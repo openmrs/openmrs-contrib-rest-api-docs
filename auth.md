@@ -9,7 +9,7 @@
 
 <b>Alternatively, a session token can be used to interact with the API endpoints.</b>
 
-####Retrieve session token
+#### Retrieve session token
 
 ```console
 curl -X GET /openmrs/ws/rest/v1/session -H 'Accept: application/json' -H 'Authorization: Basic Auth'
@@ -17,13 +17,13 @@ curl -X GET /openmrs/ws/rest/v1/session -H 'Accept: application/json' -H 'Author
 
 This token should be passed with all subsequent calls as a cookie named <b>jsessionid=token</b>.
 
-####Logout User/End session
+#### Logout User/End session
 
 ```console
 curl -X DELETE /openmrs/ws/rest/v1/session -H 'Accept: application/json' -H 'Authorization: Basic Auth'
 ```
 
-##Changing Password
+## Changing Password
 
 <b>Since version 2.17 of the webservices.rest module:</b>
 
@@ -39,7 +39,7 @@ curl -X POST /openmrs/ws/rest/v1/password/<uuidOfOtherUser> -H 'Authorization: A
 curl -X POST /openmrs/ws/rest/v1/password -H 'Authorization: Basic Auth' -H 'Content-Type: application/json' -d '{"oldPassword" : "oldPassword","newPassword" : "newPassword"}'
 ```
 
-##Getting all location without authentication
+## Getting all location without authentication
 
 Fetching locations requires you to <b> authenticate the user first </b>.If it is required to display all locations prior to login 
 or without authentication you can do it by 
