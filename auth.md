@@ -12,7 +12,8 @@
 #### Retrieve session token
 
 ```console
-curl -X GET /openmrs/ws/rest/v1/session -H 'Accept: application/json' -H 'Authorization: Basic Auth'
+curl -X GET /openmrs/ws/rest/v1/session 
+-H 'Authorization: Basic Auth' (required to indetify the user)
 ```
 
 This token should be passed with all subsequent calls as a cookie named <b>jsessionid=token</b>.
@@ -20,7 +21,8 @@ This token should be passed with all subsequent calls as a cookie named <b>jsess
 #### Logout User/End session
 
 ```console
-curl -X DELETE /openmrs/ws/rest/v1/session -H 'Accept: application/json' -H 'Authorization: Basic Auth'
+DELETE /openmrs/ws/rest/v1/session -H 'Accept: application/json'
+-H 'Authorization: Basic Auth' (required to indetify the user)
 ```
 
 ## Changing Password
@@ -30,13 +32,21 @@ curl -X DELETE /openmrs/ws/rest/v1/session -H 'Accept: application/json' -H 'Aut
 * An administrator (with the EDIT_USER_PASSWORDS privilege) can change the password for other users.
 
 ```console
-curl -X POST /openmrs/ws/rest/v1/password/<uuidOfOtherUser> -H 'Authorization: Authorization: Basic Auth' -H 'Content-Type: application/json' -d '{"oldPassword" : "oldPassword","newPassword" : "newPassword"}'
+POST /openmrs/ws/rest/v1/password/target_user-UUID 
+{
+  "oldPassword" : "oldPassword",
+  "newPassword" : "newPassword"
+}
 ``` 
 
 * After authenticating user can change their own password, by
 
 ```console
-curl -X POST /openmrs/ws/rest/v1/password -H 'Authorization: Basic Auth' -H 'Content-Type: application/json' -d '{"oldPassword" : "oldPassword","newPassword" : "newPassword"}'
+POST /openmrs/ws/rest/v1/password 
+{
+  "oldPassword" : "oldPassword",
+  "newPassword" : "newPassword"
+}
 ```
 
 ## Getting all location without authentication
@@ -45,5 +55,5 @@ Fetching locations requires you to <b> authenticate the user first </b>.If it is
 or without authentication you can do it by 
 
 ```console
-curl -X GET /openmrs/ws/rest/v1/location?tag=Login%25Location' 
+GET /openmrs/ws/rest/v1/location?tag=Login%25Location' 
 ```
