@@ -12,7 +12,7 @@
 #### Retrieve session token
 
 ```console
-curl -X GET /openmrs/ws/rest/v1/session 
+GET /openmrs/ws/rest/v1/session 
 -H 'Authorization: Basic Auth' (required to indetify the user)
 ```
 
