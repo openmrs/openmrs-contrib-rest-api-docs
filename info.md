@@ -29,15 +29,20 @@ generated on the fly.
 <b> Adding a person name. </b>
 
 ```console
-
-curl -X POST /openmrs/ws/rest/v1/person/uuidofperson/name -H 'Authorization: Basic Auth' -H 'Content-Type: application/json' -d '{"givenName": "John", "familyName": "Smith"}'    
+POST /openmrs/ws/rest/v1/person/target_person_uuid/name 
+{
+  "givenName": "John",
+  "familyName": "Smith"
+}
 ```
 
 <b> Editing a person's name. </b>
 
 ```console
-
-curl -X POST /openmrs//ws/rest/v1/person/uuidofperson/name/uuidofname -H 'Authorization: Basic Auth' -H 'Content-Type: application/json' -d '{"givenName": "Johnny"}'    
+POST /openmrs/ws/rest/v1/person/target_person_uuid/name/target_name_uuid 
+{
+  "givenName": "Johnny"
+}
 ```
 
 * A subresource can have only one parent. 
@@ -52,15 +57,14 @@ curl -X POST /openmrs//ws/rest/v1/person/uuidofperson/name/uuidofname -H 'Author
  
  Get encounter list for specific patient.
  
- curl -X GET '/openmrs/ws/rest/v1/encounter?patient=patientUUID' -H 'Authorization: Basic Auth'
+ GET '/openmrs/ws/rest/v1/encounter?patient=target_patient_uuid'
  
 ```
-
  ```console
  
  Get encounter list for specific location.
  
- curl -X GET '/openmrs/ws/rest/v1/encounter?location=locationUUID' -H 'Authorization: Basic Auth'
+ GET '/openmrs/ws/rest/v1/encounter?location=target_location_uuid'
  
 ```
 
@@ -77,9 +81,7 @@ with a special t property of the object.
  ```console
 
 POST /openmrs/ws/rest/v1/order
-Body content:
 {"t": "testorder", /*... and other properties */}
-
 ```
 
 * If you GET a resource that has subtypes, each result will be of one of those subtypes, 
@@ -91,5 +93,5 @@ which you can see by looking at the special t property of each result.
  
  Get encounter orders of druge order sub type.
  
- curl -X GET  /openmrs/ws/rest/v1/order?&t=drugorder&v=full' -H 'Authorization: Basic Auth' 
+ GET  /openmrs/ws/rest/v1/order?&t=drugorder&v=full'
 ```
