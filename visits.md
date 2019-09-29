@@ -2,11 +2,11 @@
 
 ### Overview
 
-* A Visit in OpenMRS represents exactly what it sounds like: a time period when a patient is actively interacting with the 
-healthcare system, typically at a location.
+* A Visit in OpenMRS represents precisely what it sounds like: a time when a patient is actively interacting with the 
+the healthcare system, typically at a location.
 
-* The metadata differentiating different types of visits is a Visit Type.Visit Types are displayed in the user interface, 
-and can be searched against.
+* The metadata differentiating different types of visits is a Visit Type. Visit Types displayed in the user interface, 
+also, can be searched against.
 
 * A visit contains encounters, which store more granular data about treatments or services.
 
@@ -16,7 +16,7 @@ At the Amani Clinic, a patient might typically check-in at registration, be seen
 <b> dispensed </b> in the pharmacy. This would be recorded as one <b> visit </b> of <b> visit type of Outpatient </b>, and 
 contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 
-### Sub Resourse types.
+### Sub Resource types
 
 #### Attribute.
 
@@ -31,10 +31,10 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
     <li>Create a visit.</li>
     <li>Update a visit.</li>
     <li>Delete a visit.</li>
-    <li>List attribute subresources.</li>
-    <li>Create attribute subresource with properties.</li>
-    <li>Update attribute subresource.</li>
-    <li>Delete attribute subresource.</li>
+    <li>List attribute sub resources.</li>
+    <li>Create attribute sub resource with properties.</li>
+    <li>Update attribute sub resource.</li>
+    <li>Delete attribute sub resource.</li>
 </ol>
 
 
@@ -42,15 +42,15 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 
 * **List all non-retired visits.**
     
-    Quickly filter visits with given query parameters.Returns a `404 Not Found` status if visit not exists. If you are not logged 
-    in to this action,a `401 Unauthorized` status is returned.
+    Quickly filter visits with given query parameters.Returns a `404 Not Found` status if visit not exists. If user not logged 
+    in to perform this action,a `401 Unauthorized` status returned.
     
     ##### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *patient* | `String` | **Patient resource uuid**
-    *location* | `String` | **Location resource uuid**
+    *patient* | `String` | **Patient resource UUID**
+    *location* | `String` | **Location resource UUID**
     *includeInactive* | `Boolean` | **Active/Inactive status of visit**
     *fromStartDate* | `Date (ISO8601 Long)` | **Start date of the visit**
 
@@ -63,32 +63,33 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
     -H 'Authorization: Basic Auth'
      ```
     
-* **List visit by uuid.**
+* **List visit by UUID.**
 
-    Gets a visit by its uuid. Returns a `404 Not Found status` if visit not exists. If you are not logged in to
-    this action, a `401 Unauthorized` status is returned.
+    Retrieve a visit by its UUID. Returns a `404 Not Found` status if visit not exists. If user not logged 
+    in to perform this action, a `401 Unauthorized` status returned.
     
     ```console
     curl -X GET "/openmrs/ws/rest/v1/visit/target_visit_uuid" 
     -H  "accept: application/json" 
     -H  "authorization: Basic Auth"
     ```
+    
 #### Create a visit.
 
-* To Create a a visit need you to specify below attributes in the request body.If you are not logged in to this action,
- a `401 Unauthorized` status is returned.
+* To Create a visit you need to specify below attributes in the request body.If you are not logged in to perform this action,
+ a `401 Unauthorized` status returned.
 
     ##### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *patient* | `String` | **Patient resource uuid**
-    *visitType* | `String` | **Visit type resource uuid**
+    *patient* | `String` | **Patient resource UUID**
+    *visitType* | `String` | **Visit type resource UUID**
     *startDatetime* | `Date (ISO8601 Long)` | **Start date of the visit**
-    *location* | `String` | **Location resource uuid**    
+    *location* | `String` | **Location resource UUID**    
     *indication* | `string` | **Any indication of the visit**    
     *stopDatetime* | `Date (ISO8601 Long)` | **End date of the vist**    
-    *encounters* | `Array[]: String` | **Encounter resources uuids**    
+    *encounters* | `Array[]: String` | **Encounter resources UUID**    
     *attributes* | `Array[]: Attribute` | **List of visit attributes**    
    
     ```console
@@ -110,19 +111,20 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
                    "value": "value_for_attribute"
                  }
              ]
-        }"
+            }"
 
     ```
 
 #### Update a visit.
 
-* Update a target visit with given uuid, this method will only modify properties in request.
+*  Update a target visit with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
+status if visit not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ##### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *uuid* | `String` | **Target visit resource uuid**
+    *uuid* | `String` | **Target visit resource UUID**
     
     ##### Attributes
 
@@ -140,8 +142,8 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 
 #### Delete a visit.
 
-* Delete or Retire  a  target visit by its uuid.The resource will be voided/retired unless `purge = true`. Returns a 
-`404 Not Found` status if visit not exists. If you are not logged in to this action, a `401 Unauthorized` status is returned.
+* Delete or Retire a target visit by its UUID. Returns a `404 Not Found` status if visit not exists.If user not logged 
+  in to perform this action, a `401 Unauthorized` status returned.
 
     ##### Query Parameters
 
@@ -151,6 +153,97 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 
     ```console
         curl -X DELETE "/openmrs/ws/rest/v1/visit/target_visit_uuid?purge=true" 
+        -H  "accept: application/json" 
+        -H  "authorization: Basic Auth"
+     ```
+
+#### List attribute sub resources
+
+* **List all attribute sub resources for a visit.**
+
+    Retrieve all <b>attribute</b> sub resources of a  <b>visit</b> resource by target_visit_uuid.Returns a 
+    `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+    returned.
+
+    ```console
+        curl -X GET "/openmrs/ws/rest/v1/visit/target_visit_uuid/attribute?v=ref" 
+        -H  "accept: application/json" 
+        -H  "authorization: Basic Auth"
+    ```
+
+* **List attribute sub resources by it's UUID and parent visit UUID.**
+    
+     Retrieve an <b>attribute</b> sub resources of a <b>visit</b> resource.Returns a 
+     `404 Not Found` status if attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
+     returned.
+     
+    ```console
+        curl -X GET "/openmrs/ws/rest/v1/visit/target_visit_uuid/attribute/target_attribute_uuid" 
+        -H  "accept: application/json" 
+        -H  "authorization: Basic Auth"
+    ```
+
+#### Create an attribute sub resource with properties.
+
+* To Create an attribute sub resource for a specific visit resource you need to specify below attributes in the request body.
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+    ##### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *attributeType* | `String` | **Attribute_Type resource UUID**
+    *value* | `Depends on Attribute_Type Selected` | **Value for the attribute**
+    
+    ```console
+        curl -X GET "/openmrs/ws/rest/v1/visit/target_visit_uuid/attribute/target_attribute_uuid" 
+        -H  "accept: application/json" 
+        -H  "authorization: Basic Auth"
+        -H  "content-type: application/json" 
+        -d "{  
+           "attributeType": target_attribute_type_uuid,
+           "value": "value_for_the_attriute"
+            }"
+    ```
+ 
+ 
+#### Update attribute sub resource.
+
+* Updates an attribute sub resource value with given uuid, this method will only modify value of the sub resource.Returns 
+a `404 Not Found` status if attribute not exists.If user not logged in to perform this action, a `401 Unauthorized` status
+returned.
+
+    ##### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *attributeType* | `String` | **Attribute_Type resource UUID**
+    *updated value* | `Depends on Attribute_Type Selected` | **Updated value for the attribute**
+
+    ```console
+        curl -X POST "/openmrs/ws/rest/v1/visit/target_visit_uuid/attribute/target_attribute_uuid" 
+        -H  "accept: application/json" 
+        -H  "authorization: Basic Auth" 
+        -H  "content-type: application/json" 
+        -d "{  
+            "attributeType": target_attribute_type_uuid,
+            "value": modified_attriute_value
+            }"         
+    ```
+
+#### Delete attribute sub resource.
+
+* Delete or Retire a target attribute sub resource by its UUID.Returns a `404 Not Found` status if attribute not exists. 
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+    ##### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *purge* | `Boolean` | **The resource will be voided/retired unless purge = ‘true’**
+    
+     ```console
+        curl -X DELETE "/openmrs/ws/rest/v1/visit/target_visit_uuid/attribute/target_attribute_uuid" 
         -H  "accept: application/json" 
         -H  "authorization: Basic Auth"
      ```
