@@ -25,7 +25,7 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 * Visit attributes exists specifically to allow implementations to extend the data model.
 
 
-### Available operations. 
+## Available operations. 
 
 1. [List visits](#list-visits)
 2. [Create a visit](#create-a-visit)
@@ -36,9 +36,6 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 7. [Update attribute sub resource](#update-attribute-sub-resource)
 6. [Delete attribute sub resource](#delete-attribute-sub-resource)
 
-<ol>
-    <li>Delete attribute sub resource.</li>
-</ol>
 
 
 ### List visits
