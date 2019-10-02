@@ -31,7 +31,7 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 2. [Create a visit](#create-a-visit)
 3. [Update a visit](#update-a-visit)
 4. [Delete a visit](#delete-a-visit)
-5. [List attribute sub resource](list-attribute-sub-resources)
+5. [List attribute sub resource](#list-attribute-sub-resources)
 6. [Create attribute sub resource with properties](#create-an-attribute-sub-resource-with-properties)
 7. [Update attribute sub resource](#update-attribute-sub-resource)
 6. [Delete attribute sub resource](#delete-attribute-sub-resource)
