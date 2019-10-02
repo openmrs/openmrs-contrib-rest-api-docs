@@ -10,7 +10,7 @@ also, can be searched against.
 
 * A visit contains encounters, which store more granular data about treatments or services.
 
-###Let’s look at an example.
+### Let’s look at an example.
 
 At the Amani Clinic, a patient might typically check-in at registration, be seen by a doctor, and receives medication 
 <b> dispensed </b> in the pharmacy. This would be recorded as one <b> visit </b> of <b> visit type of Outpatient </b>, and 
