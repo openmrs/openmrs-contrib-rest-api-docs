@@ -156,3 +156,79 @@ status if location not exists. If user not logged in to perform this action, a `
     ```console
         DELETE /location/:target_location_uuid?purge=true
      ```
+### List location attribute sub resources
+
+* #### List all location attribute sub resources for a location.
+
+    Retrieve all <b>attribute</b> sub resources of a  <b>location</b> resource by target_location_uuid.Returns a 
+    `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+    returned.
+
+    ```console
+        GET /location/:target_location_uuid/attribute 
+    ```
+
+* #### List location attribute sub resources by own UUID and parent location UUID.
+    
+     Retrieve an <b>attribute</b> sub resources of a <b>location</b> resource.Returns a 
+     `404 Not Found` status if attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
+     returned.
+     
+    ```console
+        GET /location/:target_location_uuid/attribute/:target_attribute_uuid
+    ```
+### Create a location attribute sub resource with properties
+
+* To Create an attribute sub resource for a specific location resource you need to specify below attributes in the request body.
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+    #### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *attributeType* | `Attribute_Type UUID` | Create Attribute from this Location Attribute_Type
+    *value* | `Depends on Attribute_Type Selected` | Value for the attribute
+    
+    ```console
+        POST location/:target_location_uuid/attribute 
+        {
+          "attributeType": "target_location_attribute_type_uuid",
+          "value": "value_for_the_attriute"
+        }
+    ```
+ 
+ 
+### Update a location attribute sub resource
+
+* Updates a location attribute sub resource value with given uuid, this method will only modify value of the sub resource.Returns 
+a `404 Not Found` status if attribute not exists.If user not logged in to perform this action, a `401 Unauthorized` status
+returned.
+
+    #### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *attributeType* | `Attribute_Type UUID` | Location Attribute_Type resource UUID
+    *updated value* | `Depends on Attribute_Type Selected` | Updated value for the attribute
+
+    ```console
+        POST location/:target_location_uuid/attribute/:target_location_attribute_uuid
+        {
+          "attributeType": "target_attribute_type_uuid",
+          "value": "modified_attriute_value"
+        } 
+    ```
+### Delete a location attribute sub resource
+
+* Delete or Retire a target location attribute sub resource by its UUID.Returns a `404 Not Found` status if attribute not exists. 
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+    #### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
+    
+     ```console
+        DELETE /location/:target_location_uuid/attribute/:target_location_attribute_uuid
+     ```
