@@ -19,8 +19,8 @@
 
 * #### List all non-retired visits attribute types.
     
-    Quickly filter visit attribute types with a given search query. Returns a `404 Not Found` status if the visit attribute type not exists. 
-    If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+    Quickly filter visit attribute types with a given search query. Returns a `404 Not Found` status if the visit attribute type not exists.
+     If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
     
     ##### Query Parameters
 
@@ -34,8 +34,8 @@
     
 * #### List visit attribute type by UUID.
 
-    Retrieve a visit attribute type by its UUID. Returns a `404 Not Found` status if visit attribute type not exists. If user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
+    Retrieve a visit attribute type by its UUID. Returns a `404 Not Found` status if the visit attribute type not exists. If the 
+    user not logged in to  perform this action, a `401 Unauthorized` status returned.
     
     ```console
     GET /visitattributetype/:target_visit_attribute_type_uuid
@@ -43,7 +43,7 @@
    
 ### Create a visit attribute type
 
-* To Create a visit attribute type you need to specify below attributes in the request body.If you are not logged in to perform this action,
+* To Create a visit attribute type you need to specify below attributes in the request body.If the user not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     #### Attributes
@@ -52,30 +52,30 @@
     --- | --- | ---
     *name* | `String` | Name of the visit attribute type (Required)
     *description* | `String` | Description (Required)
-    *datatypeClassname* | `CustomDataType Resource` | Data type Classname of custom data type resource (Required)
-    *minOccurs* | `Number` | No of minimum occurrence (Required)
-    *maxOccurs* | `Number` | No of maximum occurrence
-    *preferredHandlerClassname* | `Handler` | Handler sub resource of CustomDataType   
-    *datatypeConfig* | `String` | Data type configuration   
-    *handlerConfig* | `String` | Handler config for intiate
+    *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource.OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
+    *minOccurs* | `Number` | Minimum number of times this value can be specified for a single visit.Use `0` or `1` as the default value (Required)
+    *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single visit (e.g., use 1 to prevent an attribute from being added to a visit multiple times)
+    *preferredHandlerClassname* | `Handler` | Handler sub resource for the Custom Data Type used.Can optionally define a specific handler class want to use (otherwise the framework will choose the best handler for the chosen datatype).To find which handlers to use for the Custom DataType please refer here   
+    *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
+    *handlerConfig* | `String` | Allow the handler have any name and config it wants/needs.This will help to identify the data type unambiguously which has been contained and will allow introspecting
    
     ```console
         POST /visitattributetype
-       {
-         "name": "string",
-         "description": "string",
-         "datatypeClassname": "string",
-         "minOccurs": 0,
-         "maxOccurs": 0,
-         "datatypeConfig": "string",
-         "preferredHandlerClassname": "string",
-         "handlerConfig": "string"
-       }
+        {
+          "name": "Patient condition",
+          "description": "This attribute type will record the health conditon of the patient",
+          "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "datatypeConfig": "default",
+          "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
+          "handlerConfig": "dafault"
+        }
     ```
 ### Update a visit attribute type
 
 *  Update a target visit attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if visit attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+status if the visit attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
@@ -89,37 +89,37 @@ status if visit attribute not exists. If user not logged in to perform this acti
       --- | --- | ---
       *name* | `String` | Name of the visit attribute type (Required)
       *description* | `String` | Description (Required)
-      *datatypeClassname* | `CustomDataType Resource` | Data type Classname of custom data type resource (Required)
-      *minOccurs* | `Number` | No of minimum occurrence (Required)
-      *maxOccurs* | `Number` | No of maximum occurrence
-      *preferredHandlerClassname* | `Handler` | Handler sub resource of CustomDataType   
-      *datatypeConfig* | `String` | Data type configuration   
-      *handlerConfig* | `String` | Handler config for intiate
+      *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource.OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
+      *minOccurs* | `Number` | Minimum number of times this value can be specified for a single visit.Use `0` or `1` as the default value (Required) (Required)
+      *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single visit (e.g., use 1 to prevent an attribute from being added to a visit multiple times)
+      *preferredHandlerClassname* | `Handler` |  Handler sub resource for the Custom Data Type used.Can optionally define a specific handler class want to use (otherwise the framework will choose the best handler for the chosen datatype).To find which handlers to use for the Custom DataType please refer here   
+      *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
+      *handlerConfig* | `String` | Allow the handler have any name and config it wants/needs.This will help to identify the data type unambiguously which has been contained and will allow introspecting
     
     ```console
         POST /visitattributetype/:target_visit_attribute_type_uuid
         {
-          "name": "string",
-          "description": "string",
-          "datatypeClassname": "string",
+          "name": "Patient condition modified",
+          "description": "This attribute type will record the health conditon of the patient",
+          "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
           "minOccurs": 0,
-          "maxOccurs": 0,
-          "datatypeConfig": "string",
-          "preferredHandlerClassname": "string",
-          "handlerConfig": "string"
+          "maxOccurs": 2,
+          "datatypeConfig": "default",
+          "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
+          "handlerConfig": "dafault"
         }
     ```
     
 ### Delete a visit attribute type
 
-* Delete or Retire a target visit attribute type by its UUID. Returns a `404 Not Found` status if visit attribute not exists.If user not logged 
-  in to perform this action, a `401 Unauthorized` status returned.
+* Delete or Retire a target visit attribute type by its UUID. Returns a `404 Not Found` status if the visit attribute type not
+ exists. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
+    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
     ```console
         DELETE /visitattributetype/:target_visit_attribute_type_uuid?purge=true
