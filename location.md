@@ -4,9 +4,9 @@
 
 * A Location is a physical place where a patient may be seen, such as a hospital, a room, a clinic, or a district.
 
-* <b>Locations may have a hierarchy</b>,such that each location may have one parent location.
+* **Locations may have a hierarchy**,such that each location may have one parent location.
 
-* And also a Location can have one or more Children location example Children's Ward might be a location within the location 
+* Also a Location can have one or more Children location example Children's Ward might be a location within the location 
 Amani Clinic.
   
 * You might also store physical areas (for example Eastern Province, or California) as Locations. 
@@ -39,8 +39,8 @@ Amani Clinic.
 
 * #### List all non-retired locations`.
     
-    Quickly filter location with given query parameters.Returns a `404 Not Found` status if location not exists. If user not
-    logged in to perform this action,a `401 Unauthorized` status returned.
+    Quickly filter location with given query parameters.Returns a `404 Not Found` status if the location not exists. If the 
+    user not logged in to perform this action,a `401 Unauthorized` status returned.
     
     ##### Query Parameters
 
@@ -50,12 +50,12 @@ Amani Clinic.
      
     ```console
      GET /location?
-     q="Search Query"
+     q="amani"
      ```
     
 * #### List location by UUID.
 
-    Retrieve a location by its UUID. Returns a `404 Not Found` status if location not exists. If user not logged 
+    Retrieve a location by its UUID. Returns a `404 Not Found` status if the location not exists. If the user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
     
     ```console
@@ -64,7 +64,7 @@ Amani Clinic.
    
 ### Create a location
 
-* To Create a location you need to specify below attributes in the request body.If you are not logged in to perform this action,
+* To Create a location you need to specify below attributes in the request body.If the user not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     #### Attributes
@@ -80,31 +80,26 @@ Amani Clinic.
     *postalCode* | `String` | Postal code of the location 
     *latitude* | `String` | Latitude    
     *longitude* | `String` | Longitude
-    *countyDistrict* | `String` | Disitrict
+    *countyDistrict* | `String` | District or Country
     *tags* | `Array[]: LocationTag UUID` | UUID's of the location tags
     *parentLocation* | `Parent Location UUID` | UUID of the target parent location
     *childLocations* | `Array[]: Child Location UUID` | UUID's of the target child locations
     *attributes* | `Array[]: Attribute UUID` | UUID's of location attributes  
 
-   
     ```console
         POST /location
         {
-          "name": "name ",
-          "description": "string",
-          "address1": "string",
-          "address2": "string",
-          "cityVillage": "string",
-          "stateProvince": "string",
-          "country": "string",
-          "postalCode": "string",
-          "latitude": "string",
-          "longitude": "string",
-          "countyDistrict": "string",
-          "address3": "string",
-          "address4": "string",
-          "address5": "string",
-          "address6": "string",
+          "name": "Salzburg Hospital",
+          "description": "Salzburg hospital location",
+          "address1": "Mullner House 48",
+          "address2": "",
+          "cityVillage": "salzburg",
+          "stateProvince": "salzburg",
+          "country": "Austria",
+          "postalCode": "5020",
+          "latitude": "",
+          "longitude": "",
+          "countyDistrict": "salzburg",
           "tags": [
             "target_location_tag_uuid"
           ],
@@ -123,7 +118,7 @@ Amani Clinic.
 ### Update a location
 
 *  Update a target location with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if location not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+status if the location not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
@@ -135,16 +130,54 @@ status if location not exists. If user not logged in to perform this action, a `
 
     Parameter | Type | Description
     --- | --- | ---
-    *resource* | `Location` | Location resource with updated properties.
-    
+    *name* | `String` | Name of the location (Required)
+    *address1* | `String` | Address of the location (Required)
+    *description* | `String` | Description
+    *cityVillage* | `String` | City/village
+    *stateProvince* | `String` | State and province
+    *country* | `String` | Country    
+    *postalCode* | `String` | Postal code of the location 
+    *latitude* | `String` | Latitude    
+    *longitude* | `String` | Longitude
+    *countyDistrict* | `String` | District or Country
+    *tags* | `Array[]: LocationTag UUID` | UUID's of the location tags
+    *parentLocation* | `Parent Location UUID` | UUID of the target parent location
+    *childLocations* | `Array[]: Child Location UUID` | UUID's of the target child locations
+    *attributes* | `Array[]: Attribute UUID` | UUID's of location attributes  
+
     ```console
         POST /location/:target_location_uuid
-        -d  modified_location_object
+        {
+          "name": "Salzburg Hospital",
+          "description": "Modified location of Salzburg hospital location",
+          "address1": "Mullner House 48",
+          "address2": "",
+          "cityVillage": "salzburg",
+          "stateProvince": "salzburg",
+          "country": "Austria",
+          "postalCode": "5020",
+          "latitude": "47.811195",
+          "longitude": "13.03322",
+          "countyDistrict": "salzburg",
+          "tags": [
+            "target_location_tag_uuid"
+          ],
+          "parentLocation": "target_parent_location_uuid",
+          "childLocations": [
+            "target_child_location_uuid"
+          ],
+          "attributes": [
+              {
+                 "attributeType": "target_attributeType_uuid",
+                  "value": "value_for_attribute"
+              }
+          ]
+        }       
     ```
     
 ### Delete a location
 
-* Delete or Retire a target location by its UUID. Returns a `404 Not Found` status if location not exists.If user not logged 
+* Delete or Retire a target location by its UUID. Returns a `404 Not Found` status if the location not exists.If the user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
@@ -161,7 +194,7 @@ status if location not exists. If user not logged in to perform this action, a `
 * #### List all location attribute sub resources for a location.
 
     Retrieve all <b>attribute</b> sub resources of a  <b>location</b> resource by target_location_uuid.Returns a 
-    `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+    `404 Not Found` status if the attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status
     returned.
 
     ```console
@@ -171,7 +204,7 @@ status if location not exists. If user not logged in to perform this action, a `
 * #### List location attribute sub resources by own UUID and parent location UUID.
     
      Retrieve an <b>attribute</b> sub resources of a <b>location</b> resource.Returns a 
-     `404 Not Found` status if attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
+     `404 Not Found` status if the attribute not exists. If the user are not logged in to perform this action, a `401 Unauthorized` status
      returned.
      
     ```console
@@ -180,7 +213,7 @@ status if location not exists. If user not logged in to perform this action, a `
 ### Create a location attribute sub resource with properties
 
 * To Create an attribute sub resource for a specific location resource you need to specify below attributes in the request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Attributes
 
@@ -201,7 +234,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
 ### Update a location attribute sub resource
 
 * Updates a location attribute sub resource value with given uuid, this method will only modify value of the sub resource.Returns 
-a `404 Not Found` status if attribute not exists.If user not logged in to perform this action, a `401 Unauthorized` status
+a `404 Not Found` status if the attribute not exists.If the user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     #### Attributes
@@ -220,8 +253,8 @@ returned.
     ```
 ### Delete a location attribute sub resource
 
-* Delete or Retire a target location attribute sub resource by its UUID.Returns a `404 Not Found` status if attribute not exists. 
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or Retire a target location attribute sub resource by its UUID.Returns a `404 Not Found` status if the attribute not exists. 
+If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
