@@ -29,10 +29,10 @@ Anyone who has an Encounter or who is enrolled in a Program is a Patient.)
 6. [Create patientIdentifier sub resource with properties](#create-a-patientIdentifier-sub-resource-with-properties)
 7. [Update patientIdentifier sub resource](#update-patientidentifier-sub-resource-with-properties)
 8. [Delete patientIdentifier sub resource](#delete-patientidentifier-sub-resource-with-properties)
-9.  List allergy sub resource
-10. Create allergy sub resource with properties
-11. Update allergy sub resource
-12. Delete allergy sub resource
+9.  [List allergy sub resource](#list-allergy-sub-resources)
+10. [Create allergy sub resource with properties]()
+11. [Update allergy sub resource](#update-allergy-sub-resource-with-properties)
+12. [Delete allergy sub resource](#delete-allergy-sub-resource-with-properties)
 
 ### Search patients
 
@@ -211,4 +211,112 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
     
      ```console
         DELETE /patient/:target_patient_uuid/identifier/:target_identifier_uuid
+     ```
+
+### List allergy sub resources
+
+* List allergy sub resource by it's UUID and parent patient UUID.
+
+    Retrieve a <b>allergy</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if allergy not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
+
+    ```console
+    GET /patient/:target_patient_uuid/allergy/:target_allergy_uuid
+    ```
+### Create a allergy sub resource with properties 
+
+* To create a allergy sub resource for a specific patient resource you need to specify below properties in your request body.
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+    #### Query parameter 
+    Parameter | Description
+    --- | ---
+    `target_patient_uuid` : patient resource uuid
+
+    #### Properties for resource
+
+    Parameter | type | Description
+    --- | --- | ---
+    *allergen* | `String` | value of the allergen
+    *severity* | `Severity_UUID` | Severity uuid
+    *comment* | `String` | comment for the allergy
+    *allergy* | `allergy_UUID` | allergy uuid
+    *reaction* | `reaction_UUID` | reaction uuid
+
+    ```console
+        POST patient/:target_patient_uuid/allergy
+        {
+            "allergen": {},
+            "severity": {
+                "uuid": "string"
+            },
+            "comment": "string",
+            "reactions": [
+                {
+                    "allergy": {
+                    "uuid": "string"
+                },
+                "reaction": {
+                    "uuid": "string"
+                }
+            }
+        ]
+    }
+    ```
+
+### Update allergy sub resource with properties
+
+* Updates an allergy sub resource value with given uuid, this method will only modify value of the sub resource. Returns a `404 Not Found` status if property not exists.If user not logged in to perform this action, a `401 Unauthorized` status
+returned.
+
+    #### Query parameter 
+    
+    Parameter | Description
+    --- | ---
+    `target_patient_uuid` : patient resource uuid
+    `target_allergy_uuid` : allergy resource uuid
+
+    #### Properties for resource
+
+    Parameter | type | Description
+    --- | --- | ---
+    *allergen* | `String` | value of the allergen
+    *severity* | `Severity_UUID` | Severity uuid
+    *comment* | `String` | comment for the allergy
+    *allergy* | `allergy_UUID` | allergy uuid
+    *reaction* | `reaction_UUID` | reaction uuid
+
+    ```console
+        POST patient/:target_patient_uuid/allergy/:target_allergy_uuid
+        {
+            "allergen": {},
+            "severity": {
+                "uuid": "string"
+            },
+            "comment": "string",
+            "reactions": [
+                {
+                    "allergy": {
+                    "uuid": "string"
+                },
+                "reaction": {
+                    "uuid": "string"
+                }
+            }
+        ]
+    }
+    ```
+
+### Delete allergy sub resource with properties
+
+* Delete or retire a target allergy sub resource by its UUID.Returns a `404 Not Found` status if attribute not exists. 
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+    #### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
+    
+     ```console
+        DELETE /patient/:target_patient_uuid/allergy/:target_allergy_uuid
      ```
