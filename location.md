@@ -31,7 +31,7 @@ Amani Clinic.
 5. [List location attribute sub resource](#list-location-attribute-sub-resources)
 6. [Create location attribute sub resource with properties](#create-a-location-attribute-sub-resource-with-properties)
 7. [Update location attribute sub resource](#update-a-location-attribute-sub-resource)
-6. [Delete location attribute sub resource](#delete-a-location-attribute-sub-resource)
+8. [Delete location attribute sub resource](#delete-a-location-attribute-sub-resource)
 
 
 
