@@ -4,9 +4,11 @@
 
 * Tags are strings attached to an entity (like tagging of blog entries) to form a folksonomy and/or to categorize data. 
 
-* Location Tags are being used to tag locations.Which enables the system to act based on the presence of tags on certain locations. 
+* Location Tags are being used to tag locations, which enables the system to act based on the presence of tags on specific locations. 
 
-* You should not use locations to represent logical ideas like All District Hospitals they should be modeled using LocationTags.
+* You should not use locations to represent logical ideas like `All-District Hospitals`. They should be modeled using LocationTags.
+
+* For example, location tags may be used to control which locations are included in a choice list or to define which locations included in a report.
 
 ## Available operations. 
 
@@ -54,7 +56,7 @@
     *name* | `String` | Name of the location tag  (Required)
     *description* | `String` | Description (Required)
     *retired* | `Boolean` | Retired status of the location tag
-    *retiredReason* | `String` | Reason to retire the location tag
+    *retiredReason* | `String` | For location tags that are retired, this may contain an explanation of why the location tag was retired.
 
     ```console
         POST /locationtag
@@ -82,7 +84,7 @@ status if the location tag not exists. If the user not logged in to perform this
       *name* | `String` | Name of the location tag type (Required)
       *description* | `String` | Description (Required)
       *retired* | `Boolean` | Retired status of the location tag
-      *retiredReason* | `String` | Reason to retire the location tag
+      *retiredReason* | `String` | For location tags that are retired, this may contain an explanation of why the location tag was retired.
 
     ```console
         POST /locationtag/:target_location_tag_uuid
@@ -103,7 +105,7 @@ status if the location tag not exists. If the user not logged in to perform this
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’.Purging will attempt to irreversibly remove the tag from the system. Location tags types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’. Purging will attempt to irreversibly remove the tag from the system. Location tags types that have been used (i.e., are referenced from existing data) cannot be purged.
 
     ```console
         DELETE /locationtag/:target_location_tag_uuid?purge=true
