@@ -19,16 +19,16 @@ Administrators define what types of identifiers they will collect. These range f
 
 ## Available operations
 
-1. [List PatientIdentifierType resources](#List-patientidentifierType)
-2. [Create a patientIdentifierType record](#create-a-patient)
-3. [Update a patientIdentifierType record](#update-a-patient)
-4. [Delete a patientIdentifierType record](#delete-a-patient)
+1. [List PatientIdentifierType resources](#List-patientidentifierType-resource)
+2. [Create a patientIdentifierType record](#create-a-patientidentifierType)
+3. [Update a patientIdentifierType record](#update-a-patientIdentifierType)
+4. [Delete a patientIdentifierType record](#delete-a-patientIdentifierType)
 
-### List PatientIdentifierType resour
+### List PatientIdentifierType resource
 
 * #### List patientIdentifierType
 
-    Fetch all non-retired patientIdentifierTypes resources that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patient response. If the user is not logged in it returns `401 Unauthorized` status is returned.
+    Fetch all non-retired patientIdentifierTypes resources that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patientIdentifierType response. If the user is not logged in it returns `401 Unauthorized` status is returned.
 
     ```console
     GET /patientidentifiertype?
@@ -37,8 +37,76 @@ Administrators define what types of identifiers they will collect. These range f
 
 * #### List patientIdentifierType by UUID.
 
-    Retrieve a patientIdentifierType by its UUID. Returns a `404 Not Found` status if patient does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+    Retrieve a patientIdentifierType by its UUID. Returns a `404 Not Found` status if patientIdentifierType does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     ```console
-    GET /patientIdentifierType/:target_patientIdentifierType_uuid
+    GET /patientidentifiertype/:target_patientIdentifierType_uuid
+    ```
+### Create a patientIdentifierType
+
+* To create a patientIdentifierType you need to specify the below properties in the request. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+    #### Properties
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *name* | string | label for the identifier
+    *description* | string | a small description about the patientIdentifier
+    *format* | string | label for the identifier
+    *formatDescription* | string | a small description about the patientIdentifier
+    *required* | boolean | a true/false value
+    *checkDigit* | boolean | a true/false value
+    *validator* | string | `org.openmrs.patient.IdentifierValidator`
+    *locationBehavior* | "REQUIRED" or "NOT USED" | behavior of the location with respect to the identifier 
+    *uniquenessBehavior* | string | label for the identifier
+
+    ```console
+    POST /patientidentifiertype
+    {
+        "name": "string",
+        "description": "string",
+        "format": "string",
+        "formatDescription": "string",
+        "required": true,
+        "checkDigit": true,
+        "validator": "string",
+        "locationBehavior": "REQUIRED",
+        "uniquenessBehavior": "string"
+    }
+    ```
+### Update a patientIdentifierType
+
+* Update a target patientIdentifierType with given UUID, this method only modifies properties in the request. 
+Returns a `404 Not Found` status if patientIdentifierType not exists. If user not logged in to perform this action, a `401 Unauthorized status returned`.
+
+    #### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *uuid* | `target_patientIdentifierType_uuid` | Target patientIdentifierType resource UUID
+
+    #### Properties
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *resource* | `PatientIdentifierType` | Patient resource with updated properties (same body as while creating the resource body)
+
+    ```console
+    POST /patientidentifertype/:target_patientidentifiertype_uuid
+    -d modified_patientidentifiertype_object
+    ```
+
+### Delete a patientIdentifierType
+
+* Delete or retire a target patientIdentifierType by its UUID. Returns a `404 Not Found` status if patientIdentifierType not exists. If user is not logged in to perform this action, a `401 Unauthorized` status returned.
+
+    #### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    **uuid** | `String` | uuid to delete
+    *purge* | `Boolean` | The resource will be voided/retired unless purge = 'true'
+
+    ```console
+    DELETE /patientidentifiertype/:target_patientidentifiertype_uuid?purge=true
     ```
