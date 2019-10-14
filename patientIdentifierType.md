@@ -7,15 +7,15 @@ Administrators define what types of identifiers they will collect. These range f
 
 * format: a regular expression defining what the identifier text should contain.
 
-* formatDescription: the text an admin can enter describing the regex format they just added
+* formatDescription: An optional description of the regular expression (used to explain the requirements of the regular expression in terms a user would understand). For example, a regular expression like \d{4,8}could have a description like "Must be a number between 4 and 8 digits in length."
 
 * required: a true/false whether every patient MUST have this type
 
-* scheckDigit: a true/false whether this identifier has a checkdigit at the end.
+* checkDigit: a true/false whether this identifier has a checkdigit at the end.
 
-* validator: full class name of the IdentifierValidators
+* validator: full class name of the IdentifierValidators (for example : `org.openmrs.patient.IdentifierValidator`).
 
-* locationBehavior: REQUIRED=there must be patient_identifier.location_id defined by the user for this identifier or NOT_USED = patient_identifier.location_id is null
+* locationBehavior: "REQUIRED" if a location must be associated with the identifier; "NOT_USED" if the identifier does require a location.
 
 ## Available operations
 
