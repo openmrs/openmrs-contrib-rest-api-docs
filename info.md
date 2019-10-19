@@ -11,7 +11,7 @@ generated on the fly.
 
 * The resource class defines the properties that are exposed and the setters that are available. 
 
-* The class also defines the representations and what goes in them (ref vs default vs full, see below for more on representations).
+* The class also defines the representations and what goes in them (ref vs default vs full).
 
 <b>See documentation about resources and their URIs here: [REST Web Service Resources in OpenMRS 1.9](https://wiki.openmrs.org/display/docs/REST+Web+Service+Resources+in+OpenMRS+1.9)</b>
 

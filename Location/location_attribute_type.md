@@ -50,7 +50,7 @@
     *name* | `String` | Name of the location attribute type (Required)
     *description* | `String` | Description (Required)
     *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
-    *minOccurs* | `Number` | Minimum number of times this value can be specified for a single location.Use `0` or `1` as the default value (Required)
+    *minOccurs* | `Number` | Minimum number of times this value can be specified for a single location. Use `0` or `1` as the default value (Required)
     *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single location (e.g., use 1 to prevent an attribute from being added to a location multiple times)
     *preferredHandlerClassname* | `Handler` | Handler sub resource for the Custom Data Type used. Can optionally define a specific handler class want to use (otherwise the framework will choose the best handler for the chosen datatype). To find which handlers to use for the Custom DataType please refer here   
     *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
