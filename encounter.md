@@ -2,18 +2,16 @@
 
 ## Overview
 
-* A patient visits a health center or hospital. For each electronic form completed for a patient, a new encounter is created.
-Forms could be completed by different departments (ie.  drug pickup, visit with an HIV clinician, Diabetes visit, food package received), 
-and will have an associated encounter_type (ie. ART Drug Regimen Pickup, Adult intake, food assistance, lab test, etc).  
+* An encounter represents an interaction between a patient and the healthcare system at a single point in time. 
+Common examples would be a patient seeing a doctor during a clinic visit, a patient going to the lab to have blood drawn for
+ testing, or telephone call between a provider and the patient).
 
-* Each Encounter will have a unique encounter_id and encounter_type.  
+* Each encounter has an encounter type, date/time, location, and provider.
 
-* Each encounter has an encounter type, date/time, location and provider.
+* Encounters are classified into Encounter Types, which describe the type of interaction the encounter represents – e.g., 
+"HIV Initial", "Pediatric Follow Up", "Lab"). Implementations can define their own types of encounters.
 
-* The metadata that describes a kind of encounter is an Encounter Type. These are displayed in the user interface, 
-and you may also search against them.
-
-* A **Visit** can be associated with one or more Encounters.
+* One or more encounters may be grouped within a **Visit** (e.g., an outpatient clinic visit or a hospitalization).
 
 * Every encounter can have 0 to n **Observations** associated with it.
  
@@ -59,20 +57,19 @@ Consultation, and Dispensing**.
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `Search Query` | Get encounter by Encounter Id, Patient Identifier or name
-    *patient* | `Patient UUID` | Get encounter by target_patient_uuid
-    *encounterType* | `Encounter_Type UUID` | Encounter type uuid. Must be used with patient
-    *order* | `Order UUID` | Filter by target_order_uuid. Must be used with patient
-    *obsConcept* | `Obs UUID` | Filter by target_obs_uuid. Must be used with patient
-    *obsValues* | `String` | Filter vy value of the obs object. Must be used with patient & obsConcept.
-    *fromdate* | `Date (ISO8601 Long)` | Start date of the encounter type. Must be used with patient
-    *todate* | `Date (ISO8601 Long)` | End date of the encounter type. Must be used with patient
+    *q* | `Search Query` | Get encounter by Encounter UUID, Patient Identifier or name
+    *patient* | `Patient UUID` | Get encounter(s) for a patient
+    *encounterType* | `Encounter_Type UUID` | Filter by encounter type (must be used with patient)
+    *order* | `Order UUID` | Filter to encounter(s) containing the specified order (must be used with patient)
+    *obsConcept* | `Concept UUID` | Filter to encounter(s) containing observation(s) for the given concept (must be used with patient)
+    *obsValues* | `String` | Filter to encounter(s) containing an observations with the given value (must be used with patient & obsConcept)
+    *fromdate* | `Date or Timestamp (ISO 8601)` | Start date of the encounter (must be used with patient)
+    *todate* | `Date or Timestamp (ISO 8601)` | End date of the encounter (must be used with patient)
     
-
     ```console
     GET /encounter?
-      q=John
-      &fromdate=2016-10-08T04:09:23.000Z
+      patient=96be32d2-9367-4d1d-a285-79a5e5db12b8
+      &fromdate=2016-10-08
      ```
     
 * #### List encounter by UUID.
@@ -94,14 +91,14 @@ Consultation, and Dispensing**.
     Parameter | Type | Description
     --- | --- | ---
     *encounterDatetime* | `Date (ISO8601 Long)` | The date and time the encounter was created (required)
-    *patient* | `Patient UUID` | Patient type resource UUID (required)
-    *encounterType* | `EncounterType UUID` | Encounter type resource UUID (required)
-    *location* | `Location UUID` | Location resource UUID (required)
-    *encounterProviders* | `Array[]: Providers` | Array of Providers already registred in OpenMRS    
-    *obs* | `Array[]: Obs` | Array of observations and values for the encounter.    
+    *patient* | `Patient UUID` | The patient to whom the encounter applies.
+    *encounterType* | `EncounterType UUID` | The type of encounter – e.g., Initial visit, Return visit, etc. (required)
+    *location* | `Location UUID` | The location at which the encounter occurred (required)
+    *encounterProviders* | `Array of Provider UUID and associated Encounter Role UUID` | An array of providers and their role within the encounter. At least one provider is required    
+    *obs* | `Array[]: Obs` | Array of observations and values for the encounter    
     *orders* | `Array[]: Order UUID` | List of orders created during the encounter    
-    *form* | `FormType UUID` | Form type to be filled for the encounter
-    *visit* | `Visit UUID` | If allocating an encounter for an already existing visit should specify the target visit UUID 
+    *form* | `Form UUID` | Target Form UUID to be filled for the encounter
+    *visit* | `Visit UUID` | When creating an encounter for an existing visit, this specifies the visit
    
     ```console
         POST /encounter
@@ -122,26 +119,20 @@ Consultation, and Dispensing**.
 
 *  Update a target encounter with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if encounter not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
-
-    #### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *uuid* | `target_encounter_uuid` | Target encounter resource UUID
     
     #### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *encounterDatetime* | `Date (ISO8601 Long)` | The date and time the encounter was created (required)
-    *patient* | `Patient UUID` | Patient type resource UUID (required)
-    *encounterType* | `EncounterType UUID` | Encounter type resource UUID (required)
-    *location* | `Location UUID` | Location resource UUID (required)
-    *encounterProviders* | `Array[]: Providers` | Array of Providers already registered in OpenMRS    
-    *obs* | `Array[]: Obs` | Array of observations and values for the encounter.    
+    *encounterDatetime* | `Date (ISO8601 Long)` | The date and time the encounter was created
+    *patient* | `Patient UUID` | The patient to whom the encounter applies.
+    *encounterType* | `EncounterType UUID` | The type of encounter – e.g., Initial visit, Return visit, etc.
+    *location* | `Location UUID` | The location at which the encounter occurred
+    *encounterProviders* | `Array of Provider UUID and associated Encounter Role UUID` | An array of providers and their role within the encounter. At least one provider is required    
+    *obs* | `Array[]: Obs` | Array of observations and values for the encounter    
     *orders* | `Array[]: Order UUID` | List of orders created during the encounter    
-    *form* | `FormType UUID` | Form type to be filled for the encounter
-    *visit* | `Visit UUID` | If allocating an encounter for an already existing visit should specify the target visit UUID 
+    *form* | `Form UUID` | Target Form UUID to be filled for the encounter
+    *visit* | `Visit UUID` | When creating an encounter for an existing visit, this specifies the visit
     
     ```console
         POST /encounter/:target_encounter_uuid
@@ -161,14 +152,14 @@ status if encounter not exists. If user not logged in to perform this action, a 
     
 ### Delete an encounter
 
-* Delete or Retire a target encounter by its UUID. Returns a `404 Not Found` status if encounter not exists.If user not logged 
+* Delete or Void a target encounter by its UUID. Returns a `404 Not Found` status if encounter not exists.If user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
 
     ```console
         DELETE /encounter/:target_encounter_uuid?purge=true
@@ -177,7 +168,7 @@ status if encounter not exists. If user not logged in to perform this action, a 
 
 * #### List all encounter provider sub resources for a visit.
 
-    Retrieve all <b>encounter provider</b> sub resources of an  <b>encounter</b> resource by target_encounter_uuid.Returns a 
+    Retrieve all <b>encounter provider</b> sub resources of an  <b>encounter</b> resource by target_encounter_uuid. Returns a 
     `404 Not Found` status if encounter provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status
     returned.
 
@@ -187,7 +178,7 @@ status if encounter not exists. If user not logged in to perform this action, a 
 
 * #### List encounter provider sub resources by it's UUID and parent encounter UUID.
     
-     Retrieve an <b>encounter provider</b> sub resources of a <b>encounter</b> resource.Returns a 
+     Retrieve an <b>encounter provider</b> sub resources of a <b>encounter</b> resource. Returns a 
      `404 Not Found` status if encounter provider not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
      returned.
      
@@ -217,22 +208,22 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
  
 ### Update encounter provider sub resource
 
-* Updates an encounter provider sub resource value with given uuid, this method will only modify value of the sub resource.Returns 
-a `404 Not Found` status if encounter provider not exists.If user not logged in to perform this action, a `401 Unauthorized` status
+* Updates an encounter provider sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
+a `404 Not Found` status if encounter provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *parent_uuid* | `target_encounter_uuid` | Target encounter resource UUID
-    *uuid* | `target_encounter_provider_uuid` | Target encounter provider resource UUID
+    *parent_uuid* | `Encounter UUID` | Target encounter resource UUID
+    *uuid* | `Encounter_Provider UUID` | Target encounter provider resource UUID
 
     #### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *provider* | `Provider_Type UUID` | UUID of a provider currently registered in OpenMRS (required)
+    *provider* | `Provider UUID` | UUID of a provider currently registered in OpenMRS (required)
     *encounterRole* | `Encounter_Role UUID` | UUID of encounter role. This is the role provider will participate during this encounter (required)
 
     ```console
@@ -244,14 +235,14 @@ returned.
     ```
 ### Delete encounter provider sub resource
 
-* Delete or Retire a target encounter provider sub resource by its UUID.Returns a `404 Not Found` status if attribute not exists. 
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or Voided a target encounter provider sub resource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
+ If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’. Purging will attempt to irreversibly remove the encounter provider type from the system. Encounter provider types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to irreversibly remove the encounter provider type from the system. Encounter provider types that have been used (i.e., are referenced from existing data) cannot be purged.
     
      ```console
         DELETE /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
