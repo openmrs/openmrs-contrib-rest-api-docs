@@ -48,7 +48,7 @@ Consultation, and Dispensing**.
 
 ### List encounters
 
-* #### List all non-retired encounters.
+* #### List all non-voided encounters.
     
     Quickly filter encounters with given query parameters.Returns a `404 Not Found` status if encounter not exists. If user not logged 
     in to perform this action,a `401 Unauthorized` status returned.
@@ -91,7 +91,7 @@ Consultation, and Dispensing**.
     Parameter | Type | Description
     --- | --- | ---
     *encounterDatetime* | `Date (ISO8601 Long)` | The date and time the encounter was created (required)
-    *patient* | `Patient UUID` | The patient to whom the encounter applies.
+    *patient* | `Patient UUID` | The patient to whom the encounter applies
     *encounterType* | `EncounterType UUID` | The type of encounter – e.g., Initial visit, Return visit, etc. (required)
     *location* | `Location UUID` | The location at which the encounter occurred (required)
     *encounterProviders* | `Array of Provider UUID and associated Encounter Role UUID` | An array of providers and their role within the encounter. At least one provider is required    
@@ -125,7 +125,7 @@ status if encounter not exists. If user not logged in to perform this action, a 
     Parameter | Type | Description
     --- | --- | ---
     *encounterDatetime* | `Date (ISO8601 Long)` | The date and time the encounter was created
-    *patient* | `Patient UUID` | The patient to whom the encounter applies.
+    *patient* | `Patient UUID` | The patient to whom the encounter applies
     *encounterType* | `EncounterType UUID` | The type of encounter – e.g., Initial visit, Return visit, etc.
     *location* | `Location UUID` | The location at which the encounter occurred
     *encounterProviders* | `Array of Provider UUID and associated Encounter Role UUID` | An array of providers and their role within the encounter. At least one provider is required    
