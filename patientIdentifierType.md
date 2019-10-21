@@ -7,7 +7,7 @@ Administrators define what types of identifiers they will collect. These range f
 
 * format: a regular expression defining what the identifier text should contain
 
-* formatDescription: An optional description of the regular expression (used to explain the requirements of the regular expression in terms a user would understand). For example, a regular expression like \d{4,8}could have a description like "Must be a number between 4 and 8 digits in length."
+* formatDescription: An optional description of the regular expression (used to explain the requirements of the regular expression in terms a user would understand). For example, a regular expression like `\d{4,8}` could have a description like "Must be a number between 4 and 8 digits in length."
 
 * required: a true/false whether every patient MUST have this type
 
@@ -52,10 +52,10 @@ Administrators define what types of identifiers they will collect. These range f
     --- | --- | ---
     *name* | string | label for the identifier
     *description* | string | a small description about the patientIdentifier
-    *format* | string | label for the identifier
-    *formatDescription* | string | a small description about the patientIdentifier
-    *required* | boolean | a true/false value
-    *checkDigit* | boolean | a true/false value
+    *format* | string | a regular expression defining what the identifier text should contain
+    *formatDescription* | string | an optional description of the regular expression
+    *required* | boolean | a true/false whether every patient MUST have this type
+    *checkDigit* | boolean | a true/false whether this identifier has a checkdigit at the end
     *validator* | string | `org.openmrs.patient.IdentifierValidator`
     *locationBehavior* | "REQUIRED" or "NOT USED" | behavior of the location with respect to the identifier 
     *uniquenessBehavior* | string | label for the identifier
@@ -79,17 +79,11 @@ Administrators define what types of identifiers they will collect. These range f
 * Update a target patientIdentifierType with given UUID, this method only modifies properties in the request. 
 Returns a `404 Not Found` status if patientIdentifierType not exists. If user not logged in to perform this action, a `401 Unauthorized status returned`.
 
-    #### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *uuid* | `target_patientIdentifierType_uuid` | Target patientIdentifierType resource UUID
-
     #### Properties
 
     Parameter | Type | Description
     --- | --- | ---
-    *resource* | `PatientIdentifierType` | Patient resource with updated properties (same body as while creating the resource body)
+    *Object* | `PatientIdentifierType` | Patient resource with updated properties (same body as while creating the resource body)
 
     ```console
     POST /patientidentifertype/:target_patientidentifiertype_uuid
@@ -104,8 +98,7 @@ Returns a `404 Not Found` status if patientIdentifierType not exists. If user no
 
     Parameter | Type | Description
     --- | --- | ---
-    **uuid** | `String` | uuid to delete
-    *purge* | `Boolean` | The resource will be voided/retired unless purge = 'true'
+    *purge* | `Boolean` | The resource will be retired unless purge = 'true'
 
     ```console
     DELETE /patientidentifiertype/:target_patientidentifiertype_uuid?purge=true
