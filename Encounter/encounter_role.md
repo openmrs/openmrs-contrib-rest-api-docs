@@ -2,7 +2,7 @@
 
 ## Overview
 
-* An Encounter role is specific to the encounter. While these could match up to existing organizational roles (e.g., “Nurse”), 
+* An Encounter role is specific to the [encounter](encounter.md). While these could match up to existing organizational roles (e.g., “Nurse”), 
 they don’t have to (e.g., “Lead Surgeon”).
 
 ## Available operations. 
@@ -24,14 +24,14 @@ they don’t have to (e.g., “Lead Surgeon”).
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `Search Query` | Query to filter encounter role by it's name
+    *q* | `Search Query` | Query to filter encounter role by it's name (i.e., no apostrophe)
 
     ```console
     GET /encounterrole?
       q=Clinician
      ```
     
-* #### List encounter role by UUID.
+* #### Get encounter role by UUID.
 
     Retrieve an encounter role by its UUID. Returns a `404 Not Found` status if encounter role not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
@@ -56,7 +56,7 @@ this action, a `401 Unauthorized` status returned.
         POST /encounterrole
         {
           "name": "Clinician",
-          "description": "Encounter role for clinician encounters"
+          "description": "A provider assisting the Lead Surgeon."
         }
     ```
 ### Update an encounter role
@@ -74,8 +74,8 @@ status if encounter role not exists. If user not logged in to perform this actio
     ```console
         POST /encounterrole/:target_encounter_role_uuid
         {
-          "name": "Clinician",
-          "description": "Changed description for encounter role"
+          "name": "Assisting Surgeon"",
+          "description": "A surgeon who assisted the Lead Surgeon"
         }
     ```
     
