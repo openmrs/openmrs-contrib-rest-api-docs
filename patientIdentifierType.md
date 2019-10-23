@@ -58,20 +58,19 @@ Administrators define what types of identifiers they will collect. These range f
     *checkDigit* | boolean | a true/false whether this identifier has a checkdigit at the end
     *validator* | string | `org.openmrs.patient.IdentifierValidator`
     *locationBehavior* | "REQUIRED" or "NOT USED" | behavior of the location with respect to the identifier 
-    *uniquenessBehavior* | string | label for the identifier
+    *uniquenessBehavior* | string | specify the uniqueness of the behaviour, it can be either Unique, Non Unique or Location.
 
     ```console
     POST /patientidentifiertype
     {
-        "name": "string",
-        "description": "string",
-        "format": "string",
-        "formatDescription": "string",
+        "name": "Wilson Hospital Medical Record Number",
+        "description": "Wilson Hospital Medical Record Number is used as a patientIdentifier type.",
+        "format": "234-7",
+        "formatDescription": "Must follow the pattern NNN-N",
         "required": true,
         "checkDigit": true,
-        "validator": "string",
         "locationBehavior": "REQUIRED",
-        "uniquenessBehavior": "string"
+        "uniquenessBehavior": "Unique"
     }
     ```
 ### Update a patientIdentifierType
