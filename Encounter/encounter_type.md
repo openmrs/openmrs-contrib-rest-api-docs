@@ -2,7 +2,9 @@
 
 ## Overview
 
-* A visit can be associated with one or more encounters. OpenMRS allows you to define multiple encounter types.
+* Encounters represent an interaction between the patient and healthcare system. Since there are a wide variety of ways in
+ which these interactions may occur, OpenMRS allows you categorize them by defining different types of encounter. For example, 
+ "Adult Primary Care Initial Visit" and "In-Between Visit Documentation" could be different types of encounters.
 
 * You could define encounter type for locations such as Pharmacy, Lab, Consultation room or for actions such as admission or discharge.
 
@@ -16,7 +18,7 @@
 
 ### List encounter types
 
-* #### List all non-voided encounter types.
+* #### List all  not-retired encounter types.
     
     Quickly filter encounter types with given query parameters.Returns a `404 Not Found` status if encounter types not exists. 
     If user not logged in to perform this action,a `401 Unauthorized` status returned.
@@ -25,7 +27,7 @@
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `Search Query` | Query to filter encounter type by it's name (i.e., no apostrophe)
+    *q* | `Search Query` | Query to filter encounter type by it's name
 
     ```console
     GET /encountertype?
@@ -51,7 +53,7 @@ this action, a `401 Unauthorized` status returned.
     Parameter | Type | Description
     --- | --- | ---
     *name* | `String` | Name for the encounter type (required)
-    *description* | `String | Description for the encounter type (required)
+    *description* | `String` | Description for the encounter type (required)
    
     ```console
         POST /encountertype
@@ -70,7 +72,7 @@ status if encounter type not exists. If user not logged in to perform this actio
     Parameter | Type | Description
     --- | --- | ---
     *name* | `String` | Name for the encounter type
-    *description* | `String | Description for the encounter type
+    *description* | `String` | Description for the encounter type
     
     ```console
         POST /encountertype/:target_encounter_type_uuid
@@ -82,14 +84,14 @@ status if encounter type not exists. If user not logged in to perform this actio
     
 ### Delete an encounter type
 
-* Delete or Void a target encounter type by its UUID. Returns a `404 Not Found` status if encounter type not exists.If user 
+* Delete or retire a target encounter type by its UUID. Returns a `404 Not Found` status if encounter type not exists.If user 
  not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
+    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’
 
     ```console
         DELETE /encountertype/:target_encounter_type_uuid?purge=true
