@@ -31,11 +31,10 @@ Administrators define what types of identifiers they will collect. These range f
     Fetch all non-retired patientIdentifierTypes resources that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patientIdentifierType response. If the user is not logged in it returns `401 Unauthorized` status is returned.
 
     ```console
-    GET /patientidentifiertype?
-        &q=**searchqQuery**
+    GET /patientidentifiertype
     ```
 
-* #### List patientIdentifierType by UUID.
+* #### Get patientIdentifierType by UUID.
 
     Retrieve a patientIdentifierType by its UUID. Returns a `404 Not Found` status if patientIdentifierType does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
@@ -63,11 +62,12 @@ Administrators define what types of identifiers they will collect. These range f
     ```console
     POST /patientidentifiertype
     {
-        "name": "Wilson Hospital Medical Record Number",
-        "description": "Wilson Hospital Medical Record Number is used as a patientIdentifier type.",
-        "format": "234-7",
-        "formatDescription": "Must follow the pattern NNN-N",
+        "name": "Wilson Hosp MRN",
+        "description": "Wilson Hospital Medical Record Number",
+        "format": "\d{1,10}-\d",
+        "formatDescription": "Up to ten digts followed by a hyphen and another digit",
         "required": true,
+        "validator": "org.openmrs.patient.impl.LuhnIdentifierValidator",
         "checkDigit": true,
         "locationBehavior": "REQUIRED",
         "uniquenessBehavior": "Unique"
@@ -78,15 +78,16 @@ Administrators define what types of identifiers they will collect. These range f
 * Update a target patientIdentifierType with given UUID, this method only modifies properties in the request. 
 Returns a `404 Not Found` status if patientIdentifierType not exists. If user not logged in to perform this action, a `401 Unauthorized status returned`.
 
-    #### Properties
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *Object* | `PatientIdentifierType` | Patient resource with updated properties (same body as while creating the resource body)
-
     ```console
     POST /patientidentifertype/:target_patientidentifiertype_uuid
-    -d modified_patientidentifiertype_object
+        "name": "Amani Identifier",
+        "description": "Medical record number for Amani Health System",
+        "format": "\\d{1,10}-\\d",
+        "formatDescription": "Up to ten digts followed by a hyphen and another digit",
+        "required": false,
+        "validator": "org.openmrs.patient.impl.LuhnIdentifierValidator",
+        "locationBehavior": "NOT_USED",
+        "uniquenessBehavior": "UNIQUE"
     ```
 
 ### Delete a patientIdentifierType
