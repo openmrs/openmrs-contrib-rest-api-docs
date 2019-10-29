@@ -80,6 +80,7 @@ Returns a `404 Not Found` status if patientIdentifierType not exists. If user no
 
     ```console
     POST /patientidentifertype/:target_patientidentifiertype_uuid
+    {
         "name": "Amani Identifier",
         "description": "Medical record number for Amani Health System",
         "format": "\\d{1,10}-\\d",
@@ -88,6 +89,7 @@ Returns a `404 Not Found` status if patientIdentifierType not exists. If user no
         "validator": "org.openmrs.patient.impl.LuhnIdentifierValidator",
         "locationBehavior": "NOT_USED",
         "uniquenessBehavior": "UNIQUE"
+    }
     ```
 
 ### Delete a patientIdentifierType
