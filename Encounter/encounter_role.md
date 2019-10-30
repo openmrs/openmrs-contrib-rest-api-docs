@@ -24,7 +24,7 @@ they don’t have to (e.g., “Lead Surgeon”).
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `Search Query` | Query to filter encounter role by it's name
+    *q* | `Search Query` | Query to filter encounter role by its name
 
     ```console
     GET /encounterrole?
