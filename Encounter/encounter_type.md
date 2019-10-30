@@ -27,7 +27,7 @@
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `Search Query` | Query to filter encounter type by it's name
+    *q* | `Search Query` | Query to filter encounter type by its name
 
     ```console
     GET /encountertype?
