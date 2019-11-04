@@ -114,14 +114,14 @@ status if provider not exists. If user not logged in to perform this action, a `
     
 ### Delete a provider
 
-* Delete or Void a target provider by its UUID. Returns a `404 Not Found` status if provider not exists.If user not logged 
+* Delete or retire a target provider by its UUID. Returns a `404 Not Found` status if provider not exists.If user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
+    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’
 
     ```console
         DELETE /provider/:target_provider_uuid?purge=true
