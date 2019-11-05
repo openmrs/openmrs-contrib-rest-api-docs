@@ -26,6 +26,10 @@ Person Attributes are suitable for storing other information. But historical val
 2. Create Persons.
 3. Update Persons.
 4. Delete Persons.
+5. List person name subresources.
+6. Create person name subresources.
+7. Update person name subresources.
+8. Delete person name subresources.
 
 ### Search Persons
 
@@ -40,7 +44,7 @@ Person Attributes are suitable for storing other information. But historical val
     *q* | *query_string* | *Any string in general against which the results should be filtered out*
 
     ```console
-        GET /person/?q=query_string
+    GET /person/?q=query_string
     ```
 
 * #### List person by UUID
@@ -102,12 +106,12 @@ status if person not exists. If user not logged in to perform this action, a `40
     An example of the request is as follows : 
 
     ```console
-        POST /person/:target_person_uuid
-        {
-            "age": 22,
-            "gender": "M",
-            "birthdate": "1997-01-13",
-        }
+    POST /person/:target_person_uuid
+    {
+        "age": 22,
+        "gender": "M",
+        "birthdate": "1997-01-13",
+    }
     ```
 
 ### Delete a person
@@ -122,5 +126,253 @@ status if person not exists. If user not logged in to perform this action, a `40
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
 
     ```console
-        DELETE /person/:target_person_uuid?purge=true
+    DELETE /person/:target_person_uuid?purge=true
      ```
+
+
+### List person name subresource
+
+* List all the person name subresource corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person name not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+
+```console
+GET /person/:target_person_uuid/name
+```
+
+* List all the person name subresource by it's `UUID` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person name not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+
+```console
+GET /person/:target_person_uuid/name/:target_name_uuid
+```
+
+### Create person name subresource
+
+* To create a person name sub resource for a specific person resource you need to specify below properties in your request body.
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+#### Attributes
+
+Parameter | Type | Description
+--- | --- | ---
+*givenname* | `String` | name of the person
+*middlename* | `String` | middle name of the person
+*familyName* | `String` | family name/surname of the person
+*familyName2* | `String` | second family name/surname of the person
+*preferred* | `Boolean` | preferred/not preferred name
+*prefix* | `String` | prefix for the name
+*familyNamePrefix* | `String` | prefix if any for the family name 
+*familyNameSuffix* | `String` | Suffix if any for the family name
+*degree* | `String` | degree attained by the person
+
+```console
+POST person/:target_person_uuid/name
+{ 
+    "givenName": "Mohit",
+    "familyName": "Kumar",
+    "preferred": true,
+    "prefix": "Mr."
+}
+```
+
+### Update person name subresource
+
+* To update a person name with given uuid value for a specific person resource you need to specify below properties in your request body.
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+#### Attributes
+
+Parameter | Type | Description
+--- | --- | ---
+*givenname* | `String` | name of the person
+*middlename* | `String` | middle name of the person
+*familyName* | `String` | family name/surname of the person
+*familyName2* | `String` | second family name/surname of the person
+*preferred* | `Boolean` | preferred/not preferred name
+*prefix* | `String` | prefix for the name
+*familyNamePrefix* | `String` | prefix if any for the family name 
+*familyNameSuffix* | `String` | Suffix if any for the family name
+*degree* | `String` | degree attained by the person
+
+```console
+POST person/:target_person_uuid/name
+{ 
+    "givenName": "Mohit",
+    "familyName": "Verma",
+    "preferred": true,
+    "prefix": "Dr."
+}
+```
+
+### Delete a person name sub resource
+
+* Delete or retire a target name sub resource by its UUID.Returns a `404 Not Found` status if attribute not exists. 
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+ ```console
+DELETE /person/:target_person_uuid/person/:target_name_uuid
+ ```
+
+### List person address subresource
+
+* List all the person address subresource corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+
+```console
+GET /person/:target_person_uuid/address
+```
+
+* List all the person address subresource by it's `target_address_uuid` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+
+```console
+GET /person/:target_person_uuid/address/:target_address_uuid
+```
+
+### Create person address subresource
+
+* To create a person address sub resource for a specific person resource you need to specify below properties in your request body.
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+#### Attributes
+
+Parameter | Type | Description
+--- | --- | ---
+*preferred* | `Boolean` | preferred/not preferred address
+*address1* | `String` | address of the person
+*address2* | `String` | second address of the person
+*cityVillage* | `String` | city/village of the person
+*stateProvince* | `String` | name of the state of the person
+*country* | `String` | country of the person
+*postalCode* | `String` | pin code of the person
+*countyDistrict* | `String` | county district of the person
+*address3* | `String` | third address of the person
+*address4* | `String` | fourth address of the person
+*address5* | `String` | fifth address of the person
+*address6* | `String` | sixth address of the person
+*startDate* | `String` | start date of living by the person
+*endDate* | `String` | end date of living by the person
+*lattitude* | `String` | lattitude of the location of the person
+*longitude* | `String` | longitude of the location of the person
+
+
+```console
+POST person/:target_person_uuid/address
+{ 
+    "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
+    "cityVillage": "Bengaluru"
+    "stateProvince": "Karnataka",
+    "postalCode": "560037",
+    "lattitude": "28.65033",
+    "longitude": "77.304255"
+}
+```
+
+### Update person address subresource
+
+* To update a person address with given uuid value for a specific person resource you need to specify below properties in your request body.
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+#### Attributes
+
+Parameter | Type | Description
+--- | --- | ---
+*preferred* | `Boolean` | preferred/not preferred address
+*address1* | `String` | address of the person
+*address2* | `String` | second address of the person
+*cityVillage* | `String` | city/village of the person
+*stateProvince* | `String` | name of the state of the person
+*country* | `String` | country of the person
+*postalCode* | `String` | pin code of the person
+*countyDistrict* | `String` | county district of the person
+*address3* | `String` | third address of the person
+*address4* | `String` | fourth address of the person
+*address5* | `String` | fifth address of the person
+*address6* | `String` | sixth address of the person
+*startDate* | `String` | start date of living by the person
+*endDate* | `String` | end date of living by the person
+*lattitude* | `String` | lattitude of the location of the person
+*longitude* | `String` | longitude of the location of the person
+
+
+```console
+POST person/:target_person_uuid/address
+{ 
+    "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
+    "cityVillage": "Bengaluru"
+    "stateProvince": "Karnataka",
+    "postalCode": "560037",
+    "lattitude": "28.65033",
+    "longitude": "77.304255"
+}
+```
+
+### Delete a person address sub resource
+
+* Delete or retire a target address sub resource by its UUID.Returns a `404 Not Found` status if attribute not exists. 
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+ ```console
+DELETE /person/:target_person_uuid/person/:target_address_uuid
+ ```
+
+### List person attribute subresource
+
+* List all the person attribute subresource corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person attribute not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+
+```console
+GET /person/:target_person_uuid/attribute
+```
+
+* List all the person attribute subresource by it's `UUID` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person attribute not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+
+```console
+GET /person/:target_person_uuid/name/:target_attribute_uuid
+```
+
+### Create person attribute subresource
+
+* To create a person attribute sub resource for a specific person resource you need to specify below properties in your request body.
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+#### Attributes
+
+Parameter | Type | Description
+--- | --- | ---
+*attributeType* | `UUID` | UUID of the attributeType
+*value* | `String` | value associated with the attribute
+*hydratedObject* | `UUID` | UUID of the hydrated person attribute object
+
+```console
+POST person/:target_person_uuid/attribute
+{ 
+    "attributeType": "Mohit",
+    "value": "Kumar",
+}
+```
+
+### Update person attribute subresource
+
+* To update a person attribute with given uuid value for a specific person resource you need to specify below properties in your request body.
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+#### Attributes
+
+Parameter | Type | Description
+--- | --- | ---
+*attributeType* | `UUID` | UUID of the attributeType
+*value* | `String` | value associated with the attribute
+*hydratedObject* | `UUID` | UUID of the hydrated person attribute object
+
+```console
+POST person/:target_person_uuid/attribute
+{ 
+    "attributeType": "Mohit",
+    "value": "Kumar",
+}
+```
+
+### Delete a person attribute sub resource
+
+* Delete or retire a target attribute sub resource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
+If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+ ```console
+DELETE /person/:target_person_uuid/person/:target_attribute_uuid
+ ```
