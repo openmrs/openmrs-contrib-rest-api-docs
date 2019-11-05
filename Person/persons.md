@@ -74,4 +74,53 @@ Person Attributes are suitable for storing other information. But historical val
 
     ```
     POST /person
-    
+    {
+        "names": [
+            {
+            "givenName": "Mohit",
+            "familyName": "Kumar"
+            }
+        ],
+        "gender": "M",
+        "birthdate": "1997-09-02",
+        "addresses": [
+            {
+            "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
+            "cityVillage": "Bengaluru",
+            "country": "India",
+            "postalCode": "560037"
+            }
+        ]
+    }
+    ```
+
+### Update a person
+
+* Update a target person with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
+status if person not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned. 
+
+    An example of the request is as follows : 
+
+    ```console
+        POST /person/:target_person_uuid
+        {
+            "age": 22,
+            "gender": "M",
+            "birthdate": "1997-01-13",
+        }
+    ```
+
+### Delete a person
+
+* Delete or Void a target person by its UUID. Returns a `404 Not Found` status if person not exists.If user 
+ not logged in to perform this action, a `401 Unauthorized` status returned.
+
+    #### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
+
+    ```console
+        DELETE /person/:target_person_uuid?purge=true
+     ```
