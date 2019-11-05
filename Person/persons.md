@@ -30,6 +30,14 @@ Person Attributes are suitable for storing other information. But historical val
 6. Create person name subresources.
 7. Update person name subresources.
 8. Delete person name subresources.
+10. List person address subresources.
+11. Create person address subresources.
+12. Update person address subresources.
+13. Delete person address subresources.
+14. List person attribute subresource.
+15. Create person attribute subresources.
+16. Update person attribute subresources.
+17. Delete person attribute subresources
 
 ### Search Persons
 
