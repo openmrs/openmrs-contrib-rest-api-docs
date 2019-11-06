@@ -22,22 +22,22 @@ To support your local needs, you can define additional pieces of information abo
 Person Attributes are suitable for storing other information. But historical values of person attributes are not retained. For example, you should use a person attribute to record a patient's contact telephone number. This information may change, but if it does so, the system need only store the most recent value, and need not retain previous values. It is not appropriate to use a person attribute to store something like the patient's height, which is recorded at a given point in time, but can be expected to change and should be tracked as it does so.
 
 ## Available Operations
-1. List Persons.
-2. Create Persons.
-3. Update Persons.
-4. Delete Persons.
-5. List person name subresources.
-6. Create person name subresources.
-7. Update person name subresources.
-8. Delete person name subresources.
-10. List person address subresources.
-11. Create person address subresources.
-12. Update person address subresources.
-13. Delete person address subresources.
-14. List person attribute subresource.
-15. Create person attribute subresources.
-16. Update person attribute subresources.
-17. Delete person attribute subresources
+1. [Search Persons](#search-persons)
+2. [Create Persons](#create-a-person)
+3. [Update Persons](#update-a-person)
+4. [Delete Persons](#delete-a-person)
+5. [List person name subresources](#list-person-name-subresource)
+6. [Create person name subresources](#create-person-name-subresource)
+7. [Update person name subresources](#update-person-name-subresource)
+8. [Delete person name subresources](#delete-person-name-subresource)
+10. [List person address subresources](#list-person-address-subresource)
+11. [Create person address subresources](#create-person-address-subresource)
+12. [Update person address subresources](#create-person-address-subresource)
+13. [Delete person address subresources](#create-person-address-subresource)
+14. [List person attribute subresource](#list-person-attribute-subresource)
+15. [Create person attribute subresources](#create-person-attribute-subresource)
+16. [Update person attribute subresources](#update-person-name-subresource)
+17. [Delete person attribute subresources](#delete-person-name-subresource)
 
 ### Search Persons
 
@@ -350,8 +350,8 @@ Parameter | Type | Description
 ```console
 POST person/:target_person_uuid/attribute
 { 
-    "attributeType": "Mohit",
-    "value": "Kumar",
+    "attributeType": "8d8718c2-c2cc-11de-8d13-0010c6dffd0f",
+    "value": "Birthplace",
 }
 ```
 
@@ -371,8 +371,8 @@ Parameter | Type | Description
 ```console
 POST person/:target_person_uuid/attribute
 { 
-    "attributeType": "Mohit",
-    "value": "Kumar",
+    "attributeType": "8d8718c2-c2cc-11de-8d13-0010c6dffd0f",
+    "value": "Birthplace",
 }
 ```
 
