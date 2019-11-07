@@ -38,22 +38,20 @@ A **Role** represents a group of privileges in the system. Roles may inherit pri
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name of the provider attribute type (Required)
-    *description* | `String` | Description (Required)
+    *name* | `String` | Name of the role(Required)
+    *description* | `String` | Description of the role(Required)
     *privileges* | `Array[] : privileges` | An array of the privilege resource
     *inheritedRoles* | `Array[] : inheritedRoles` | An array of the inheritedRoles type
 
     ```console
         POST /role
         {
-          "name": "Provider Location",
-          "description": "This attribute type will record the loication of the provider",
-          "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
-          "minOccurs": 0,
-          "maxOccurs": 1,
-          "datatypeConfig": "default",
-          "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-          "handlerConfig": "dafault"
+          "name": "Clinician",
+          "description": "A provider assisting the Lead Surgeon.",
+          "privileges": [{
+              "name": "Operating",
+              "description": "The one having this privilege can operate on the patient."
+          }]
         }
     ```
 ### Update a role
@@ -65,22 +63,16 @@ status if the role deos not exists. If the user not logged in to perform this ac
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name of the provider attribute type (Required)
-    *description* | `String` | Description (Required)
+    *name* | `String` | Name of the role (Required)
+    *description* | `String` | Description of the role (Required)
     *privileges* | `Array[] : privileges` | An array of the privilege resource
     *inheritedRoles* | `Array[] : inheritedRoles` | An array of the inheritedRoles type
 
     ```console
-        POST /providerattributetype/:target_provider_attribute_type_uuid
+        POST /role
         {
-          "name": "Provider Location",
-          "description": "This attribute type will record the loication of the provider",
-          "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
-          "minOccurs": 0,
-          "maxOccurs": 2,
-          "datatypeConfig": "default",
-          "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-          "handlerConfig": "dafault"
+          "name": "Assisting Surgeon",
+          "description": "A surgeon who assisted the Lead Surgeon"
         }
     ```
 
