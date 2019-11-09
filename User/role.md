@@ -14,7 +14,7 @@ A **Role** represents a group of privileges in the system. Roles may inherit pri
 
 ### List roles
 
-* Fetch all non-retired roles that match any specified parameters otherwise fetch all non-retired roles. Returns a `200 OK` status with the patient response. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+* Fetch all non-retired roles that match any specified parameters otherwise fetch all non-retired roles. Returns a `200 OK` status with the role response. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
 
     ```console
     GET /role
@@ -49,8 +49,8 @@ A **Role** represents a group of privileges in the system. Roles may inherit pri
           "name": "Clinician",
           "description": "A provider assisting the Lead Surgeon.",
           "privileges": [{
-              "name": "Operating",
-              "description": "The one having this privilege can operate on the patient."
+              "name": "Delete Patients",
+              "description": "The one having this privilege can to delete the patients."
           }]
         }
     ```
