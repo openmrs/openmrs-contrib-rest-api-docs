@@ -21,10 +21,11 @@ Examples of observations include Serum Creatinine of 0.9mg/dL or Review of cardi
 
 ### List observations
 
-* #### List all non-retired observations.
+* #### List all observations.
     
-    Quickly filter observations with given query parameters. Returns a `404 Not Found` status if provider not exists. If user not logged 
-    in to perform this action,a `401 Unauthorized` status returned.
+    Quickly filter observations with given query parameters. Returns `404 Not Found` status if the observation does not exist. 
+If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+status is returned.
     
     ```console
     GET /obs
@@ -32,8 +33,9 @@ Examples of observations include Serum Creatinine of 0.9mg/dL or Review of cardi
     
 * #### Query observations by UUID.
 
-    Retrieve an observation by its UUID. Returns a `404 Not Found` status if observation not exists. If user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
+    Retrieve an observation by its UUID. Returns `404 Not Found` status if the observation does not exist. 
+If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+status is returned.
     
     ```console
     GET /observation/:target_observation_uuid
@@ -41,8 +43,8 @@ Examples of observations include Serum Creatinine of 0.9mg/dL or Review of cardi
    
 ### Create an observation
 
-* To Create an observation you need to specify below attributes in the request body.If you are not logged in to perform this action,
- a `401 Unauthorized` status returned.
+* To Create an observation you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+status is returned.
 
     #### Attributes
 
@@ -81,10 +83,11 @@ Examples of observations include Serum Creatinine of 0.9mg/dL or Review of cardi
           "retired": false
         }
     ```
-### Update a provider
+### Update an observation
 
-*  Update a target provider with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+*  Update a target obs, this method only modifies properties in the request. Returns `404 Not Found` status if the observation does not exist. 
+If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+status is returned.
     
     #### Attributes
 
@@ -110,10 +113,11 @@ status if provider not exists. If user not logged in to perform this action, a `
         }
     ```
     
-### Delete a provider
+### Delete an observation
 
-* Delete or retire a target provider by its UUID. Returns a `404 Not Found` status if provider not exists.If user not logged 
-  in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target observation. Returns `404 Not Found` status if the observation does not exist. 
+If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+status is returned.
 
     #### Query Parameters
 
@@ -122,88 +126,5 @@ status if provider not exists. If user not logged in to perform this action, a `
     *purge* | `Boolean` | The resource will be retired unless purge = ‘true’
 
     ```console
-        DELETE /provider/:target_provider_uuid?purge=true
-     ```
-### List provider attribute sub resources
-
-* #### List all provider attribute sub resources for a provider.
-
-    Retrieve all **provider attribute** sub resources of an  **provider** resource by target_provider_uuid. Returns a 
-    `404 Not Found` status if provider attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
-
-    ```console
-        GET /provider/:target_provider_uuid/attribute 
-    ```
-
-* #### List provider attribute sub resources by it's UUID and parent provider UUID.
-    
-     Retrieve an **provider attribute** sub resources of a **provider** resource. Returns a `404 Not Found` status if provider 
-     attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
-     returned.
-     
-    ```console
-        GET /provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
-    ```
-### Create a provider attribute sub resource with properties
-
-* To Create an attribute sub resource for a specific provider resource you need to specify below attributes in the request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
-
-    #### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type (required)
-    *value* | `Depends on Attribute_Type Selected` | Value for the attribute (required)
-    
-    ```console
-        POST provider/:target_provider_uuid/attribute 
-        {
-          "attributeType": "target_provider_attribute_type_uuid",
-          "value": "New provider"
-        }
-    ```
- 
- 
-### Update provider attribute sub resource
-
-* Updates an provider attribute sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
-a `404 Not Found` status if provider attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-returned.
-
-    #### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *parent_uuid* | `Provider UUID` | Target provider resource UUID
-    *uuid* | `Provider_Attribute UUID` | Target provider attribute resource UUID
-
-    #### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type
-    *value* | `Depends on Attribute_Type Selected` | Value for the attribute
-
-    ```console
-        POST provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
-        {
-           "attributeType": "target_provider_attribute_type_uuid",
-           "value": "New provider"
-        }
-    ```
-### Delete provider attribute sub resource
-
-* Delete or Retire a target provider attribute sub resource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
- If user not logged in to perform this action, a `401 Unauthorized` status returned.
-
-    #### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’. Purging will attempt to irreversibly remove the provider attribute type from the system. Provider attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
-    
-     ```console
-        DELETE /provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
+        DELETE /obs/:target_obs_uuid?purge=true
      ```
