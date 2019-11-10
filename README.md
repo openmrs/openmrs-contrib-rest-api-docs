@@ -15,7 +15,7 @@ Contributions are welcome!
 
 Create high level docs or example guides on how to use the APIs to perform any action/view with OpenMRS. 
 
-##Get Started 
+## Get Started 
 
 Fork the repository in Github and submit the changes via pull requests.
 
