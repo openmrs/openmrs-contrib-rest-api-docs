@@ -2,14 +2,7 @@
 
 ## Overview
 
-* A concept maps with the concept source type in openMRS. 
-
-* Concept can have any number of mappings to any number of other vocabularies. 
-
-* Other vocabularies are called "concept sources" in OpenMRS (ie. LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc), but the concept 
-source can also be a custom (ie. org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). 
-
-* Every concept can define a string for its mapping in any "concept source" defined in the database
+* If you wish to record extra information about concept, you can create Concept Attributes and assign them to Concept attribute Types. 
 
 ## Available operations. 
 
