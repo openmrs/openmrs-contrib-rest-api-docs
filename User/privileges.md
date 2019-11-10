@@ -31,7 +31,7 @@ A **Privilege** is an authorization to perform a particular action in the system
 
 ### Create a privilege
 
-* To create a privilege you need to specify below attributes in the request body.If the user not logged in to perform this action,
+* To create a privilege you need to specify below attributes in the request body. If the user not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     #### Attributes
