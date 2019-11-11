@@ -2,10 +2,7 @@
 title: OpenMRS Docs
 
 language_tabs:
-  - shell
-  - java
-  - python
-  - node.js
+  - console
 
 toc_footers:
   - <a href='https://openmrs.org/'>OpenMRS org</a>
