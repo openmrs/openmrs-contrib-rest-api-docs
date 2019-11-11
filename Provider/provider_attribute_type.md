@@ -17,7 +17,7 @@
 * #### List all non-retired provider attribute types.
 
     Quickly filter provider attribute types with a given search query. Returns a `404 Not Found` status if the provider attribute type not exists.
-     If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+    If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
     ##### Query Parameters
 
@@ -31,8 +31,8 @@
 
 * #### List provider attribute type by UUID.
 
-    Retrieve a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not exists. If the
-    user not logged in to  perform this action, a `401 Unauthorized` status returned.
+    Retrieve a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not exists. 
+    If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
     ```console
     GET /providerattributetype/:target_provider_attribute_type_uuid
@@ -40,8 +40,8 @@
 
 ### Create a provider attribute type
 
-* To Create a provider attribute type you need to specify below attributes in the request body.If the user not logged in to perform this action,
- a `401 Unauthorized` status returned.
+* To Create a provider attribute type you need to specify below attributes in the request body. If user not authenticated or 
+the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
     #### Attributes
 
@@ -52,7 +52,7 @@
     *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
     *minOccurs* | `Number` | Minimum number of times this value can be specified for a single provider. Use `0` or `1` as the default value (Required)
     *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single provider (e.g., use 1 to prevent an attribute from being added to a provider multiple times)
-    *preferredHandlerClassname* | `Handler` | Handler sub resource for the Custom Data Type used. Can optionally define a specific handler class want to use (otherwise the framework will choose the best handler for the chosen datatype). To find which handlers to use for the Custom DataType please refer here
+    *preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this provider attribute type. The java class must implement [`CustomDataTypeHandler`(https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype.
     *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
     *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list and this configuration would tell the handler the possible choices in the list for this specific attribute type
 
@@ -72,7 +72,8 @@
 ### Update a provider attribute type
 
 *  Update a target provider attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
-status if the provider attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+status if the provider attribute not exists. If user not authenticated or the authenticated user does not have appropriate permissions, 
+a 401 Unauthorized status is returned.
 
     #### Attributes
 
@@ -83,7 +84,7 @@ status if the provider attribute not exists. If the user not logged in to perfor
       *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
       *minOccurs* | `Number` | Minimum number of times this value can be specified for a single provider. Use `0` or `1` as the default value (Required)
       *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single provider (e.g., use 1 to prevent an attribute from being added to a provider multiple times)
-      *preferredHandlerClassname* | `Handler` |  Handler sub resource for the Custom Data Type used. Can optionally define a specific handler class want to use (otherwise the framework will choose the best handler for the chosen datatype).To find which handlers to use for the Custom DataType please refer here
+      *preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this provider attribute type. The java class must implement [`CustomDataTypeHandler`(https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype.
       *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
       *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list and this configuration would tell the handler the possible choices in the list for this specific attribute type
 
@@ -104,7 +105,7 @@ status if the provider attribute not exists. If the user not logged in to perfor
 ### Delete a provider attribute type
 
 * Delete or Retire a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not
- exists. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+ exists. If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
     #### Query Parameters
 
