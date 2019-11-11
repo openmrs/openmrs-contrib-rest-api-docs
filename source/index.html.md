@@ -17,6 +17,8 @@ includes:
   # - errors
   - info
   - auth
+  - Person/persons
+  - Patient/patients
   - Patient/patients
   - Patient/patient_identifier_type
   - Visit/visits

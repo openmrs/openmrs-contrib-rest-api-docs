@@ -1,6 +1,6 @@
 # Person
 
-## Overview
+## Person Overview
 
 Every individual who is referred to in a patient record in OpenMRS is stored in the system as a Person. These include Patients, any patient relative or caretaker, Providers, and Users.
 
@@ -21,7 +21,8 @@ To support your local needs, you can define additional pieces of information abo
 
 Person Attributes are suitable for storing other information. But historical values of person attributes are not retained. For example, you should use a person attribute to record a patient's contact telephone number. This information may change, but if it does so, the system need only store the most recent value, and need not retain previous values. It is not appropriate to use a person attribute to store something like the patient's height, which is recorded at a given point in time, but can be expected to change and should be tracked as it does so.
 
-## Available Operations
+## Available Operations for Person type
+
 1. [Search Persons](#search-persons)
 2. [Create Persons](#create-a-person)
 3. [Update Persons](#update-a-person)
@@ -39,35 +40,35 @@ Person Attributes are suitable for storing other information. But historical val
 16. [Update person attribute](#update-person-name-subresource)
 17. [Delete person attribute](#delete-person-name-subresource)
 
-### Search Persons
+## Search Persons
 
-* #### Search Persons
+* ### Search Persons
      
      Fetch all non-voided persons that match the search query parameter. Returns a 200 OK status with the Person response.
 
-    #### Parameters
+    ### Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *q* | *string* | *search by name*
 
-    ```console
-    GET /person?q=john
-    ```
+```console
+GET /person?q=john
+```
 
-* #### List person by UUID
+* ### List person by UUID
 
     Retrieve a person by its UUID. Returns a `404 Not Found` status if person does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
-    ```console
-    GET /person/:target_person_uuid
-    ```
+```console
+GET /person/:target_person_uuid
+```
 
-### Create a person
+## Create a person
 
 * To create a person you need to specify the below properties in the request. `401 Unauthorized` is returned if the request is not authenticated or if the authenticated user does not have appropriate permissions.
 
-    #### Attributes
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -83,59 +84,60 @@ Person Attributes are suitable for storing other information. But historical val
     *deathdateEstimated* | Boolean | `true` if deathDate is estimate; `false` if deathDate is accurate
     *addresses* | `Array[] : addresses` | The address details aggregated in an array
     *attributes* | `Array[] : attributes` | The attribute details aggregated in an array
-    ```
-    POST /person
-    {
-        "names": [
-            {
-            "givenName": "Mohit",
-            "familyName": "Kumar"
-            }
-        ],
-        "gender": "M",
-        "birthdate": "1997-09-02",
-        "addresses": [
-            {
-            "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
-            "cityVillage": "Bengaluru",
-            "country": "India",
-            "postalCode": "560037"
-            }
-        ]
-    }
-    ```
+    
+```
+POST /person
+{
+    "names": [
+        {
+        "givenName": "Mohit",
+        "familyName": "Kumar"
+        }
+    ],
+    "gender": "M",
+    "birthdate": "1997-09-02",
+    "addresses": [
+        {
+        "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
+        "cityVillage": "Bengaluru",
+        "country": "India",
+        "postalCode": "560037"
+        }
+    ]
+}
+```
 
-### Update a person
+## Update a person
 
 * Update a person. This method only modifies properties specified in the request. Returns a `404 Not found`.
 If not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status returned.
 
     An example of the request is as follows : 
 
-    ```console
-    POST /person/:target_person_uuid
-    {
-        "gender": "M",
-        "birthdate": "1997-01-13",
-    }
-    ```
+```console
+POST /person/:target_person_uuid
+{
+    "gender": "M",
+    "birthdate": "1997-01-13",
+}
+```
 
-### Delete a person
+## Delete a person
 
 * Delete or Void a target person. Returns a `404 Not Found` status if person not exists. IIf not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status returned.
 
-    #### Query Parameters
+    ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
 
-    ```console
-    DELETE /person/:target_person_uuid?purge=true
-     ```
+```console
+DELETE /person/:target_person_uuid?purge=true
+ ```
 
 
-### List person name
+## List person name
 
 * List all the person name subresource corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
@@ -153,24 +155,24 @@ status is returned.
 GET /person/:target_person_uuid/name/:target_name_uuid
 ```
 
-### Create person name subresource
+## Create person name subresource
 
 * To create a person name sub resource for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-#### Attributes
-
-Parameter | Type | Description
---- | --- | ---
-*givenName* | `String` | name of the person
-*middleName* | `String` | middle name of the person
-*familyName* | `String` | family name/surname of the person
-*familyName2* | `String` | second family name/surname of the person
-*preferred* | `Boolean` | true if this is the person's preferred name. When a person has only one name, it should be marked as preferred; when a person has multiple names, only one name can be preferred.
-*prefix* | `String` | prefix for the name
-*familyNamePrefix* | `String` | prefix if any for the family name 
-*familyNameSuffix* | `String` | Suffix if any for the family name
-*degree* | `String` | degree attained by the person
+    ### Attributes
+    
+    Parameter | Type | Description
+    --- | --- | ---
+    *givenName* | `String` | name of the person
+    *middleName* | `String` | middle name of the person
+    *familyName* | `String` | family name/surname of the person
+    *familyName2* | `String` | second family name/surname of the person
+    *preferred* | `Boolean` | true if this is the person's preferred name. When a person has only one name, it should be marked as preferred; when a person has multiple names, only one name can be preferred.
+    *prefix* | `String` | prefix for the name
+    *familyNamePrefix* | `String` | prefix if any for the family name 
+    *familyNameSuffix* | `String` | Suffix if any for the family name
+    *degree* | `String` | degree attained by the person
 
 ```console
 POST person/:target_person_uuid/name
@@ -182,24 +184,24 @@ POST person/:target_person_uuid/name
 }
 ```
 
-### Update person name 
+## Update person name 
 
 * To update a person name with given uuid value for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-#### Attributes
-
-Parameter | Type | Description
---- | --- | ---
-*givenName* | `String` | name of the person
-*middleName* | `String` | middle name of the person
-*familyName* | `String` | family name/surname of the person
-*familyName2* | `String` | second family name/surname of the person
-*preferred* | `Boolean` | true if this is the person's preferred name. When a person has only one name, it should be marked as preferred; when a person has multiple names, only one name can be preferred.
-*prefix* | `String` | prefix for the name
-*familyNamePrefix* | `String` | prefix if any for the family name 
-*familyNameSuffix* | `String` | Suffix if any for the family name
-*degree* | `String` | degree attained by the person
+    ### Attributes
+    
+    Parameter | Type | Description
+    --- | --- | ---
+    *givenName* | `String` | name of the person
+    *middleName* | `String` | middle name of the person
+    *familyName* | `String` | family name/surname of the person
+    *familyName2* | `String` | second family name/surname of the person
+    *preferred* | `Boolean` | true if this is the person's preferred name. When a person has only one name, it should be marked as preferred; when a person has multiple names, only one name can be preferred.
+    *prefix* | `String` | prefix for the name
+    *familyNamePrefix* | `String` | prefix if any for the family name 
+    *familyNameSuffix* | `String` | Suffix if any for the family name
+    *degree* | `String` | degree attained by the person
 
 ```console
 POST person/:target_person_uuid/name
@@ -211,7 +213,7 @@ POST person/:target_person_uuid/name
 }
 ```
 
-### Delete a person name sub resource
+## Delete a person name sub resource
 
 * Delete or void a target name sub resource. Returns a `404 Not Found` status if attribute not exists. 
 If user not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -220,7 +222,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
 DELETE /person/:target_person_uuid/person/:target_name_uuid
  ```
 
-### List person address subresource
+## List person address subresource
 
 * List all the person addresses corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
 
@@ -234,31 +236,31 @@ GET /person/:target_person_uuid/address
 GET /person/:target_person_uuid/address/:target_address_uuid
 ```
 
-### Create person address subresource
+## Create person address subresource
 
 * To create a person address sub resource for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-#### Attributes
-
-Parameter | Type | Description
---- | --- | ---
-*preferred* | `Boolean` | true if this is the person's preferred address. If a person has multiple addresses, only one can be preferred.
-*address1* | `String` | address of the person
-*address2* | `String` | second address of the person
-*cityVillage* | `String` | city/village of the person
-*stateProvince* | `String` | name of the state of the person
-*country* | `String` | country of the person
-*postalCode* | `String` | pin code of the person
-*countyDistrict* | `String` | county district of the person
-*address3* | `String` | third address of the person
-*address4* | `String` | fourth address of the person
-*address5* | `String` | fifth address of the person
-*address6* | `String` | sixth address of the person
-*startDate* | `String` | date when the person began living at this address
-*endDate* | `String` | date when the person stopped living at this address
-*lattitude* | `String` | lattitude of the address
-*longitude* | `String` | longitude of the address
+    #### Attributes
+    
+    Parameter | Type | Description
+    --- | --- | ---
+    *preferred* | `Boolean` | true if this is the person's preferred address. If a person has multiple addresses, only one can be preferred.
+    *address1* | `String` | address of the person
+    *address2* | `String` | second address of the person
+    *cityVillage* | `String` | city/village of the person
+    *stateProvince* | `String` | name of the state of the person
+    *country* | `String` | country of the person
+    *postalCode* | `String` | pin code of the person
+    *countyDistrict* | `String` | county district of the person
+    *address3* | `String` | third address of the person
+    *address4* | `String` | fourth address of the person
+    *address5* | `String` | fifth address of the person
+    *address6* | `String` | sixth address of the person
+    *startDate* | `String` | date when the person began living at this address
+    *endDate* | `String` | date when the person stopped living at this address
+    *lattitude* | `String` | lattitude of the address
+    *longitude* | `String` | longitude of the address
 
 
 ```console
@@ -273,31 +275,31 @@ POST person/:target_person_uuid/address
 }
 ```
 
-### Update person address subresource
+## Update person address subresource
 
 * To update a person address with given uuid value for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status returned.
-
-#### Attributes
-
-Parameter | Type | Description
---- | --- | ---
-*preferred* | `Boolean` | true if this is the person's preferred address. If a person has multiple addresses, only one can be preferred.
-*address1* | `String` | address of the person
-*address2* | `String` | second address of the person
-*cityVillage* | `String` | city/village of the person
-*stateProvince* | `String` | name of the state of the person
-*country* | `String` | country of the person
-*postalCode* | `String` | pin code of the person
-*countyDistrict* | `String` | county district of the person
-*address3* | `String` | third address of the person
-*address4* | `String` | fourth address of the person
-*address5* | `String` | fifth address of the person
-*address6* | `String` | sixth address of the person
-*startDate* | `String` | date when the person began living at this address
-*endDate* | `String` | date when the person stopped living at this address
-*lattitude* | `String` | lattitude of the address
-*longitude* | `String` | longitude of the address
+    
+    ### Attributes
+    
+    Parameter | Type | Description
+    --- | --- | ---
+    *preferred* | `Boolean` | true if this is the person's preferred address. If a person has multiple addresses, only one can be preferred.
+    *address1* | `String` | address of the person
+    *address2* | `String` | second address of the person
+    *cityVillage* | `String` | city/village of the person
+    *stateProvince* | `String` | name of the state of the person
+    *country* | `String` | country of the person
+    *postalCode* | `String` | pin code of the person
+    *countyDistrict* | `String` | county district of the person
+    *address3* | `String` | third address of the person
+    *address4* | `String` | fourth address of the person
+    *address5* | `String` | fifth address of the person
+    *address6* | `String` | sixth address of the person
+    *startDate* | `String` | date when the person began living at this address
+    *endDate* | `String` | date when the person stopped living at this address
+    *lattitude* | `String` | lattitude of the address
+    *longitude* | `String` | longitude of the address
 
 
 ```console
@@ -312,7 +314,7 @@ POST person/:target_person_uuid/address
 }
 ```
 
-### Delete a person address sub resource
+## Delete a person address sub resource
 
 * Delete or void a target address sub resource. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
@@ -322,7 +324,7 @@ status is returned.
 DELETE /person/:target_person_uuid/person/:target_address_uuid
  ```
 
-### List person attribute subresource
+## List person attribute subresource
 
 * List all person attributes for a given person. Returns a `404 Not Found` if the person doesn't exist. If not authenticated or the authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
@@ -336,18 +338,18 @@ GET /person/:target_person_uuid/attribute
 GET /person/:target_person_uuid/name/:target_attribute_uuid
 ```
 
-### Create person attribute subresource
+## Create person attribute subresource
 
 * To create a person attribute sub resource for a specific person resource you need to specify below properties in your request body.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
-#### Attributes
-
-Parameter | Type | Description
---- | --- | ---
-*attributeType* | `UUID` | UUID of the attributeType
-*value* | `String` | value associated with the attribute
+    #### Attributes
+    
+    Parameter | Type | Description
+    --- | --- | ---
+    *attributeType* | `UUID` | UUID of the attributeType
+    *value* | `String` | value associated with the attribute
 
 ```console
 POST person/:target_person_uuid/attribute
@@ -357,17 +359,17 @@ POST person/:target_person_uuid/attribute
 }
 ```
 
-### Update person attribute subresource
+## Update person attribute subresource
 
 * To update a person attribute with given uuid value for a specific person resource you need to specify below properties in your request body.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-#### Attributes
-
-Parameter | Type | Description
---- | --- | ---
-*attributeType* | `UUID` | UUID of the attributeType
-*value* | `String` | value associated with the attribute
+    ### Attributes
+    
+    Parameter | Type | Description
+    --- | --- | ---
+    *attributeType* | `UUID` | UUID of the attributeType
+    *value* | `String` | value associated with the attribute
 
 ```console
 POST person/:target_person_uuid/attribute
@@ -377,7 +379,7 @@ POST person/:target_person_uuid/attribute
 }
 ```
 
-### Delete a person attribute sub resource
+## Delete a person attribute sub resource
 
 * Delete or void a target attribute. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 

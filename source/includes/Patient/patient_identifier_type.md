@@ -3,7 +3,7 @@
 ## PatientIdentifierType Overview
 Administrators define what types of identifiers they will collect. These range from National ID numbers, to driver's license numbers, to per-hospital medical record numbers.
 
-### Properties on PatientIdentifierType:
+## Properties on PatientIdentifierType:
 
 * format: a regular expression defining what the identifier text should contain
 
@@ -78,7 +78,7 @@ POST /patientidentifiertype
 * Update a target patientIdentifierType with given UUID, this method only modifies properties in the request. 
 Returns a `404 Not Found` status if patientIdentifierType not exists. If user not logged in to perform this action, a `401 Unauthorized status returned`.
 
-    ```console
+```console
 POST /patientidentifertype/:target_patientidentifiertype_uuid
 {
     "name": "Amani Identifier",
