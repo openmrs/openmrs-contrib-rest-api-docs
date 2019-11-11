@@ -23,22 +23,29 @@ Examples of observations include Serum Creatinine of 0.9mg/dL or Review of cardi
 
 * #### List all observations.
     
-    Quickly filter observations with given query parameters. Returns `404 Not Found` status if the observation does not exist. 
+    Quickly filter observations with given query parameters. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
-    
+
+    #### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *patient* | `target_patient_uuid` | patient resource UUID
+    *concept* | `target_concept_uuid`| concept resource UUID (this parameter to be used with patient)
+
     ```console
-    GET /obs
+    GET /obs?patient=070f0120-0283-4858-885d-a20d967729cf"
      ```
     
 * #### Query observations by UUID.
 
-    Retrieve an observation by its UUID. Returns `404 Not Found` status if the observation does not exist. 
+    Retrieve an observation by its UUID.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
     
     ```console
-    GET /observation/:target_observation_uuid
+    GET /obs/:target_observation_uuid
     ```
    
 ### Create an observation
@@ -58,30 +65,31 @@ status is returned.
     *encounter* | `String` | what obs are collected and grouped together into. An encounter is a visit.
     *accessionNumber* | `String` | a unique identifier assigned to each Obs.
     *groupMembers* | `Array[]: Obs` |  a list of Obs grouped under this Obs
-    *valueCodedName* | `String` | the order of an Obs.
-    *comment* | `String` | the order of an Obs.
-    *voided* | `String` | the order of an Obs.
-    *value* | `String` | v
-    *valueModifier* | `String` | 
-    *formFieldPath* | `String` |
-    *formFieldNamespace* | `String` | 
-    *status* | ENUM | 
+    *comment* | `String` | the comment written in an Obs.
+    *value* | `String` | various values saved from a given Obs.
+    *status* | ENUM | the status of the observation
     *interpretation* | ENUM | the enumerations related to the current state of being of an Obs
+    *voided* | `Boolean` | whether the obs is voided or not
     
    
     ```console
-        POST /provider
-        {
-          "person": "007037a0-0500-11e3-8ffd-0800200c9a66",
-          "identifier": "doctor",
-          "attributes": [
-            {
-              "attributeType": "target_attributeType_uuid",
-              "value": "value_for_attribute"
-            }
-          ],
-          "retired": false
-        }
+    POST /obs
+    {
+      "person": {
+        "uuid": "070f0120-0283-4858-885d-a20d967729cf",
+        "display": "1001MH - John Smith",
+        "links": [
+          {
+            "rel": "self",
+            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/patient/070f0120-0283-4858-885d-a20d967729cf"
+          }
+        ]
+      },
+      "obsDatetime": "2016-11-10T07:37:31.000+0000",
+      "voided": false,
+      "status": "PRELIMINARY",
+      "interpretation": "NORMAL"
+    }
     ```
 ### Update an observation
 
@@ -93,29 +101,43 @@ status is returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *person* | `Person UUID` | Target person who will be a provider for OpenMRS (required)
-    *identifier* | `String` | Value of the identifier.Identifier is used to virtually group providers in to groups (required)
-    *attributes* | `Array[]: Attribute` |  List of provider attributes 
-    *retired* | `Boolean` | Retired status for the provider.
-    
+    *person* | `Person UUID` | the Person this Obs is acting on.
+    *obsDateTime* | `String` | the time this Obs took place.
+    *concept* | `String` | the coded value/name given to an obs when it is made.
+    *location* | `String` | the location this Obs took place (was taken).
+    *order* | `String` | the order of an Obs.
+    *encounter* | `String` | what obs are collected and grouped together into. An encounter is a visit.
+    *accessionNumber* | `String` | a unique identifier assigned to each Obs.
+    *groupMembers* | `Array[]: Obs` |  a list of Obs grouped under this Obs
+    *comment* | `String` | the comment written in an Obs.
+    *value* | `String` | various values saved from a given Obs.
+    *status* | ENUM | the status of the observation
+    *interpretation* | ENUM | the enumerations related to the current state of being of an Obs
+    *voided* | `Boolean` | whether the obs is voided or not
+   
     ```console
-        POST /provider/:target_provider_uuid
+    POST /obs
+    {
+      "person": {
+      "uuid": "070f0120-0283-4858-885d-a20d967729cf",
+      "display": "1001MH - John Smith",
+      "links": [
         {
-          "person": "007037a0-0500-11e3-8ffd-0800200c9a66",
-          "identifier": "doctor",
-          "attributes": [
-            {
-              "attributeType": "target_attributeType_uuid",
-              "value": "value_for_attribute"
-            }
-          ],
-          "retired": false
+          "rel": "self",
+          "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/patient/070f0120-0283-4858-885d-a20d967729cf"
         }
+      ]
+      },
+      "obsDatetime": "2016-11-10T07:37:31.000+0000",
+      "voided": true,
+      "status": "PRELIMINARY",
+      "interpretation": "ABNORMAL"
+    }
     ```
     
 ### Delete an observation
 
-* Delete or retire a target observation. Returns `404 Not Found` status if the observation does not exist. 
+* Delete or void a target observation. Returns `404 Not Found` status if the observation does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
@@ -123,8 +145,8 @@ status is returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
 
     ```console
-        DELETE /obs/:target_obs_uuid?purge=true
+    DELETE /obs/:target_obs_uuid?purge=true
      ```
