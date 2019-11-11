@@ -6,7 +6,7 @@ The live demo can be viewed in the following URL.
 
 ## Contributing to the documentation
 
-OpenMRS documentation is built using Slate. All documentation is in includes directory, and uses Markdown text format. 
+OpenMRS documentation is built using Slate. All documentation is in **source/includes** directory, and uses Markdown text format. 
 View the contribution guide on how to start contributing to the document.
 
 Contributions are welcome!
