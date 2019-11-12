@@ -2,7 +2,9 @@
 
 ## Overview
 
-* A PersonAttributeType exists to group PersonAttribute objects together.
+* Person attributes provide a mechanism for implementations to add custom attributes to their person records. A Person Attribute Type defines one of these custom attributes, including its data type and search behavior.
+
+* For example, creating a Person Attribute Type for civil status (whether or not someone is single or married) would allow an implementation to record this information for each person in their system.
 
 ## Available operations.
 
@@ -16,14 +18,19 @@
 
 * #### List all non-retired person attribute types.
 
-    Quickly filter person attribute types with a given search query. Returns a `404 Not Found` status if the person attribute type not exists.
-     If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+    Quickly filter person attribute types with a given search query. If the request is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+
+    ##### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *q* | `Search Query` | Query to filter person attributes by its name(partial search is not supported)
 
     ```console
-    GET /personattributetype
+    GET /personattributetype?q=race
      ```
 
-* #### List person attribute type by UUID.
+* #### Get person attribute type by UUID.
 
     Retrieve a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type not exists. If the
     user not logged in to  perform this action, a `401 Unauthorized` status returned.
@@ -43,18 +50,17 @@
     --- | --- | ---
     *name* | `String` | Name of the person attribute type (Required)
     *description* | `String` | Description (Required)
-    *format* | `java.package.Class` | the Java class the PersonAttributeType  
-    *foreignKey* | `Number` | the foreign key in the database that this PersonAttributeType references
+    *format* | `Java Class` | the Java class the PersonAttributeType  
+    *foreignKey* | `Number` | the internal identifier (foreign key) to a Concept that defines the possible values for this attribute
     *sortWeight* | `Number` | the order this PersonAttributeType will appear in when searched
-    *searchable* | `Boolean` | a Boolean denoting whether or not this PersonAttributeType can be searched for
-    *editPrivilege* | `JSON Object` | the privileges required to make changes to this type
-
+    *searchable* | `Boolean` | true if this person attributes should be used to find patients. The default is false
+    *editPrivilege* | `JSON Object` | the privilege required to make changes to this type
 
     ```console
         POST /personattributetype
         {
-            "name": "Civil Status",
-            "description": "Marriage Status of this person",
+            "name": "Edit Civil Status",
+            "description": "Able to manage the civil status of persons",
             "format": "org.openmrs.Concept",
             "foreignKey": 1054,
             "searchable": false,
@@ -69,24 +75,21 @@
 *  Update a target person attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
 status if the person attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    #### Attributes
-
     Parameter | Type | Description
     --- | --- | ---
     *name* | `String` | Name of the person attribute type (Required)
     *description* | `String` | Description (Required)
-    *format* | `java.package.Class` | the Java class the PersonAttributeType  
-    *foreignKey* | `Number` | the foreign key in the database that this PersonAttributeType references
+    *format* | `Java Class` | the Java class the PersonAttributeType  
+    *foreignKey* | `Number` | the internal identifier (foreign key) to a Concept that defines the possible values for this attribute
     *sortWeight* | `Number` | the order this PersonAttributeType will appear in when searched
-    *searchable* | `Boolean` | a Boolean denoting whether or not this PersonAttributeType can be searched for
-    *editPrivilege* | `JSON Object` | the privileges required to make changes to this type
-
+    *searchable* | `Boolean` | true if this person attributes should be used to find patients. The default is false
+    *editPrivilege* | `JSON Object` | the privilege required to make changes to this type
 
     ```console
         POST /personattributetype
         {
-            "name": "Civil Status",
-            "description": "Employment Status of this person",
+            "name": "Edit Civil Status",
+            "description": "Able to manage the civil status of persons",
             "format": "org.openmrs.Concept",
             "foreignKey": 1054,
             "searchable": true,
