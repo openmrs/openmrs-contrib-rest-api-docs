@@ -48,22 +48,22 @@ referenced source.
 2.  [Create a concept](#create-a-concept)
 3.  [Update a concept](#update-a-concept)
 4.  [Delete a concept](#delete-a-concept)
-5.  [List concept mapping sub resource](#list-concept-mapping-sub-resources)
-6.  [Create concept mapping sub resource with properties](#create-a-concept-mapping-sub-resource-with-properties)
-7.  [Update concept mapping sub resource](#update-a-concept-mapping-sub-resource)
-8.  [Delete concept mapping sub resource](#delete-a-concept-mapping-sub-resource)
-9.  [List concept name sub resource](#list-concept-name-sub-resources)
-10. [Create concept name sub resource with properties](#create-a-concept-name-sub-resource-with-properties)
-11. [Update concept name sub resource](#update-concept-name-sub-resource)
-12. [Delete concept name sub resource](#delete-concept-name-sub-resource)
-13. [List concept attribute sub resource](#list-concept-attribute-sub-resources)
-14. [Create concept attribute sub resource with properties](#create-a-concept-attribute-sub-resource-with-properties)
-15. [Update concept attribute sub resource](#update-concept-attribute-sub-resource)
-16. [Delete concept attribute sub resource](#delete-concept-attribute-sub-resource)
-13. [List concept description sub resource](#list-concept-description-sub-resources)
-14. [Create concept description sub resource with properties](#create-a-concept-description-sub-resource-with-properties)
-15. [Update concept description sub resource](#update-concept-description-sub-resource)
-16. [Delete concept description sub resource](#delete-concept-description-sub-resource)
+5.  [List concept mapping](#list-concept-mapping)
+6.  [Create concept mapping with properties](#create-a-concept-mapping-with-properties)
+7.  [Update concept mapping](#update-a-concept-mapping)
+8.  [Delete concept mapping](#delete-a-concept-mapping)
+9.  [List concept name](#list-concept-name)
+10. [Create concept name with properties](#create-a-concept-name-with-properties)
+11. [Update concept name](#update-concept-name)
+12. [Delete concept name](#delete-concept-name)
+13. [List concept attribute](#list-concept-attribute)
+14. [Create concept attribute with properties](#create-a-concept-attribute-with-properties)
+15. [Update concept attribute](#update-concept-attribute)
+16. [Delete concept attribute](#delete-concept-attribute)
+13. [List concept description](#list-concept-descriptions)
+14. [Create concept description with properties](#create-a-concept-description-with-properties)
+15. [Update concept description](#update-concept-description)
+16. [Delete concept description](#delete-concept-description
 
 
 ### List concepts
@@ -186,9 +186,9 @@ status if concept not exists. If user not logged in to perform this action, a `4
     ```console
         DELETE /concept/:target_concept_uuid?purge=true
      ```
-### List concept mapping sub resources
+### List concept mapping
 
-* #### List all concept mapping sub resources for a concept.
+* #### List all concept mappings for a concept.
 
     Retrieve all **concept mapping** sub resources of a **concept** resource by target_concept_uuid. Returns a 
     `404 Not Found` status if concept mapping not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -198,7 +198,7 @@ status if concept not exists. If user not logged in to perform this action, a `4
         GET /concept/:target_concept_uuid/mapping 
     ```
 
-* #### List concept mapping sub resources by it's UUID and parent concept UUID.
+* #### List concept mapping by it's UUID and parent concept UUID.
     
      Retrieve an **concept mapping** sub resources of a **concept** resource. Returns a 
      `404 Not Found` status if concept mapping not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
@@ -207,7 +207,7 @@ status if concept not exists. If user not logged in to perform this action, a `4
     ```console
         GET /concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
     ```
-### Create a concept mapping sub resource with properties
+### Create a concept mapping with properties
 
 * To Create a concept mapping sub resource for a specific concept resource you need to specify below attributes in the request body.
 If user not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -228,7 +228,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
     ```
  
  
-### Update a concept mapping sub resource
+### Update a concept mapping
 
 * Updates an concept mapping sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
 a `404 Not Found` status if concept mapping not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -248,7 +248,7 @@ returned.
           "conceptMapType": "35543629-7d8c-11e1-909d-c80aa9edcf4e"
         }
     ```
-### Delete a concept mapping sub resource
+### Delete a concept mapping
 
 * Delete or Voided a target concept mapping sub resource by its UUID. Returns a `404 Not Found` status if concept mapping not exists. 
  If user not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -262,9 +262,9 @@ returned.
      ```console
         DELETE concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
      ```
-### List concept name sub resources
+### List concept name
 
-* #### List all concept name sub resources for a concept.
+* #### List all concept names for a concept.
 
     Retrieve all **concept name** sub resources of a **concept** resource by target_concept_uuid. Returns a 
     `404 Not Found` status if concept name not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -274,7 +274,7 @@ returned.
         GET /concept/:target_concept_uuid/name 
     ```
 
-* #### List concept name sub resources by it's UUID and parent concept UUID.
+* #### List concept name it's UUID and parent concept UUID.
     
      Retrieve an **concept name** sub resources of a **concept** resource. Returns a 
      `404 Not Found` status if concept name not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
@@ -283,7 +283,7 @@ returned.
     ```console
         GET /concept/:target_concept_uuid/name/:target_concept_name_uuid
     ```
-### Create a concept name sub resource with properties
+### Create a concept name with properties
 
 * To Create a concept name sub resource for a specific concept resource you need to specify below attributes in the request body.
 If user not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -308,7 +308,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
     ```
  
  
-### Update concept name sub resource
+### Update concept name
 
 * Updates an concept name sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
 a `404 Not Found` status if concept name not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -332,7 +332,7 @@ returned.
           "conceptNameType": "FULLY_SPECIFIED"
         }
     ```
-### Delete concept name sub resource
+### Delete concept name
 
 * Delete or retire a target concept name sub resource by its UUID. Returns a `404 Not Found` status if concept name not exists. 
  If user not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -347,9 +347,9 @@ returned.
         DELETE concept/:target_concept_uuid/name/:target_concept_name_uuid
      ```
      
-### List concept attribute sub resources
+### List concept attribute
 
-* #### List all concept attribute sub resources for a concept.
+* #### List all concept attributes for a concept.
 
     Retrieve all **concept attribute** sub resources of a **concept** resource by target_concept_uuid. Returns a 
     `404 Not Found` status if concept attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -359,7 +359,7 @@ returned.
         GET /concept/:target_concept_uuid/attribute 
     ```
 
-* #### List concept attribute sub resources by it's UUID and parent concept UUID.
+* #### List concept attribute by it's UUID and parent concept UUID.
     
      Retrieve an **concept attribute** sub resources of a **concept** resource. Returns a 
      `404 Not Found` status if concept attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
@@ -368,7 +368,7 @@ returned.
     ```console
         GET /concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid
     ```
-### Create a concept attribute sub resource with properties
+### Create a concept attribute with properties
 
 * To Create a concept attribute sub resource for a specific concept resource you need to specify below attributes in the request body.
 If user not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -389,7 +389,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
     ```
  
  
-### Update concept attribute sub resource
+### Update concept attribute
 
 * Updates an concept attribute sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
 a `404 Not Found` status if concept attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -409,7 +409,7 @@ returned.
           "value": "value_for_the_attriute"
         }
     ```
-### Delete concept attribute sub resource
+### Delete concept attribute
 
 * Delete or retire a target concept attribute sub resource by its UUID. Returns a `404 Not Found` status if concept attribute not exists. 
  If user not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -425,9 +425,9 @@ returned.
      ```
 
     
-### List concept description sub resources
+### List concept descriptions
 
-* #### List all concept description sub resources for a concept.
+* #### List all concept descriptions for a concept.
 
     Retrieve all **concept description** sub resources of a **concept** resource by target_concept_uuid. Returns a 
     `404 Not Found` status if concept description not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -437,7 +437,7 @@ returned.
         GET /concept/:target_concept_uuid/description 
     ```
 
-* #### List concept description sub resources by it's UUID and parent concept UUID.
+* #### List concept description by it's UUID and parent concept UUID.
     
      Retrieve an **concept description** sub resources of a **concept** resource. Returns a 
      `404 Not Found` status if concept description not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
@@ -446,7 +446,7 @@ returned.
     ```console
         GET /concept/:target_concept_uuid/description/:target_concept_description_uuid
     ```
-### Create a concept description sub resource with properties
+### Create a concept description with properties
 
 * To Create a concept description sub resource for a specific concept resource you need to specify below attributes in the request body.
 If user not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -467,7 +467,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
     ```
  
  
-### Update concept description sub resource
+### Update concept description
 
 * Updates an concept description sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
 a `404 Not Found` status if concept description not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -487,7 +487,7 @@ returned.
           "locale": "en"
         }
     ```
-### Delete concept description sub resource
+### Delete concept description
 
 * Delete or retire a target concept description sub resource by its UUID. Returns a `404 Not Found` status if concept description not exists. 
  If user not logged in to perform this action, a `401 Unauthorized` status returned.
