@@ -127,4 +127,4 @@ status is returned.
 
     ```console
     DELETE /obs/:target_obs_uuid?purge=true
-     ```
+    ```
