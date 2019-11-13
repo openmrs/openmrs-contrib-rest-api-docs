@@ -58,37 +58,26 @@ status is returned.
     Parameter | Type | Description
     --- | --- | ---
     *person* | `Person UUID` | the Person this Obs is acting on.
-    *obsDateTime* | `String` | the time this Obs took place.
-    *concept* | `String` | the coded value/name given to an obs when it is made.
-    *location* | `String` | the location this Obs took place (was taken).
+    *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp"
+    *concept* | `Concept UUID` | the coded value/name given to an obs when it is made.
+    *location* | `Location UUID` | the location this Obs took place (was taken).
     *order* | `String` | the order of an Obs.
-    *encounter* | `String` | what obs are collected and grouped together into. An encounter is a visit.
-    *accessionNumber* | `String` | a unique identifier assigned to each Obs.
+    *encounter* | `Encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
+    *accessionNumber* | `String` | An identifier used by the fulfiller (e.g., the lab) to identify the specimen or requisition used to produce this observation.
     *groupMembers* | `Array[]: Obs` |  a list of Obs grouped under this Obs
-    *comment* | `String` | the comment written in an Obs.
-    *value* | `String` | various values saved from a given Obs.
-    *status* | ENUM | the status of the observation
-    *interpretation* | ENUM | the enumerations related to the current state of being of an Obs
-    *voided* | `Boolean` | whether the obs is voided or not
+    *comment* | `String` | An option free text comment about the observation.
+    *value* | `String` | The value for the observation (e.g., the answer to a question or the result of a lab test).
+    *status* | `String` | `PRELIMINARY`, `FINAL`, `AMENDED`
+    *interpretation* | `String` | `NORMAL`, `ABNORMAL`, `CRITICALLY_ABNORMAL`, `NEGATIVE`, `POSITIVE`,`CRITICALLY_LOW`,  `LOW`, `HIGH`, `CRITICALLY_HIGH`, `VERY_SUSCEPTIBLE`, `SUSCEPTIBLE`, `INTERMEDIATE`, `RESISTANT`, `SIGNIFICANT_CHANGE_DOWN`, `SIGNIFICANT_CHANGE_UP`, `OFF_SCALE_LOW`, `OFF_SCALE_HIGH`
+    *voided* | `Boolean` | true if the observation is voided
     
-   
     ```console
-    POST /obs
+    POST /obs 
     {
-      "person": {
-        "uuid": "070f0120-0283-4858-885d-a20d967729cf",
-        "display": "1001MH - John Smith",
-        "links": [
-          {
-            "rel": "self",
-            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/patient/070f0120-0283-4858-885d-a20d967729cf"
-          }
-        ]
-      },
-      "obsDatetime": "2016-11-10T07:37:31.000+0000",
-      "voided": false,
-      "status": "PRELIMINARY",
-      "interpretation": "NORMAL"
+      "person": "070f0120-0283-4858-885d-a20d967729cf",
+      "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "obsDatetime": "2019-11-14T07:37:31.000+0000",
+      "value": 70
     }
     ```
 ### Update an observation
@@ -99,39 +88,28 @@ status is returned.
     
     #### Attributes
 
+    #### Attributes
+
     Parameter | Type | Description
     --- | --- | ---
     *person* | `Person UUID` | the Person this Obs is acting on.
-    *obsDateTime* | `String` | the time this Obs took place.
-    *concept* | `String` | the coded value/name given to an obs when it is made.
-    *location* | `String` | the location this Obs took place (was taken).
+    *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp"
+    *concept* | `Concept UUID` | the coded value/name given to an obs when it is made.
+    *location* | `Location UUID` | the location this Obs took place (was taken).
     *order* | `String` | the order of an Obs.
-    *encounter* | `String` | what obs are collected and grouped together into. An encounter is a visit.
-    *accessionNumber* | `String` | a unique identifier assigned to each Obs.
+    *encounter* | `Encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
+    *accessionNumber* | `String` | An identifier used by the fulfiller (e.g., the lab) to identify the specimen or requisition used to produce this observation.
     *groupMembers* | `Array[]: Obs` |  a list of Obs grouped under this Obs
-    *comment* | `String` | the comment written in an Obs.
-    *value* | `String` | various values saved from a given Obs.
-    *status* | ENUM | the status of the observation
-    *interpretation* | ENUM | the enumerations related to the current state of being of an Obs
-    *voided* | `Boolean` | whether the obs is voided or not
+    *comment* | `String` | An option free text comment about the observation.
+    *value* | `String` | The value for the observation (e.g., the answer to a question or the result of a lab test).
+    *status* | `String` | `PRELIMINARY`, `FINAL`, `AMENDED`
+    *interpretation* | `String` | `NORMAL`, `ABNORMAL`, `CRITICALLY_ABNORMAL`, `NEGATIVE`, `POSITIVE`,`CRITICALLY_LOW`,  `LOW`, `HIGH`, `CRITICALLY_HIGH`, `VERY_SUSCEPTIBLE`, `SUSCEPTIBLE`, `INTERMEDIATE`, `RESISTANT`, `SIGNIFICANT_CHANGE_DOWN`, `SIGNIFICANT_CHANGE_UP`, `OFF_SCALE_LOW`, `OFF_SCALE_HIGH`
+    *voided* | `Boolean` | true if the observation is voided
    
     ```console
-    POST /obs
+    POST /obs/:uuid_of_obs_to_be_updated
     {
-      "person": {
-      "uuid": "070f0120-0283-4858-885d-a20d967729cf",
-      "display": "1001MH - John Smith",
-      "links": [
-        {
-          "rel": "self",
-          "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/patient/070f0120-0283-4858-885d-a20d967729cf"
-        }
-      ]
-      },
-      "obsDatetime": "2016-11-10T07:37:31.000+0000",
-      "voided": true,
-      "status": "PRELIMINARY",
-      "interpretation": "ABNORMAL"
+      "value": 71
     }
     ```
     
