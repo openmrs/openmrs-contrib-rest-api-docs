@@ -4,7 +4,7 @@
 
  A User in OpenMRS is an account that a person may use to log into the system.
 
-The real-life person is represented by a Person record in OpenMRS, and a person may have more than one user account. If you want a patient to be able to view her own record in OpenMRS, then you need to create a user account and link it to the patient.
+The real-life person is represented by a Person record in OpenMRS, and a person may have more than one user account. If you want a patient to be able to view her own record in OpenMRS, then you need to create a user account and link it to the patient's person record.
 
 ## Available operations
 
@@ -16,20 +16,20 @@ The real-life person is represented by a Person record in OpenMRS, and a person 
 
 ### List user
 
-* #### List all non-voided users.
+* #### List all non-retired users.
     
-    Quickly filter users with given query parameters.Returns a `404 Not Found` status if user not exists. 
+    Quickly filter users with given query parameters. Returns a `404 Not Found` status if user not exists. 
      If not logged in to perform this action,a `401 Unauthorized` status returned.
     
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `Search Query` | Query to filter users by its name
+    *q* | `Search Query` | Filter users by username or system ID
 
     ```console
     GET /user?
-      q=Clinician
+      q=user1
      ```
     
 * #### Get user by UUID.
@@ -43,7 +43,7 @@ The real-life person is represented by a Person record in OpenMRS, and a person 
    
 ### Create a user
 
-* To create a user you need to specify below attributes in the request body. If you are not logged in to perform 
+* For convenience, the person's information can be included in order to create the corresponding person record at the same time as their user record. When creating a user record for an existing person, then the existing person need only be referenced by UUID. If you are not logged in to perform 
 this action, a `401 Unauthorized` status returned.
 
     #### Attributes
@@ -91,7 +91,7 @@ this action, a `401 Unauthorized` status returned.
         "secretQuestion" : "What is the name of your high school?"
     }
     ```
-### Update a user role
+### Update a user
 
 *  Update a target user with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if user not exists. If not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -144,7 +144,7 @@ status if user not exists. If not logged in to perform this action, a `401 Unaut
     
 ### Delete a user
 
-* Delete or Void a target user by its UUID. Returns a `404 Not Found` status if user not exists.If not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target user by its UUID. Returns a `404 Not Found` status if user not exists.If not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
