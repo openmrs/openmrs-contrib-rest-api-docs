@@ -1,6 +1,6 @@
 # Person Attribute Type
 
-## Overview
+## Person Attribute Type Overview
 
 * Person attributes provide a mechanism for implementations to add custom attributes to their person records. A Person Attribute Type defines one of these custom attributes, including its data type and search behavior.
 
@@ -14,37 +14,37 @@
 4. [Delete a person attribute type](#delete-a-person-attribute-type)
 
 
-### List person attribute types
+## List person attribute types
 
-* #### List all non-retired person attribute types.
+* ### List all non-retired person attribute types.
 
     Quickly filter person attribute types with a given search query. If the request is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
-    ##### Query Parameters
+    #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *q* | `Search Query` | Query to filter person attributes by its name(partial search is not supported)
 
-    ```console
-    GET /personattributetype?q=race
-     ```
+```console
+GET /personattributetype?q=race
+ ```
 
-* #### Get person attribute type by UUID.
+* ### Get person attribute type by UUID.
 
     Retrieve a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type not exists. If the
     user not logged in to  perform this action, a `401 Unauthorized` status returned.
 
-    ```console
-    GET /personattributetype/:target_person_attribute_type_uuid
-    ```
+```console
+GET /personattributetype/:target_person_attribute_type_uuid
+```
 
-### Create a person attribute type
+## Create a person attribute type
 
 * To Create a person attribute type you need to specify below attributes in the request body.If the user not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
-    #### Attributes
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -56,21 +56,21 @@
     *searchable* | `Boolean` | true if this person attributes should be used to find patients. The default is false
     *editPrivilege* | `JSON Object` | the privilege required to make changes to this type
 
-    ```console
-        POST /personattributetype
-        {
-            "name": "Edit Civil Status",
-            "description": "Able to manage the civil status of persons",
-            "format": "org.openmrs.Concept",
-            "foreignKey": 1054,
-            "searchable": false,
-            "editPrivilege": {
-                "name": "Super User",
-                "description": "Change and update the person attribute type"
-            }
-        }
-    ```
-### Update a person attribute type
+```console
+POST /personattributetype
+{
+    "name": "Edit Civil Status",
+    "description": "Able to manage the civil status of persons",
+    "format": "org.openmrs.Concept",
+    "foreignKey": 1054,
+    "searchable": false,
+    "editPrivilege": {
+        "name": "Super User",
+        "description": "Change and update the person attribute type"
+    }
+}
+```
+## Update a person attribute type
 
 *  Update a target person attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
 status if the person attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -85,31 +85,32 @@ status if the person attribute not exists. If the user not logged in to perform 
     *searchable* | `Boolean` | true if this person attributes should be used to find patients. The default is false
     *editPrivilege* | `JSON Object` | the privilege required to make changes to this type
 
-    ```console
-        POST /personattributetype
-        {
-            "name": "Edit Civil Status",
-            "description": "Able to manage the civil status of persons",
-            "format": "org.openmrs.Concept",
-            "foreignKey": 1054,
-            "searchable": true,
-            "editPrivilege": {
-                "name": "Super User",
-                "description": "Change and update the person attribute type"
-            }
-        }
-    ```
+```console
+POST /personattributetype
+{
+    "name": "Edit Civil Status",
+    "description": "Able to manage the civil status of persons",
+    "format": "org.openmrs.Concept",
+    "foreignKey": 1054,
+    "searchable": true,
+    "editPrivilege": {
+        "name": "Super User",
+        "description": "Change and update the person attribute type"
+    }
+}
+```
 
-### Delete a person attribute type
+## Delete a person attribute type
 
 * Delete or Retire a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type not
  exists. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
 
-    #### Query Parameters
+    ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *purge* | `Boolean` | The resource will be retired unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
-    ```console
-        DELETE /personattributetype/:target_person_attribute_type_uuid?purge=true
+```console
+DELETE /personattributetype/:target_person_attribute_type_uuid?purge=true
+```

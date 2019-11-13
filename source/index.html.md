@@ -15,6 +15,7 @@ includes:
   - info
   - auth
   - Person/persons
+  - Person/person_attribute_type
   - Patient/patients
   - Patient/patient_identifier_type
   - Visit/visits
@@ -27,6 +28,7 @@ includes:
   - Encounter/encounter_type
   - Encounter/encounter_role
   - Provider/provider
+  - Provider/provider_attribute_type
 
   
 
