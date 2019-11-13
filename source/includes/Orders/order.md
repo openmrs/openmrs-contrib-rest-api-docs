@@ -113,7 +113,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
     ```console
         DELETE /order/:target_order_uuid?purge=true
