@@ -1,27 +1,22 @@
-# Concept Source Type
+# Concept Source
 
 ## Overview
 
-* A concept maps with the concept source type in openMRS. 
-
-* Concept can have any number of mappings to any number of other vocabularies. 
-
-* Other vocabularies are called "concept sources" in OpenMRS (ie. LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc), but the concept 
-source can also be a custom (ie. org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). 
-
-* Every concept can define a string for its mapping in any "concept source" defined in the database
+* Concepts are often managed within a dictionary (as a collection of concepts). While OpenMRS has it's own dictionary of 
+concepts, other dictionaries may exist in other systems or as standardized reference terminologies (like LOINC or ICD). 
+The authorities who manage these other concept dictionaries represent "Concept Sources".
 
 ## Available operations. 
 
-1. [List concept_source types](#list-concept-source-types)
-2. [Create a concept_source](#create-a-concept_source-type)
-3. [Update a concept_source type](#update-a-concept_source-type)
-4. [Delete a concept_source type](#delete-a-concept_source-type)
+1. [List concept_source types](#list-concept-source)
+2. [Create a concept_source](#create-a-concept-source)
+3. [Update a concept_source type](#update-a-concept-source)
+4. [Delete a concept_source type](#delete-a-concept-source)
 
 
-### List concept source types
+### List concept source
 
-* #### List all non-retired concept source types.
+* #### List all non-retired concept source.
     
     Quickly filter concept source types with a given search query.Returns a `404 Not Found` status if concept source type not exists. 
     If user not logged in to perform this action,a `401 Unauthorized` status returned.
@@ -30,13 +25,13 @@ source can also be a custom (ie. org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `Search Query` | Display Name of concept source Type.
+    *q* | `String` | Full or partial match to concept source name. Search is case-insensitive
 
     ```console
-    GET /conceptsource?q="Search Query"
+    GET /conceptsource?q="loinc"
      ```
     
-* #### List concept source type by UUID.
+* #### Query concept source by UUID.
 
     Retrieve a concept source type by its UUID. Returns a `404 Not Found` status if concept source type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
@@ -45,7 +40,7 @@ source can also be a custom (ie. org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc
     GET /conceptsource/:target_concept_source_type_uuid
     ```
    
-### Create a concept source type
+### Create a concept source
 
 * To Create a concept source type you need to specify below attributes in the request body.If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
@@ -56,7 +51,7 @@ source can also be a custom (ie. org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc
     --- | --- | ---
     *name* | `String` | Name of the concept source type (Required)
     *description* | `String` | Description for the concept source type resource (Required)
-    *hl7Code* | `String` | The 5-20 character code defined for this source by governing bodies. Alternatively, this could be the "Implementation Id" code used by another OpenMRS installation to define its concepts and forms
+    *hl7Code* | `String` | A short code defined by governing bodies like HL7 (as in Vocabulary Table 0396). Alternatively, this could be the "Implementation Id" code used by another OpenMRS installation to define its concepts and forms
     *uniqueId* | `String` | A globally unique id to for the concept source
    
     ```console
@@ -67,7 +62,7 @@ source can also be a custom (ie. org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc
           "hl7Code": "SCT"
         }
     ```
-### Update a concept source type
+### Update a concept source
 
 *  Update a target concept source  type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if concept source not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -90,7 +85,7 @@ status if concept source not exists. If user not logged in to perform this actio
        }
     ```
     
-### Delete a concept source  type
+### Delete a concept source
 
 * Delete or Retire a target concept source  type by its UUID. Returns a `404 Not Found` status if concept source not exists.If user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
