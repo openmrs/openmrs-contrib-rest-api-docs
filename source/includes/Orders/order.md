@@ -2,7 +2,7 @@
 
 ## Overview
 
-An **Order** is an action that a provider requests be taken regarding a patient.
+An **Order** represents a request from a provider such as a lab test, procedure, referral, etc.
 
 For example a provider could order a Complete Blood Count laboratory panel for a patient.
 
@@ -17,7 +17,7 @@ An Order only records an intention, not whether or not the action is carried out
 
 ### List orders
 
-* Fetch all non-retired roles that match any specified parameters otherwise fetch all non-retired roles. 
+* Fetch all non-retired orders that match any specified parameters otherwise fetch all non-retired orders. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     ##### Query Parameters
@@ -30,7 +30,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     GET /order?q=penicillin
      ```
 
-* #### List a particular order
+* #### Get a particular order
 
     Retrieve a particular order.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
@@ -48,14 +48,16 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     Parameter | Type | Description
     --- | --- | ---
     *encounter* | `Encounter UUID` | the encounter for this order
-    *orderType* | `String` | the type of the order
-    *action* | `String` | the action for the order
-    *accessionNumber* | `String` | 
+    *orderType* | `OrderType UUID` | the type of the order
+    *action* | `String` | Possible actions are `NEW` (placing a new order), `REVISE` (revising an existing order), `DISCONTINUE` (request an active order to be stopped),`RENEW` (resume a prior order).
+    *accessionNumber* | `String` | An optional identifier from the fulfiller (e.g., lab system) for the specimen or record associated with the order.
     *patient* | `Patient UUID` | the patient for the order
-    *concept* | `Concept UUID` | the concept of the order
-    *previousNumber* | `String` | the link to the previous order
+    *concept* | `Concept UUID` | UUID for the concept of the order; the item being requested (e.g., "serum creatinine")
+    *previousNumber* | `String` | when orders are revised, this links to the previous revision of the order
     *instructions* | `String` | the instructions for the order
-    *urgency* | `Urgency` | the level of urgency of the order
+    *urgency* | `Urgency` | `ROUTINE` (carry out order according to standard procedures), 
+`STAT` (carry out order immediately), `ON_SCHEDULED_DATE` 
+(carry out order at a specific time)
     *dateActivated* | `Date` | the start date of the order
     *dateStopped* | `Date` | the date of discontinuation
 
@@ -79,14 +81,16 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     Parameter | Type | Description
     --- | --- | ---
     *encounter* | `Encounter UUID` | the encounter for this order
-    *orderType* | `String` | the type of the order
-    *action* | `String` | the action for the order
-    *accessionNumber* | `String` | 
+    *orderType* | `OrderType UUID` | the type of the order
+    *action* | `String` | Possible actions are `NEW` (placing a new order), `REVISE` (revising an existing order), `DISCONTINUE` (request an active order to be stopped),`RENEW` (resume a prior order).
+    *accessionNumber* | `String` | An optional identifier from the fulfiller (e.g., lab system) for the specimen or record associated with the order.
     *patient* | `Patient UUID` | the patient for the order
-    *concept* | `Concept UUID` | the concept of the order
-    *previousNumber* | `String` | the link to the previous order
+    *concept* | `Concept UUID` | UUID for the concept of the order; the item being requested (e.g., "serum creatinine")
+    *previousNumber* | `String` | when orders are revised, this links to the previous revision of the order
     *instructions* | `String` | the instructions for the order
-    *urgency* | `Urgency` | the level of urgency of the order
+    *urgency* | `Urgency` | `ROUTINE` (carry out order according to standard procedures), 
+`STAT` (carry out order immediately), `ON_SCHEDULED_DATE` 
+(carry out order at a specific time)
     *dateActivated* | `Date` | the start date of the order
     *dateStopped* | `Date` | the date of discontinuation
 
@@ -103,7 +107,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 
 ### Delete an order
 
-* Delete or Retire an order by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+* Delete or void an order by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     #### Query Parameters
 
