@@ -14,13 +14,13 @@ A **Role** represents a group of privileges in the system. Roles may inherit pri
 
 ### List roles
 
-* Fetch all non-retired roles that match any specified parameters otherwise fetch all non-retired roles. Returns a `200 OK` status with the role response. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+* Fetch all the roles that match any specified parameters otherwise fetch all roles. Returns a `200 OK` status with the role response. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
 
     ```console
     GET /role
      ```
 
-* #### List roles by UUID.
+* #### Get a role by UUID.
 
     Retrieve a role by its UUID. Returns a `404 Not Found` status if the role not exists. If the
     user not logged in to  perform this action, a `401 Unauthorized` status returned.
@@ -38,8 +38,8 @@ A **Role** represents a group of privileges in the system. Roles may inherit pri
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name of the role(Required)
-    *description* | `String` | Description of the role(Required)
+    *name* | `String` | Name of the role (Required)
+    *description* | `String` | Description of the role (Required)
     *privileges* | `Array[] : privileges` | An array of the privilege resource
     *inheritedRoles* | `Array[] : inheritedRoles` | An array of the inheritedRoles type
 
@@ -50,7 +50,7 @@ A **Role** represents a group of privileges in the system. Roles may inherit pri
           "description": "A provider assisting the Lead Surgeon.",
           "privileges": [{
               "name": "Delete Patients",
-              "description": "The one having this privilege can to delete the patients."
+              "description": "Able to delete patients"
           }]
         }
     ```
@@ -71,8 +71,8 @@ status if the role deos not exists. If the user not logged in to perform this ac
     ```console
         POST /role
         {
-          "name": "Assisting Surgeon",
-          "description": "A surgeon who assisted the Lead Surgeon"
+          "name": "Configures Forms",
+          "description": "Manages forms and attaches them to the UI"
         }
     ```
 
@@ -85,7 +85,7 @@ status if the role deos not exists. If the user not logged in to perform this ac
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | true to delete the role from the system; if false, the request will have no effect
 
     ```console
         DELETE /role/:target_role_uuid?purge=true
