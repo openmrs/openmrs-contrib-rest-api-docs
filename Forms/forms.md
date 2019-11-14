@@ -13,14 +13,18 @@ The HTML Form Entry module does not require you to manage the schema.
 
 ### Forms Formfield.
 
-* If you wish to record extra information about concept, you can create Concept Attributes and assign them to Concept Types.
+* The FormField object relates/orders the fields on a form A form can have many 0 to n fields associated with it in a 
+hierarchical manor. This FormField object governs what/how that takes place
 
-* Concept attributes exists specifically to allow implementations to extend the data model.
+* This FormField object governs what/how that takes place
 
 ### Forms Resource.
 
-* ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale. 
-Because there may be many names for any concept.
+* A FormResource is meant as a way for modules to add arbitrary information to a Form. FormResources are essentially just
+key-value pairs. The value is stored as a custom datatype. A Form can have 0-n FormResources but only one FormResource per name per Form.
+
+* The name of a resource specifies one of many resources that can be stored for a particular owner. Only one resource for 
+each name will ever be saved.
 
 
 ## Available operations. 
@@ -137,7 +141,7 @@ status if forms not exists. If user not logged in to perform this action, a `401
      ```
 ### List form field sub resources
 
-* #### List all form field sub resources for a concept.
+* #### List all form field sub resources for a form.
 
     Retrieve all **form field** sub resources of a **form** resource by target_form_uuid. Returns a 
     `404 Not Found` status if form field not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -147,7 +151,7 @@ status if forms not exists. If user not logged in to perform this action, a `401
         GET /form/:target_form_uuid/formfield 
     ```
 
-* #### List form field sub resources by it's UUID and parent concept UUID.
+* #### List form field sub resources by it's UUID and parent form UUID.
 
      Retrieve an **form field** sub resources of a **form** resource. Returns a 
      `404 Not Found` status if form field not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
@@ -168,12 +172,12 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
     *form* | `target_form_uuid` | UUID of the parent form (required)
     *field* | `target_field_uuid` | UUID of the target field to be included (required)
     *required* | `Boolean` | Indicates whether the form element should be required 
-    *fieldNumber* | `target_concept_map_type_uuid` |  The field number corresponding to the actual form element in your form. This value may be left blank
-    *fieldPart* | `target_concept_map_type_uuid` | The sub field number/letter corresponding to the actual form element in your form (i.e. 'a' in 1a). This value may be left blank
-    *pageNumber* | `target_concept_map_type_uuid` | : The page number where this form element appears. This value may be left blank
-    *minOccurs* | `target_concept_map_type_uuid` | The minimum number of times that this form element should appear on the form. This value may be left blank. Default = 0
-    *maxOccurs* | `target_concept_map_type_uuid` | The maximum number of times that this form element should appear on the form. This value may be left blank. Default = 1. Use -1 to allow for an arbitrary number of values, for example, if you intend to use a 
-    *sortWeight* | `target_concept_map_type_uuid` | Based on the value the order this form field will appear in when searched
+    *fieldNumber* | `Number` |  The field number corresponding to the actual form element in your form. This value may be left blank
+    *fieldPart* | `Number` | The sub field number/letter corresponding to the actual form element in your form (i.e. 'a' in 1a). This value may be left blank
+    *pageNumber* | `Number` | : The page number where this form element appears. This value may be left blank
+    *minOccurs* | `Number` | The minimum number of times that this form element should appear on the form. This value may be left blank. Default = 0
+    *maxOccurs* | `Number` | The maximum number of times that this form element should appear on the form. This value may be left blank. Default = 1. Use -1 to allow for an arbitrary number of values, for example, if you intend to use a 
+    *sortWeight* | `Boolean` | Based on the value the order this form field will appear in when searched
 
     ```console
         POST form/:target_form_uuid/formfield
@@ -203,12 +207,12 @@ returned.
     *form* | `target_form_uuid` | UUID of the parent form
     *field* | `target_field_uuid` | UUID of the target field to be included
     *required* | `Boolean` | Indicates whether the form element should be required
-    *fieldNumber* | `target_concept_map_type_uuid` |  The field number corresponding to the actual form element in your form. This value may be left blank
-    *fieldPart* | `target_concept_map_type_uuid` | The sub field number/letter corresponding to the actual form element in your form (i.e. 'a' in 1a). This value may be left blank
-    *pageNumber* | `target_concept_map_type_uuid` | : The page number where this form element appears. This value may be left blank
-    *minOccurs* | `target_concept_map_type_uuid` | The minimum number of times that this form element should appear on the form. This value may be left blank. Default = 0
-    *maxOccurs* | `target_concept_map_type_uuid` | The maximum number of times that this form element should appear on the form. This value may be left blank. Default = 1. Use -1 to allow for an arbitrary number of values, for example, if you intend to use a 
-    *sortWeight* | `target_concept_map_type_uuid` | Based on the value the order this form field will appear in when searched.
+    *fieldNumber* | `Number` |  The field number corresponding to the actual form element in your form. This value may be left blank
+    *fieldPart* | `Number` | The sub field number/letter corresponding to the actual form element in your form (i.e. 'a' in 1a). This value may be left blank
+    *pageNumber* | `Number` | : The page number where this form element appears. This value may be left blank
+    *minOccurs* | `Number` | The minimum number of times that this form element should appear on the form. This value may be left blank. Default = 0
+    *maxOccurs* | `Number` | The maximum number of times that this form element should appear on the form. This value may be left blank. Default = 1. Use -1 to allow for an arbitrary number of values, for example, if you intend to use a 
+    *sortWeight* | `Boolean` | Based on the value the order this form field will appear in when searched.
   
    ```console
         POST form/:target_form_uuid/formfield
@@ -233,7 +237,7 @@ returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to irreversibly remove the concept mapping type from the system. Concept mapping types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to irreversibly remove the form field type from the system. Form field mapping types that have been used (i.e., are referenced from existing data) cannot be purged.
 
      ```console
         DELETE form/:target_form_uuid/formfield/:target_form_field_uuid
@@ -241,7 +245,7 @@ returned.
      
 ### List form resource sub resources
 
-* #### List all form resource sub resources for a concept.
+* #### List all form resource sub resources for a form.
 
     Retrieve all **form resource** sub resources of a **form** resource by target_form_uuid. Returns a 
     `404 Not Found` status if form resource not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -251,7 +255,7 @@ returned.
         GET /form/:target_form_uuid/resource 
     ```
 
-* #### Query form resource sub resources by it's UUID and parent concept UUID.
+* #### Query form resource sub resources by it's UUID and parent form UUID.
 
      Retrieve an **form resourc** sub resources of a **form** resource. Returns a 
      `404 Not Found` status if form resource not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
@@ -290,7 +294,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
 ### Update form resource sub resource
 
 * Updates an orm resource sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
-a `404 Not Found` status if concept name not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+a `404 Not Found` status if form resource not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     #### Attributes
@@ -322,7 +326,7 @@ returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to irreversibly remove the concept name type from the system. Form resource types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to irreversibly remove the form resource type from the system. Form resource types that have been used (i.e., are referenced from existing data) cannot be purged.
 
      ```console
         DELETE form/:target_form_uuid/resource/:target_form_resource_uuid
