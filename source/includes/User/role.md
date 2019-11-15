@@ -78,14 +78,14 @@ status if the role deos not exists. If the user not logged in to perform this ac
 
 ### Delete a role
 
-* Delete or Retire a role by its UUID. Returns a `404 Not Found` status if the role not
+* Delete a role by its UUID. Returns a `404 Not Found` status if the role not
  exists. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | true to delete the role from the system; if false, the request will have no effect
+    *purge* | `Boolean` | must be `true` to delete the role from the system; if `false`, the request will have no effect
 
     ```console
         DELETE /role/:target_role_uuid?purge=true
