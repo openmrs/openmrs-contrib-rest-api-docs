@@ -14,6 +14,8 @@ includes:
   # - errors
   - info
   - auth
+  - User/user
+  - User/role
   - Person/persons
   - Person/person_attribute_type
   - Patient/patients
@@ -27,8 +29,11 @@ includes:
   - Encounter/encounter
   - Encounter/encounter_type
   - Encounter/encounter_role
+  - Concepts/concept
+  - Concepts/concept_source
   - Provider/provider
   - Provider/provider_attribute_type
+  - Observations/obs
 
   
 
