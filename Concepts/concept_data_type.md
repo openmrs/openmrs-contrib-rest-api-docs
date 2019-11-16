@@ -29,20 +29,14 @@
 
 * #### List all non-retired concept data types.
     
-    Quickly filter concept data types with a given search query.Returns a `404 Not Found` status if concept data type not exists. 
-    If user not logged in to perform this action,a `401 Unauthorized` status returned.
-    
-    ##### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *q* | `Search Query` | Display Name of concept data Type.
+    Get concept data types.Returns a `404 Not Found` status if concept data type not exists. 
+    If user not logged in to perform this action,a `401 Unauthorized` status returned. 
 
     ```console
-    GET /conceptdatatype?q="Search Query"
+    GET /conceptdatatype"
      ```
     
-* #### List concept data type by UUID.
+* #### Get concept data type by UUID.
 
     Retrieve a concept data type by its UUID. Returns a `404 Not Found` status if concept data type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
