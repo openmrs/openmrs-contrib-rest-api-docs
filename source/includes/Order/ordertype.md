@@ -1,5 +1,14 @@
 # Order type
 
+* Orders represent requests from providers for some action to care for a patient. 
+Common types of orders are prescriptions (drug orders), lab tests, radiology tests, 
+procedures, and referrals.
+
+* In nearly all cases, handling different types of orders requires specific behavior of 
+the application. The OpenMRS platform is designed to handle certain types of orders. 
+Adding new order types will usually only happen when new features to handle the 
+new order type are also being added to the system (using a module or app).
+
 ## Available operations.
 
 1. [List orders](#list-orders)
@@ -26,7 +35,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 
 ### Create an order type
 
-* To create an order type you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+* Order types depend on code within the application to properly handle them, so it would be unusual to create a new order type unless some new code (e.g., a module) has been added to the system to handle the new order type.
 
     #### Attributes
 
@@ -36,7 +45,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     *description* | `String` | the description of the order type
     *javaClassName* | `Java Class` | the java class
     *parent* | `Order UUID` | the order uuid
-    *conceptClasses* | `Array[] : Concept UUID` | the array of concept class
+    *conceptClasses* | `Array[] : Concept UUID` | classes of concepts that can be used to generate an order of this type
 
     ```console
         POST /ordertype
@@ -59,7 +68,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     *description* | `String` | the description of the order type
     *javaClassName* | `Java Class` | the java class
     *parent* | `Order UUID` | the order uuid
-    *conceptClasses* | `Array[] : Concept UUID` | the array of concept class
+    *conceptClasses* | `Array[] : Concept UUID` | classes of concepts that can be used to generate an order of this type
 
     ```console
         POST /ordertype/:target_ordertype_uuid
@@ -71,7 +80,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 
 ### Delete an order type
 
-* Delete or void an order type by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+* Delete or retire an order type by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     ```console
         DELETE /ordertype/:target_ordertype_uuid
