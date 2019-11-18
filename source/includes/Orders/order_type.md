@@ -48,12 +48,12 @@ GET /ordertype/:target_ordertype_uuid
     *conceptClasses* | `Array[] : Concept UUID` | classes of concepts that can be used to generate an order of this type
 
 ```console
-    POST /ordertype
-    {
-      "name": "drug order",
-      "description": "One 500mg tablet of Ciprofloxacin, twice a day",
-      "parent": "070f0120-0283-4858-885d-a20d967729cf",
-    }
+POST /ordertype
+{
+  "name": "drug order",
+  "description": "One 500mg tablet of Ciprofloxacin, twice a day",
+  "parent": "070f0120-0283-4858-885d-a20d967729cf",
+}
 ```
     
 ### Update an order type
@@ -71,11 +71,11 @@ GET /ordertype/:target_ordertype_uuid
     *conceptClasses* | `Array[] : Concept UUID` | classes of concepts that can be used to generate an order of this type
 
 ```console
-    POST /ordertype/:target_ordertype_uuid
-    {
-      "name": "drug order",
-      "description": "One 400mg tablet of Ciprofloxacin, twice a day"
-    }
+POST /ordertype/:target_ordertype_uuid
+{
+  "name": "drug order",
+  "description": "One 400mg tablet of Ciprofloxacin, twice a day"
+}
 ```
 
 ### Delete an order type
@@ -83,5 +83,5 @@ GET /ordertype/:target_ordertype_uuid
 * Delete or retire an order type by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
 ```console
-    DELETE /ordertype/:target_ordertype_uuid
+DELETE /ordertype/:target_ordertype_uuid
  ```
