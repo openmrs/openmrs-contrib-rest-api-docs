@@ -14,10 +14,10 @@ ANTENATAL VISIT REASON and add them as answers.
 
 ## Available operations. 
 
-1. [List concept_map types](#list-concept-map-types)
-2. [Create a concept_map_type](#create-a-concept-map-type)
-3. [Update a concept_map type](#update-a-concept-map-type)
-4. [Delete a concept_map type](#delete-a-concept-map-type)
+1. [List concept mapping types](#list-concept-map-types)
+2. [Create a concept mapping type](#create-a-concept-map-type)
+3. [Update a concept mapping typee](#update-a-concept-map-type)
+4. [Delete a concept mapping type](#delete-a-concept-map-type)
 
 
 ### List concept map types
@@ -31,10 +31,10 @@ ANTENATAL VISIT REASON and add them as answers.
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `Search Query` | Display Name of concept map Type.
+    *q* | `String` | Full or partial name search term. Search is case insensitive.
 
     ```console
-    GET /conceptmaptype?q="Search Query"
+    GET /conceptmaptype?q="same"
      ```
 
 * #### List concept map type by UUID.
@@ -55,8 +55,8 @@ ANTENATAL VISIT REASON and add them as answers.
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name of the concept attribute type (Required)
-    *description* | `String` | Description
+    *name* | `String` | Name of the concept mapping type (Required)
+    *description* | `String` | A brief description of the concept mapping type
     *isHidden* | `Boolean` | State to record concept map is hidden or not
     
     ```console
@@ -75,8 +75,8 @@ status if concept map not exists. If user not logged in to perform this action, 
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name of the concept attribute type (Required)
-    *description* | `String` | Description
+    *name* | `String` | Name of the concept mapping type (Required)
+    *description* | `String` |  A brief description of the concept mapping type
     *isHidden* | `Boolean` | State to record concept map is hidden or not
     
     ```console
