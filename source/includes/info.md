@@ -7,44 +7,43 @@ API for [OpenMRS](https://openmrs.org/).
 
 * By default, all requests to `/openmrs/ws/rest` receive the v1 version of the REST API.
 
-* We have hosted online [swagger documentation](https://demo.openmrs.org/openmrs/module/webservices/rest/apiDocs.htm) that is 
-generated on the fly.
+* The OpenMRS REST Web Services module includes dynamically generated documentation. For example, see the 
+  [swagger documentation](https://demo.openmrs.org/openmrs/module/webservices/rest/apiDocs.htm) on the demo 
+  server (username **admin**, password **Admin123**).
 
 # Resources
 
-* Every available object in the web services (ws) module is written up as a resource. 
+* OpenMRS objects (persons, patients, encounters, observations, etc.) are exposed by the REST Web Services 
+  modules as a REST resource as documented here.
 
-* The resource class defines the properties that are exposed and the setters that are available. 
-
-* The class also defines the representations and what goes in them (ref vs default vs full).
-
-<b>See documentation about resources and their URIs here: [REST Web Service Resources in OpenMRS 1.9](https://wiki.openmrs.org/display/docs/REST+Web+Service+Resources+in+OpenMRS+1.9)</b>
-
+* Resources have a default representation, which returns key properites. Most resources can be fetched using a 
+  full representation (using the parameter `v=full`) that includes a more comprehensive list of properties.
 
 # Subresources
 
-* There are some objects that are not defined or do not make sense apart from their parent object which we refer as subresources. 
+* Some resources are not defined or do not make sense apart from their parent object. We refer 
+  to these as subresources. 
 
-* Examples are PersonNames, PersonAddresses, ConceptNames, etc. 
+* Examples of subresources are PersonNames, PersonAddresses, ConceptNames, etc. 
 
-* You can act on subresources under the parent url.
+* You can act on subresources under the parent's url
 
-### Examples :  
+### Examples  
 
-<b> Adding a person name. </b>
+#### Adding a person name.
 
 ```console
-POST /openmrs/ws/rest/v1/person/target_person_uuid/name 
+POST /openmrs/ws/rest/v1/person/:target_person_uuid/name 
 {
   "givenName": "John",
   "familyName": "Smith"
 }
 ```
 
-<b> Editing a person's name. </b>
+#### Editing a person's name.
 
 ```console
-POST /openmrs/ws/rest/v1/person/target_person_uuid/name/target_name_uuid 
+POST /openmrs/ws/rest/v1/person/:target_person_uuid/name/:target_name_uuid 
 {
   "givenName": "Johnny"
 }
@@ -52,51 +51,46 @@ POST /openmrs/ws/rest/v1/person/target_person_uuid/name/target_name_uuid
 
 * A subresource can have only one parent. 
 
-* If it seems like an object has two or more parents, then it is most likely a top-level resource. 
+* If it seems like an resource has two or more parents, then it is most likely a top-level resource. 
 
-* Example "encounters" should not be a subresource of "patient" and "location" resource type (answering questions of "all encounters of a patient" and "all encounters at a location"). 
+* For example "encounters" is not be a subresource of "patient" and "location" resources (answering questions of "all encounters of a patient" and "all encounters at a location"). 
 
-<b> Instead, these should be queries on the encounter resource: </b> 
- 
- ```console
- 
+#### Instead, these should be queries on the encounter resource:
+
  Get encounter list for specific patient.
- 
- GET '/openmrs/ws/rest/v1/encounter?patient=target_patient_uuid'
- 
-```
- ```console
- 
- Get encounter list for specific location.
- 
- GET '/openmrs/ws/rest/v1/encounter?location=target_location_uuid'
- 
+
+```console 
+ GET /encounter?patient=:target_patient_uuid
 ```
 
-# Resources with Subtypes
+Get encounter list for specific location.
 
-* Some resources can have multiple subtypes,<b> for example the order resource contains drugorder and testorder subtypes</b>
+```console 
+ GET /encounter?location=:target_location_uuid
+```
 
-* When creating a resource that has subtypes via a POST, you must specify which subtype of the resource you are creating, 
-with a special t property of the object.
+# Resources with subtypes
+
+* Some resources can have subtypes. For example, the Order resource contains DrugOrder and TestOrder subtypes
+
+* When creating a resource that has subtypes via a `POST`, you must specify which subtype of the resource you are creating, 
+with a special t property of the resource.
 
 
-### Examples :  
+### Examples
 
- ```console
-
+```console
 POST /openmrs/ws/rest/v1/order
 {"t": "testorder", /*... and other properties */}
 ```
 
 * If you GET a resource that has subtypes, each result will be of one of those subtypes, 
-which you can see by looking at the special t property of each result. 
+which you can see by looking at the special property of each result. 
 
 * You may query for only a certain subtype of a resource by providing a t query parameter. 
 
- ```console
- 
- Get encounter orders of druge order sub type.
- 
- GET  /openmrs/ws/rest/v1/order?&t=drugorder&v=full'
+Get encounter orders of druge order sub type.
+
+```console 
+GET  /openmrs/ws/rest/v1/order?&t=drugorder&v=full'
 ```
