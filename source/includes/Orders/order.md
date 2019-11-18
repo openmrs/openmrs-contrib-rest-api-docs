@@ -26,17 +26,17 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     --- | --- | ---
     *q* | `String` | Full or partial display name of order
 
-    ```console
-    GET /order?q=penicillin
-     ```
+```console
+GET /order?q=penicillin
+ ```
 
 * #### Get a particular order
 
     Retrieve a particular order. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    ```console
-    GET /order/:target_order_uuid
-    ```
+```console
+GET /order/:target_order_uuid
+```
 
 ### Create an order
 
@@ -60,16 +60,16 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     *dateActivated* | `Date` | the start date of the order
     *dateStopped* | `Date` | the date of discontinuation
 
-    ```console
-        POST /order
-        {
-          "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
-          "action": "new",
-          "urgency": "ROUTINE",
-          "patient": "070f0120-0283-4858-885d-a20d967729cf",
-          "dateActivated": "2018-10-16 12:08:43"
-        }
-    ```
+```console
+    POST /order
+    {
+      "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
+      "action": "new",
+      "urgency": "ROUTINE",
+      "patient": "070f0120-0283-4858-885d-a20d967729cf",
+      "dateActivated": "2018-10-16 12:08:43"
+    }
+```
     
 ### Update an order
 
@@ -93,16 +93,16 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     *dateActivated* | `Date` | the start date of the order
     *dateStopped* | `Date` | the date of discontinuation
 
-    ```console
-        POST /order/:target_order_uuid
-        {
-          "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
-          "action": "new",
-          "urgency": "ROUTINE",
-          "patient": "070f0120-0283-4858-885d-a20d967729cf",
-          "dateStopped": "2019-03-12 11:48:23"
-        }
-    ```
+```console
+    POST /order/:target_order_uuid
+    {
+      "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
+      "action": "new",
+      "urgency": "ROUTINE",
+      "patient": "070f0120-0283-4858-885d-a20d967729cf",
+      "dateStopped": "2019-03-12 11:48:23"
+    }
+```
 
 ### Delete an order
 
@@ -114,6 +114,6 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
-    ```console
-        DELETE /order/:target_order_uuid?purge=true
-     ```
+```console
+    DELETE /order/:target_order_uuid?purge=true
+ ```
