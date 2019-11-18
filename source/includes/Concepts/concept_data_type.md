@@ -32,18 +32,18 @@
     Get concept data types.Returns a `404 Not Found` status if concept data type not exists. 
     If user not logged in to perform this action,a `401 Unauthorized` status returned. 
 
-    ```console
-    GET /conceptdatatype"
-     ```
+```console
+GET /conceptdatatype"
+```
     
 * #### Get concept data type by UUID.
 
     Retrieve a concept data type by its UUID. Returns a `404 Not Found` status if concept data type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
     
-    ```console
-    GET /conceptdatatype/:target_concept_data_type_uuid
-    ```
+```console
+GET /conceptdatatype/:target_concept_data_type_uuid
+```
     
 ### Delete a concept data type
 
@@ -57,6 +57,6 @@
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
 
-    ```console
-        DELETE /conceptdatatype/:target_concept_data_type_uuid?purge=true
-     ```
+```console
+DELETE /conceptdatatype/:target_concept_data_type_uuid?purge=true
+```

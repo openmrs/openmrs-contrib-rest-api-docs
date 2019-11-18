@@ -25,18 +25,18 @@
     --- | --- | ---
     *q* | `String` | Full or partial display name of concept source
 
-    ```console
-    GET /conceptattributetype?q=time
-     ```
+```console
+GET /conceptattributetype?q=time
+ ```
 
 * #### List concept attribute type by UUID.
 
     Retrieve a concept attribute type by its UUID. Returns a `404 Not Found` status if concept attribute type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
 
-    ```console
-    GET /conceptattributetype/:target_concept_attribute_type_uuid
-    ```
+```console
+GET /conceptattributetype/:target_concept_attribute_type_uuid
+```
 
 ### Create a concept attribute type
 
@@ -57,19 +57,19 @@
     *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
     *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list and this configuration would tell the handler the possible choices in the list for this specific attribute type
     
-    ```console
-        POST /conceptattributetype
-        {
-          "name": "Time Span",
-          "description": "This attribute type will record the time span for the concept",
-          "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
-          "minOccurs": 0,
-          "maxOccurs": 1,
-          "datatypeConfig": "default",
-          "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-          "handlerConfig": "dafault"
-        }
-    ```
+```console
+POST /conceptattributetype
+{
+  "name": "Time Span",
+  "description": "This attribute type will record the time span for the concept",
+  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+  "minOccurs": 0,
+  "maxOccurs": 1,
+  "datatypeConfig": "default",
+  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
+  "handlerConfig": "dafault"
+}
+```
 ### Update a concept attribute type
 
 *  Update a target concept attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
@@ -88,19 +88,19 @@ status if concept attribute not exists. If user not logged in to perform this ac
     *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
     *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list and this configuration would tell the handler the possible choices in the list for this specific attribute type
     
-    ```console
-        POST /conceptattributetype
-        {
-          "name": "Time Span",
-          "description": "This attribute type will record the time span for the concept",
-          "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
-          "minOccurs": 0,
-          "maxOccurs": 1,
-          "datatypeConfig": "default",
-          "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-          "handlerConfig": "dafault"
-        }
-    ```
+```console
+POST /conceptattributetype
+{
+  "name": "Time Span",
+  "description": "This attribute type will record the time span for the concept",
+  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+  "minOccurs": 0,
+  "maxOccurs": 1,
+  "datatypeConfig": "default",
+  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
+  "handlerConfig": "dafault"
+}
+```
 
 ### Delete a concept attribute type
 
@@ -115,6 +115,6 @@ status if concept attribute not exists. If user not logged in to perform this ac
     --- | --- | ---
     *purge* | `Boolean` | The resource will be retired unless purge = "true"
 
-    ```console
-        DELETE /conceptattributetype/:target_concept_attribute_type_uuid?purge=true
-     ```
+```console
+DELETE /conceptattributetype/:target_concept_attribute_type_uuid?purge=true
+```
