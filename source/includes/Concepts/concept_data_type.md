@@ -6,10 +6,10 @@
 
 * The current types are as follows:
     
-    1. Numeric – any data represented numerically, also allows you to classify critical values and units, e.g. age, height, and liters consumed per day.
-    2. Coded – allows answers to be only those provided, e.g. Blood type can only be “A,” “B,” and “O”
+    1. Numeric – any data represented numerically, also allows you to classify critical values and units, e.g. age, height, and liters consumed per day
+    2. Coded – allows answers to be only those provided, e.g. blood type can only be “A”, “B”, "AB", or “O”
     3. Text – Open ended responses
-    4. N/A – the standard datatype for any non-query-like concepts, e.g. symptoms, diagnoses, findings, anatomy, misc, etc.
+    4. N/A – the standard datatype for any non-query-like concepts (answers or things), e.g. symptoms, diagnoses, findings, anatomy, misc
     5. Document 
     6. Date – structured day, month, and year
     7. Time – structured time response
@@ -47,8 +47,9 @@
     
 ### Delete a concept data type
 
-* Delete or Retire a target concept data type by its UUID. Returns a `404 Not Found` status if concept data not exists.If user not logged 
-  in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target concept data type by its UUID. Returns a `404 Not Found` 
+  status if concept data not exists. If user not logged in to perform this action, 
+  a `401 Unauthorized` status returned.
 
     #### Query Parameters
 

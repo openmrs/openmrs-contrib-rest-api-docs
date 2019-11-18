@@ -23,10 +23,10 @@
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `Search Query` | Display Name of concept source Type.
+    *q* | `String` | Full or partial display name of concept source
 
     ```console
-    GET /conceptattributetype?q="Search Query"
+    GET /conceptattributetype?q=time
      ```
 
 * #### List concept attribute type by UUID.
@@ -40,8 +40,9 @@
 
 ### Create a concept attribute type
 
-* To Create a concept attribute type you need to specify below attributes in the request body.If you are not logged in to perform this action,
- a `401 Unauthorized` status returned.
+* To Create a concept attribute type you need to specify below attributes in 
+  the request body.If you are not logged in to perform this action,
+  a `401 Unauthorized` status returned.
 
     #### Attributes
 
@@ -103,14 +104,16 @@ status if concept attribute not exists. If user not logged in to perform this ac
 
 ### Delete a concept attribute type
 
-* Delete or Retire a target concept attribute type by its UUID. Returns a `404 Not Found` status if concept attribute not exists.If user not logged 
-  in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target concept attribute type by its UUID. Returns
+  `404 Not Found` status if concept attribute does not exist. If not 
+  authenticated or user does not have sufficient privilege, a 
+  `401 Unauthorized` status is returned.
 
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
+    *purge* | `Boolean` | The resource will be retired unless purge = "true"
 
     ```console
         DELETE /conceptattributetype/:target_concept_attribute_type_uuid?purge=true
