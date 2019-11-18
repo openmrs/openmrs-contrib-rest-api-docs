@@ -1,5 +1,7 @@
 # Order type
 
+## Order type Overview
+
 * Orders represent requests from providers for some action to care for a patient. 
 Common types of orders are prescriptions (drug orders), lab tests, radiology tests, 
 procedures, and referrals.
@@ -9,14 +11,14 @@ the application. The OpenMRS platform is designed to handle certain types of ord
 Adding new order types will usually only happen when new features to handle the 
 new order type are also being added to the system (using a module or app).
 
-## Available operations.
+## Available operations for Order type.
 
 1. [List orders](#list-orders)
 2. [Create an order](#create-an-order)
 3. [Update an order](#update-an-order)
 4. [Delete an order](#delete-an-order)
 
-### List orders
+## List orders
 
 * Fetch all non-retired order types that match any specified parameters otherwise fetch all non-retired order types. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
@@ -24,7 +26,7 @@ new order type are also being added to the system (using a module or app).
 GET /ordertype
  ```
 
-* #### Get a particular order type
+* ### Get a particular order type
 
     Retrieve a particular order.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
@@ -33,7 +35,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 GET /ordertype/:target_ordertype_uuid
 ```
 
-### Create an order type
+## Create an order type
 
 * Order types depend on code within the application to properly handle them, so it would be unusual to create a new order type unless some new code (e.g., a module) has been added to the system to handle the new order type.
 
@@ -56,11 +58,11 @@ POST /ordertype
 }
 ```
     
-### Update an order type
+## Update an order type
 
 * Update an order type with given UUID, this method only modifies properties in the request. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    #### Attributes
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -78,7 +80,7 @@ POST /ordertype/:target_ordertype_uuid
 }
 ```
 
-### Delete an order type
+## Delete an order type
 
 * Delete or retire an order type by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 

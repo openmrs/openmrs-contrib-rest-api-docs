@@ -1,6 +1,6 @@
 # Order
 
-## Overview
+## Order Overview
 
 An **Order** represents a request from a provider such as a lab test, procedure, referral, etc.
 
@@ -8,19 +8,19 @@ For example a provider could order a Complete Blood Count laboratory panel for a
 
 An Order only records an intention, not whether or not the action is carried out. The results of an Order are typically recorded later as Observations.
 
-## Available operations.
+## Available operations for Order type.
 
 1. [List orders](#list-orders)
 2. [Create an order](#create-an-order)
 3. [Update an order](#update-an-order)
 4. [Delete an order](#delete-an-order)
 
-### List orders
+## List orders
 
 * Fetch all non-retired orders that match any specified parameters otherwise fetch all non-retired orders. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    ##### Query Parameters
+    #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
@@ -30,7 +30,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 GET /order?q=penicillin
  ```
 
-* #### Get a particular order
+* ### Get a particular order
 
     Retrieve a particular order. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
@@ -38,11 +38,11 @@ GET /order?q=penicillin
 GET /order/:target_order_uuid
 ```
 
-### Create an order
+## Create an order
 
 * To create a role you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    #### Attributes
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -71,11 +71,11 @@ POST /order
 }
 ```
     
-### Update an order
+## Update an order
 
 * Update an order with given UUID, this method only modifies properties in the request. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    #### Attributes
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -104,11 +104,11 @@ POST /order/:target_order_uuid
 }
 ```
 
-### Delete an order
+## Delete an order
 
 * Delete or void an order by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    #### Query Parameters
+    ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
