@@ -1,3 +1,8 @@
+# OpenMRS REST API
+
+This documentation serves as a reference to the bespoke [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) 
+API for [OpenMRS](https://openmrs.org/).
+
 # Current version
 
 * By default, all requests to `/openmrs/ws/rest` receive the v1 version of the REST API.
