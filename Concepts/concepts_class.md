@@ -19,38 +19,32 @@ defining concepts, but implementation sites may also create additional custom co
 
 * #### List all non-retired concept classes.
 
-    Quickly filter concept class types with a given search query.Returns a `404 Not Found` status if concept class type not exists. 
+    List all concept classes with a given search query.Returns a `404 Not Found` status if concept classes not exists. 
     If user not logged in to perform this action,a `401 Unauthorized` status returned.
 
-    ##### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *q* | `Search Query` | Display Name of concept class Type.
-
     ```console
-    GET /conceptclass?q="Search Query"
+    GET /conceptclass"
      ```
 
 * #### List concept class type by UUID.
 
-    Retrieve a concept class type by its UUID. Returns a `404 Not Found` status if concept class type not exists. If user not logged 
+    Retrieve a concept class by its UUID. Returns a `404 Not Found` status if concept class type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
 
     ```console
-    GET /conceptclass/:target_concept_class_type_uuid
+    GET /conceptclass/:target_concept_class_uuid
     ```
 
 ### Create a concept class
 
-* To Create a concept class type you need to specify below attributes in the request body. If you are not logged in to perform this action,
+* To Create a concept class you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     #### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name of the concept class type (Required)
+    *name* | `String` | Name of the concept class (Required)
     *description* | `String` | Description
 
     ```console
@@ -62,14 +56,14 @@ defining concepts, but implementation sites may also create additional custom co
     ```
 ### Update a concept class
 
-*  Update a target concept class type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
+*  Update a target concept class with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if concept class not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name of the concept class type (Required)
+    *name* | `String` | Name of the concept class (Required)
     *description* | `String` | Description
 
     ```console
@@ -82,7 +76,7 @@ status if concept class not exists. If user not logged in to perform this action
 
 ### Delete a concept class
 
-* Delete or Retire a target concept class type by its UUID. Returns a `404 Not Found` status if concept class not exists.If user not logged 
+* Delete or Retire a target concept class  by its UUID. Returns a `404 Not Found` status if concept class not exists.If user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
@@ -92,5 +86,5 @@ status if concept class not exists. If user not logged in to perform this action
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
 
     ```console
-        DELETE /conceptclass/:target_concept_class_type_uuid?purge=true
+        DELETE /conceptclass/:target_concept_class_uuid?purge=true
      ```
