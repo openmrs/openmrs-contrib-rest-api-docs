@@ -38,6 +38,6 @@ $ bundle exec middleman server
 
 ### Guide for new PR's
 
-1. Make sure you add the document inside **/includes** folder and the subresource folder.
+1. Make sure you add the document inside **/includes** folder and also inside the relavent subresource folder.
 
 2. Make sure to follow the already existing resource mark-down files and the format followed before sending the PR.
