@@ -61,14 +61,14 @@ GET /order/:target_order_uuid
     *dateStopped* | `Date` | the date of discontinuation
 
 ```console
-    POST /order
-    {
-      "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
-      "action": "new",
-      "urgency": "ROUTINE",
-      "patient": "070f0120-0283-4858-885d-a20d967729cf",
-      "dateActivated": "2018-10-16 12:08:43"
-    }
+POST /order
+{
+  "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
+  "action": "new",
+  "urgency": "ROUTINE",
+  "patient": "070f0120-0283-4858-885d-a20d967729cf",
+  "dateActivated": "2018-10-16 12:08:43"
+}
 ```
     
 ### Update an order
@@ -94,14 +94,14 @@ GET /order/:target_order_uuid
     *dateStopped* | `Date` | the date of discontinuation
 
 ```console
-    POST /order/:target_order_uuid
-    {
-      "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
-      "action": "new",
-      "urgency": "ROUTINE",
-      "patient": "070f0120-0283-4858-885d-a20d967729cf",
-      "dateStopped": "2019-03-12 11:48:23"
-    }
+POST /order/:target_order_uuid
+{
+  "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
+  "action": "new",
+  "urgency": "ROUTINE",
+  "patient": "070f0120-0283-4858-885d-a20d967729cf",
+  "dateStopped": "2019-03-12 11:48:23"
+}
 ```
 
 ### Delete an order
@@ -115,5 +115,5 @@ GET /order/:target_order_uuid
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
 ```console
-    DELETE /order/:target_order_uuid?purge=true
+DELETE /order/:target_order_uuid?purge=true
  ```
