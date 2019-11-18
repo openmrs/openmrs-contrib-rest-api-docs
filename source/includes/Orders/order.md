@@ -24,7 +24,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `Search Query` | Display Name of order
+    *q* | `String` | Full or partial display name of order
 
     ```console
     GET /order?q=penicillin
@@ -32,8 +32,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 
 * #### Get a particular order
 
-    Retrieve a particular order.
-If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+    Retrieve a particular order. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     ```console
     GET /order/:target_order_uuid
