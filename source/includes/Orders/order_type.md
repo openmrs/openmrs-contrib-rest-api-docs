@@ -20,18 +20,18 @@ new order type are also being added to the system (using a module or app).
 
 * Fetch all non-retired order types that match any specified parameters otherwise fetch all non-retired order types. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    ```console
-    GET /ordertype
-     ```
+```console
+GET /ordertype
+ ```
 
 * #### Get a particular order type
 
     Retrieve a particular order.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    ```console
-    GET /ordertype/:target_ordertype_uuid
-    ```
+```console
+GET /ordertype/:target_ordertype_uuid
+```
 
 ### Create an order type
 
@@ -47,14 +47,14 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     *parent* | `Order UUID` | the order uuid
     *conceptClasses* | `Array[] : Concept UUID` | classes of concepts that can be used to generate an order of this type
 
-    ```console
-        POST /ordertype
-        {
-          "name": "drug order",
-          "description": "One 500mg tablet of Ciprofloxacin, twice a day",
-          "parent": "070f0120-0283-4858-885d-a20d967729cf",
-        }
-    ```
+```console
+    POST /ordertype
+    {
+      "name": "drug order",
+      "description": "One 500mg tablet of Ciprofloxacin, twice a day",
+      "parent": "070f0120-0283-4858-885d-a20d967729cf",
+    }
+```
     
 ### Update an order type
 
@@ -70,18 +70,18 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     *parent* | `Order UUID` | the order uuid
     *conceptClasses* | `Array[] : Concept UUID` | classes of concepts that can be used to generate an order of this type
 
-    ```console
-        POST /ordertype/:target_ordertype_uuid
-        {
-          "name": "drug order",
-          "description": "One 400mg tablet of Ciprofloxacin, twice a day"
-        }
-    ```
+```console
+    POST /ordertype/:target_ordertype_uuid
+    {
+      "name": "drug order",
+      "description": "One 400mg tablet of Ciprofloxacin, twice a day"
+    }
+```
 
 ### Delete an order type
 
 * Delete or retire an order type by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    ```console
-        DELETE /ordertype/:target_ordertype_uuid
-     ```
+```console
+    DELETE /ordertype/:target_ordertype_uuid
+ ```
