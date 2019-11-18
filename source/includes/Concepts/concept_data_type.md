@@ -1,6 +1,6 @@
 # Concept Data Type
 
-## Overview
+## Concept Data Type Overview
 
 * Concept Data type defines the structured format you desired the data to be represented as.
 
@@ -19,15 +19,15 @@
     11. Structured 
 
 
-## Available operations. 
+## Available operations for Concept Data Type. 
 
 1. [List concept_data types](#list-concept-data-types)
 4. [Delete a concept_data type](#delete-a-concept_data-type)
 
 
-### List concept data types
+## List concept data types
 
-* #### List all non-retired concept data types.
+* ### List all non-retired concept data types.
     
     Get concept data types.Returns a `404 Not Found` status if concept data type not exists. 
     If user not logged in to perform this action,a `401 Unauthorized` status returned. 
@@ -36,7 +36,7 @@
 GET /conceptdatatype"
 ```
     
-* #### Get concept data type by UUID.
+* ### Get concept data type by UUID.
 
     Retrieve a concept data type by its UUID. Returns a `404 Not Found` status if concept data type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
@@ -45,13 +45,13 @@ GET /conceptdatatype"
 GET /conceptdatatype/:target_concept_data_type_uuid
 ```
     
-### Delete a concept data type
+## Delete a concept data type
 
 * Delete or retire a target concept data type by its UUID. Returns a `404 Not Found` 
   status if concept data not exists. If user not logged in to perform this action, 
   a `401 Unauthorized` status returned.
 
-    #### Query Parameters
+    ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---

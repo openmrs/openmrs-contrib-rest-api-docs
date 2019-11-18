@@ -1,10 +1,10 @@
 # Concept Attribute Type
 
-## Overview
+## Concept Attribute Type Overview
 
 * If you wish to record extra information about concept, you can create Concept Attributes and assign them to Concept attribute Types. 
 
-## Available operations. 
+## Available operations for Concept Attribute Type. 
 
 1. [List concept_attribute types](#list-concept-attribute-types)
 2. [Create a concept_attribute_type](#create-a-concept-attribute-type)
@@ -12,14 +12,14 @@
 4. [Delete a concept_attribute type](#delete-a-concept-attribute-type)
 
 
-### List concept attribute types
+## List concept attribute types
 
-* #### List all non-retired concept attribute types.
+* ### List all non-retired concept attribute types.
 
     Quickly filter concept attribute types with a given search query.Returns a `404 Not Found` status if concept attribute type not exists. 
     If user not logged in to perform this action,a `401 Unauthorized` status returned.
 
-    ##### Query Parameters
+    #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
@@ -29,7 +29,7 @@
 GET /conceptattributetype?q=time
  ```
 
-* #### List concept attribute type by UUID.
+* ### List concept attribute type by UUID.
 
     Retrieve a concept attribute type by its UUID. Returns a `404 Not Found` status if concept attribute type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
@@ -38,13 +38,13 @@ GET /conceptattributetype?q=time
 GET /conceptattributetype/:target_concept_attribute_type_uuid
 ```
 
-### Create a concept attribute type
+## Create a concept attribute type
 
 * To Create a concept attribute type you need to specify below attributes in 
   the request body.If you are not logged in to perform this action,
   a `401 Unauthorized` status returned.
 
-    #### Attributes
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -70,12 +70,12 @@ POST /conceptattributetype
   "handlerConfig": "dafault"
 }
 ```
-### Update a concept attribute type
+## Update a concept attribute type
 
 *  Update a target concept attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if concept attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    #### Attributes
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -102,14 +102,14 @@ POST /conceptattributetype
 }
 ```
 
-### Delete a concept attribute type
+## Delete a concept attribute type
 
 * Delete or retire a target concept attribute type by its UUID. Returns
   `404 Not Found` status if concept attribute does not exist. If not 
   authenticated or user does not have sufficient privilege, a 
   `401 Unauthorized` status is returned.
 
-    #### Query Parameters
+    ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
