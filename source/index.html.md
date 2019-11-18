@@ -31,9 +31,13 @@ includes:
   - Encounter/encounter_role
   - Concepts/concept
   - Concepts/concept_source
+  - Concepts/concept_attribute_type
+  - Concepts/concept_data_type
   - Provider/provider
   - Provider/provider_attribute_type
   - Observations/obs
+  - Orders/order
+  - Orders/order_type
 
   
 
