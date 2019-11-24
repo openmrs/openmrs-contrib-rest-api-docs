@@ -11,6 +11,12 @@ API for [OpenMRS](https://openmrs.org/).
   [swagger documentation](https://demo.openmrs.org/openmrs/module/webservices/rest/apiDocs.htm) on the demo 
   server (username **admin**, password **Admin123**).
 
+# Purpose
+
+* The purpose of this documentation is to provide a brief and good taste and experience of the APIs that are used in OpenMRS community to the new developers so that can onboard in the projects within the org easily.
+
+* The documentation also aims to assist the existing developers to get to know the conceptual context of the APIs and how they help the consumers during the interaction in the real world.
+
 # Resources
 
 * OpenMRS objects (persons, patients, encounters, observations, etc.) are exposed by the REST Web Services 
