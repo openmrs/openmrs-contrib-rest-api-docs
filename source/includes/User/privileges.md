@@ -14,16 +14,17 @@ A **Privilege** is an authorization to perform a particular action in the system
 
 ### List privilege
 
-* Fetch all non-retired privileges that match any specified parameters otherwise fetch all non-retired privileges. Returns a `200 OK` status with the privilege response. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+* Fetch all privileges that match any specified parameters otherwise fetch all privileges. Returns a `200 OK` status with the privilege response. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+status is returned.
 
     ```console
     GET /privilege
      ```
 
-* #### List privileges by UUID.
+* #### Get privilege by UUID
 
-    Retrieve a privilege by its UUID. Returns a `404 Not Found` status if the privilege not exists. If the
-    user not logged in to  perform this action, a `401 Unauthorized` status returned.
+    Retrieve a privilege by its UUID. Returns a `404 Not Found` status if the privilege not exists. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+status is returned.
 
     ```console
     GET /privilege/:target_privilege_uuid
@@ -31,8 +32,7 @@ A **Privilege** is an authorization to perform a particular action in the system
 
 ### Create a privilege
 
-* To create a privilege you need to specify below attributes in the request body. If the user not logged in to perform this action,
- a `401 Unauthorized` status returned.
+* To create a privilege you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     #### Attributes
 
@@ -48,10 +48,11 @@ A **Privilege** is an authorization to perform a particular action in the system
             "description": "A privilege or permission to delete patients"
         }
     ```
+
 ### Update a privilege
 
-*  Update a privilege with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
-status if the privilege deos not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Update a privilege with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
+status if the privilege deos not exists. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned. Attempting to update a privilege's name will fail with the error code `400 Bad Request`.
 
     #### Attributes
 
@@ -68,15 +69,16 @@ status if the privilege deos not exists. If the user not logged in to perform th
 
 ### Delete a privilege
 
-* Delete or Retire a privilege by its UUID. Returns a `404 Not Found` status if the privilege not
- exists. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+* Delete a privilege by its UUID. Returns a `404 Not Found` status if the privilege not
+ exists. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+status is returned.
 
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | `true` to delete the privilege from the system; if `false`, the request will have no effect
 
     ```console
         DELETE /privilege/:target_privilege_uuid?purge=true
-     ```
+    ```
