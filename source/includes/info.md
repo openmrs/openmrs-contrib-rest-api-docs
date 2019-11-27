@@ -1,15 +1,19 @@
-# Overview
-
-Welcome to OpenMRS API documentation!.OpenMRS is a software platform and a reference application which enables design of a 
-customized medical records system with no programming knowledge (although medical and systems analysis knowledge is required). 
-It is a common platform upon which medical informatics efforts in developing countries can be built. The system is based on a
-conceptual database structure which is not dependent on the actual types of medical information required to be collected or
-on particular data collection forms and so can be customized for different uses.
-
-This document provides High level documentation of OpenMRS APIs with code samples which are in the dark area to the right. If
-anything missing or incorrect please inform us by creating a [GitHub Issue](https://github.com/openmrs/openmrs-contrib-rest-api-docs).
-
 # OpenMRS REST API
+
+Welcome to the OpenMRS REST API documentation! OpenMRS is a software 
+platform and a reference application which enables design of a customized 
+medical records system with no programming knowledge (although medical and 
+systems analysis knowledge is required). 
+
+It is a common platform upon which medical informatics efforts in developing
+countries can be built. The system is based on a conceptual database structure 
+which is not dependent on the actual types of medical information required to 
+be collected or on particular data collection forms and so can be customized 
+for different uses.
+
+This document provides High level documentation of OpenMRS APIs with code 
+samples which are in the dark area to the right. If you find anything missing 
+or incorrect please consider proposing revision on [GitHub](https://github.com/openmrs/openmrs-contrib-rest-api-docs).
 
 This documentation serves as a reference to the bespoke [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) 
 API for [OpenMRS](https://openmrs.org/).
@@ -23,9 +27,9 @@ from openMRS
 
 * By default, all requests to `/openmrs/ws/rest` receive the v1 version of the REST API.
 
-* The OpenMRS REST Web Services module includes dynamically generated documentation. For example, see the 
-  [swagger documentation](https://demo.openmrs.org/openmrs/module/webservices/rest/apiDocs.htm) on the demo 
-  server (username **admin**, password **Admin123**).
+* The OpenMRS REST Web Services module includes dynamically generated documentation. 
+  For example, see the 
+  [swagger documentation](https://demo.openmrs.org/openmrs/module/webservices/rest/apiDocs.htm) on the demo server (username **admin**, password **Admin123**).
 
 # Purpose
 
