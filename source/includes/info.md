@@ -1,7 +1,23 @@
+# Overview
+
+Welcome to OpenMRS API documentation!.OpenMRS is a software platform and a reference application which enables design of a 
+customized medical records system with no programming knowledge (although medical and systems analysis knowledge is required). 
+It is a common platform upon which medical informatics efforts in developing countries can be built. The system is based on a
+conceptual database structure which is not dependent on the actual types of medical information required to be collected or
+on particular data collection forms and so can be customized for different uses.
+
+This document provides High level documentation of OpenMRS APIs with code samples which are in the dark area to the right. If
+anything missing or incorrect please inform us by creating a [GitHub Issue](https://github.com/openmrs/openmrs-contrib-rest-api-docs).
+
 # OpenMRS REST API
 
 This documentation serves as a reference to the bespoke [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) 
 API for [OpenMRS](https://openmrs.org/).
+
+# Getting Started
+
+If you are new to openMRS checkout the [Getting Started as a Developer Guide](https://wiki.openmrs.org/display/docs/Getting+Started+as+a+Developer)
+from openMRS
 
 # Current version
 
@@ -10,6 +26,21 @@ API for [OpenMRS](https://openmrs.org/).
 * The OpenMRS REST Web Services module includes dynamically generated documentation. For example, see the 
   [swagger documentation](https://demo.openmrs.org/openmrs/module/webservices/rest/apiDocs.htm) on the demo 
   server (username **admin**, password **Admin123**).
+
+# Schema
+
+All API access is over HTTPS, and can be accessed from `https://demo.openmrs.org/openmrs/ws/rest/v1`. All data is sent and received as JSON.
+
+```console
+curl -X GET "https://demo.openmrs.org/openmrs/ws/rest/v1/concept"
+connection: keep-alive 
+content-length: 9731 
+content-type: application/json;charset=UTF-8 
+date: Wed, 20 Nov 2019 14:13:54 GMT 
+etag: "04c83ff0cf2cc35cf05a2075ad117df83" 
+server: nginx/1.10.3 (Ubuntu) 
+strict-transport-security: max-age=15768000 
+```
 
 # Resources
 
