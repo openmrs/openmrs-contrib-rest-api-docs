@@ -38,7 +38,7 @@ includes:
   - Observations/obs
   - Orders/order
   - Orders/order_type
-
+  - contrib
   
 
 search: true

@@ -1,27 +1,27 @@
 # openmrs-contrib-rest-api-docs
 
-Welcome to OpenMRS REST API documentation!.
+This is the repository for OpenMRS REST API documentation.
 
-The live demo can be viewed in the following URL.
+The live demo can be viewed at [rest.openmrs.org](https://rest.openmrs.org/).
 
 ## Contributing to the documentation
 
-OpenMRS documentation is built using Slate. All documentation is in `source/includes` directory, and uses Markdown text format. 
-View the contribution guide on how to start contributing to the document.
+OpenMRS documentation is built using [Slate](https://github.com/slatedocs/slate). 
+All documentation can be found in the `source/includes/` directory and uses 
+[Markdown](https://guides.github.com/features/mastering-markdown/) text format. 
 
 Contributions are welcome!
 
-1. Creating High-level REST API Documents
-
-Create high level docs or example guides on how to use the APIs to perform any action/view with OpenMRS. 
-
 ## Get Started 
 
-Fork the repository in Github and submit the changes via pull requests.
+Fork this repository in Github and submit the changes via pull requests. If 
+you browse to the markdown files in this repository and edit them, GitHub will 
+guide you through forking and making a pull request with your suggested changes.
 
-### Local Setup for API Docs
+### Build the REST API Documentation locally
 
-OpenMRS uses git for its code repository. To submit a documentation update, use the following steps:
+Use git to clone the repository and build and ruby to build it (git and ruby must 
+be installed locally).
 
 1. Clone the openmrs-contrib-rest-api-docs repository: 
 ```
@@ -38,6 +38,10 @@ $ bundle exec middleman server
 
 ### Guide for new PR's
 
-1. Make sure you add the document inside **/includes** folder and also inside the relavent subresource folder.
+1. Make sure you add the document inside under the `source/includes/` folder 
+inside the relevant subfolder.
 
-2. Make sure to follow the already existing resource mark-down files and the format followed before sending the PR.
+2. Make sure to follow conventions used in existing markdown files for consistency.
+
+3. New files need to be added to the list of inclusions in 
+[`source/includes/info.md`](source/includes/info.md).
