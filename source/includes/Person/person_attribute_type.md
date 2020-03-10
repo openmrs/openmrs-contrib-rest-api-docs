@@ -18,7 +18,7 @@
 
 * ### List all non-retired person attribute types.
 
-    Quickly filter person attribute types with a given search query. If the request is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+    Quickly filter person attribute types with a given search query. If the request is not authenticated or the authenticated user does not have appropriate permissions, a `401 Unauthorized` status is returned.
 
     #### Query Parameters
 
@@ -32,8 +32,8 @@ GET /personattributetype?q=race
 
 * ### Get person attribute type by UUID.
 
-    Retrieve a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type not exists. If the
-    user not logged in to  perform this action, a `401 Unauthorized` status returned.
+    Retrieve a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not exist. If the
+    user not logged in to  perform this action, a `401 Unauthorized` status is returned.
 
 ```console
 GET /personattributetype/:target_person_attribute_type_uuid
@@ -42,7 +42,7 @@ GET /personattributetype/:target_person_attribute_type_uuid
 ## Create a person attribute type
 
 * To Create a person attribute type you need to specify below attributes in the request body.If the user not logged in to perform this action,
- a `401 Unauthorized` status returned.
+ a `401 Unauthorized` status is returned.
 
     ### Attributes
 
@@ -73,7 +73,7 @@ POST /personattributetype
 ## Update a person attribute type
 
 *  Update a target person attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
-status if the person attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+status if the person attribute does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     Parameter | Type | Description
     --- | --- | ---
@@ -102,8 +102,8 @@ POST /personattributetype
 
 ## Delete a person attribute type
 
-* Delete or Retire a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type not
- exists. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+* Delete or Retire a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not
+ exist. If the user is not logged in to  perform this action, a `401 Unauthorized` status is returned.
 
     ### Query Parameters
 

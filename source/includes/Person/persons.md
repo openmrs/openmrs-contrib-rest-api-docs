@@ -44,7 +44,7 @@ Person Attributes are suitable for storing other information. But historical val
 
 * ### Search Persons
      
-     Fetch all non-voided persons that match the search query parameter. Returns a 200 OK status with the Person response.
+     Fetch all non-voided persons that match the search query parameter. Returns a `200 OK` status with the Person response.
 
     ### Parameters
 
@@ -58,7 +58,7 @@ GET /person?q=john
 
 * ### List person by UUID
 
-    Retrieve a person by its UUID. Returns a `404 Not Found` status if person does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+    Retrieve a person by their UUID. Returns a `404 Not Found` status if the person does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 ```console
 GET /person/:target_person_uuid
@@ -110,7 +110,7 @@ POST /person
 ## Update a person
 
 * Update a person. This method only modifies properties specified in the request. Returns a `404 Not found`.
-If not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status returned.
+If not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status is returned.
 
     An example of the request is as follows : 
 
@@ -124,7 +124,7 @@ POST /person/:target_person_uuid
 
 ## Delete a person
 
-* Delete or Void a target person. Returns a `404 Not Found` status if person not exists. IIf not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status returned.
+* Delete or Void a target person. Returns a `404 Not Found` status if person not exists. If not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status is returned.
 
     ### Query Parameters
 
@@ -147,7 +147,7 @@ status is returned.
 GET /person/:target_person_uuid/name
 ```
 
-* List the person name by it's `UUID` and corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. 
+* List the person name by its `UUID` and corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
@@ -158,7 +158,7 @@ GET /person/:target_person_uuid/name/:target_name_uuid
 ## Create person name subresource
 
 * To create a person name sub resource for a specific person resource you need to specify below properties in your request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+If user not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     ### Attributes
     
@@ -187,7 +187,7 @@ POST person/:target_person_uuid/name
 ## Update person name 
 
 * To update a person name with given uuid value for a specific person resource you need to specify below properties in your request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+If user not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     ### Attributes
     
@@ -215,8 +215,8 @@ POST person/:target_person_uuid/name
 
 ## Delete a person name sub resource
 
-* Delete or void a target name sub resource. Returns a `404 Not Found` status if attribute not exists. 
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or void a target name sub resource. Returns a `404 Not Found` status if attribute does not exist. 
+If user not logged in to perform this action, a `401 Unauthorized` status is returned.
 
  ```console
 DELETE /person/:target_person_uuid/person/:target_name_uuid
@@ -224,13 +224,13 @@ DELETE /person/:target_person_uuid/person/:target_name_uuid
 
 ## List person address subresource
 
-* List all the person addresses corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+* List all the person addresses corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address does not exist. If user not logged in to perform this action, a `401 unauthorized` status is returned.
 
 ```console
 GET /person/:target_person_uuid/address
 ```
 
-* List all the person addresses by it's `target_address_uuid` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+* List all the person addresses by its `target_address_uuid` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address does not exist. If user not logged in to perform this action, a `401 unauthorized` status is returned.
 
 ```console
 GET /person/:target_person_uuid/address/:target_address_uuid
@@ -239,7 +239,7 @@ GET /person/:target_person_uuid/address/:target_address_uuid
 ## Create person address subresource
 
 * To create a person address sub resource for a specific person resource you need to specify below properties in your request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+If user not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     #### Attributes
     
@@ -278,7 +278,7 @@ POST person/:target_person_uuid/address
 ## Update person address subresource
 
 * To update a person address with given uuid value for a specific person resource you need to specify below properties in your request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+If user not logged in to perform this action, a `401 Unauthorized` status is returned.
     
     ### Attributes
     
@@ -332,7 +332,7 @@ DELETE /person/:target_person_uuid/person/:target_address_uuid
 GET /person/:target_person_uuid/attribute
 ```
 
-* List all the person attributes by it's `UUID` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person attribute not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+* List all the person attributes by its `UUID` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person attribute does not exist. If user not logged in to perform this action, a `401 unauthorized` status is returned.
 
 ```console
 GET /person/:target_person_uuid/name/:target_attribute_uuid
