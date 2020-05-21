@@ -10,8 +10,7 @@
 
 ## Retrieve session token
 
-The session token is retrieved using Basic authentication on the `/session` endpoint. The response will 
-include a `JSESSIONID` in the header. This session ID is also included in the response object
+The session token is retrieved using Basic authentication on the `/session` endpoint. The response will include a `JSESSIONID` in the header. This session ID is also included in the response object
 
 ```console
 GET /openmrs/ws/rest/v1/session 
