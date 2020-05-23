@@ -1,7 +1,7 @@
 # OpenMRS REST API
 
 Welcome to the OpenMRS REST API documentation! OpenMRS is a software
-platform and a reference application which enables design of a customized
+platform and a reference application which enables the design of a customized
 medical records system with no programming knowledge (although medical and
 systems analysis knowledge is required).
 
@@ -20,8 +20,8 @@ API for [OpenMRS](https://openmrs.org/).
 
 # Getting Started
 
-If you are new to openMRS checkout the [Getting Started as a Developer Guide](https://wiki.openmrs.org/display/docs/Getting+Started+as+a+Developer)
-from openMRS
+If you are new to OpenMRS checkout the [Getting Started as a Developer Guide](https://wiki.openmrs.org/display/docs/Getting+Started+as+a+Developer)
+from OpenMRS
 
 # Current version
 
@@ -33,9 +33,9 @@ from openMRS
 
 # Purpose
 
-- The purpose of this documentation is to provide a brief and good taste and experience of the APIs that are used in OpenMRS community to the new developers so that can onboard in the projects within the org easily.
+- The purpose of this documentation is to provide a brief and good taste and experience of the APIs that are used in OpenMRS community to the new developers so that they can onboard in the projects within the organization easily.
 
-- The documentation also aims to assist the existing developers to get to know the conceptual context of the APIs and how they help the consumers during the interaction in the real world.
+- The documentation also aims to assist the existing developers in getting to know the APIs' conceptual context and how they help the consumers during the interaction in the real world.
 
 # Schema
 
@@ -55,9 +55,9 @@ strict-transport-security: max-age=15768000
 # Resources
 
 - OpenMRS objects (persons, patients, encounters, observations, etc.) are exposed by the REST Web Services
-  modules as a REST resource as documented here.
+  modules as a REST resource, as documented here.
 
-- Resources have a default representation, which returns key properites. Most resources can be fetched using a
+- Resources have a default representation, which returns key properties. Most resources can be fetched using a
   full representation (using the parameter `v=full`) that includes a more comprehensive list of properties.
 
 # Subresources
@@ -67,7 +67,7 @@ strict-transport-security: max-age=15768000
 
 - Examples of subresources are PersonNames, PersonAddresses, ConceptNames, etc.
 
-- You can act on subresources under the parent's url
+- You can act on subresources under the parent's URL
 
 ### Examples
 
@@ -94,17 +94,17 @@ POST /openmrs/ws/rest/v1/person/:target_person_uuid/name/:target_name_uuid
 
 - If it seems like a resource has two or more parents, then it is most likely a top-level resource.
 
-- For example "encounters" should not be a subresource of "patient" and "location" resources (answering questions of "all encounters of a patient" and "all encounters at a location").
+- For example, "encounters" should not be a subresource of "patient" and "location" resources (answering questions of "all encounters of a patient" and "all encounters at a location").
 
 #### Instead, these should be queries on the encounter resource:
 
-Get encounter list for specific patient.
+Get an encounter list for a specific patient.
 
 ```console
  GET /encounter?patient=:target_patient_uuid
 ```
 
-Get encounter list for specific location.
+Get an encounter list for a specific location.
 
 ```console
  GET /encounter?location=:target_location_uuid
@@ -124,12 +124,12 @@ POST /openmrs/ws/rest/v1/order
 {"t": "testorder", /*... and other properties */}
 ```
 
-- If you GET a resource that has subtypes, each result will be of one of those subtypes,
+- If you GET a resource that has subtypes, each result will be one of those subtypes,
   which you can see by looking at the special property of each result.
 
 - You may query for only a certain subtype of a resource by providing a t query parameter.
 
-Get encounter orders of drug order sub type.
+Get encounter orders of drug order subtype.
 
 ```console
 GET  /openmrs/ws/rest/v1/order?&t=drugorder&v=full'
