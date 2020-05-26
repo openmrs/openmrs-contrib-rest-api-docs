@@ -6,7 +6,7 @@ Every individual who is referred to in a patient record in OpenMRS is stored in 
 
 All Persons have these characteristics.
 
-## Sub resource types
+## Subresource types
 
 ### Names
 A person can have one or more names, one of which must be marked as the **preferred** name. The preferred name will be displayed in search results and patient screens.
@@ -17,7 +17,7 @@ A person may have zero or more contact addresses. You may configure the format o
 
 ### Person Attributes
 
-To support your local needs, you can define additional pieces of information about the people in your system, on top of those that are natively supported by OpenMRS. You can define the datatype of a Person Attribute, as well as any constraints on the possible values, using metadata. This metadata is called a Person Attribute Type.
+To support your local needs, you can define additional information about the people in your system, on top of those that are natively supported by OpenMRS. You can define the datatype of a Person Attribute, as well as any constraints on the possible values, using metadata. This metadata is called a Person Attribute Type.
 
 Person Attributes are suitable for storing other information. But historical values of person attributes are not retained. For example, you should use a person attribute to record a patient's contact telephone number. This information may change, but if it does so, the system need only store the most recent value, and need not retain previous values. It is not appropriate to use a person attribute to store something like the patient's height, which is recorded at a given point in time, but can be expected to change and should be tracked as it does so.
 
@@ -157,7 +157,7 @@ GET /person/:target_person_uuid/name/:target_name_uuid
 
 ## Create person name subresource
 
-* To create a person name sub resource for a specific person resource you need to specify below properties in your request body.
+* To create a person name subresource for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     ### Attributes
@@ -186,7 +186,7 @@ POST person/:target_person_uuid/name
 
 ## Update person name 
 
-* To update a person name with given uuid value for a specific person resource you need to specify below properties in your request body.
+* To update a person name with given UUID value for a specific person resource, you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     ### Attributes
@@ -213,10 +213,10 @@ POST person/:target_person_uuid/name
 }
 ```
 
-## Delete a person name sub resource
+## Delete a person name subresource
 
-* Delete or void a target name sub resource. Returns a `404 Not Found` status if attribute does not exist. 
-If user not logged in to perform this action, a `401 Unauthorized` status is returned.
+* Delete or void a target name subresource. Returns a `404 Not Found` status if an attribute does not exist. 
+If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
  ```console
 DELETE /person/:target_person_uuid/person/:target_name_uuid
@@ -224,7 +224,7 @@ DELETE /person/:target_person_uuid/person/:target_name_uuid
 
 ## List person address subresource
 
-* List all the person addresses corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address does not exist. If user not logged in to perform this action, a `401 unauthorized` status is returned.
+* List all the person addresses corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address does not exist. If the user is not logged in to perform this action, a `401 unauthorized` status is returned.
 
 ```console
 GET /person/:target_person_uuid/address
@@ -238,7 +238,7 @@ GET /person/:target_person_uuid/address/:target_address_uuid
 
 ## Create person address subresource
 
-* To create a person address sub resource for a specific person resource you need to specify below properties in your request body.
+* To create a person address subresource for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     #### Attributes
@@ -277,7 +277,7 @@ POST person/:target_person_uuid/address
 
 ## Update person address subresource
 
-* To update a person address with given uuid value for a specific person resource you need to specify below properties in your request body.
+* To update a person address with given UUID value for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status is returned.
     
     ### Attributes
@@ -314,9 +314,9 @@ POST person/:target_person_uuid/address
 }
 ```
 
-## Delete a person address sub resource
+## Delete a person address subresource
 
-* Delete or void a target address sub resource. Returns `404 Not Found` status if the person does not exist. 
+* Delete or void a target address subresource. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
@@ -340,7 +340,7 @@ GET /person/:target_person_uuid/name/:target_attribute_uuid
 
 ## Create person attribute subresource
 
-* To create a person attribute sub resource for a specific person resource you need to specify below properties in your request body.
+* To create a person attribute subresource for a specific person resource you need to specify below properties in your request body.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
@@ -361,7 +361,7 @@ POST person/:target_person_uuid/attribute
 
 ## Update person attribute subresource
 
-* To update a person attribute with given uuid value for a specific person resource you need to specify below properties in your request body.
+* To update a person attribute with given UUID value for a specific person resource you need to specify below properties in your request body.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     ### Attributes
@@ -379,7 +379,7 @@ POST person/:target_person_uuid/attribute
 }
 ```
 
-## Delete a person attribute sub resource
+## Delete a person attribute subresource
 
 * Delete or void a target attribute. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 

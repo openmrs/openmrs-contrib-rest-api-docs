@@ -11,7 +11,7 @@ Administrators define what types of identifiers they will collect. These range f
 
 * required: a true/false whether every patient MUST have this type
 
-* checkDigit: a true/false whether this identifier has a checkdigit at the end
+* checkDigit: a true/false whether this identifier has a checkDigit at the end
 
 * validator: full class name of an [IdentifierValidator](https://docs.openmrs.org/doc/org/openmrs/patient/IdentifierValidator.html) (e.g., [`org.openmrs.patient.impl.LuhnIdentifierValidator`](https://docs.openmrs.org/doc/org/openmrs/patient/impl/LuhnIdentifierValidator.html))
 
@@ -28,7 +28,7 @@ Administrators define what types of identifiers they will collect. These range f
 
 * ### List patientIdentifierType
 
-    Fetch all non-retired patientIdentifierTypes resources that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patientIdentifierType response. If the user is not logged in it returns `401 Unauthorized` status is returned.
+    Fetch all non-retired patientIdentifierTypes resources that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patientIdentifierType response. If the user is not logged in a `401 Unauthorized` status is returned.
 
 ```console
 GET /patientidentifiertype

@@ -4,12 +4,12 @@
 
 * Anyone who receives care in OpenMRS must be a **Patient**.
 
-* Every Patient must have atleast one Identifier, which is explained below. (for example,
+* Every Patient must have at least one Identifier, which is explained below. (for example,
 Anyone who has an Encounter or who is enrolled in a Program is a Patient.)
 
-* A Patient is also a Person, meaning they must have at least one name and they may have addresses.
+* A Patient is also a Person, meaning they must have at least one name, and they may have addresses.
 
-## Sub resource types of Patient
+## Subresource types of Patient
 
 ### PatientIdentifier (Identifier)
 
@@ -98,7 +98,7 @@ POST /patient
 ## Update a patient
 
 * Update a target patient with given UUID, this method only modifies properties in the request. 
-Returns a `404 Not Found` status if patient not exists. If user not logged in to perform this action, a `401 Unauthorized status returned`.
+Returns a `404 Not Found` status if patient not exists. If the user is not logged in to perform this action, a `401 Unauthorized status returned`.
 
     ### Query Parameters
 
@@ -119,7 +119,7 @@ Returns a `404 Not Found` status if patient not exists. If user not logged in to
 
 ## Delete a patient
 
-* Delete or retire a target patient by its UUID. Returns a `404 Not Found` status if patient not exists. If user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target patient by its UUID. Returns a `404 Not Found` status if patient not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
@@ -149,8 +149,8 @@ GET /patient/:target_patient_uuid/identifier/:target_identifier_uuid
 ```
 ## Create a patientIdentifier sub resource with properties 
 
-* To create a patientIdentifier sub resource for a specific patient resource you need to specifyn below properties in your request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* To create a patientIdentifier subresource for a specific patient resource you need to specify below properties in your request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query parameter 
     Parameter | Description
@@ -177,7 +177,7 @@ POST patient/:target_patient_uuid/identifier
 ```
 ## Update patientIdentifier sub resource with properties
 
-* Updates an patientIdentifier sub resource value with given uuid, this method will only modify value of the sub resource. Returns a `404 Not Found` status if attribute not exists.If user not logged in to perform this action, a `401 Unauthorized` status
+* Updates an patientIdentifier subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     ### Properties
@@ -201,8 +201,8 @@ POST patient/:target_patient_uuid/identifier/:target_identifier_uuid
 
 ## Delete patientIdentifier sub resource with properties
 
-* Delete or retire a target identifier sub resource by its UUID.Returns a `404 Not Found` status if attribute not exists. 
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target identifier subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
@@ -214,9 +214,9 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
 DELETE /patient/:target_patient_uuid/identifier/:target_identifier_uuid
 ```
 
-## List allergy sub resources
+## List allergy subresources
 
-* List allergy sub resource by it's UUID and parent patient UUID.
+* List allergy subresource by its UUID and parent patient UUID.
 
     Retrieve a <b>allergy</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if allergy not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
 
@@ -225,8 +225,8 @@ GET /patient/:target_patient_uuid/allergy/:target_allergy_uuid
 ```
 ## Create a allergy sub resource with properties 
 
-* To create a allergy sub resource for a specific patient resource you need to specify below properties in your request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* To create an allergy subresource for a specific patient resource, you need to specify below properties in your request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query parameter 
     Parameter | Description
@@ -266,7 +266,7 @@ POST patient/:target_patient_uuid/allergy
 
 ## Update allergy sub resource with properties
 
-* Updates an allergy sub resource value with given uuid, this method will only modify value of the sub resource. Returns a `404 Not Found` status if property not exists.If user not logged in to perform this action, a `401 Unauthorized` status
+* Updates an allergy subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if property not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     ### Query parameter 
@@ -309,8 +309,8 @@ POST patient/:target_patient_uuid/allergy/:target_allergy_uuid
 
 ## Delete allergy sub resource with properties
 
-* Delete or retire a target allergy sub resource by its UUID.Returns a `404 Not Found` status if attribute not exists. 
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target allergy subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 

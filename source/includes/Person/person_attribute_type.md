@@ -33,7 +33,7 @@ GET /personattributetype?q=race
 * ### Get person attribute type by UUID.
 
     Retrieve a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not exist. If the
-    user not logged in to  perform this action, a `401 Unauthorized` status is returned.
+    user not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 ```console
 GET /personattributetype/:target_person_attribute_type_uuid
@@ -41,7 +41,7 @@ GET /personattributetype/:target_person_attribute_type_uuid
 
 ## Create a person attribute type
 
-* To Create a person attribute type you need to specify below attributes in the request body.If the user not logged in to perform this action,
+* To Create a person attribute type you need to specify below attributes in the request body. If the user is not logged in to perform this action,
  a `401 Unauthorized` status is returned.
 
     ### Attributes
@@ -102,14 +102,13 @@ POST /personattributetype
 
 ## Delete a person attribute type
 
-* Delete or Retire a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not
- exist. If the user is not logged in to  perform this action, a `401 Unauthorized` status is returned.
+* Delete or Retire a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’.Purging will attempt to remove the attribute type from the system irreversibly. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
 ```console
 DELETE /personattributetype/:target_person_attribute_type_uuid?purge=true
