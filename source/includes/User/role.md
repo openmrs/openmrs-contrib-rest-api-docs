@@ -31,7 +31,7 @@ GET /role/:target_role_uuid
 
 ## Create a role
 
-* To create a role you need to specify below attributes in the request body.If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+* To create a role, you need to specify below attributes in the request body. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     ### Attributes
 
@@ -76,8 +76,7 @@ POST /role
 
 ## Delete a role
 
-* Delete a role by its UUID. Returns a `404 Not Found` status if the role does not
- exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+* Delete a role by its UUID. Returns a `404 Not Found` status if the role does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     ### Query Parameters
 

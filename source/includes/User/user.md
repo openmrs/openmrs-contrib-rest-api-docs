@@ -4,7 +4,7 @@
 
 A User in OpenMRS is an account that a person may use to log into the system.
 
-The real-life person is represented by a Person record in OpenMRS, and a person may have more than one user account. If you want a patient to be able to view her own record in OpenMRS, then you need to create a user account and link it to the patient's person record.
+The real-life person is represented by a Person record in OpenMRS, and a person may have more than one user account. If you want a patient to be able to view her record in OpenMRS, then you need to create a user account and link it to the patient's person record.
 
 ## Available operations for User
 
@@ -18,7 +18,7 @@ The real-life person is represented by a Person record in OpenMRS, and a person 
 - ### List all non-retired users.
 
   Quickly filter users with given query parameters. Returns a `404 Not Found` status if the user does not exist.
-  If not logged in to perform this action,a `401 Unauthorized` status is returned.
+  If not logged in to perform this action, a `401 Unauthorized` status is returned.
   
 
   ### Query Parameters
@@ -42,7 +42,7 @@ GET /user/:target_user_uuid
 
 ## Create a user
 
-- For convenience, the person's information can be included in order to create the corresponding person record at the same time as their user record. When creating a user record for an existing person, then the existing person need only be referenced by UUID. If you are not logged in to perform this action,
+- For convenience, the person's information can be included in order to create the corresponding person record at the same time as their user record. When creating a user record for an existing person, the existing person must only be referenced by UUID. If you are not logged in to perform this action,
 a `401 Unauthorized` status is returned.
 
       ### Attributes
@@ -144,7 +144,7 @@ POST /user/:target_user_uuid
 
 ## Delete a user
 
-- Delete or retire a target user by its UUID. Returns a `404 Not Found` status if the user does not exist.If not logged in to perform this action, a `401 Unauthorized` status is returned.
+- Delete or retire a target user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
 
   ### Query Parameters
 
