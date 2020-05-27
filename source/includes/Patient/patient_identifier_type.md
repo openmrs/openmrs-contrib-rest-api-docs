@@ -45,19 +45,19 @@ GET /patientidentifiertype/:target_patientIdentifierType_uuid
 
 * To create a patientIdentifierType you need to specify the below properties in the request. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
 
-    ### Properties
+### Properties
 
-    Parameter | Type | Description
-    --- | --- | ---
-    *name* | string | label for the identifier
-    *description* | string | a small description about the patientIdentifier
-    *format* | string | a regular expression defining what the identifier text should contain
-    *formatDescription* | string | an optional description of the regular expression
-    *required* | boolean | a true/false whether every patient MUST have this type
-    *checkDigit* | boolean | a true/false whether this identifier has a checkdigit at the end
-    *validator* | string | `org.openmrs.patient.IdentifierValidator`
-    *locationBehavior* | "REQUIRED" or "NOT USED" | behavior of the location with respect to the identifier 
-    *uniquenessBehavior* | string | specify the uniqueness of the behaviour, it can be either Unique, Non Unique or Location.
+Parameter | Type | Description
+--- | --- | ---
+*name* | string | label for the identifier
+*description* | string | a small description about the patientIdentifier
+*format* | string | a regular expression defining what the identifier text should contain
+*formatDescription* | string | an optional description of the regular expression
+*required* | boolean | a true/false whether every patient MUST have this type
+*checkDigit* | boolean | a true/false whether this identifier has a checkdigit at the end
+*validator* | string | `org.openmrs.patient.IdentifierValidator`
+*locationBehavior* | "REQUIRED" or "NOT USED" | behavior of the location with respect to the identifier 
+*uniquenessBehavior* | string | specify the uniqueness of the behaviour, it can be either Unique, Non Unique or Location.
 
 ```console
 POST /patientidentifiertype
