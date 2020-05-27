@@ -15,24 +15,24 @@ The real-life person is represented by a Person record in OpenMRS, and a person 
 
 ## List user
 
-- ### List all non-retired users.
+### List all non-retired users.
 
   Quickly filter users with given query parameters. Returns a `404 Not Found` status if the user does not exist.
   If not logged in to perform this action, a `401 Unauthorized` status is returned.
   
 
-  ### Query Parameters
+### Query Parameters
 
-  | Parameter | Type           | Description                           |
-  | --------- | -------------- | ------------------------------------- |
-  | _q_       | `Search Query` | Filter users by username or system ID |
+| Parameter | Type           | Description                           |
+| --------- | -------------- | ------------------------------------- |
+| _q_       | `Search Query` | Filter users by username or system ID |
 
 ```console
 GET /user?
 q=user1
 ```
 
-- ### Get user by UUID.
+### Get user by UUID.
 
   Retrieve a user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
 
