@@ -45,19 +45,19 @@ GET /user/:target_user_uuid
 - For convenience, the person's information can be included in order to create the corresponding person record at the same time as their user record. When creating a user record for an existing person, the existing person must only be referenced by UUID. If you are not logged in to perform this action,
 a `401 Unauthorized` status is returned.
 
-      ### Attributes
+### Attributes
 
-      Parameter | Type | Description
-      --- | --- | ---
-      *name* | `String` | Name of the user
-      *description* | `String | Description of the user
-      *username* | `String | username of the user
-      *password* | `String | password of the user
-      *person* | `String` | person resource associated with the user
-      *systemId* | `String` | a unique identifier assigned to each user
-      *roles* | `Array[] : role` | a list of roles attributed to the user
-      *userProperties* | `JSON Object`| A set of key value pairs. Used to store user specific data
-      *secretQuestion* | `String` | A secret question chosen by the user
+Parameter | Type | Description
+--- | --- | ---
+*name* | `String` | Name of the user
+*description* | `String | Description of the user
+*username* | `String | username of the user
+*password* | `String | password of the user
+*person* | `String` | person resource associated with the user
+*systemId* | `String` | a unique identifier assigned to each user
+*roles* | `Array[] : role` | a list of roles attributed to the user
+*userProperties* | `JSON Object`| A set of key value pairs. Used to store user specific data
+*secretQuestion* | `String` | A secret question chosen by the user
 
 ```console
 POST /user
@@ -96,19 +96,19 @@ POST /user
 - Update a target user with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
   status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
     
-   ### Attributes
+### Attributes
 
-      Parameter | Type | Description
-      --- | --- | ---
-      *name* | `String` | Name of the user
-      *description* | `String | Description of the user
-      *username* | `String | username of the user
-      *password* | `String | password of the user
-      *person* | `String` | person resource associated with the user
-      *systemId* | `String` | a unique identifier assigned to each user
-      *roles* | `Array[] : role` | a list of roles attributed to the user
-      *userProperties* | `JSON Object`| A set of key value pairs. Used to store user specific data
-      *secretQuestion* | `String` | A secret question chosen by the user
+  Parameter | Type | Description
+  --- | --- | ---
+  *name* | `String` | Name of the user
+  *description* | `String | Description of the user
+  *username* | `String | username of the user
+  *password* | `String | password of the user
+  *person* | `String` | person resource associated with the user
+  *systemId* | `String` | a unique identifier assigned to each user
+  *roles* | `Array[] : role` | a list of roles attributed to the user
+  *userProperties* | `JSON Object`| A set of key value pairs. Used to store user specific data
+  *secretQuestion* | `String` | A secret question chosen by the user
 
 ```console
 POST /user/:target_user_uuid
@@ -146,11 +146,11 @@ POST /user/:target_user_uuid
 
 - Delete or retire a target user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
 
-  ### Query Parameters
+### Query Parameters
 
-  | Parameter | Type      | Description                                       |
-  | --------- | --------- | ------------------------------------------------- |
-  | _purge_   | `Boolean` | The resource will be voided unless purge = ‘true’ |
+| Parameter | Type      | Description                                       |
+| --------- | --------- | ------------------------------------------------- |
+| _purge_   | `Boolean` | The resource will be voided unless purge = ‘true’ |
 
 ```console
 DELETE /user/:target_user_uuid?purge=true
