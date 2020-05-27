@@ -45,7 +45,7 @@ GET /user/:target_user_uuid
 - For convenience, the person's information can be included in order to create the corresponding person record at the same time as their user record. When creating a user record for an existing person, the existing person must only be referenced by UUID. If you are not logged in to perform this action,
 a `401 Unauthorized` status is returned.
 
-      ### Attributes
+### Attributes
 
       Parameter | Type | Description
       --- | --- | ---
@@ -96,7 +96,7 @@ POST /user
 - Update a target user with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
   status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
     
-   ### Attributes
+### Attributes
 
       Parameter | Type | Description
       --- | --- | ---
@@ -146,11 +146,11 @@ POST /user/:target_user_uuid
 
 - Delete or retire a target user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
 
-  ### Query Parameters
+### Query Parameters
 
-  | Parameter | Type      | Description                                       |
-  | --------- | --------- | ------------------------------------------------- |
-  | _purge_   | `Boolean` | The resource will be voided unless purge = ‘true’ |
+| Parameter | Type      | Description                                       |
+| --------- | --------- | ------------------------------------------------- |
+| _purge_   | `Boolean` | The resource will be voided unless purge = ‘true’ |
 
 ```console
 DELETE /user/:target_user_uuid?purge=true
