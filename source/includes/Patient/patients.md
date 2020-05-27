@@ -112,7 +112,7 @@ Returns a `404 Not Found` status if patient not exists. If the user is not logge
     --- | --- | ---
     *resource* | `Patient` | Patient resource with updated properties
 
-    ```console
+```console
     POST /patient/:target_patient_uuid
     -d modified_patient_object
 ```
