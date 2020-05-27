@@ -155,7 +155,7 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     ### Query parameter 
     Parameter | Description
     --- | ---
-    `target_patient_uuid` : patient resource uuid
+    `target_patient_uuid` | patient resource uuid
 
     ### Properties for resource
 
@@ -231,7 +231,7 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     ### Query parameter 
     Parameter | Description
     --- | ---
-    `target_patient_uuid` : patient resource uuid
+    `target_patient_uuid` | patient resource uuid
 
     ### Properties for resource
 
@@ -273,8 +273,8 @@ returned.
     
     Parameter | Description
     --- | ---
-    `target_patient_uuid` : patient resource uuid
-    `target_allergy_uuid` : allergy resource uuid
+    `target_patient_uuid` | patient resource uuid
+    `target_allergy_uuid` | allergy resource uuid
 
     ### Properties for resource
 
