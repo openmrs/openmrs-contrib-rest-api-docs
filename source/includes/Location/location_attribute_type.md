@@ -17,7 +17,7 @@
 * ### List all non-retired location attribute types.
 
     Quickly filter location attribute types with a given search query. Returns a `404 Not Found` status if the location attribute type not exists.
-     If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+     If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
@@ -32,7 +32,7 @@ GET /locationattributetype?q="humidity"
 * ### List location attribute type by UUID.
 
     Retrieve a location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not exists. If the 
-    user not logged in to  perform this action, a `401 Unauthorized` status returned.
+    user not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ```console
 GET /locationattributetype/:target_location_attribute_type_uuid
@@ -40,7 +40,7 @@ GET /locationattributetype/:target_location_attribute_type_uuid
 
 ## Create a location attribute type
 
-* To Create a location attribute type you need to specify below attributes in the request body. If the user not logged in to perform this action,
+* To Create a location attribute type, you need to specify below attributes in the request body. If the user not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -52,7 +52,7 @@ GET /locationattributetype/:target_location_attribute_type_uuid
     *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
     *minOccurs* | `Number` | Minimum number of times this value can be specified for a single location. Use `0` or `1` as the default value (Required)
     *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single location (e.g., use 1 to prevent an attribute from being added to a location multiple times)
-    *preferredHandlerClassname* | `Handler` | Handler sub resource for the Custom Data Type used. Can optionally define a specific handler class want to use (otherwise the framework will choose the best handler for the chosen datatype). To find which handlers to use for the Custom DataType please refer here   
+    *preferredHandlerClassname* | `Handler` | Handler subresource for the Custom Data Type used. Can optionally define a specific handler class wants to use (otherwise the framework will choose the best handler for the chosen DataType,). To find which handlers to use for the Custom DataType, please refer here   
     *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
     *handlerConfig* | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting
 
@@ -89,7 +89,7 @@ status if the location attribute not exists. If the user not logged in to perfor
       *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
       *minOccurs* | `Number` | Minimum number of times this value can be specified for a single location. Use `0` or `1` as the default value (Required)
       *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single location (e.g., use 1 to prevent an attribute from being added to a location multiple times)
-      *preferredHandlerClassname* | `Handler` |  Handler sub resource for the Custom Data Type used. Can optionally define a specific handler class want to use (otherwise the framework will choose the best handler for the chosen datatype). To find which handlers to use for the Custom DataType please refer here   
+      *preferredHandlerClassname* | `Handler` |  Handler subresource for the Custom Data Type used. Can optionally define a specific handler class want to use (otherwise the framework will choose the best handler for the chosen DataType). To find which handlers to use for the Custom DataType, please refer here   
       *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
       *handlerConfig* | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting
 
@@ -109,8 +109,7 @@ POST /locationattributetype/:target_location_attribute_type_uuid
 
 ## Delete a location attribute type
 
-* Delete or Retire a target location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not
- exists. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+* Delete or Retire a target location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 

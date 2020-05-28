@@ -4,14 +4,14 @@
 
 * A Location is a physical place where a patient may be seen, such as a hospital, a room, a clinic, or a district.
 
-* **Locations may have a hierarchy**,such that each location may have one parent location.
+* **Locations may have a hierarchy**, such that each location may have one parent location.
 
 * Also a Location can have one or more Children location example Children's Ward might be a location within the location 
 Amani Clinic.
   
-* You might also store physical areas (for example Eastern Province, or California) as Locations. 
+* You might also store physical areas (for example, Eastern Province, or California) as Locations. 
 
-* You should not use locations to represent logical ideas like All District Hospitals they should be modeled using LocationTags.
+* You should not use locations to represent logical ideas like All-District Hospitals. They should be modeled using LocationTags.
 
 ## Location Sub Resource types
 
@@ -22,7 +22,7 @@ Amani Clinic.
 * Location attributes exists specifically to allow implementations to extend the data model.
 
 
-## Available operations for Location
+## Available operations for location
 
 1. [List location](#list-location)
 2. [Create a location](#create-a-location)
@@ -39,8 +39,8 @@ Amani Clinic.
 
 * ### List all non-retired locations`.
     
-    Quickly filter location with given query parameters.Returns a `404 Not Found` status if the location not exists. If the 
-    user not logged in to perform this action,a `401 Unauthorized` status returned.
+    Quickly filter location with given query parameters. Returns a `404 Not Found` status if the location not exists. If the 
+    user not logged in to perform this action, a `401 Unauthorized` status returned.
     
     ### Query Parameters
 
@@ -64,7 +64,7 @@ GET /location/:target_location_uuid
    
 ## Create a location
 
-* To Create a location you need to specify below attributes in the request body.If the user not logged in to perform this action,
+* To Create a location you need to specify below attributes in the request body. If the user not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -178,7 +178,7 @@ POST /location/:target_location_uuid
     
 ## Delete a location
 
-* Delete or Retire a target location by its UUID. Returns a `404 Not Found` status if the location not exists.If the user not logged 
+* Delete or Retire a target location by its UUID. Returns a `404 Not Found` status if the location not exists. If the user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
@@ -192,7 +192,7 @@ DELETE /location/:target_location_uuid?purge=true
 ```
 ## List location attribute sub resources
 
-* ### List all location attribute sub resources for a location.
+* ### List all location attribute subresources for a location.
 
     Retrieve all <b>attribute</b> sub resources of a  <b>location</b> resource by target_location_uuid.Returns a 
     `404 Not Found` status if the attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status
@@ -202,7 +202,7 @@ DELETE /location/:target_location_uuid?purge=true
 GET /location/:target_location_uuid/attribute 
 ```
 
-* ### List location attribute sub resources by own UUID and parent location UUID.
+* ### List location attribute subresources by own UUID and parent location UUID.
     
      Retrieve an <b>attribute</b> sub resources of a <b>location</b> resource.Returns a 
      `404 Not Found` status if the attribute not exists. If the user are not logged in to perform this action, a `401 Unauthorized` status
@@ -213,7 +213,7 @@ GET /location/:target_location_uuid/attribute/:target_attribute_uuid
 ```
 ## Create a location attribute sub resource with properties
 
-* To Create an attribute sub resource for a specific location resource you need to specify below attributes in the request body.
+* To Create an attribute subresource for a specific location resource, you need to specify below attributes in the request body.
 If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -232,10 +232,9 @@ POST location/:target_location_uuid/attribute
 ```
  
  
-## Update a location attribute sub resource
+## Update a location attribute subresource
 
-* Updates a location attribute sub resource value with given uuid, this method will only modify value of the sub resource.Returns 
-a `404 Not Found` status if the attribute not exists.If the user not logged in to perform this action, a `401 Unauthorized` status
+* Updates a location attribute sub resource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if the attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     ### Attributes
@@ -253,9 +252,9 @@ POST location/:target_location_uuid/attribute/:target_location_attribute_uuid
 } 
 ```
 
-## Delete a location attribute sub resource
+## Delete a location attribute subresource
 
-* Delete or Retire a target location attribute sub resource by its UUID.Returns a `404 Not Found` status if the attribute not exists. 
+* Delete or Retire a target location attribute subresource by its UUID. Returns a `404 Not Found` status if the attribute not exists. 
 If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters

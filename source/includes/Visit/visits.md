@@ -5,12 +5,11 @@
 * A Visit in OpenMRS represents precisely what it sounds like: a time when a patient is actively interacting with the 
 the healthcare system, typically at a location.
 
-* The metadata differentiating different types of visits is a Visit Type. Visit Types displayed in the user interface, 
-also, can be searched against.
+* The metadata differentiating different types of visits is a Visit Type. Visit Types displayed in the user interface, also can be searched against.
 
 * A visit contains encounters, which store more granular data about treatments or services.
 
-## Let’s look at an example of Visits
+## Let's look at an example of Visits
 
 At the Amani Clinic, a patient might typically check-in at registration, be seen by a doctor, and receives medication 
 <b> dispensed </b> in the pharmacy. This would be recorded as one <b> visit </b> of <b> visit type of Outpatient </b>, and 
@@ -41,8 +40,8 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 
 * ### List all non-retired visits.
     
-    Quickly filter visits with given query parameters.Returns a `404 Not Found` status if visit not exists. If user not logged 
-    in to perform this action,a `401 Unauthorized` status returned.
+    Quickly filter visits with given query parameters. Returns a `404 Not Found` status if visit not exists. If user not logged 
+    in to perform this action, a `401 Unauthorized` status returned.
     
     ### Query Parameters
 
@@ -72,7 +71,7 @@ GET /visit/:target_visit_uuid
    
 ## Create visit
 
-* To Create a visit you need to specify below attributes in the request body.If you are not logged in to perform this action,
+* To Create a visit you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -110,7 +109,7 @@ POST /visit
 ## Update visit
 
 *  Update a target visit with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if visit not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+status if visit not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
@@ -131,7 +130,7 @@ POST /visit/:target_visit_uuid
     
 ## Delete visit
 
-* Delete or Retire a target visit by its UUID. Returns a `404 Not Found` status if visit not exists.If user not logged 
+* Delete or Retire a target visit by its UUID. Returns a `404 Not Found` status if visit not exists. If the user is not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
@@ -145,7 +144,7 @@ DELETE /visit/:target_visit_uuid?purge=true
 ```
 ## List attribute sub resources
 
-* ### List all attribute sub resources for a visit.
+* ### List all attribute subresources for a visit.
 
     Retrieve all <b>attribute</b> sub resources of a  <b>visit</b> resource by target_visit_uuid.Returns a 
     `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -155,7 +154,7 @@ DELETE /visit/:target_visit_uuid?purge=true
 GET /visit/:target_visit_uuid/attribute 
 ```
 
-* ### List attribute sub resources by it's UUID and parent visit UUID.
+* ### List attribute subresources by it's UUID and parent visit UUID.
     
      Retrieve an <b>attribute</b> sub resources of a <b>visit</b> resource.Returns a 
      `404 Not Found` status if attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
@@ -167,8 +166,8 @@ GET /visit/:target_visit_uuid/attribute/:target_attribute_uuid
 
 ## Create an attribute sub resource with properties
 
-* To Create an attribute sub resource for a specific visit resource you need to specify below attributes in the request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -186,10 +185,9 @@ POST visit/:target_visit_uuid/attribute
 ```
  
  
-## Update attribute sub resource
+## Update attribute subresource
 
-* Updates an attribute sub resource value with given uuid, this method will only modify value of the sub resource.Returns 
-a `404 Not Found` status if attribute not exists.If user not logged in to perform this action, a `401 Unauthorized` status
+* Updates an attribute subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     ### Attributes
@@ -208,8 +206,8 @@ POST visit/:target_visit_uuid/attribute/:target_attribute_uuid
 ```
 ## Delete attribute sub resource
 
-* Delete or Retire a target attribute sub resource by its UUID.Returns a `404 Not Found` status if attribute not exists. 
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or Retire a target attribute subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 

@@ -11,7 +11,7 @@
 
 * Visit types will be shown as dropdown options when creating or editing a patient in Registration. 
 
-* Visit types can be added via the OpenMRS admin screen(Administration > Visits > Manage Visit Types) or via sql scripts. 
+* Visit types can be added via the OpenMRS admin screen(Administration > Visits > Manage Visit Types) or via SQL scripts. 
 
 ## Available operations for Visits Type
 
@@ -24,8 +24,8 @@
 ## List visits types
 * ### List all non-retired visits types.
     
-    Quickly filter visit types with a given search query.Returns a `404 Not Found` status if visit type not exists. 
-    If user not logged in to perform this action,a `401 Unauthorized` status returned.
+    Quickly filter visit types with a given search query. Returns a `404 Not Found` status if visit type not exists. 
+    If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
     ##### Query Parameters
 
@@ -48,7 +48,7 @@ GET /visittype/:target_visit_type_uuid
    
 ## Create a visit type
 
-* To Create a visit type you need to specify below attributes in the request body.If you are not logged in to perform this action,
+* To Create a visit type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -93,7 +93,7 @@ POST /type/:target_visit_type_uuid
     
 ## Delete a visit type
 
-* Delete or Retire a target visit type by its UUID. Returns a `404 Not Found` status if visit not exists.If user not logged 
+* Delete or Retire a target visit type by its UUID. Returns a `404 Not Found` status if visit not exists. If user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
