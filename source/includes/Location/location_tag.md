@@ -23,7 +23,7 @@
 * ### List all non-retired location tags.
 
     Quickly filter location tags with a given search query. Returns a `404 Not Found` status if the location tag not exists.
-    If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+    If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
@@ -38,7 +38,7 @@ GET /locationtag?q="visit"
 * ### List location tag by UUID.
 
     Retrieve a location tag by its UUID. Returns a `404 Not Found` status if the location tag type not exists. If the 
-    user not logged in to  perform this action, a `401 Unauthorized` status returned.
+    user not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ```console
 GET /locationtag/:target_location_tag_uuid
@@ -46,7 +46,7 @@ GET /locationtag/:target_location_tag_uuid
 
 ## Create a location tag
 
-* To Create a location tag  you need to specify below attributes in the request body.If the user not logged in to perform this action,
+* To Create a location tag, you need to specify below attributes in the request body. If the user not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -99,14 +99,13 @@ POST /locationtag/:target_location_tag_uuid
 
 ## Delete a location tag
 
-* Delete or Retire a target location tag type by its UUID. Returns a `404 Not Found` status if the location tag not
- exists. If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
+* Delete or Retire a target location tag type by its UUID. Returns a `404 Not Found` status if the location tag not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’. Purging will attempt to irreversibly remove the tag from the system. Location tags types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’. Purging will attempt to remove the tag from the system irreversibly. Location tags types that have been used (i.e., are referenced from existing data) cannot be purged.
 
 ```console
 DELETE /locationtag/:target_location_tag_uuid?purge=true
