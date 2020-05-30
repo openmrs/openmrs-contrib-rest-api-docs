@@ -6,23 +6,22 @@
 Common examples would be a patient seeing a doctor during a clinic visit, a patient going to the lab to have blood drawn for
  testing, or telephone call between a provider and the patient).
 
-* Each encounter has an encounter type, date/time, location, and provider.
+* Each Encounter has an encounter type, date/time, location, and provider.
 
-* Encounters are classified into Encounter Types, which describe the type of interaction the encounter represents – e.g., 
+* Encounters are classified into Encounter Types, which describe the type of interaction the Encounter represents – e.g., 
 "HIV Initial", "Pediatric Follow Up", "Lab"). Implementations can define their own types of encounters.
 
 * One or more encounters may be grouped within a **Visit** (e.g., an outpatient clinic visit or a hospitalization).
 
-* Every encounter can have 0 to n **Observations** associated with it.
+* Every Encounter can have 0 to n **Observations** associated with it.
  
-* Every encounter can have 0 to n **Orders** associated with it.
+* Every Encounter can have 0 to n **Orders** associated with it.
 
  
-## Let’s look at an example of Encounter
+## Let's look at an example of Encounter
 
-During a typical Amani Clinic Outpatient Visit, a patient checks in at registration, is seen by a doctor, and receives medicine 
-dispensed in the pharmacy. This would be recorded as **one visit** containing three encounters, whose types are **Registration, 
-Consultation, and Dispensing**.
+During a typical Amani Clinic Outpatient Visit, a patient checks in at registration is seen by a doctor and receives medicine dispensed in the pharmacy. This would be recorded as **one visit** containing three encounters, whose types are **Registration, 
+Consultation and Dispensing**.
 
 ## Sub Resource types of Encounter
 
@@ -30,7 +29,7 @@ Consultation, and Dispensing**.
 
 * A Provider is a person who provides care or services to patients. 
 
-* A provider may be a clinician like a doctor or nurse, a social worker, or a lab tech. 
+* A provider may be a clinician like a doctor or a nurse, a social worker, or a lab tech. 
 
 * Any healthcare worker that a patient can have an encounter with is a provider.
 
@@ -50,8 +49,7 @@ Consultation, and Dispensing**.
 
 * ### List all non-voided encounters.
     
-    Quickly filter encounters with given query parameters.Returns a `404 Not Found` status if encounter not exists. If user not logged 
-    in to perform this action,a `401 Unauthorized` status returned.
+    Quickly filter encounters with given query parameters. Returns a `404 Not Found` status if Encounter not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
     ### Query Parameters
 
@@ -74,7 +72,7 @@ patient=96be32d2-9367-4d1d-a285-79a5e5db12b8
     
 * ### List encounter by UUID.
 
-    Retrieve an encounter by its UUID. Returns a `404 Not Found` status if encounter not exists. If user not logged 
+    Retrieve an encounter by its UUID. Returns a `404 Not Found` status if Encounter not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
     
 ```console
@@ -83,7 +81,7 @@ GET /encounter/:target_encounter_uuid
    
 ## Create an encounter
 
-* To Create an encounter you need to specify below attributes in the request body.If you are not logged in to perform this action,
+* To Create an encounter you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -101,7 +99,7 @@ GET /encounter/:target_encounter_uuid
     *visit* | `Visit UUID` | When creating an encounter for an existing visit, this specifies the visit
    
 ```console
-POST /encounter
+POST /Encounter
 {
   "encounterDatetime": "2019-10-16 12:08:43",
   "patient": "070f0120-0283-4858-885d-a20d967729cf",
@@ -118,7 +116,7 @@ POST /encounter
 ## Update an encounter
 
 *  Update a target encounter with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if encounter not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+status if Encounter not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
     ### Attributes
 
@@ -152,7 +150,7 @@ POST /encounter/:target_encounter_uuid
     
 ## Delete an encounter
 
-* Delete or Void a target encounter by its UUID. Returns a `404 Not Found` status if encounter not exists.If user not logged 
+* Delete or Void a target encounter by its UUID. Returns a `404 Not Found` status if Encounter not exists. If the user is not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
@@ -164,9 +162,9 @@ POST /encounter/:target_encounter_uuid
 ```console
   DELETE /encounter/:target_encounter_uuid?purge=true
 ```
-## List encounter provider sub resources
+## List encounter provider subresources
 
-* ### List all encounter provider sub resources for a visit.
+* ### List all encounter provider subresources for a visit.
 
     Retrieve all <b>encounter provider</b> sub resources of an  <b>encounter</b> resource by target_encounter_uuid. Returns a 
     `404 Not Found` status if encounter provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status
@@ -176,7 +174,7 @@ POST /encounter/:target_encounter_uuid
 GET /encounter/:target_encounter_uuid/encounterprovider 
 ```
 
-* ### List encounter provider sub resources by it's UUID and parent encounter UUID.
+* ### List encounter provider subresources by it's UUID and parent encounter UUID.
     
      Retrieve an <b>encounter provider</b> sub resources of a <b>encounter</b> resource. Returns a 
      `404 Not Found` status if encounter provider not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
@@ -187,8 +185,8 @@ GET /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provid
 ```
 ## Create an encounter provider sub resource with properties
 
-* To Create an attribute sub resource for a specific visit resource you need to specify below attributes in the request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -206,10 +204,9 @@ POST encounter/:target_encounter_uuid/encounterprovider
 ```
  
  
-## Update encounter provider sub resource
+## Update encounter provider subresource
 
-* Updates an encounter provider sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
-a `404 Not Found` status if encounter provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+* Updates an encounter provider subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if encounter provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     ### Query Parameters
@@ -233,16 +230,16 @@ POST encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provid
   "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
 }
 ```
-## Delete encounter provider sub resource
+## Delete encounter provider subresource
 
-* Delete or Voided a target encounter provider sub resource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
- If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or Voided a target encounter provider subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
+ If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to irreversibly remove the encounter provider type from the system. Encounter provider types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided unless purge = 'true'. Purging will attempt to remove the encounter provider type from the system irreversibly. Encounter provider types that have been used (i.e., are referenced from existing data) cannot be purged.
 
 ```console
 DELETE /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid

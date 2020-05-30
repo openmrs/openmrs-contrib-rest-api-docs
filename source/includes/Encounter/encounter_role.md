@@ -2,8 +2,8 @@
 
 ## Encounter Role Overview
 
-* An Encounter role is specific to the [encounter](encounter.md). While these could match up to existing organizational roles (e.g., “Nurse”), 
-they don’t have to (e.g., “Lead Surgeon”).
+* An Encounter role is specific to the [encounter](encounter.md). While these could match up to existing organizational roles (e.g., "Nurse"), 
+they don't have to (e.g., "Lead Surgeon").
 
 ## Available operation for Encounter Roles 
 
@@ -17,8 +17,8 @@ they don’t have to (e.g., “Lead Surgeon”).
 
 * ### List all non-voided encounter roles.
     
-    Quickly filter encounter roles with given query parameters.Returns a `404 Not Found` status if encounter roles not exists. 
-     If user not logged in to perform this action,a `401 Unauthorized` status returned.
+    Quickly filter encounter roles with given query parameters. Returns a `404 Not Found` status if encounter roles not exist. 
+     If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
     ##### Query Parameters
 
@@ -29,7 +29,7 @@ they don’t have to (e.g., “Lead Surgeon”).
 ```console
 GET /encounterrole?
     q=Clinician
-    ```
+```
     
 * ### Get encounter role by UUID.
 
@@ -42,7 +42,7 @@ GET /encounter/:target_encounter_role_uuid
    
 ## Create an encounter role
 
-* To Create an encounter role you need to specify below attributes in the request body. If you are not logged in to perform 
+* To Create an encounter role, you need to specify below attributes in the request body. If you are not logged in to perform 
 this action, a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -62,7 +62,7 @@ POST /encounterrole
 ## Update an encounter role
 
 *  Update a target encounter role with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if encounter role not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+status if encounter role not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
     ### Attributes
 
@@ -81,7 +81,7 @@ POST /encounterrole/:target_encounter_role_uuid
     
 ## Delete an encounter role
 
-* Delete or Void a target encounter role by its UUID. Returns a `404 Not Found` status if encounter role not exists.If user 
+* Delete or Void a target encounter role by its UUID. Returns a `404 Not Found` status if encounter role not exists. If the user is
  not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
