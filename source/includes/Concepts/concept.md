@@ -134,7 +134,7 @@ POST /concept
 ## Update a concept
 
 *  Update a target concept with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if concept not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+status if concept not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
     
     ### Attributes
 
@@ -484,4 +484,3 @@ POST concept/:target_concept_uuid/description
 ```console
 DELETE concept/:target_concept_uuid/description/:target_concept_description_uuid
 ```
-
