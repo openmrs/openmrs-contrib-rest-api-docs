@@ -44,7 +44,7 @@ GET /encountertype/:target_encounter_type_uuid
    
 ## Create an encounter type
 
-* To Create an encounter type, you need to specify below attributes in the request body. If you are not logged in to perform 
+* To create an encounter type, you need to specify below attributes in the request body. If you are not logged in to perform 
 this action, a `401 Unauthorized` status returned.
 
     #### Attributes
@@ -95,4 +95,3 @@ POST /encountertype/:target_encounter_type_uuid
 ```console
 DELETE /encountertype/:target_encounter_type_uuid?purge=true
 ```
-
