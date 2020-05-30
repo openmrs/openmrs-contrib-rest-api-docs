@@ -13,7 +13,7 @@ set of discrete answers of "A, B, AB or O."  We use concepts in OpenMRS to imple
 the answer would be expressed in a text box.  It would not be possible to provide a complete list of every possible name for
 your pet.  In this example, there would be one concept -- "name of first pet."
 
-* The bottom line is that if you need a medical word within your electronic records system, it needs to be defined within the concept dictionary, more details about all the possible concepts will be given in a later section.
+* The bottom-line is that if you need a medical word within your electronic records system, it needs to be defined within the concept dictionary, more details about all the possible concepts will be given in a later section.
   
 ## Sub Resource types of Concepts
 
