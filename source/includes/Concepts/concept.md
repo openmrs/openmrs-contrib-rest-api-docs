@@ -206,12 +206,12 @@ GET /concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
 * To Create a concept mapping subresource for a specific concept resource, you need to specify below attributes in the request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Attributes
+### Attributes
 
-    Parameter | Type | Description
-    --- | --- | ---
-    *conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A concept term defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
-    *conceptMapType* | `target_concept_map_type_uuid` | A concept map connects a concept term to a concept (required)
+Parameter | Type | Description
+--- | --- | ---
+*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A concept term defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
+*conceptMapType* | `target_concept_map_type_uuid` | A concept map connects a concept term to a concept (required)
     
 ```console
 POST concept/:target_concept_uuid/mapping
@@ -227,12 +227,12 @@ POST concept/:target_concept_uuid/mapping
 * Updates a concept mapping subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if concept mapping not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
-    ### Attributes
+### Attributes
 
-    Parameter | Type | Description
-    --- | --- | ---
-    *conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A concept term defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
-    *conceptMapType* | `target_concept_map_type_uuid` | A concept map connects a concept term to a concept (required)
+Parameter | Type | Description
+--- | --- | ---
+*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A concept term defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
+*conceptMapType* | `target_concept_map_type_uuid` | A concept map connects a concept term to a concept (required)
 
 ```console
 POST concept/:target_concept_uuid/mapping
