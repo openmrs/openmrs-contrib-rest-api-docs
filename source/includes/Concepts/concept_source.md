@@ -2,9 +2,9 @@
 
 ## Concept Source Overview
 
-* Concepts are often managed within a dictionary (as a collection of concepts). While OpenMRS has it's own dictionary of 
+* Concepts are often managed within a dictionary (as a collection of concepts). While OpenMRS has, it's own dictionary of 
 concepts, other dictionaries may exist in other systems or as standardized reference terminologies (like LOINC or ICD). 
-The authorities who manage these other concept dictionaries represent "Concept Sources".
+The authorities who manage these other concept dictionaries represent "Concept Sources."
 
 ## Available operations for Concept Source. 
 
@@ -18,8 +18,8 @@ The authorities who manage these other concept dictionaries represent "Concept S
 
 * ### List all non-retired concept source.
     
-    Quickly filter concept source types with a given search query.Returns a `404 Not Found` status if concept source type not exists. 
-    If user not logged in to perform this action,a `401 Unauthorized` status returned.
+    Quickly filter concept source types with a given search query. Returns a `404 Not Found` status if concept source type not exists. 
+    If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
     #### Query Parameters
 
@@ -42,7 +42,7 @@ GET /conceptsource/:target_concept_source_type_uuid
    
 ## Create a concept source
 
-* To Create a concept source type you need to specify below attributes in the request body.If you are not logged in to perform this action,
+* To Create a concept source type you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -64,8 +64,8 @@ POST /conceptsource
 ```
 ## Update a concept source
 
-*  Update a target concept source  type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if concept source not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+*  Update a target concept source type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
+status if concept source not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -87,7 +87,7 @@ POST /conceptsource
     
 ## Delete a concept source
 
-* Delete or Retire a target concept source  type by its UUID. Returns a `404 Not Found` status if concept source not exists.If user not logged 
+* Delete or Retire a target concept source type by its UUID. Returns a `404 Not Found` status if concept source not exists. If user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters

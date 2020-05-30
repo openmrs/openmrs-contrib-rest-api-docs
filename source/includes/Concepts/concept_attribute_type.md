@@ -2,7 +2,7 @@
 
 ## Concept Attribute Type Overview
 
-* If you wish to record extra information about concept, you can create Concept Attributes and assign them to Concept attribute Types. 
+* If you wish to record extra information about concept, you can create Concept Attributes and assign them to Concept Attribute Types. 
 
 ## Available operations for Concept Attribute Type. 
 
@@ -16,8 +16,8 @@
 
 * ### List all non-retired concept attribute types.
 
-    Quickly filter concept attribute types with a given search query.Returns a `404 Not Found` status if concept attribute type not exists. 
-    If user not logged in to perform this action,a `401 Unauthorized` status returned.
+    Quickly filter concept attribute types with a given search query. Returns a `404 Not Found` status if concept attribute type not exists. 
+    If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
@@ -31,8 +31,7 @@ GET /conceptattributetype?q=time
 
 * ### List concept attribute type by UUID.
 
-    Retrieve a concept attribute type by its UUID. Returns a `404 Not Found` status if concept attribute type not exists. If user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
+    Retrieve a concept attribute type by its UUID. Returns a `404 Not Found` status if concept attribute type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ```console
 GET /conceptattributetype/:target_concept_attribute_type_uuid
@@ -40,8 +39,7 @@ GET /conceptattributetype/:target_concept_attribute_type_uuid
 
 ## Create a concept attribute type
 
-* To Create a concept attribute type you need to specify below attributes in 
-  the request body.If you are not logged in to perform this action,
+* To Create a concept attribute type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
   a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -54,8 +52,8 @@ GET /conceptattributetype/:target_concept_attribute_type_uuid
     *minOccurs* | `Number` | Minimum number of times this value can be specified for a single concept. Use `0` or `1` as the default value (Required)
     *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single concept (e.g., use 1 to prevent an attribute from being added to a concept multiple times)
     *preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this concept attribute type. The java class must implement [`CustomDataTypeHandler`(https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype
-    *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
-    *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list and this configuration would tell the handler the possible choices in the list for this specific attribute type
+    *datatypeConfig* | `String` | Provides ability to define custom data types configuration for OpenMRS
+    *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list, and this configuration would tell the handler the possible choices in the list for this specific attribute type
     
 ```console
 POST /conceptattributetype
@@ -73,7 +71,7 @@ POST /conceptattributetype
 ## Update a concept attribute type
 
 *  Update a target concept attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if concept attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+status if concept attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -85,8 +83,8 @@ status if concept attribute not exists. If user not logged in to perform this ac
     *minOccurs* | `Number` | Minimum number of times this value can be specified for a single concept. Use `0` or `1` as the default value
     *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single concept (e.g., use 1 to prevent an attribute from being added to a concept multiple times)
     *preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this concept attribute type. The java class must implement [`CustomDataTypeHandler`(https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype
-    *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
-    *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list and this configuration would tell the handler the possible choices in the list for this specific attribute type
+    *datatypeConfig* | `String` | Provides ability to define custom data types configuration for OpenMRS
+    *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list, and this configuration would tell the handler the possible choices in the list for this specific attribute type
     
 ```console
 POST /conceptattributetype

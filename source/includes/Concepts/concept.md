@@ -5,17 +5,15 @@
 * The concept is the basic element of flexibility in OpenMRS. Concepts are the individual data points collected from a 
 population of patients. Concepts include both questions and answers. 
 
-* For example, blood type data is collected for a patient.  The question is "What is the blood type for the patient?", with a
-set of discrete answers of "A, B, AB or O".  To implement this in OpenMRS with concepts, the question is a concept 
-("blood type") and each response ("A", "B", "AB" and "O") is also a concept.  For this one question, a total of 5 concepts 
-are required.
+* For example, blood type data is collected for a patient.  The question is, "What is the blood type for the patient?", with a
+set of discrete answers of "A, B, AB or O."  We use concepts in OpenMRS to implement this. The question is a concept 
+("blood type") and each response ("A," "B," "AB" and "O") is also a concept.  For this one question, a total of 5 concepts are required.
 
 * What about a question where the answer is not a discrete answer?  If the question is "What is the name of your first pet?",
 the answer would be expressed in a text box.  It would not be possible to provide a complete list of every possible name for
-your pet.  In this example, there would be one concept -- "name of first pet".
+your pet.  In this example, there would be one concept -- "name of first pet."
 
-* The bottom line is, if you need a medical word within your electronic records system, it needs to be defined within the 
-concept dictionary.  More detail about all the possible concepts in a later section.
+* The bottom line is that if you need a medical word within your electronic records system, it needs to be defined within the concept dictionary, more details about all the possible concepts will be given in a later section.
   
 ## Sub Resource types of Concepts
 
@@ -27,12 +25,11 @@ concept dictionary.  More detail about all the possible concepts in a later sect
 
 ### Concept Name.
 
-* ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale. 
-Because there may be many names for any concept.
+* ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale since there can be many names for any concept.
 
 ### Concept Mapping.
 
-* Concept Mappings are added to facilitate managing concept dictionaries and point to other concepts which have the same meaning. 
+* Concept Mappings are added to facilitate managing concept dictionaries and point to other concepts that have the same meaning. 
 Mappings are useful when you need to receive or send information to external systems, letting you define how your system's
  concepts relate to external concepts such as standardized medical vocabularies (e.g., ICD, LOINC, SNOMED).
 
@@ -40,7 +37,7 @@ Mappings are useful when you need to receive or send information to external sys
 
 ### Concept Description.
 
-* A clear and concise description of the concept, as agreed upon by the members of the organization or the most commonly 
+* A clear and concise description of the concept, as agreed upon by the organization's members or the most commonly 
 referenced source.  
 
 ## Available operations for Concepts 
@@ -71,8 +68,7 @@ referenced source.
 
 * ### List all concepts.
     
-    Quickly filter concepts with given query parameters.Returns a `404 Not Found` status if concepts not exists. If user not logged 
-    in to perform this action,a `401 Unauthorized` status returned.
+    Quickly filter concepts with given query parameters. Returns a `404 Not Found` status if concepts not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
     #### Query Parameters
 
@@ -83,7 +79,7 @@ referenced source.
     *name* | `String` | ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale
     *term* | `String` | Medical coding term or OpenMRS concept dictionary term that could be mapped to a concept
     *source* | `String` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (ie. LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc), but the concept source can also be a custom (ie. org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database
-    *class* | `String` | The concept's class provides a useful way to narrow down the scope of the information that the concept is intended to capture.  In this way, the class is helpful for data extraction.  This classification details how a concept will be represented (i.e. as a question or an answer) when the information is stored.  OpenMRS contains several default classes to use when defining concepts, but implementation sites may also create additional custom concept classes for use.
+    *class* | `String` | The concept's class provides a useful way to narrow down the scope of the information that the concept is intended to capture.  In this way, the class is helpful for data extraction.  This classification elaborates how a concept will be represented (i.e., as a question or an answer) when the information is stored.  OpenMRS contains several default classes to use when defining concepts, but implementation sites may also create additional custom concept classes.
     
 ```console
 GET /concept?
@@ -93,8 +89,7 @@ GET /concept?
     
 * ### Query concept by UUID.
 
-    Retrieve an concepts by its UUID. Returns a `404 Not Found` status if concepts not exists. If user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
+    Retrieve a concept by its UUID. Returns a `404 Not Found` status if concepts not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
 ```console
 GET /concept/:target_concept_uuid
@@ -102,7 +97,7 @@ GET /concept/:target_concept_uuid
    
 ## Create a concept
 
-* To Create an concept you need to specify below attributes in the request body.If you are not logged in to perform this action,
+* To Create a concept, you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -139,7 +134,7 @@ POST /concept
 ## Update a concept
 
 *  Update a target concept with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if concept not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+status if concept not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
     ### Attributes
 
@@ -175,7 +170,7 @@ POST /concept/:target_concept_uuid
     
 ## Delete a concept
 
-* Delete or retire a target concept by its UUID. Returns a `404 Not Found` status if concept not exists.If user not logged 
+* Delete or retire a target concept by its UUID. Returns a `404 Not Found` status if concept not exists. If the user is not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
@@ -191,27 +186,25 @@ DELETE /concept/:target_concept_uuid?purge=true
 
 * ### List all concept mappings for a concept.
 
-    Retrieve all **concept mapping** sub resources of a **concept** resource by target_concept_uuid. Returns a 
-    `404 Not Found` status if concept mapping not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
+    Retrieve all **concept mapping** subresources of a **concept** resource by target_concept_uuid. Returns a 
+    `404 Not Found` status if concept mapping not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ```console
 GET /concept/:target_concept_uuid/mapping 
 ```
 
-* ### List concept mapping by it's UUID and parent concept UUID.
+* ### List concept mapping by its UUID and parent concept UUID.
     
-     Retrieve an **concept mapping** sub resources of a **concept** resource. Returns a 
-     `404 Not Found` status if concept mapping not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
-     returned.
+     Retrieve a **concept mapping** subresources of a **concept** resource. Returns a 
+     `404 Not Found` status if concept mapping not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ```console
 GET /concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
 ```
 ## Create a concept mapping with properties
 
-* To Create a concept mapping sub resource for a specific concept resource you need to specify below attributes in the request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* To Create a concept mapping subresource for a specific concept resource, you need to specify below attributes in the request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -231,8 +224,7 @@ POST concept/:target_concept_uuid/mapping
  
 ## Update a concept mapping
 
-* Updates an concept mapping sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
-a `404 Not Found` status if concept mapping not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+* Updates a concept mapping subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if concept mapping not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     ### Attributes
@@ -251,14 +243,14 @@ POST concept/:target_concept_uuid/mapping
 ```
 ## Delete a concept mapping
 
-* Delete or Voided a target concept mapping sub resource by its UUID. Returns a `404 Not Found` status if concept mapping not exists. 
- If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or Voided a target concept mapping subresource by its UUID. Returns a `404 Not Found` status if concept mapping not exists. 
+ If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to irreversibly remove the concept mapping type from the system. Concept mapping types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to remove the concept mapping type from the system irreversibly. Concept mapping types that have been used (i.e., are referenced from existing data) cannot be purged.
     
 ```console
 DELETE concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
@@ -267,9 +259,8 @@ DELETE concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
 
 * ### List all concept names for a concept.
 
-    Retrieve all **concept name** sub resources of a **concept** resource by target_concept_uuid. Returns a 
-    `404 Not Found` status if concept name not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
+    Retrieve all **concept name** subresources of a **concept** resource by target_concept_uuid. Returns a 
+    `404 Not Found` status if concept name not exists. If the user isnot logged in to perform this action, a `401 Unauthorized` status returned.
 
 ```console
 GET /concept/:target_concept_uuid/name 
@@ -277,17 +268,16 @@ GET /concept/:target_concept_uuid/name
 
 * ### List concept name it's UUID and parent concept UUID.
     
-     Retrieve an **concept name** sub resources of a **concept** resource. Returns a 
-     `404 Not Found` status if concept name not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
-     returned.
+     Retrieve a **concept name** subresources of a **concept** resource. Returns a 
+     `404 Not Found` status if concept name not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ```console
 GET /concept/:target_concept_uuid/name/:target_concept_name_uuid
 ```
 ## Create a concept name with properties
 
-* To Create a concept name sub resource for a specific concept resource you need to specify below attributes in the request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* To Create a concept name subresource for a specific concept resource, you need to specify below attributes in the request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -295,7 +285,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
     --- | --- | ---
     *name* | `String` | Name for the concept (required)
     *locale* | `String` | Language to record concept name (required)
-    *localePreferred* | `String` | This is the preferred name to use within a locale.  By default, this is the fully-specified name; however, full-specified names are sometimes long and more detailed than necessary for day-to-day use.  In those cases, a synonym can be defined to be the locale-preferred name.  There can only be one preferred name within a locale.  The primary term should be the word(s) used most often by those who will have access to the records to prevent duplicate concept creation.
+    *localePreferred* | `String` | This is the preferred name to use within a locale.  By default, this is the fully-specified name; however, full-specified names are sometimes long and more detailed than necessary for day-to-day use.  In those cases, a synonym can be defined to be the locale-preferred name.  There can only be one preferred name within a locale.  The primary term should be the word(s) used by those who will have access to the records to prevent duplication of concept creation.
     *conceptNameType* | `String` | Type of the name to be specified.
     
 ```console
@@ -311,8 +301,7 @@ POST concept/:target_concept_uuid/name
  
 ## Update concept name
 
-* Updates an concept name sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
-a `404 Not Found` status if concept name not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+* Updates a concept name subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if concept name not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     ### Attributes
@@ -335,14 +324,14 @@ POST concept/:target_concept_uuid/name
 ```
 ## Delete concept name
 
-* Delete or retire a target concept name sub resource by its UUID. Returns a `404 Not Found` status if concept name not exists. 
- If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target concept name subresource by its UUID. Returns a `404 Not Found` status if concept name not exists. 
+ If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to irreversibly remove the concept name type from the system. Concept name types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to remove the concept name type from the system irreversibly. Concept name types that have been used (i.e., are referenced from existing data) cannot be purged.
     
 ```console
 DELETE concept/:target_concept_uuid/name/:target_concept_name_uuid
@@ -352,27 +341,25 @@ DELETE concept/:target_concept_uuid/name/:target_concept_name_uuid
 
 * ### List all concept attributes for a concept.
 
-    Retrieve all **concept attribute** sub resources of a **concept** resource by target_concept_uuid. Returns a 
-    `404 Not Found` status if concept attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
+    Retrieve all **concept attribute** subresources of a **concept** resource by target_concept_uuid. Returns a 
+    `404 Not Found` status if a concept attribute not exists. If the user isnot logged in to perform this action, a `401 Unauthorized` status returned.
 
 ```console
 GET /concept/:target_concept_uuid/attribute 
 ```
 
-* ### List concept attribute by it's UUID and parent concept UUID.
+* ### List concept attribute by its UUID and parent concept UUID.
     
-     Retrieve an **concept attribute** sub resources of a **concept** resource. Returns a 
-     `404 Not Found` status if concept attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
-     returned.
+     Retrieve a **concept attribute** subresources of a **concept** resource. Returns a 
+     `404 Not Found` status if a concept attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ```console
 GET /concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid
 ```
 ## Create a concept attribute with properties
 
-* To Create a concept attribute sub resource for a specific concept resource you need to specify below attributes in the request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* To Create a concept attribute subresource for a specific concept resource, you need to specify below attributes in the request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -392,8 +379,7 @@ POST concept/:target_concept_uuid/attribute
  
 ## Update concept attribute
 
-* Updates an concept attribute sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
-a `404 Not Found` status if concept attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+* Updates a concept attribute subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if the concept attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     ### Attributes
@@ -412,14 +398,14 @@ POST concept/:target_concept_uuid/attribute
 ```
 ## Delete concept attribute
 
-* Delete or retire a target concept attribute sub resource by its UUID. Returns a `404 Not Found` status if concept attribute not exists. 
- If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target concept attribute subresource by its UUID. Returns a `404 Not Found` status if concept attribute not exists. 
+ If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Query Parameters
+    ### Query Parameters 
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to irreversibly remove the concept name type from the system. Concept name types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to remove the concept name type from the system irreversibly. Concept name types that have been used (i.e., are referenced from existing data) cannot be purged.
     
 ```console
 DELETE concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid
@@ -429,27 +415,25 @@ DELETE concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid
 
 * ### List all concept descriptions for a concept.
 
-    Retrieve all **concept description** sub resources of a **concept** resource by target_concept_uuid. Returns a 
-    `404 Not Found` status if concept description not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
+    Retrieve all **concept description** subresources of a **concept** resource by target_concept_uuid. Returns a 
+    `404 Not Found` status if concept description not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ```console
     GET /concept/:target_concept_uuid/description 
 ```
 
-* ### List concept description by it's UUID and parent concept UUID.
+* ### List concept description by its UUID and parent concept UUID.
     
-     Retrieve an **concept description** sub resources of a **concept** resource. Returns a 
-     `404 Not Found` status if concept description not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
-     returned.
+     Retrieve a **concept description** subresources of a **concept** resource. Returns a 
+     `404 Not Found` status if concept description not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ```console
 GET /concept/:target_concept_uuid/description/:target_concept_description_uuid
 ```
 ## Create a concept description with properties
 
-* To Create a concept description sub resource for a specific concept resource you need to specify below attributes in the request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* To Create a concept description subresource for a specific concept resource you need to specify below attributes in the request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -461,7 +445,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
 ```console
 POST concept/:target_concept_uuid/description
 {
-  "description": "Pregnancy terminated by a spontaneous abortion.",
+  "description": "Pregnancy terminated by spontaneous abortion.",
   "locale": "en"
 }
 ```
@@ -469,8 +453,7 @@ POST concept/:target_concept_uuid/description
  
 ## Update concept description
 
-* Updates an concept description sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
-a `404 Not Found` status if concept description not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+* Updates a concept description subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if concept description not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
     ### Attributes
@@ -483,20 +466,20 @@ returned.
 ```console
 POST concept/:target_concept_uuid/description
 {
-  "description": "Pregnancy terminated by a spontaneous abortion.",
+  "description": "Pregnancy terminated by spontaneous abortion.",
   "locale": "en"
 }
 ```
 ## Delete concept description
 
-* Delete or retire a target concept description sub resource by its UUID. Returns a `404 Not Found` status if concept description not exists. 
- If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target concept description subresource by its UUID. Returns a `404 Not Found` status if concept description not exists. 
+ If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to irreversibly remove the concept description  from the system. Concept description that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to remove the concept description from the system irreversibly. Concept descriptions that have been used (i.e., are referenced from existing data) cannot be purged.
     
 ```console
 DELETE concept/:target_concept_uuid/description/:target_concept_description_uuid
