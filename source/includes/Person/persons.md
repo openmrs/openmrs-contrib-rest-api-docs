@@ -27,7 +27,7 @@ Person Attributes are suitable for storing other information. But historical val
 2. [Create Persons](#create-a-person)
 3. [Update Persons](#update-a-person)
 4. [Delete Persons](#delete-a-person)
-5. [List person names](#list-person-name-subresource)
+5. [List person name](#list-person-name)
 6. [Create person name](#create-person-name-subresource)
 7. [Update person name](#update-person-name-subresource)
 8. [Delete person name](#delete-person-name-subresource)
