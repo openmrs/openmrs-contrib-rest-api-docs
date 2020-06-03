@@ -11,8 +11,8 @@
 
 1. [List encounter types](#list-encounter-types)
 2. [Create an encounter type](#create-an-encounter-type)
-3. [Update an encounter type](#update-an-encounters-type)
-4. [Delete an encounter type](#delete-an-encounters-type)
+3. [Update an encounter type](#update-an-encounter-type)
+4. [Delete an encounter type](#delete-an-encounter-type)
 
 
 ## List encounter types
