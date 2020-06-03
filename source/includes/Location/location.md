@@ -28,10 +28,10 @@ Amani Clinic.
 2. [Create a location](#create-a-location)
 3. [Update a location](#update-a-location)
 4. [Delete a location](#delete-a-location)
-5. [List location attribute sub resource](#list-location-attribute-subresources)
-6. [Create location attribute sub resource with properties](#create-a-location-attribute-subresource-with-properties)
-7. [Update location attribute sub resource](#update-a-location-attribute-subresource)
-8. [Delete location attribute sub resource](#delete-a-location-attribute-subresource)
+5. [List location attribute subresource](#list-location-attribute-subresources)
+6. [Create location attribute subresource with properties](#create-a-location-attribute-subresource-with-properties)
+7. [Update location attribute subresource](#update-a-location-attribute-subresource)
+8. [Delete location attribute subresource](#delete-a-location-attribute-subresource)
 
 
 
