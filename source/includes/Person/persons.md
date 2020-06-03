@@ -27,7 +27,7 @@ Person Attributes are suitable for storing other information. But historical val
 2. [Create Persons](#create-a-person)
 3. [Update Persons](#update-a-person)
 4. [Delete Persons](#delete-a-person)
-5. [List person name](#list-person-name)
+5. [List person name](#list-person-name-subresource)
 6. [Create person name](#create-person-name-subresource)
 7. [Update person name](#update-person-name-subresource)
 8. [Delete person name](#delete-person-name-subresource)
@@ -37,8 +37,8 @@ Person Attributes are suitable for storing other information. But historical val
 13. [Delete person address](#create-person-address-subresource)
 14. [List person attributes](#list-person-attribute-subresource)
 15. [Create person attribute](#create-person-attribute-subresource)
-16. [Update person attribute](#update-person-name-subresource)
-17. [Delete person attribute](#delete-person-name-subresource)
+16. [Update person attribute](#update-person-attribute-subresource)
+17. [Delete person attribute](#delete-person-attribute-subresource)
 
 ## Search Persons
 
@@ -137,7 +137,7 @@ DELETE /person/:target_person_uuid?purge=true
  ```
 
 
-## List person name
+## List person name subresource
 
 * List all the person name subresource corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
@@ -184,7 +184,7 @@ POST person/:target_person_uuid/name
 }
 ```
 
-## Update person name 
+## Update person name subresource
 
 * To update a person name with given UUID value for a specific person resource, you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status is returned.
@@ -213,7 +213,7 @@ POST person/:target_person_uuid/name
 }
 ```
 
-## Delete a person name subresource
+## Delete person name subresource
 
 * Delete or void a target name subresource. Returns a `404 Not Found` status if an attribute does not exist. 
 If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
@@ -379,7 +379,7 @@ POST person/:target_person_uuid/attribute
 }
 ```
 
-## Delete a person attribute subresource
+## Delete person attribute subresource
 
 * Delete or void a target attribute. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
