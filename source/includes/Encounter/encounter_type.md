@@ -10,9 +10,9 @@
 ## Available operations for Encounter Type 
 
 1. [List encounter types](#list-encounter-types)
-2. [Create an encounter type](#create-a-encounter-type)
-3. [Update an encounter type](#update-a-encounters-type)
-4. [Delete an encounter type](#delete-a-encounters-type)
+2. [Create an encounter type](#create-an-encounter-type)
+3. [Update an encounter type](#update-an-encounter-type)
+4. [Delete an encounter type](#delete-an-encounter-type)
 
 
 ## List encounter types

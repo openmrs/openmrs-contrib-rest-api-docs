@@ -28,10 +28,10 @@ Amani Clinic.
 2. [Create a location](#create-a-location)
 3. [Update a location](#update-a-location)
 4. [Delete a location](#delete-a-location)
-5. [List location attribute sub resource](#list-location-attribute-sub-resources)
-6. [Create location attribute sub resource with properties](#create-a-location-attribute-sub-resource-with-properties)
-7. [Update location attribute sub resource](#update-a-location-attribute-sub-resource)
-8. [Delete location attribute sub resource](#delete-a-location-attribute-sub-resource)
+5. [List location attribute subresource](#list-location-attribute-subresources)
+6. [Create location attribute subresource with properties](#create-a-location-attribute-subresource-with-properties)
+7. [Update location attribute subresource](#update-a-location-attribute-subresource)
+8. [Delete location attribute subresource](#delete-a-location-attribute-subresource)
 
 
 
@@ -190,7 +190,7 @@ POST /location/:target_location_uuid
 ```console
 DELETE /location/:target_location_uuid?purge=true
 ```
-## List location attribute sub resources
+## List location attribute subresources
 
 * ### List all location attribute subresources for a location.
 
@@ -211,7 +211,7 @@ GET /location/:target_location_uuid/attribute
 ```console
 GET /location/:target_location_uuid/attribute/:target_attribute_uuid
 ```
-## Create a location attribute sub resource with properties
+## Create a location attribute subresource with properties
 
 * To Create an attribute subresource for a specific location resource, you need to specify below attributes in the request body.
 If the user not logged in to perform this action, a `401 Unauthorized` status returned.
