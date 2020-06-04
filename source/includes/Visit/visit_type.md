@@ -22,6 +22,9 @@
 
 
 ## List visits types
+```console
+GET /visittype?q="Search Query"
+```
 * ### List all non-retired visits types.
     
     Quickly filter visit types with a given search query. Returns a `404 Not Found` status if visit type not exists. 
@@ -34,20 +37,22 @@
     *q* | `Search Query` | Display Name of Visit Type.
 
 ```console
-GET /visittype?q="Search Query"
+GET /visittype/:target_visit_type_uuid
 ```
-    
 * ### List visit type by UUID.
 
     Retrieve a visit type by its UUID. Returns a `404 Not Found` status if visit type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
-    
-```console
-GET /visittype/:target_visit_type_uuid
-```
    
-## Create a visit type
 
+## Create a visit type
+```console
+POST /visittype
+{
+    "name": "Name for the visit type",
+    "description": "Description for the visit type"
+}
+```
 * To Create a visit type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
@@ -58,15 +63,15 @@ GET /visittype/:target_visit_type_uuid
     *name* | `String` | Name of the visit type (Required)
     *description* | `Patient UUID` | Visit type resource UUID (Required)
    
+
+## Update a visit type
 ```console
-POST /visittype
+POST /type/:target_visit_type_uuid
 {
-    "name": "Name for the visit type",
-    "description": "Description for the visit type"
+    "name": "Modified name for the visit type",
+    "description": "Modified description for the visit type"
 }
 ```
-## Update a visit type
-
 *  Update a target visit type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if visit not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -83,16 +88,11 @@ status if visit not exists. If user not logged in to perform this action, a `401
     *name* | `String` | Name of the visit type (Required)
     *description* | `Patient UUID` | Visit type resource UUID (Required)
     
-```console
-POST /type/:target_visit_type_uuid
-{
-    "name": "Modified name for the visit type",
-    "description": "Modified description for the visit type"
-}
-```
     
 ## Delete a visit type
-
+```console
+DELETE /visittype/:target_visit_type_uuid?purge=true
+```
 * Delete or Retire a target visit type by its UUID. Returns a `404 Not Found` status if visit not exists. If user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
@@ -102,6 +102,4 @@ POST /type/:target_visit_type_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
 
-```console
-DELETE /visittype/:target_visit_type_uuid?purge=true
-```
+

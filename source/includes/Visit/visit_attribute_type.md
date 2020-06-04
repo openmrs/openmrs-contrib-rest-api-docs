@@ -14,11 +14,12 @@
 3. [Update a visit attribute type](#update-a-visit-attribute-type)
 4. [Delete a visit attribute type](#delete-a-visit-attribute-type)
 
-
 ## List visits attribute types
-
+```console
+GET /visitattributetype?q="Search Query"
+```  
 * ### List all non-retired visits attribute types.
-    
+
     Quickly filter visit attribute types with a given search query. Returns a `404 Not Found` status if the visit attribute type not exists.
      If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
     
@@ -29,20 +30,28 @@
     *q* | `Search Query` | Display Name of Visit attribute type.
 
 ```console
-GET /visitattributetype?q="Search Query"
-  ```
-    
+GET /visitattributetype/:target_visit_attribute_type_uuid
+```  
 * ### List visit attribute type by UUID.
 
     Retrieve a visit attribute type by its UUID. Returns a `404 Not Found` status if the visit attribute type not exists. If the 
     user not logged in to  perform this action, a `401 Unauthorized` status returned.
     
-```console
-GET /visitattributetype/:target_visit_attribute_type_uuid
-```
    
 ## Create a visit attribute type
-
+```console
+POST /visitattributetype
+{
+  "name": "Patient condition",
+  "description": "This attribute type will record the health conditon of the patient",
+  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+  "minOccurs": 0,
+  "maxOccurs": 1,
+  "datatypeConfig": "default",
+  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
+  "handlerConfig": "dafault"
+}
+```
 * To Create a visit attribute type, you need to specify below attributes in the request body. If the user not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
@@ -59,21 +68,21 @@ GET /visitattributetype/:target_visit_attribute_type_uuid
     *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
     *handlerConfig* | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting
    
+
+## Update a visit attribute type
 ```console
-POST /visitattributetype
+POST /visitattributetype/:target_visit_attribute_type_uuid
 {
-  "name": "Patient condition",
+  "name": "Patient condition modified",
   "description": "This attribute type will record the health conditon of the patient",
   "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
   "minOccurs": 0,
-  "maxOccurs": 1,
+  "maxOccurs": 2,
   "datatypeConfig": "default",
   "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
   "handlerConfig": "dafault"
 }
 ```
-## Update a visit attribute type
-
 *  Update a target visit attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if the visit attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -96,22 +105,10 @@ status if the visit attribute not exists. If the user not logged in to perform t
     *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
     *handlerConfig* | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting
     
-```console
-POST /visitattributetype/:target_visit_attribute_type_uuid
-{
-  "name": "Patient condition modified",
-  "description": "This attribute type will record the health conditon of the patient",
-  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
-  "minOccurs": 0,
-  "maxOccurs": 2,
-  "datatypeConfig": "default",
-  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": "dafault"
-}
-```
-    
 ## Delete a visit attribute type
-
+```console
+DELETE /visitattributetype/:target_visit_attribute_type_uuid?purge=true
+```
 * Delete or Retire a target visit attribute type by its UUID. Returns a `404 Not Found` status if the visit attribute type not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
@@ -120,6 +117,4 @@ POST /visitattributetype/:target_visit_attribute_type_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’.Purging will attempt to remove the attribute type from the system irreversibly. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
-```console
-DELETE /visitattributetype/:target_visit_attribute_type_uuid?purge=true
-```
+
