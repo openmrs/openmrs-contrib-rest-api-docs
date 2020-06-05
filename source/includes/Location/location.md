@@ -37,54 +37,32 @@ Amani Clinic.
 
 ## List location
 
-* ### List all non-retired locations`.
+```console
+GET /location?
+q="amani"
+```
+### List all non-retired locations`.
     
     Quickly filter location with given query parameters. Returns a `404 Not Found` status if the location not exists. If the 
     user not logged in to perform this action, a `401 Unauthorized` status returned.
     
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *q* | `Search Query` | Display Name of Location object.
      
-```console
-GET /location?
-q="amani"
-```
     
-* ### List location by UUID.
+### List location by UUID.
 
-    Retrieve a location by its UUID. Returns a `404 Not Found` status if the location not exists. If the user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
-    
 ```console
 GET /location/:target_location_uuid
 ```
+    Retrieve a location by its UUID. Returns a `404 Not Found` status if the location not exists. If the user not logged 
+    in to perform this action, a `401 Unauthorized` status returned.
+    
    
 ## Create a location
-
-* To Create a location you need to specify below attributes in the request body. If the user not logged in to perform this action,
- a `401 Unauthorized` status returned.
-
-    ### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *name* | `String` | Name of the location (Required)
-    *address1* | `String` | Address of the location (Required)
-    *description* | `String` | Description
-    *cityVillage* | `String` | City/village
-    *stateProvince* | `String` | State and province
-    *country* | `String` | Country    
-    *postalCode* | `String` | Postal code of the location 
-    *latitude* | `String` | Latitude    
-    *longitude* | `String` | Longitude
-    *countyDistrict* | `String` | District or Country
-    *tags* | `Array[]: LocationTag UUID` | UUID's of the location tags
-    *parentLocation* | `Parent Location UUID` | UUID of the target parent location
-    *childLocations* | `Array[]: Child Location UUID` | UUID's of the target child locations
-    *attributes* | `Array[]: Attribute UUID` | UUID's of location attributes  
 
 ```console
 POST /location
@@ -115,18 +93,9 @@ POST /location
     ]
 }
 ```
+* To Create a location you need to specify below attributes in the request body. If the user not logged in to perform this action,
+ a `401 Unauthorized` status returned.
 
-## Update a location
-
-*  Update a target location with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if the location not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
-
-    ### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *uuid* | `target_location_uuid` | Target location resource UUID
-    
     ### Attributes
 
     Parameter | Type | Description
@@ -145,6 +114,10 @@ status if the location not exists. If the user not logged in to perform this act
     *parentLocation* | `Parent Location UUID` | UUID of the target parent location
     *childLocations* | `Array[]: Child Location UUID` | UUID's of the target child locations
     *attributes* | `Array[]: Attribute UUID` | UUID's of location attributes  
+
+
+## Update a location
+
 
 ```console
 POST /location/:target_location_uuid
@@ -175,9 +148,40 @@ POST /location/:target_location_uuid
     ]
 }       
 ```
+*  Update a target location with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
+status if the location not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+    ### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *uuid* | `target_location_uuid` | Target location resource UUID
+    
+    ### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *name* | `String` | Name of the location (Required)
+    *address1* | `String` | Address of the location (Required)
+    *description* | `String` | Description
+    *cityVillage* | `String` | City/village
+    *stateProvince* | `String` | State and province
+    *country* | `String` | Country    
+    *postalCode* | `String` | Postal code of the location 
+    *latitude* | `String` | Latitude    
+    *longitude* | `String` | Longitude
+    *countyDistrict* | `String` | District or Country
+    *tags* | `Array[]: LocationTag UUID` | UUID's of the location tags
+    *parentLocation* | `Parent Location UUID` | UUID of the target parent location
+    *childLocations* | `Array[]: Child Location UUID` | UUID's of the target child locations
+    *attributes* | `Array[]: Attribute UUID` | UUID's of location attributes  
+
     
 ## Delete a location
 
+```console
+DELETE /location/:target_location_uuid?purge=true
+```
 * Delete or Retire a target location by its UUID. Returns a `404 Not Found` status if the location not exists. If the user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
@@ -187,32 +191,36 @@ POST /location/:target_location_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
 
-```console
-DELETE /location/:target_location_uuid?purge=true
-```
 ## List location attribute subresources
 
-* ### List all location attribute subresources for a location.
-
-    Retrieve all <b>attribute</b> sub resources of a  <b>location</b> resource by target_location_uuid.Returns a 
-    `404 Not Found` status if the attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
+### List all location attribute subresources for a location.
 
 ```console
 GET /location/:target_location_uuid/attribute 
 ```
+    Retrieve all <b>attribute</b> sub resources of a  <b>location</b> resource by target_location_uuid.Returns a 
+    `404 Not Found` status if the attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status
+    returned.
 
-* ### List location attribute subresources by own UUID and parent location UUID.
-    
+
+### List location attribute subresources by own UUID and parent location UUID.
+
+```console
+GET /location/:target_location_uuid/attribute/:target_attribute_uuid
+```    
      Retrieve an <b>attribute</b> sub resources of a <b>location</b> resource.Returns a 
      `404 Not Found` status if the attribute not exists. If the user are not logged in to perform this action, a `401 Unauthorized` status
      returned.
      
-```console
-GET /location/:target_location_uuid/attribute/:target_attribute_uuid
-```
 ## Create a location attribute subresource with properties
 
+```console
+POST location/:target_location_uuid/attribute 
+{
+    "attributeType": "target_location_attribute_type_uuid",
+    "value": "value_for_the_attriute"
+}
+```
 * To Create an attribute subresource for a specific location resource, you need to specify below attributes in the request body.
 If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -223,17 +231,18 @@ If the user not logged in to perform this action, a `401 Unauthorized` status re
     *attributeType* | `Attribute_Type UUID` | Create Attribute from this Location Attribute_Type
     *value* | `Depends on Attribute_Type Selected` | Value for the attribute
 
-```console
-POST location/:target_location_uuid/attribute 
-{
-    "attributeType": "target_location_attribute_type_uuid",
-    "value": "value_for_the_attriute"
-}
-```
  
  
 ## Update a location attribute subresource
 
+
+```console
+POST location/:target_location_uuid/attribute/:target_location_attribute_uuid
+{
+    "attributeType": "target_attribute_type_uuid",
+    "value": "modified_attriute_value"
+} 
+```
 * Updates a location attribute sub resource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if the attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
@@ -244,16 +253,12 @@ returned.
     *attributeType* | `Attribute_Type UUID` | Location Attribute_Type resource UUID
     *updated value* | `Depends on Attribute_Type Selected` | Updated value for the attribute
 
-```console
-POST location/:target_location_uuid/attribute/:target_location_attribute_uuid
-{
-    "attributeType": "target_attribute_type_uuid",
-    "value": "modified_attriute_value"
-} 
-```
 
 ## Delete a location attribute subresource
 
+```console
+DELETE /location/:target_location_uuid/attribute/:target_location_attribute_uuid
+```
 * Delete or Retire a target location attribute subresource by its UUID. Returns a `404 Not Found` status if the attribute not exists. 
 If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -263,6 +268,3 @@ If the user not logged in to perform this action, a `401 Unauthorized` status re
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
     
-```console
-DELETE /location/:target_location_uuid/attribute/:target_location_attribute_uuid
-```
