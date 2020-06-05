@@ -38,12 +38,20 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 
 ## List visits
 
-* ### List all non-retired visits.
+```console
+GET /visit?
+includeInactive=true
+&fromStartDate=2016-10-08T04:09:23.000Z
+&patient=target_patient_uuid
+&location=target_location_uuid
+```
+
+### List all non-retired visits.
     
     Quickly filter visits with given query parameters. Returns a `404 Not Found` status if visit not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
     
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
@@ -52,41 +60,18 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
     *includeInactive* | `Boolean` | Active/Inactive status of visit
     *fromStartDate* | `Date (ISO8601 Long)` | Start date of the visit
 
-```console
-GET /visit?
-includeInactive=true
-&fromStartDate=2016-10-08T04:09:23.000Z
-&patient=target_patient_uuid
-&location=target_location_uuid
-```
     
-* ### List visit by UUID.
+### List visit by UUID.
 
-    Retrieve a visit by its UUID. Returns a `404 Not Found` status if visit not exists. If user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
-    
 ```console
 GET /visit/:target_visit_uuid
 ```
+    Retrieve a visit by its UUID. Returns a `404 Not Found` status if visit not exists. If user not logged 
+    in to perform this action, a `401 Unauthorized` status returned.
+    
    
 ## Create visit
 
-* To Create a visit you need to specify below attributes in the request body. If you are not logged in to perform this action,
- a `401 Unauthorized` status returned.
-
-    ### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *patient* | `Patient UUID` | Patient resource UUID
-    *visitType* | `Patient UUID` | Visit type resource UUID
-    *startDatetime* | `Date (ISO8601 Long)` | Start date of the visit
-    *location* | `Location UUID` | Location resource UUID 
-    *indication* | `string` | Any indication of the visit    
-    *stopDatetime* | `Date (ISO8601 Long)` | End date of the vist    
-    *encounters* | `Array[]: Encounter UUID` | Encounter resources UUID    
-    *attributes* | `Array[]: Attribute` | List of visit attributes  
-   
 ```console
 POST /visit
 {
@@ -106,8 +91,29 @@ POST /visit
     ]
 }
 ```
+* To Create a visit you need to specify below attributes in the request body. If you are not logged in to perform this action,
+ a `401 Unauthorized` status returned.
+
+    ### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *patient* | `Patient UUID` | Patient resource UUID
+    *visitType* | `Patient UUID` | Visit type resource UUID
+    *startDatetime* | `Date (ISO8601 Long)` | Start date of the visit
+    *location* | `Location UUID` | Location resource UUID 
+    *indication* | `string` | Any indication of the visit    
+    *stopDatetime* | `Date (ISO8601 Long)` | End date of the vist    
+    *encounters* | `Array[]: Encounter UUID` | Encounter resources UUID    
+    *attributes* | `Array[]: Attribute` | List of visit attributes  
+   
 ## Update visit
 
+
+```console
+POST /visit/:target_visit_uuid
+-d  modified_visit_object
+```
 *  Update a target visit with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if visit not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -123,13 +129,12 @@ status if visit not exists. If the user is not logged in to perform this action,
     --- | --- | ---
     *resource* | `Visit` | Visit resource with updated properties.
     
-```console
-POST /visit/:target_visit_uuid
--d  modified_visit_object
-```
     
 ## Delete visit
 
+```console
+DELETE /visit/:target_visit_uuid?purge=true
+```
 * Delete or Retire a target visit by its UUID. Returns a `404 Not Found` status if visit not exists. If the user is not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
@@ -139,32 +144,36 @@ POST /visit/:target_visit_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
 
-```console
-DELETE /visit/:target_visit_uuid?purge=true
-```
 ## List attribute sub resources
 
-* ### List all attribute subresources for a visit.
-
-    Retrieve all <b>attribute</b> sub resources of a  <b>visit</b> resource by target_visit_uuid.Returns a 
-    `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
+### List all attribute subresources for a visit.
 
 ```console
 GET /visit/:target_visit_uuid/attribute 
 ```
 
-* ### List attribute subresources by it's UUID and parent visit UUID.
-    
-     Retrieve an <b>attribute</b> sub resources of a <b>visit</b> resource.Returns a 
-     `404 Not Found` status if attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
-     returned.
-     
+    Retrieve all <b>attribute</b> sub resources of a  <b>visit</b> resource by target_visit_uuid.Returns a 
+    `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+    returned.
+
+
+### List attribute subresources by it's UUID and parent visit UUID.
+
 ```console
 GET /visit/:target_visit_uuid/attribute/:target_attribute_uuid
-```
+```    
+Retrieve an <b>attribute</b> sub resources of a <b>visit</b> resource.Returns a `404 Not Found` status if attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
+     
 
 ## Create an attribute sub resource with properties
+
+```console
+POST visit/:target_visit_uuid/attribute 
+{
+    "attributeType": "target_attribute_type_uuid",
+    "value": "value_for_the_attriute"
+}
+```
 
 * To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -176,17 +185,17 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     *attributeType* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type
     *value* | `Depends on Attribute_Type Selected` | Value for the attribute
     
-```console
-POST visit/:target_visit_uuid/attribute 
-{
-    "attributeType": "target_attribute_type_uuid",
-    "value": "value_for_the_attriute"
-}
-```
  
  
 ## Update attribute subresource
 
+```console
+POST visit/:target_visit_uuid/attribute/:target_attribute_uuid
+{
+    "attributeType": "target_attribute_type_uuid",
+    "value": "modified_attriute_value"
+} 
+```
 * Updates an attribute subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
@@ -197,15 +206,13 @@ returned.
     *attributeType* | `Attribute_Type UUID` | Attribute_Type resource UUID
     *updated value* | `Depends on Attribute_Type Selected` | Updated value for the attribute
 
-```console
-POST visit/:target_visit_uuid/attribute/:target_attribute_uuid
-{
-    "attributeType": "target_attribute_type_uuid",
-    "value": "modified_attriute_value"
-} 
-```
+
 ## Delete attribute sub resource
 
+
+```console
+DELETE /visit/:target_visit_uuid/attribute/:target_attribute_uuid
+```
 * Delete or Retire a target attribute subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -215,6 +222,3 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
     
-```console
-DELETE /visit/:target_visit_uuid/attribute/:target_attribute_uuid
-```
