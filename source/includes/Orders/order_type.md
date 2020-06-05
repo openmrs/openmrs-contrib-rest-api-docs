@@ -20,23 +20,31 @@ new order type are also being added to the system (using a module or app).
 
 ## List orders
 
-* Fetch all non-retired order types that match any specified parameters otherwise fetch all non-retired order types. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
-
 ```console
 GET /ordertype
- ```
+```
+* Fetch all non-retired order types that match any specified parameters otherwise fetch all non-retired order types. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-* ### Get a particular order type
 
-    Retrieve a particular order.
-If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+### Get a particular order type
 
 ```console
 GET /ordertype/:target_ordertype_uuid
 ```
+    Retrieve a particular order.
+If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+
 
 ## Create an order type
 
+```console
+POST /ordertype
+{
+  "name": "drug order",
+  "description": "One 500mg tablet of Ciprofloxacin, twice a day",
+  "parent": "070f0120-0283-4858-885d-a20d967729cf",
+}
+```
 * Order types depend on code within the application to properly handle them, so it would be unusual to create a new order type unless some new code (e.g., a module) has been added to the system to handle the new order type.
 
     #### Attributes
@@ -49,17 +57,16 @@ GET /ordertype/:target_ordertype_uuid
     *parent* | `Order UUID` | the order uuid
     *conceptClasses* | `Array[] : Concept UUID` | classes of concepts that can be used to generate an order of this type
 
-```console
-POST /ordertype
-{
-  "name": "drug order",
-  "description": "One 500mg tablet of Ciprofloxacin, twice a day",
-  "parent": "070f0120-0283-4858-885d-a20d967729cf",
-}
-```
     
 ## Update an order type
 
+```console
+POST /ordertype/:target_ordertype_uuid
+{
+  "name": "drug order",
+  "description": "One 400mg tablet of Ciprofloxacin, twice a day"
+}
+```
 * Update an order type with given UUID, this method only modifies properties in the request. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -72,18 +79,11 @@ POST /ordertype
     *parent* | `Order UUID` | the order uuid
     *conceptClasses* | `Array[] : Concept UUID` | classes of concepts that can be used to generate an order of this type
 
-```console
-POST /ordertype/:target_ordertype_uuid
-{
-  "name": "drug order",
-  "description": "One 400mg tablet of Ciprofloxacin, twice a day"
-}
-```
 
 ## Delete an order type
 
-* Delete or retire an order type by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
-
 ```console
 DELETE /ordertype/:target_ordertype_uuid
- ```
+```
+* Delete or retire an order type by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+
