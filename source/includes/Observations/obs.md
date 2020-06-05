@@ -21,35 +21,44 @@ Examples of observations include Serum Creatinine of 0.9mg/dL or Review of cardi
 
 ## List observations
 
-* ### List all observations.
-    
+### List all observations.
+
+```console
+GET /obs?patient=070f0120-0283-4858-885d-a20d967729cf"
+```    
     Quickly filter observations with given query parameters. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *patient* | `target_patient_uuid` | patient resource UUID
     *concept* | `target_concept_uuid`| concept resource UUID (this parameter to be used with patient)
 
-```console
-GET /obs?patient=070f0120-0283-4858-885d-a20d967729cf"
- ```
     
-* ### Query observations by UUID.
+### Query observations by UUID.
 
+```console
+GET /obs/:target_observation_uuid
+```
     Retrieve an observation by its UUID.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
     
-```console
-GET /obs/:target_observation_uuid
-```
    
 ## Create an observation
 
+```console
+POST /obs 
+{
+  "person": "070f0120-0283-4858-885d-a20d967729cf",
+  "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "obsDatetime": "2019-11-14T07:37:31.000+0000",
+  "value": 70
+}
+```
 * To Create an observation you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
@@ -71,17 +80,14 @@ status is returned.
     *interpretation* | `String` | `NORMAL`, `ABNORMAL`, `CRITICALLY_ABNORMAL`, `NEGATIVE`, `POSITIVE`,`CRITICALLY_LOW`,  `LOW`, `HIGH`, `CRITICALLY_HIGH`, `VERY_SUSCEPTIBLE`, `SUSCEPTIBLE`, `INTERMEDIATE`, `RESISTANT`, `SIGNIFICANT_CHANGE_DOWN`, `SIGNIFICANT_CHANGE_UP`, `OFF_SCALE_LOW`, `OFF_SCALE_HIGH`
     *voided* | `Boolean` | true if the observation is voided
     
-```console
-POST /obs 
-{
-  "person": "070f0120-0283-4858-885d-a20d967729cf",
-  "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-  "obsDatetime": "2019-11-14T07:37:31.000+0000",
-  "value": 70
-}
-```
 ## Update an observation
 
+```console
+POST /obs/:uuid_of_obs_to_be_updated
+{
+  "value": 71
+}
+```
 *  Update a target obs, this method only modifies properties in the request. Returns `404 Not Found` status if the observation does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
@@ -104,14 +110,12 @@ status is returned.
     *interpretation* | `String` | `NORMAL`, `ABNORMAL`, `CRITICALLY_ABNORMAL`, `NEGATIVE`, `POSITIVE`,`CRITICALLY_LOW`,  `LOW`, `HIGH`, `CRITICALLY_HIGH`, `VERY_SUSCEPTIBLE`, `SUSCEPTIBLE`, `INTERMEDIATE`, `RESISTANT`, `SIGNIFICANT_CHANGE_DOWN`, `SIGNIFICANT_CHANGE_UP`, `OFF_SCALE_LOW`, `OFF_SCALE_HIGH`
     *voided* | `Boolean` | true if the observation is voided
    
-```console
-POST /obs/:uuid_of_obs_to_be_updated
-{
-  "value": 71
-}
-```
     
 ## Delete an observation
+
+```console
+DELETE /obs/:target_obs_uuid?purge=true
+```
 
 * Delete or void a target observation. Returns `404 Not Found` status if the observation does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
@@ -123,6 +127,3 @@ status is returned.
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
 
-```console
-DELETE /obs/:target_obs_uuid?purge=true
-```
