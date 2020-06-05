@@ -39,8 +39,6 @@ from OpenMRS
 
 # Schema
 
-All API access is over HTTPS, and can be accessed from `https://demo.openmrs.org/openmrs/ws/rest/v1`. All data is sent and received as JSON.
-
 ```console
 curl -X GET "https://demo.openmrs.org/openmrs/ws/rest/v1/concept"
 connection: keep-alive
@@ -51,6 +49,9 @@ etag: "04c83ff0cf2cc35cf05a2075ad117df83"
 server: nginx/1.10.3 (Ubuntu)
 strict-transport-security: max-age=15768000
 ```
+
+All API access is over HTTPS, and can be accessed from `https://demo.openmrs.org/openmrs/ws/rest/v1`. All data is sent and received as JSON.
+
 
 # Resources
 
