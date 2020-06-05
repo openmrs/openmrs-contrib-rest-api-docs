@@ -27,25 +27,28 @@
 
 ## List concept data types
 
-* ### List all non-retired concept data types.
-    
-    Get concept data types. Returns a `404 Not Found` status if concept data type not exists. 
-    If the user is not logged in to perform this action, a `401 Unauthorized` status returned. 
+### List all non-retired concept data types.
 
 ```console
 GET /conceptdatatype"
-```
-    
-* ### Get concept data type by UUID.
+```    
+    Get concept data types. Returns a `404 Not Found` status if concept data type not exists. 
+    If the user is not logged in to perform this action, a `401 Unauthorized` status returned. 
 
-    Retrieve a concept data type by its UUID. Returns a `404 Not Found` status if concept data type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
+### Get concept data type by UUID.
+
 ```console
 GET /conceptdatatype/:target_concept_data_type_uuid
 ```
+    Retrieve a concept data type by its UUID. Returns a `404 Not Found` status if concept data type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+    
     
 ## Delete a concept data type
 
+```console
+DELETE /conceptdatatype/:target_concept_data_type_uuid?purge=true
+```
 * Delete or retire a target concept data type by its UUID. Returns a `404 Not Found` 
   status if concept data not exists. If the user is not logged in to perform this action, 
   a `401 Unauthorized` status returned.
@@ -56,6 +59,3 @@ GET /conceptdatatype/:target_concept_data_type_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
 
-```console
-DELETE /conceptdatatype/:target_concept_data_type_uuid?purge=true
-```

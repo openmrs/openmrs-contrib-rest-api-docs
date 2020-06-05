@@ -22,7 +22,11 @@ ANTENATAL VISIT REASON and add them as answers.
 
 ### List concept map types
 
-* #### List all non-retired concept map types.
+### List all non-retired concept map types.
+
+```console
+  GET /conceptmaptype?q="same"
+```
 
     Quickly filter concept map types with a given search query. Returns a `404 Not Found` status if concept map type not exists. 
     If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -33,32 +37,19 @@ ANTENATAL VISIT REASON and add them as answers.
     --- | --- | ---
     *q* | `String` | Full or partial name search term. Search is case insensitive.
 
-    ```console
-    GET /conceptmaptype?q="same"
-     ```
 
-* #### List concept map type by UUID.
+### List concept map type by UUID.
+
+```console
+  GET /conceptmaptype/:target_concept_map_type_uuid
+```
 
     Retrieve a concept map type by its UUID. Returns a `404 Not Found` status if concept map type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
 
-    ```console
-    GET /conceptmaptype/:target_concept_map_type_uuid
-    ```
 
 ### Create a concept map type
 
-* To Create a concept map type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
- a `401 Unauthorized` status returned.
-
-    #### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *name* | `String` | Name of the concept mapping type (Required)
-    *description* | `String` | A brief description of the concept mapping type
-    *isHidden* | `Boolean` | State to record concept map is hidden or not
-    
     ```console
         POST /conceptmaptype
         {
@@ -66,8 +57,27 @@ ANTENATAL VISIT REASON and add them as answers.
           "isHidden": false
         }
     ```
+
+* To Create a concept map type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
+ a `401 Unauthorized` status returned.
+
+### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *name* | `String` | Name of the concept mapping type (Required)
+    *description* | `String` | A brief description of the concept mapping type
+    *isHidden* | `Boolean` | State to record concept map is hidden or not
+    
 ### Update a concept map type
 
+```console
+        POST /conceptmaptype
+        {
+          "name": "SAME-AS",
+          "isHidden": true
+        }
+    ```
 *  Update a target concept map type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if concept map not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -79,15 +89,13 @@ status if concept map not exists. If the user is not logged in to perform this a
     *description* | `String` |  A brief description of the concept mapping type
     *isHidden* | `Boolean` | State to record concept map is hidden or not
     
-    ```console
-        POST /conceptmaptype
-        {
-          "name": "SAME-AS",
-          "isHidden": true
-        }
-    ```
-
+    
 ### Delete a concept map type
+
+
+    ```console
+        DELETE /conceptmaptype/:target_concept_map_type_uuid?purge=true
+    ```
 
 * Delete or Retire a target concept map type by its UUID. Returns a `404 Not Found` status if concept map not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -97,6 +105,3 @@ status if concept map not exists. If the user is not logged in to perform this a
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
 
-    ```console
-        DELETE /conceptmaptype/:target_concept_map_type_uuid?purge=true
-     ```
