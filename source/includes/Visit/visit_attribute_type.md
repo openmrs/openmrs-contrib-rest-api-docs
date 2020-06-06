@@ -14,15 +14,13 @@
 3. [Update a visit attribute type](#update-a-visit-attribute-type)
 4. [Delete a visit attribute type](#delete-a-visit-attribute-type)
 
-
 ## List visits attribute types
-
-### List all non-retired visits attribute types.
 
 ```console
 GET /visitattributetype?q="Search Query"
-```
-  
+```  
+* ### List all non-retired visits attribute types.
+
     Quickly filter visit attribute types with a given search query. Returns a `404 Not Found` status if the visit attribute type not exists.
      If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
     
@@ -32,18 +30,16 @@ GET /visitattributetype?q="Search Query"
     --- | --- | ---
     *q* | `Search Query` | Display Name of Visit attribute type.
 
-    
-### List visit attribute type by UUID.
-    
 ```console
 GET /visitattributetype/:target_visit_attribute_type_uuid
-```
+```  
+* ### List visit attribute type by UUID.
 
     Retrieve a visit attribute type by its UUID. Returns a `404 Not Found` status if the visit attribute type not exists. If the 
     user not logged in to  perform this action, a `401 Unauthorized` status returned.
+    
    
 ## Create a visit attribute type
-
 ```console
 POST /visitattributetype
 {
@@ -57,7 +53,6 @@ POST /visitattributetype
   "handlerConfig": "dafault"
 }
 ```
-
 * To Create a visit attribute type, you need to specify below attributes in the request body. If the user not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
@@ -76,7 +71,6 @@ POST /visitattributetype
    
 
 ## Update a visit attribute type
-
 ```console
 POST /visitattributetype/:target_visit_attribute_type_uuid
 {
@@ -112,10 +106,7 @@ status if the visit attribute not exists. If the user not logged in to perform t
     *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
     *handlerConfig* | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting
     
-
-    
 ## Delete a visit attribute type
-
 ```console
 DELETE /visitattributetype/:target_visit_attribute_type_uuid?purge=true
 ```
@@ -127,4 +118,5 @@ DELETE /visitattributetype/:target_visit_attribute_type_uuid?purge=true
     Parameter | Type | Description
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’.Purging will attempt to remove the attribute type from the system irreversibly. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
+
 

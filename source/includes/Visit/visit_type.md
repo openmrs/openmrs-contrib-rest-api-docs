@@ -21,14 +21,12 @@
 4. [Delete a visit type](#delete-a-visit-type)
 
 
-## List visits types
-
-### List all non-retired visits types.
-
 ```console
 GET /visittype?q="Search Query"
 ```
-  
+* ### List all non-retired visits types.
+    
+
     Quickly filter visit types with a given search query. Returns a `404 Not Found` status if visit type not exists. 
     If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
@@ -38,15 +36,13 @@ GET /visittype?q="Search Query"
     --- | --- | ---
     *q* | `Search Query` | Display Name of Visit Type.
 
-    
-### List visit type by UUID.
-
 ```console
 GET /visittype/:target_visit_type_uuid
 ```
+* ### List visit type by UUID.
+
     Retrieve a visit type by its UUID. Returns a `404 Not Found` status if visit type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
-    
    
 ## Create a visit type
 
@@ -69,7 +65,6 @@ POST /visittype
    
 
 ## Update a visit type
-
 ```console
 POST /type/:target_visit_type_uuid
 {
@@ -95,7 +90,6 @@ status if visit not exists. If user not logged in to perform this action, a `401
     
     
 ## Delete a visit type
-
 ```console
 DELETE /visittype/:target_visit_type_uuid?purge=true
 ```
@@ -107,4 +101,5 @@ DELETE /visittype/:target_visit_type_uuid?purge=true
     Parameter | Type | Description
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
+
 

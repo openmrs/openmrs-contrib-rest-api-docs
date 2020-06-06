@@ -23,21 +23,18 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 
 * Visit attributes exists specifically to allow implementations to extend the data model.
 
-
 ## Available operations for Visits
 
 1. [List visits](#list-visits)
-2. [Create a visit](#create-a-visit)
-3. [Update a visit](#update-a-visit)
-4. [Delete a visit](#delete-a-visit)
-5. [List attribute sub resource](#list-attribute-sub-resources)
-6. [Create attribute sub resource with properties](#create-an-attribute-sub-resource-with-properties)
-7. [Update attribute sub resource](#update-attribute-sub-resource)
-6. [Delete attribute sub resource](#delete-attribute-sub-resource)
-
+2. [Create visit](#create-visit)
+3. [Update visit](#update-visit)
+4. [Delete visit](#delete-visit)
+5. [List attribute subresource](#list-attribute-subresources)
+6. [Create attribute subresource with properties](#create-an-attribute-subresource-with-properties)
+7. [Update attribute subresource](#update-attribute-subresource)
+6. [Delete attribute subresource](#delete-attribute-subresource)
 
 ## List visits
-
 ```console
 GET /visit?
 includeInactive=true
@@ -45,8 +42,7 @@ includeInactive=true
 &patient=target_patient_uuid
 &location=target_location_uuid
 ```
-
-### List all non-retired visits.
+* ### List all non-retired visits.
     
     Quickly filter visits with given query parameters. Returns a `404 Not Found` status if visit not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
@@ -60,18 +56,16 @@ includeInactive=true
     *includeInactive* | `Boolean` | Active/Inactive status of visit
     *fromStartDate* | `Date (ISO8601 Long)` | Start date of the visit
 
-    
-### List visit by UUID.
-
 ```console
 GET /visit/:target_visit_uuid
-```
+```    
+* ### List visit by UUID.
+
     Retrieve a visit by its UUID. Returns a `404 Not Found` status if visit not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
-    
-   
+      
 ## Create visit
-
+ 
 ```console
 POST /visit
 {
@@ -94,6 +88,7 @@ POST /visit
 * To Create a visit you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
+
     ### Attributes
 
     Parameter | Type | Description
@@ -108,7 +103,6 @@ POST /visit
     *attributes* | `Array[]: Attribute` | List of visit attributes  
    
 ## Update visit
-
 
 ```console
 POST /visit/:target_visit_uuid
@@ -128,10 +122,8 @@ status if visit not exists. If the user is not logged in to perform this action,
     Parameter | Type | Description
     --- | --- | ---
     *resource* | `Visit` | Visit resource with updated properties.
-    
-    
+        
 ## Delete visit
-
 ```console
 DELETE /visit/:target_visit_uuid?purge=true
 ```
@@ -144,29 +136,25 @@ DELETE /visit/:target_visit_uuid?purge=true
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
 
-## List attribute sub resources
-
-### List all attribute subresources for a visit.
-
+## List attribute subresources
 ```console
 GET /visit/:target_visit_uuid/attribute 
 ```
+* ### List all attribute subresources for a visit.
 
     Retrieve all <b>attribute</b> sub resources of a  <b>visit</b> resource by target_visit_uuid.Returns a 
     `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
     returned.
-
-
-### List attribute subresources by it's UUID and parent visit UUID.
-
 ```console
 GET /visit/:target_visit_uuid/attribute/:target_attribute_uuid
-```    
-Retrieve an <b>attribute</b> sub resources of a <b>visit</b> resource.Returns a `404 Not Found` status if attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
-     
+```
+* ### List attribute subresources by it's UUID and parent visit UUID.
+    
+     Retrieve an <b>attribute</b> sub resources of a <b>visit</b> resource.Returns a 
+     `404 Not Found` status if attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
+     returned.
 
-## Create an attribute sub resource with properties
-
+## Create an attribute subresource with properties
 ```console
 POST visit/:target_visit_uuid/attribute 
 {
@@ -174,7 +162,6 @@ POST visit/:target_visit_uuid/attribute
     "value": "value_for_the_attriute"
 }
 ```
-
 * To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -184,11 +171,8 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     --- | --- | ---
     *attributeType* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type
     *value* | `Depends on Attribute_Type Selected` | Value for the attribute
-    
- 
- 
-## Update attribute subresource
 
+## Update attribute subresource
 ```console
 POST visit/:target_visit_uuid/attribute/:target_attribute_uuid
 {
@@ -206,10 +190,7 @@ returned.
     *attributeType* | `Attribute_Type UUID` | Attribute_Type resource UUID
     *updated value* | `Depends on Attribute_Type Selected` | Updated value for the attribute
 
-
-## Delete attribute sub resource
-
-
+## Delete attribute subresource
 ```console
 DELETE /visit/:target_visit_uuid/attribute/:target_attribute_uuid
 ```
