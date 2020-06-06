@@ -14,6 +14,7 @@ includes:
   # - errors
   - info
   - auth
+  - SystemSettings/system_settings
   - User/user
   - User/role
   - Person/persons
