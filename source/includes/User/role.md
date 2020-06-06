@@ -14,33 +14,24 @@ A **Role** represents a group of privileges in the system. Roles may inherit pri
 
 ## List roles
 
-* Fetch all the roles that match any specified parameters otherwise fetch all roles. Returns a `200 OK` status with the role response. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
-
 ```console
 GET /role
- ```
+```
+
+* Fetch all the roles that match any specified parameters otherwise fetch all roles. Returns a `200 OK` status with the role response. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+
 
 * ## Get a role by UUID.
-
-    Retrieve a role by its UUID. Returns a `404 Not Found` status if the role does not exist. If the
-    user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 ```console
 GET /role/:target_role_uuid
 ```
 
+    Retrieve a role by its UUID. Returns a `404 Not Found` status if the role does not exist. If the
+    user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+
 ## Create a role
-
-* To create a role, you need to specify below attributes in the request body. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
-
-    ### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *name* | `String` | Name of the role (Required)
-    *description* | `String` | Description of the role (Required)
-    *privileges* | `Array[] : privileges` | An array of the privilege resource
-    *inheritedRoles* | `Array[] : inheritedRoles` | An array of the inheritedRoles type
 
 ```console
 POST /role
@@ -53,7 +44,27 @@ POST /role
   }]
 }
 ```
+
+* To create a role, you need to specify below attributes in the request body. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+    ### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *name* | `String` | Name of the role (Required)
+    *description* | `String` | Description of the role (Required)
+    *privileges* | `Array[] : privileges` | An array of the privilege resource
+    *inheritedRoles* | `Array[] : inheritedRoles` | An array of the inheritedRoles type
+
 ## Update a role
+
+```console
+POST /role
+{
+  "name": "Configures Forms",
+  "description": "Manages forms and attaches them to the UI"
+}
+```
 
 *  Update a role with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if the role does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
@@ -66,15 +77,12 @@ POST /role
     *privileges* | `Array[] : privileges` | An array of the privilege resource
     *inheritedRoles* | `Array[] : inheritedRoles` | An array of the inheritedRoles type
 
-```console
-POST /role
-{
-  "name": "Configures Forms",
-  "description": "Manages forms and attaches them to the UI"
-}
-```
 
 ## Delete a role
+
+```console
+DELETE /role/:target_role_uuid?purge=true
+```
 
 * Delete a role by its UUID. Returns a `404 Not Found` status if the role does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
@@ -84,6 +92,3 @@ POST /role
     --- | --- | ---
     *purge* | `Boolean` | must be `true` to delete the role from the system; if `false`, the request will have no effect
 
-```console
-DELETE /role/:target_role_uuid?purge=true
-```

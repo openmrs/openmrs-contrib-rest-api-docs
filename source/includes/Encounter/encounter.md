@@ -47,11 +47,17 @@ Consultation and Dispensing**.
 
 ## List encounters
 
-* ### List all non-voided encounters.
-    
+### List all non-voided encounters.
+
+```console
+GET /encounter?
+patient=96be32d2-9367-4d1d-a285-79a5e5db12b8
+&fromdate=2016-10-08
+```
+   
     Quickly filter encounters with given query parameters. Returns a `404 Not Found` status if Encounter not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
@@ -64,23 +70,33 @@ Consultation and Dispensing**.
     *fromdate* | `Date or Timestamp (ISO 8601)` | Start date of the encounter (must be used with patient)
     *todate* | `Date or Timestamp (ISO 8601)` | End date of the encounter (must be used with patient)
     
-```console
-GET /encounter?
-patient=96be32d2-9367-4d1d-a285-79a5e5db12b8
-&fromdate=2016-10-08
-```
     
-* ### List encounter by UUID.
+### List encounter by UUID.
 
-    Retrieve an encounter by its UUID. Returns a `404 Not Found` status if Encounter not exists. If user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
-    
 ```console
 GET /encounter/:target_encounter_uuid
 ```
+    Retrieve an encounter by its UUID. Returns a `404 Not Found` status if Encounter not exists. If user not logged 
+    in to perform this action, a `401 Unauthorized` status returned.
+    
    
 ## Create an encounter
 
+```console
+POST /Encounter
+{
+  "encounterDatetime": "2019-10-16 12:08:43",
+  "patient": "070f0120-0283-4858-885d-a20d967729cf",
+  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
+  "location": "aff27d58-a15c-49a6-9beb-d30dcfc0c66e",
+  "encounterProviders": [
+    {
+      "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
+      "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
+    }
+  ]
+}
+```
 * To Create an encounter you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
@@ -98,8 +114,12 @@ GET /encounter/:target_encounter_uuid
     *form* | `Form UUID` | Target Form UUID to be filled for the encounter
     *visit* | `Visit UUID` | When creating an encounter for an existing visit, this specifies the visit
    
+
+## Update an encounter
+
+
 ```console
-POST /Encounter
+POST /encounter/:target_encounter_uuid
 {
   "encounterDatetime": "2019-10-16 12:08:43",
   "patient": "070f0120-0283-4858-885d-a20d967729cf",
@@ -113,8 +133,6 @@ POST /Encounter
   ]
 }
 ```
-## Update an encounter
-
 *  Update a target encounter with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if Encounter not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
@@ -132,24 +150,12 @@ status if Encounter not exists. If the user is not logged in to perform this act
     *form* | `Form UUID` | Target Form UUID to be filled for the encounter
     *visit* | `Visit UUID` | When creating an encounter for an existing visit, this specifies the visit
 
-```console
-POST /encounter/:target_encounter_uuid
-{
-  "encounterDatetime": "2019-10-16 12:08:43",
-  "patient": "070f0120-0283-4858-885d-a20d967729cf",
-  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
-  "location": "aff27d58-a15c-49a6-9beb-d30dcfc0c66e",
-  "encounterProviders": [
-    {
-      "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
-      "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
-    }
-  ]
-}
-```
     
 ## Delete an encounter
 
+```console
+  DELETE /encounter/:target_encounter_uuid?purge=true
+```
 * Delete or Void a target encounter by its UUID. Returns a `404 Not Found` status if Encounter not exists. If the user is not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
@@ -159,32 +165,38 @@ POST /encounter/:target_encounter_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
 
-```console
-  DELETE /encounter/:target_encounter_uuid?purge=true
-```
 ## List encounter provider subresources
 
-* ### List all encounter provider subresources for a visit.
-
-    Retrieve all <b>encounter provider</b> sub resources of an  <b>encounter</b> resource by target_encounter_uuid. Returns a 
-    `404 Not Found` status if encounter provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
+### List all encounter provider subresources for a visit.
 
 ```console
 GET /encounter/:target_encounter_uuid/encounterprovider 
 ```
 
-* ### List encounter provider subresources by it's UUID and parent encounter UUID.
+    Retrieve all <b>encounter provider</b> sub resources of an  <b>encounter</b> resource by target_encounter_uuid. Returns a 
+    `404 Not Found` status if encounter provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+    returned.
+
+
+### List encounter provider subresources by it's UUID and parent encounter UUID.
+
+```console
+GET /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
+```
     
      Retrieve an <b>encounter provider</b> sub resources of a <b>encounter</b> resource. Returns a 
      `404 Not Found` status if encounter provider not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
      returned.
      
-```console
-GET /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
-```
 ## Create an encounter provider sub resource with properties
 
+```console
+POST encounter/:target_encounter_uuid/encounterprovider 
+{
+  "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
+  "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
+}
+```
 * To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -195,17 +207,17 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     *provider* | `Provider_Type UUID` | UUID of a provider currently registered in OpenMRS (required)
     *encounterRole* | `Encounter_Role UUID` | UUID of encounter role. This is the role provider will participate during this encounter (required)
     
+ 
+ 
+## Update encounter provider subresource
+
 ```console
-POST encounter/:target_encounter_uuid/encounterprovider 
+POST encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
 {
   "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
   "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
 }
 ```
- 
- 
-## Update encounter provider subresource
-
 * Updates an encounter provider subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if encounter provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
@@ -223,15 +235,12 @@ returned.
     *provider* | `Provider UUID` | UUID of a provider currently registered in OpenMRS (required)
     *encounterRole* | `Encounter_Role UUID` | UUID of encounter role. This is the role provider will participate during this encounter (required)
 
-```console
-POST encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
-{
-  "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
-  "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
-}
-```
+
 ## Delete encounter provider subresource
 
+```console
+DELETE /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
+```
 * Delete or Voided a target encounter provider subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
  If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -241,6 +250,3 @@ POST encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided unless purge = 'true'. Purging will attempt to remove the encounter provider type from the system irreversibly. Encounter provider types that have been used (i.e., are referenced from existing data) cannot be purged.
 
-```console
-DELETE /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
-```

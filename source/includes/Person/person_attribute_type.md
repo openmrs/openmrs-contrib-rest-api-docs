@@ -16,45 +16,30 @@
 
 ## List person attribute types
 
-* ### List all non-retired person attribute types.
+### List all non-retired person attribute types.
 
+```console
+GET /personattributetype?q=race
+```
     Quickly filter person attribute types with a given search query. If the request is not authenticated or the authenticated user does not have appropriate permissions, a `401 Unauthorized` status is returned.
 
-    #### Query Parameters
+    ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *q* | `Search Query` | Query to filter person attributes by its name(partial search is not supported)
 
-```console
-GET /personattributetype?q=race
- ```
 
-* ### Get person attribute type by UUID.
-
-    Retrieve a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not exist. If the
-    user not logged in to perform this action, a `401 Unauthorized` status is returned.
+### Get person attribute type by UUID.
 
 ```console
 GET /personattributetype/:target_person_attribute_type_uuid
 ```
+    Retrieve a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not exist. If the
+    user not logged in to perform this action, a `401 Unauthorized` status is returned.
+
 
 ## Create a person attribute type
-
-* To Create a person attribute type you need to specify below attributes in the request body. If the user is not logged in to perform this action,
- a `401 Unauthorized` status is returned.
-
-    ### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *name* | `String` | Name of the person attribute type (Required)
-    *description* | `String` | Description (Required)
-    *format* | `Java Class` | the Java class the PersonAttributeType  
-    *foreignKey* | `Number` | the internal identifier (foreign key) to a Concept that defines the possible values for this attribute
-    *sortWeight* | `Number` | the order this PersonAttributeType will appear in when searched
-    *searchable* | `Boolean` | true if this person attributes should be used to find patients. The default is false
-    *editPrivilege* | `JSON Object` | the privilege required to make changes to this type
 
 ```console
 POST /personattributetype
@@ -70,10 +55,10 @@ POST /personattributetype
     }
 }
 ```
-## Update a person attribute type
+* To Create a person attribute type you need to specify below attributes in the request body. If the user is not logged in to perform this action,
+ a `401 Unauthorized` status is returned.
 
-*  Update a target person attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
-status if the person attribute does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -84,6 +69,9 @@ status if the person attribute does not exist. If the user is not logged in to p
     *sortWeight* | `Number` | the order this PersonAttributeType will appear in when searched
     *searchable* | `Boolean` | true if this person attributes should be used to find patients. The default is false
     *editPrivilege* | `JSON Object` | the privilege required to make changes to this type
+
+
+## Update a person attribute type
 
 ```console
 POST /personattributetype
@@ -100,7 +88,25 @@ POST /personattributetype
 }
 ```
 
+*  Update a target person attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
+status if the person attribute does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *name* | `String` | Name of the person attribute type (Required)
+    *description* | `String` | Description (Required)
+    *format* | `Java Class` | the Java class the PersonAttributeType  
+    *foreignKey* | `Number` | the internal identifier (foreign key) to a Concept that defines the possible values for this attribute
+    *sortWeight* | `Number` | the order this PersonAttributeType will appear in when searched
+    *searchable* | `Boolean` | true if this person attributes should be used to find patients. The default is false
+    *editPrivilege* | `JSON Object` | the privilege required to make changes to this type
+
+
 ## Delete a person attribute type
+
+```console
+DELETE /personattributetype/:target_person_attribute_type_uuid?purge=true
+```
 
 * Delete or Retire a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
@@ -110,6 +116,3 @@ POST /personattributetype
     --- | --- | ---
     *purge* | `Boolean` | The resource will be retired unless purge = ‘true’.Purging will attempt to remove the attribute type from the system irreversibly. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
-```console
-DELETE /personattributetype/:target_person_attribute_type_uuid?purge=true
-```

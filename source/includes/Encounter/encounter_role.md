@@ -15,33 +15,41 @@ they don't have to (e.g., "Lead Surgeon").
 
 ## List encounter roles
 
-* ### List all non-voided encounter roles.
-    
-    Quickly filter encounter roles with given query parameters. Returns a `404 Not Found` status if encounter roles not exist. 
-     If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
-    
-    ##### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *q* | `Search Query` | Query to filter encounter role by its name
+### List all non-voided encounter roles.
 
 ```console
 GET /encounterrole?
     q=Clinician
 ```
     
-* ### Get encounter role by UUID.
-
-    Retrieve an encounter role by its UUID. Returns a `404 Not Found` status if encounter role not exists. If user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
+    Quickly filter encounter roles with given query parameters. Returns a `404 Not Found` status if encounter roles not exist. 
+     If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
+### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *q* | `Search Query` | Query to filter encounter role by its name
+
+    
+### Get encounter role by UUID.
+
 ```console
 GET /encounter/:target_encounter_role_uuid
 ```
+    Retrieve an encounter role by its UUID. Returns a `404 Not Found` status if encounter role not exists. If user not logged 
+    in to perform this action, a `401 Unauthorized` status returned.
+    
    
 ## Create an encounter role
 
+```console
+POST /encounterrole
+{
+    "name": "Clinician",
+    "description": "A provider assisting the Lead Surgeon."
+}
+```
 * To Create an encounter role, you need to specify below attributes in the request body. If you are not logged in to perform 
 this action, a `401 Unauthorized` status returned.
 
@@ -52,15 +60,16 @@ this action, a `401 Unauthorized` status returned.
     *name* | `String` | Name for the encounter role (required)
     *description* | `String | Description for the encounter role (required)
    
-```console
-POST /encounterrole
-{
-    "name": "Clinician",
-    "description": "A provider assisting the Lead Surgeon."
-}
-```
+
 ## Update an encounter role
 
+```console
+POST /encounterrole/:target_encounter_role_uuid
+{
+    "name": "Assisting Surgeon"",
+    "description": "A surgeon who assisted the Lead Surgeon"
+}
+```
 *  Update a target encounter role with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if encounter role not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
@@ -71,16 +80,13 @@ status if encounter role not exists. If the user is not logged in to perform thi
     *name* | `String` | Name for the encounter role
     *description* | `String | Description for the encounter role
     
-```console
-POST /encounterrole/:target_encounter_role_uuid
-{
-    "name": "Assisting Surgeon"",
-    "description": "A surgeon who assisted the Lead Surgeon"
-}
-```
+
     
 ## Delete an encounter role
 
+```console
+DELETE /encounterrole/:target_encounter_role_uuid?purge=true
+```
 * Delete or Void a target encounter role by its UUID. Returns a `404 Not Found` status if encounter role not exists. If the user is
  not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -90,6 +96,3 @@ POST /encounterrole/:target_encounter_role_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
 
-```console
-DELETE /encounterrole/:target_encounter_role_uuid?purge=true
-```
