@@ -17,33 +17,42 @@
 
 ## List encounter types
 
-* ### List all  not-retired encounter types.
-    
-    Quickly filter encounter types with given query parameters. Returns a `404 Not Found` status if encounter types not exist. 
-    If the user not logged in to perform this action, a `401 Unauthorized` status returned.
-    
-    ##### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *q* | `Search Query` | Query to filter encounter type by its name
+### List all  not-retired encounter types.
 
 ```console
 GET /encountertype?
     q=Admission
 ```
+
+    Quickly filter encounter types with given query parameters. Returns a `404 Not Found` status if encounter types not exist. 
+    If the user not logged in to perform this action, a `401 Unauthorized` status returned.
     
-* ### Get encounter type by UUID.
+### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *q* | `Search Query` | Query to filter encounter type by its name
+
+    
+### Get encounter type by UUID.
+
+```console
+GET /encountertype/:target_encounter_type_uuid
+```
 
     Retrieve an encounter type by its UUID. Returns a `404 Not Found` status if encounter type not exists. If the user is not logged 
     in to perform this action, a `401 Unauthorized` status returned.
     
-```console
-GET /encountertype/:target_encounter_type_uuid
-```
    
 ## Create an encounter type
 
+```console
+POST /encountertype
+{
+    "name": "Discharge",
+    "description": "Attach encounters related to hospital dischargers"
+}
+```
 * To create an encounter type, you need to specify below attributes in the request body. If you are not logged in to perform 
 this action, a `401 Unauthorized` status returned.
 
@@ -54,15 +63,16 @@ this action, a `401 Unauthorized` status returned.
     *name* | `String` | Name for the encounter type (required)
     *description* | `String` | Description for the encounter type (required)
    
-```console
-POST /encountertype
-{
-    "name": "Discharge",
-    "description": "Attach encounters related to hospital dischargers"
-}
-```
+
 ## Update an encounter type
 
+```console
+POST /encountertype/:target_encounter_type_uuid
+{
+    "name": "Discharge",
+    "description": "Encounters related to hospital dischargers"
+}
+```
 *  Update a target encounter type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if encounter type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
@@ -73,16 +83,13 @@ status if encounter type not exists. If the user is not logged in to perform thi
     *name* | `String` | Name for the encounter type
     *description* | `String` | Description for the encounter type
     
-```console
-POST /encountertype/:target_encounter_type_uuid
-{
-    "name": "Discharge",
-    "description": "Encounters related to hospital dischargers"
-}
-```
+
     
 ## Delete an encounter type
 
+```console
+DELETE /encountertype/:target_encounter_type_uuid?purge=true
+```
 * Delete or retire a target encounter type by its UUID. Returns a `404 Not Found` status if encounter type not exists. If the user is 
  not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -92,6 +99,3 @@ POST /encountertype/:target_encounter_type_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be retired unless purge = ‘true’
 
-```console
-DELETE /encountertype/:target_encounter_type_uuid?purge=true
-```

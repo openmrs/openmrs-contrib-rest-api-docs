@@ -26,23 +26,38 @@ Administrators define what types of identifiers they will collect. These range f
 
 ## List PatientIdentifierType resource
 
-* ### List patientIdentifierType
-
-    Fetch all non-retired patientIdentifierTypes resources that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patientIdentifierType response. If the user is not logged in a `401 Unauthorized` status is returned.
+### List patientIdentifierType
 
 ```console
 GET /patientidentifiertype
 ```
+    Fetch all non-retired patientIdentifierTypes resources that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patientIdentifierType response. If the user is not logged in a `401 Unauthorized` status is returned.
 
-* ### Get patientIdentifierType by UUID.
 
-    Retrieve a patientIdentifierType by its UUID. Returns a `404 Not Found` status if patientIdentifierType does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+### Get patientIdentifierType by UUID.
 
 ```console
 GET /patientidentifiertype/:target_patientIdentifierType_uuid
 ```
+    Retrieve a patientIdentifierType by its UUID. Returns a `404 Not Found` status if patientIdentifierType does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+
 ## Create a patientIdentifierType
 
+```console
+POST /patientidentifiertype
+{
+    "name": "Wilson Hosp MRN",
+    "description": "Wilson Hospital Medical Record Number",
+    "format": "\d{1,10}-\d",
+    "formatDescription": "Up to ten digts followed by a hyphen and another digit",
+    "required": true,
+    "validator": "org.openmrs.patient.impl.LuhnIdentifierValidator",
+    "checkDigit": true,
+    "locationBehavior": "REQUIRED",
+    "uniquenessBehavior": "Unique"
+}
+```
 * To create a patientIdentifierType you need to specify the below properties in the request. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 ### Properties
@@ -59,24 +74,8 @@ Parameter | Type | Description
 *locationBehavior* | "REQUIRED" or "NOT USED" | behavior of the location with respect to the identifier 
 *uniquenessBehavior* | string | specify the uniqueness of the behaviour, it can be either Unique, Non Unique or Location.
 
-```console
-POST /patientidentifiertype
-{
-    "name": "Wilson Hosp MRN",
-    "description": "Wilson Hospital Medical Record Number",
-    "format": "\d{1,10}-\d",
-    "formatDescription": "Up to ten digts followed by a hyphen and another digit",
-    "required": true,
-    "validator": "org.openmrs.patient.impl.LuhnIdentifierValidator",
-    "checkDigit": true,
-    "locationBehavior": "REQUIRED",
-    "uniquenessBehavior": "Unique"
-}
-```
-## Update a patientIdentifierType
 
-* Update a target patientIdentifierType with given UUID, this method only modifies properties in the request. 
-Returns a `404 Not Found` status if patientIdentifierType not exists. If user not logged in to perform this action, a `401 Unauthorized status returned`.
+## Update a patientIdentifierType
 
 ```console
 POST /patientidentifertype/:target_patientidentifiertype_uuid
@@ -91,9 +90,16 @@ POST /patientidentifertype/:target_patientidentifiertype_uuid
     "uniquenessBehavior": "UNIQUE"
 }
 ```
+* Update a target patientIdentifierType with given UUID, this method only modifies properties in the request. 
+Returns a `404 Not Found` status if patientIdentifierType not exists. If user not logged in to perform this action, a `401 Unauthorized status returned`.
+
+
 
 ## Delete a patientIdentifierType
 
+```console
+DELETE /patientidentifiertype/:target_patientidentifiertype_uuid?purge=true
+```
 * Delete or retire a target patientIdentifierType by its UUID. Returns a `404 Not Found` status if patientIdentifierType not exists. If user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
@@ -102,6 +108,3 @@ POST /patientidentifertype/:target_patientidentifiertype_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be retired unless purge = 'true'
 
-```console
-DELETE /patientidentifiertype/:target_patientidentifiertype_uuid?purge=true
-```

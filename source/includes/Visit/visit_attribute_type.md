@@ -15,6 +15,7 @@
 4. [Delete a visit attribute type](#delete-a-visit-attribute-type)
 
 ## List visits attribute types
+
 ```console
 GET /visitattributetype?q="Search Query"
 ```  
@@ -23,7 +24,7 @@ GET /visitattributetype?q="Search Query"
     Quickly filter visit attribute types with a given search query. Returns a `404 Not Found` status if the visit attribute type not exists.
      If the user not logged in to  perform this action, a `401 Unauthorized` status returned.
     
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
@@ -109,6 +110,7 @@ status if the visit attribute not exists. If the user not logged in to perform t
 ```console
 DELETE /visitattributetype/:target_visit_attribute_type_uuid?purge=true
 ```
+
 * Delete or Retire a target visit attribute type by its UUID. Returns a `404 Not Found` status if the visit attribute type not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters

@@ -17,6 +17,12 @@ The real-life person is represented by a Person record in OpenMRS, and a person 
 
 ### List all non-retired users.
 
+```console
+GET /user?
+q=user1
+```
+
+
   Quickly filter users with given query parameters. Returns a `404 Not Found` status if the user does not exist.
   If not logged in to perform this action, a `401 Unauthorized` status is returned.
   
@@ -27,37 +33,18 @@ The real-life person is represented by a Person record in OpenMRS, and a person 
 | --------- | -------------- | ------------------------------------- |
 | _q_       | `Search Query` | Filter users by username or system ID |
 
-```console
-GET /user?
-q=user1
-```
 
 ### Get user by UUID.
-
-  Retrieve a user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 ```console
 GET /user/:target_user_uuid
 ```
 
+
+  Retrieve a user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+
 ## Create a user
-
-- For convenience, the person's information can be included in order to create the corresponding person record at the same time as their user record. When creating a user record for an existing person, the existing person must only be referenced by UUID. If you are not logged in to perform this action,
-a `401 Unauthorized` status is returned.
-
-### Attributes
-
-Parameter | Type | Description
---- | --- | ---
-*name* | `String` | Name of the user
-*description* | `String | Description of the user
-*username* | `String | username of the user
-*password* | `String | password of the user
-*person* | `String` | person resource associated with the user
-*systemId* | `String` | a unique identifier assigned to each user
-*roles* | `Array[] : role` | a list of roles attributed to the user
-*userProperties* | `JSON Object`| A set of key value pairs. Used to store user specific data
-*secretQuestion* | `String` | A secret question chosen by the user
 
 ```console
 POST /user
@@ -91,24 +78,25 @@ POST /user
 }
 ```
 
-## Update a user
+- For convenience, the person's information can be included in order to create the corresponding person record at the same time as their user record. When creating a user record for an existing person, the existing person must only be referenced by UUID. If you are not logged in to perform this action,
+a `401 Unauthorized` status is returned.
 
-- Update a target user with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
-  status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
-    
 ### Attributes
 
-  Parameter | Type | Description
-  --- | --- | ---
-  *name* | `String` | Name of the user
-  *description* | `String | Description of the user
-  *username* | `String | username of the user
-  *password* | `String | password of the user
-  *person* | `String` | person resource associated with the user
-  *systemId* | `String` | a unique identifier assigned to each user
-  *roles* | `Array[] : role` | a list of roles attributed to the user
-  *userProperties* | `JSON Object`| A set of key value pairs. Used to store user specific data
-  *secretQuestion* | `String` | A secret question chosen by the user
+Parameter | Type | Description
+--- | --- | ---
+*name* | `String` | Name of the user
+*description* | `String | Description of the user
+*username* | `String | username of the user
+*password* | `String | password of the user
+*person* | `String` | person resource associated with the user
+*systemId* | `String` | a unique identifier assigned to each user
+*roles* | `Array[] : role` | a list of roles attributed to the user
+*userProperties* | `JSON Object`| A set of key value pairs. Used to store user specific data
+*secretQuestion* | `String` | A secret question chosen by the user
+
+
+## Update a user
 
 ```console
 POST /user/:target_user_uuid
@@ -142,7 +130,29 @@ POST /user/:target_user_uuid
 }
 ```
 
+- Update a target user with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
+  status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
+    
+### Attributes
+
+  Parameter | Type | Description
+  --- | --- | ---
+  *name* | `String` | Name of the user
+  *description* | `String | Description of the user
+  *username* | `String | username of the user
+  *password* | `String | password of the user
+  *person* | `String` | person resource associated with the user
+  *systemId* | `String` | a unique identifier assigned to each user
+  *roles* | `Array[] : role` | a list of roles attributed to the user
+  *userProperties* | `JSON Object`| A set of key value pairs. Used to store user specific data
+  *secretQuestion* | `String` | A secret question chosen by the user
+
+
 ## Delete a user
+
+```console
+DELETE /user/:target_user_uuid?purge=true
+```
 
 - Delete or retire a target user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
 
@@ -152,6 +162,3 @@ POST /user/:target_user_uuid
 | --------- | --------- | ------------------------------------------------- |
 | _purge_   | `Boolean` | The resource will be voided unless purge = ‘true’ |
 
-```console
-DELETE /user/:target_user_uuid?purge=true
-```

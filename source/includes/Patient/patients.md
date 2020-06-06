@@ -36,11 +36,17 @@ Anyone who has an Encounter or who is enrolled in a Program is a Patient.)
 
 ## Search patients
 
-* ### Search patients
+### Search patients
+
+```console
+GET /patient?
+country=india
+&gender=M
+```
 
     Fetch all non-retired patients that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patient response. 
 
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Description
     --- | ---
@@ -56,30 +62,17 @@ Anyone who has an Encounter or who is enrolled in a Program is a Patient.)
     givenname  | must be used with matchSimilar
     state | must be used with matchSimilar
 
-```console
-GET /patient?
-country=india
-&gender=M
-```
 
-* ### List patient by UUID.
-
-    Retrieve a patient by its UUID. Returns a `404 Not Found` status if patient does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+### List patient by UUID.
 
 ```console
 GET /patient/:target_patient_uuid
 ```
 
+    Retrieve a patient by its UUID. Returns a `404 Not Found` status if patient does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+
 ## Create a patient
-
-* To create a patient you need to specify the below properties in the request. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
-
-    ### Properties
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *person* | `PERSON_UUID` | Person resource UUID
-    *identifiers* | `Array[]: Identifiers` | List of patientIdentifiers
 
 ```console
 POST /patient
@@ -95,7 +88,22 @@ POST /patient
     ]
 }
 ```
+
+* To create a patient you need to specify the below properties in the request. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+    ### Properties
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *person* | `PERSON_UUID` | Person resource UUID
+    *identifiers* | `Array[]: Identifiers` | List of patientIdentifiers
+
 ## Update a patient
+
+```console
+    POST /patient/:target_patient_uuid
+    -d modified_patient_object
+```
 
 * Update a target patient with given UUID, this method only modifies properties in the request. 
 Returns a `404 Not Found` status if patient not exists. If the user is not logged in to perform this action, a `401 Unauthorized status returned`.
@@ -112,12 +120,12 @@ Returns a `404 Not Found` status if patient not exists. If the user is not logge
     --- | --- | ---
     *resource* | `Patient` | Patient resource with updated properties
 
-```console
-    POST /patient/:target_patient_uuid
-    -d modified_patient_object
-```
 
 ## Delete a patient
+
+```console
+DELETE /patient/:target_patient_uuid?purge=true
+```
 
 * Delete or retire a target patient by its UUID. Returns a `404 Not Found` status if patient not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -128,26 +136,35 @@ Returns a `404 Not Found` status if patient not exists. If the user is not logge
     **uuid** | `String` | uuid to delete
     *purge* | `Boolean` | The resource will be voided/retired unless purge = 'true'
 
-```console
-DELETE /patient/:target_patient_uuid?purge=true
-```
 ## List patientIdentifier sub resources
 
 * ### List all patientIdentifier sub resources for a patient.
 
-    Retrieve all <b>identifier</b> sub resources of a <b>patient</b> resource by `target_patient_uuid`.Returns a `404 Not Found` status if patientIdentifier not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
-
 ```console
 GET /patient/:target_patient_uuid/identifier
 ```  
-* ### List patientIdentifier sub resource by it's UUID and parent patient UUID.
 
-    Retrieve a <b>patientIdentifier</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if patientIdentifier not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
+    Retrieve all <b>identifier</b> sub resources of a <b>patient</b> resource by `target_patient_uuid`.Returns a `404 Not Found` status if patientIdentifier not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+
+* ### List patientIdentifier sub resource by it's UUID and parent patient UUID.
 
 ```console
 GET /patient/:target_patient_uuid/identifier/:target_identifier_uuid
 ```
+
+    Retrieve a <b>patientIdentifier</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if patientIdentifier not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
+
 ## Create a patientIdentifier sub resource with properties 
+
+```console
+POST patient/:target_patient_uuid/identifier
+{ 
+    "identifier" : "string",
+    "identifierType" : "target_identifer_uuid",
+    "location" : "target_location_uuid",
+    "preferred" : true/false
+}
+```
 
 * To create a patientIdentifier subresource for a specific patient resource you need to specify below properties in your request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -166,16 +183,17 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     *location* | `Location UUID` | Get patients for this location
     *preferred* | `boolean` | preferred/not preferred identifier
 
+## Update patientIdentifier sub resource with properties
+
 ```console
-POST patient/:target_patient_uuid/identifier
+POST patient/:target_patient_uuid/identifier/:target_identifier_uuid
 { 
-    "identifier" : "string",
-    "identifierType" : "target_identifer_uuid",
-    "location" : "target_location_uuid",
-    "preferred" : true/false
+"identifier" : "string",
+"identifierType" : "target_identifer_uuid",
+"location" : "target_location_uuid",
+"preferred" : true/false
 }
 ```
-## Update patientIdentifier sub resource with properties
 
 * Updates an patientIdentifier subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
@@ -189,17 +207,12 @@ returned.
     *location* | `Location UUID` | updated location
     *preferred* | `boolean` | updated status of preferred/not preferred identifier
 
-```console
-POST patient/:target_patient_uuid/identifier/:target_identifier_uuid
-{ 
-"identifier" : "string",
-"identifierType" : "target_identifer_uuid",
-"location" : "target_location_uuid",
-"preferred" : true/false
-}
-```
 
 ## Delete patientIdentifier sub resource with properties
+
+```console
+DELETE /patient/:target_patient_uuid/identifier/:target_identifier_uuid
+```
 
 * Delete or retire a target identifier subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -210,38 +223,17 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
     
-```console
-DELETE /patient/:target_patient_uuid/identifier/:target_identifier_uuid
-```
 
 ## List allergy subresources
-
-* List allergy subresource by its UUID and parent patient UUID.
-
-    Retrieve a <b>allergy</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if allergy not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
 
 ```console
 GET /patient/:target_patient_uuid/allergy/:target_allergy_uuid
 ```
+* List allergy subresource by its UUID and parent patient UUID.
+
+    Retrieve a <b>allergy</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if allergy not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
+
 ## Create a allergy sub resource with properties 
-
-* To create an allergy subresource for a specific patient resource, you need to specify below properties in your request body.
-If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
-
-    ### Query parameter 
-    Parameter | Description
-    --- | ---
-    `target_patient_uuid` | patient resource uuid
-
-    ### Properties for resource
-
-    Parameter | type | Description
-    --- | --- | ---
-    *allergen* | `String` | value of the allergen
-    *severity* | `Severity_UUID` | Severity uuid
-    *comment* | `String` | comment for the allergy
-    *allergy* | `allergy_UUID` | allergy uuid
-    *reaction* | `reaction_UUID` | reaction uuid
 
 ```console
 POST patient/:target_patient_uuid/allergy
@@ -263,18 +255,13 @@ POST patient/:target_patient_uuid/allergy
 ]
 }
 ```
-
-## Update allergy sub resource with properties
-
-* Updates an allergy subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if property not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-returned.
+* To create an allergy subresource for a specific patient resource, you need to specify below properties in your request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query parameter 
-    
     Parameter | Description
     --- | ---
     `target_patient_uuid` | patient resource uuid
-    `target_allergy_uuid` | allergy resource uuid
 
     ### Properties for resource
 
@@ -285,6 +272,9 @@ returned.
     *comment* | `String` | comment for the allergy
     *allergy* | `allergy_UUID` | allergy uuid
     *reaction* | `reaction_UUID` | reaction uuid
+
+
+## Update allergy sub resource with properties
 
 ```console
 POST patient/:target_patient_uuid/allergy/:target_allergy_uuid
@@ -306,9 +296,32 @@ POST patient/:target_patient_uuid/allergy/:target_allergy_uuid
 ]
 }
 ```
+* Updates an allergy subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if property not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+returned.
+
+    ### Query parameter 
+    
+    Parameter | Description
+    --- | ---
+    `target_patient_uuid` | patient resource uuid
+    `target_allergy_uuid` | allergy resource uuid
+
+    ### Properties for resource
+
+    Parameter | type | Description
+    --- | --- | ---
+    *allergen* | `String` | value of the allergen
+    *severity* | `Severity_UUID` | Severity uuid
+    *comment* | `String` | comment for the allergy
+    *allergy* | `allergy_UUID` | allergy uuid
+    *reaction* | `reaction_UUID` | reaction uuid
+
 
 ## Delete allergy sub resource with properties
 
+```console
+DELETE /patient/:target_patient_uuid/allergy/:target_allergy_uuid
+```
 * Delete or retire a target allergy subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -318,6 +331,3 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
     
-```console
-DELETE /patient/:target_patient_uuid/allergy/:target_allergy_uuid
-```

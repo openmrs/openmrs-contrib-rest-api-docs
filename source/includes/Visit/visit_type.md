@@ -21,16 +21,16 @@
 4. [Delete a visit type](#delete-a-visit-type)
 
 
-## List visits types
 ```console
 GET /visittype?q="Search Query"
 ```
 * ### List all non-retired visits types.
     
+
     Quickly filter visit types with a given search query. Returns a `404 Not Found` status if visit type not exists. 
     If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
-    ##### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
@@ -44,8 +44,8 @@ GET /visittype/:target_visit_type_uuid
     Retrieve a visit type by its UUID. Returns a `404 Not Found` status if visit type not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
    
-
 ## Create a visit type
+
 ```console
 POST /visittype
 {

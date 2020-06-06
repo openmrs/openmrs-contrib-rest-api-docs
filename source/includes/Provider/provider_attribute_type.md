@@ -14,32 +14,46 @@
 
 ## List provider attribute types
 
-* ### List all non-retired provider attribute types.
+### List all non-retired provider attribute types.
 
+```console
+GET /providerattributetype?q="Search Query"
+```
     Quickly filter provider attribute types with a given search query. Returns a `404 Not Found` status if the provider attribute type not exists.
     If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
-    #### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *q* | `Search Query` | Display Name of provider attribute type.
 
-```console
-GET /providerattributetype?q="Search Query"
- ```
 
-* ### List provider attribute type by UUID.
-
-    Retrieve a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not exists. 
-    If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+### List provider attribute type by UUID.
 
 ```console
 GET /providerattributetype/:target_provider_attribute_type_uuid
 ```
+    Retrieve a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not exists. 
+    If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+
 
 ## Create a provider attribute type
 
+
+```console
+POST /providerattributetype
+{
+  "name": "Provider Location",
+  "description": "This attribute type will record the loication of the provider",
+  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+  "minOccurs": 0,
+  "maxOccurs": 1,
+  "datatypeConfig": "default",
+  "preferredHandlerClassname":   "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
+  "handlerConfig": "dafault"
+}
+```
 * To Create a provider attribute type you need to specify below attributes in the request body. If user not authenticated or 
 the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
@@ -56,22 +70,22 @@ the authenticated user does not have appropriate permissions, a 401 Unauthorized
     *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
     *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list and this configuration would tell the handler the possible choices in the list for this specific attribute type
 
+
+## Update a provider attribute type
+
 ```console
-POST /providerattributetype
+POST /providerattributetype/:target_provider_attribute_type_uuid
 {
   "name": "Provider Location",
   "description": "This attribute type will record the loication of the provider",
   "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
   "minOccurs": 0,
-  "maxOccurs": 1,
+  "maxOccurs": 2,
   "datatypeConfig": "default",
   "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
   "handlerConfig": "dafault"
 }
 ```
-
-## Update a provider attribute type
-
 *  Update a target provider attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
 status if the provider attribute not exists. If user not authenticated or the authenticated user does not have appropriate permissions, 
 a 401 Unauthorized status is returned.
@@ -89,22 +103,12 @@ a 401 Unauthorized status is returned.
     *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
     *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list and this configuration would tell the handler the possible choices in the list for this specific attribute type
 
-```console
-POST /providerattributetype/:target_provider_attribute_type_uuid
-{
-  "name": "Provider Location",
-  "description": "This attribute type will record the loication of the provider",
-  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
-  "minOccurs": 0,
-  "maxOccurs": 2,
-  "datatypeConfig": "default",
-  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": "dafault"
-}
-```
 
 ## Delete a provider attribute type
 
+```console
+DELETE /providerattributetype/:target_provider_attribute_type_uuid?purge=true
+```
 * Delete or Retire a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not
  exists. If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
@@ -114,6 +118,3 @@ POST /providerattributetype/:target_provider_attribute_type_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be retired unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
-```console
-DELETE /providerattributetype/:target_provider_attribute_type_uuid?purge=true
-```

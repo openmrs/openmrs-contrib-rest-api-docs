@@ -42,49 +42,32 @@ Person Attributes are suitable for storing other information. But historical val
 
 ## Search Persons
 
-* ### Search Persons
+### Search Persons
+
+```console
+GET /person?q=john
+```
      
      Fetch all non-voided persons that match the search query parameter. Returns a `200 OK` status with the Person response.
 
-    ### Parameters
+### Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *q* | *string* | *search by name*
 
-```console
-GET /person?q=john
-```
 
-* ### List person by UUID
-
-    Retrieve a person by their UUID. Returns a `404 Not Found` status if the person does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+### List person by UUID
 
 ```console
 GET /person/:target_person_uuid
 ```
 
+    Retrieve a person by their UUID. Returns a `404 Not Found` status if the person does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+
 ## Create a person
 
-* To create a person you need to specify the below properties in the request. `401 Unauthorized` is returned if the request is not authenticated or if the authenticated user does not have appropriate permissions.
-
-    ### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *names* | `Array[] : names` | List of names
-    *gender* | String | The patient's gender ("M" for male, "F" for female, or "U" for unknown)
-    *age* | Integer | The estimated age in years. Used when birthdate is unknown.
-    *birthDate* | String | Date of birth of a person
-    *birthDateEstimated* | Boolean | True if the birthdate is estimated; false if birthdate is accurate.
-    *birthTime* | String | The time of birth of the person
-    *dead* | Boolean | True if the patient is dead.
-    *deathDate* | String | Date of death of the person
-    *causeOfDeath* | `Concept UUID` | Reason for the death of the person
-    *deathdateEstimated* | Boolean | `true` if deathDate is estimate; `false` if deathDate is accurate
-    *addresses* | `Array[] : addresses` | The address details aggregated in an array
-    *attributes* | `Array[] : attributes` | The attribute details aggregated in an array
-    
 ```
 POST /person
 {
@@ -107,12 +90,28 @@ POST /person
 }
 ```
 
+
+* To create a person you need to specify the below properties in the request. `401 Unauthorized` is returned if the request is not authenticated or if the authenticated user does not have appropriate permissions.
+
+    ### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *names* | `Array[] : names` | List of names
+    *gender* | String | The patient's gender ("M" for male, "F" for female, or "U" for unknown)
+    *age* | Integer | The estimated age in years. Used when birthdate is unknown.
+    *birthDate* | String | Date of birth of a person
+    *birthDateEstimated* | Boolean | True if the birthdate is estimated; false if birthdate is accurate.
+    *birthTime* | String | The time of birth of the person
+    *dead* | Boolean | True if the patient is dead.
+    *deathDate* | String | Date of death of the person
+    *causeOfDeath* | `Concept UUID` | Reason for the death of the person
+    *deathdateEstimated* | Boolean | `true` if deathDate is estimate; `false` if deathDate is accurate
+    *addresses* | `Array[] : addresses` | The address details aggregated in an array
+    *attributes* | `Array[] : attributes` | The attribute details aggregated in an array
+    
+
 ## Update a person
-
-* Update a person. This method only modifies properties specified in the request. Returns a `404 Not found`.
-If not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status is returned.
-
-    An example of the request is as follows : 
 
 ```console
 POST /person/:target_person_uuid
@@ -122,7 +121,16 @@ POST /person/:target_person_uuid
 }
 ```
 
+* Update a person. This method only modifies properties specified in the request. Returns a `404 Not found`.
+If not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status is returned.
+
+    An example of the request is as follows : 
+
 ## Delete a person
+
+```console
+DELETE /person/:target_person_uuid?purge=true
+```
 
 * Delete or Void a target person. Returns a `404 Not Found` status if person not exists. If not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status is returned.
 
@@ -132,30 +140,36 @@ POST /person/:target_person_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’
 
-```console
-DELETE /person/:target_person_uuid?purge=true
- ```
 
 
 ## List person name subresource
 
-* List all the person name subresource corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. 
-If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
-status is returned.
-
 ```console
 GET /person/:target_person_uuid/name
 ```
-
-* List the person name by its `UUID` and corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. 
+* List all the person name subresource corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
 ```console
 GET /person/:target_person_uuid/name/:target_name_uuid
 ```
+* List the person name by its `UUID` and corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. 
+If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+status is returned.
+
 
 ## Create person name subresource
+
+```console
+POST person/:target_person_uuid/name
+{ 
+    "givenName": "Mohit",
+    "familyName": "Kumar",
+    "preferred": true,
+    "prefix": "Mr."
+}
+```
 
 * To create a person name subresource for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status is returned.
@@ -174,17 +188,17 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
     *familyNameSuffix* | `String` | Suffix if any for the family name
     *degree* | `String` | degree attained by the person
 
+## Update person name subresource
+
 ```console
 POST person/:target_person_uuid/name
 { 
     "givenName": "Mohit",
-    "familyName": "Kumar",
+    "familyName": "Verma",
     "preferred": true,
-    "prefix": "Mr."
+    "prefix": "Dr."
 }
 ```
-
-## Update person name subresource
 
 * To update a person name with given UUID value for a specific person resource, you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status is returned.
@@ -203,40 +217,43 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
     *familyNameSuffix* | `String` | Suffix if any for the family name
     *degree* | `String` | degree attained by the person
 
-```console
-POST person/:target_person_uuid/name
-{ 
-    "givenName": "Mohit",
-    "familyName": "Verma",
-    "preferred": true,
-    "prefix": "Dr."
-}
-```
 
 ## Delete person name subresource
+
+```console
+DELETE /person/:target_person_uuid/person/:target_name_uuid
+```
 
 * Delete or void a target name subresource. Returns a `404 Not Found` status if an attribute does not exist. 
 If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
- ```console
-DELETE /person/:target_person_uuid/person/:target_name_uuid
- ```
-
+ 
 ## List person address subresource
-
-* List all the person addresses corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address does not exist. If the user is not logged in to perform this action, a `401 unauthorized` status is returned.
 
 ```console
 GET /person/:target_person_uuid/address
 ```
-
-* List all the person addresses by its `target_address_uuid` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address does not exist. If user not logged in to perform this action, a `401 unauthorized` status is returned.
+* List all the person addresses corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address does not exist. If the user is not logged in to perform this action, a `401 unauthorized` status is returned.
 
 ```console
 GET /person/:target_person_uuid/address/:target_address_uuid
 ```
+* List all the person addresses by its `target_address_uuid` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address does not exist. If user not logged in to perform this action, a `401 unauthorized` status is returned.
+
 
 ## Create person address subresource
+
+```console
+POST person/:target_person_uuid/address
+{ 
+    "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
+    "cityVillage": "Bengaluru"
+    "stateProvince": "Karnataka",
+    "postalCode": "560037",
+    "lattitude": "28.65033",
+    "longitude": "77.304255"
+}
+```
 
 * To create a person address subresource for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status is returned.
@@ -263,6 +280,9 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
     *longitude* | `String` | longitude of the address
 
 
+
+## Update person address subresource
+
 ```console
 POST person/:target_person_uuid/address
 { 
@@ -274,8 +294,6 @@ POST person/:target_person_uuid/address
     "longitude": "77.304255"
 }
 ```
-
-## Update person address subresource
 
 * To update a person address with given UUID value for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status is returned.
@@ -302,44 +320,40 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
     *longitude* | `String` | longitude of the address
 
 
-```console
-POST person/:target_person_uuid/address
-{ 
-    "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
-    "cityVillage": "Bengaluru"
-    "stateProvince": "Karnataka",
-    "postalCode": "560037",
-    "lattitude": "28.65033",
-    "longitude": "77.304255"
-}
-```
-
 ## Delete a person address subresource
+
+```console
+DELETE /person/:target_person_uuid/person/:target_address_uuid
+```
 
 * Delete or void a target address subresource. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
- ```console
-DELETE /person/:target_person_uuid/person/:target_address_uuid
- ```
-
+ 
 ## List person attribute subresource
 
-* List all person attributes for a given person. Returns a `404 Not Found` if the person doesn't exist. If not authenticated or the authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
 ```console
 GET /person/:target_person_uuid/attribute
 ```
-
-* List all the person attributes by its `UUID` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person attribute does not exist. If user not logged in to perform this action, a `401 unauthorized` status is returned.
+* List all person attributes for a given person. Returns a `404 Not Found` if the person doesn't exist. If not authenticated or the authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
 ```console
 GET /person/:target_person_uuid/name/:target_attribute_uuid
 ```
+* List all the person attributes by its `UUID` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person attribute does not exist. If user not logged in to perform this action, a `401 unauthorized` status is returned.
+
 
 ## Create person attribute subresource
 
+```console
+POST person/:target_person_uuid/attribute
+{ 
+    "attributeType": "8d8718c2-c2cc-11de-8d13-0010c6dffd0f",
+    "value": "Birthplace",
+}
+```
 * To create a person attribute subresource for a specific person resource you need to specify below properties in your request body.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
@@ -351,6 +365,9 @@ status is returned.
     *attributeType* | `UUID` | UUID of the attributeType
     *value* | `String` | value associated with the attribute
 
+
+## Update person attribute subresource
+
 ```console
 POST person/:target_person_uuid/attribute
 { 
@@ -358,9 +375,6 @@ POST person/:target_person_uuid/attribute
     "value": "Birthplace",
 }
 ```
-
-## Update person attribute subresource
-
 * To update a person attribute with given UUID value for a specific person resource you need to specify below properties in your request body.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
@@ -371,20 +385,14 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     *attributeType* | `UUID` | UUID of the attributeType
     *value* | `String` | value associated with the attribute
 
-```console
-POST person/:target_person_uuid/attribute
-{ 
-    "attributeType": "8d8718c2-c2cc-11de-8d13-0010c6dffd0f",
-    "value": "Birthplace",
-}
-```
 
 ## Delete person attribute subresource
 
+```console
+DELETE /person/:target_person_uuid/person/:target_attribute_uuid
+```
 * Delete or void a target attribute. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
- ```console
-DELETE /person/:target_person_uuid/person/:target_attribute_uuid
- ```
+ 

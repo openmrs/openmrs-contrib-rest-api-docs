@@ -33,6 +33,9 @@ includes:
   - Concepts/concept_source
   - Concepts/concept_attribute_type
   - Concepts/concept_data_type
+  - Concepts/concept_map_type
+  - Concepts/concept_reference_term_type
+  - Concepts/concepts_class
   - Provider/provider
   - Provider/provider_attribute_type
   - Observations/obs

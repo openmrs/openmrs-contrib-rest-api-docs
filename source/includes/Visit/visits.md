@@ -34,7 +34,6 @@ contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
 7. [Update attribute subresource](#update-attribute-subresource)
 6. [Delete attribute subresource](#delete-attribute-subresource)
 
-
 ## List visits
 ```console
 GET /visit?
@@ -48,7 +47,7 @@ includeInactive=true
     Quickly filter visits with given query parameters. Returns a `404 Not Found` status if visit not exists. If user not logged 
     in to perform this action, a `401 Unauthorized` status returned.
     
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
@@ -56,7 +55,6 @@ includeInactive=true
     *location* | `Location UUID` | Get visits for this location
     *includeInactive* | `Boolean` | Active/Inactive status of visit
     *fromStartDate* | `Date (ISO8601 Long)` | Start date of the visit
-
 
 ```console
 GET /visit/:target_visit_uuid
@@ -67,6 +65,7 @@ GET /visit/:target_visit_uuid
     in to perform this action, a `401 Unauthorized` status returned.
       
 ## Create visit
+ 
 ```console
 POST /visit
 {
@@ -89,6 +88,7 @@ POST /visit
 * To Create a visit you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
+
     ### Attributes
 
     Parameter | Type | Description
@@ -103,6 +103,7 @@ POST /visit
     *attributes* | `Array[]: Attribute` | List of visit attributes  
    
 ## Update visit
+
 ```console
 POST /visit/:target_visit_uuid
 -d  modified_visit_object
@@ -144,7 +145,6 @@ GET /visit/:target_visit_uuid/attribute
     Retrieve all <b>attribute</b> sub resources of a  <b>visit</b> resource by target_visit_uuid.Returns a 
     `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
     returned.
-
 ```console
 GET /visit/:target_visit_uuid/attribute/:target_attribute_uuid
 ```
@@ -171,7 +171,7 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     --- | --- | ---
     *attributeType* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type
     *value* | `Depends on Attribute_Type Selected` | Value for the attribute
-    
+
 ## Update attribute subresource
 ```console
 POST visit/:target_visit_uuid/attribute/:target_attribute_uuid
@@ -189,7 +189,6 @@ returned.
     --- | --- | ---
     *attributeType* | `Attribute_Type UUID` | Attribute_Type resource UUID
     *updated value* | `Depends on Attribute_Type Selected` | Updated value for the attribute
-
 
 ## Delete attribute subresource
 ```console

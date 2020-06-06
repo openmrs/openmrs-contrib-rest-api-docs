@@ -17,29 +17,40 @@ An Order only records an intention, not whether or not the action is carried out
 
 ## List orders
 
+```console
+GET /order?q=penicillin
+```
 * Fetch all non-retired orders that match any specified parameters otherwise fetch all non-retired orders. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    #### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *q* | `String` | Full or partial display name of order
 
-```console
-GET /order?q=penicillin
- ```
 
-* ### Get a particular order
-
-    Retrieve a particular order. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+### Get a particular order
 
 ```console
 GET /order/:target_order_uuid
 ```
+    Retrieve a particular order. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+
 
 ## Create an order
 
+
+```console
+POST /order
+{
+  "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
+  "action": "new",
+  "urgency": "ROUTINE",
+  "patient": "070f0120-0283-4858-885d-a20d967729cf",
+  "dateActivated": "2018-10-16 12:08:43"
+}
+```
 * To create a role you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     ### Attributes
@@ -60,19 +71,20 @@ GET /order/:target_order_uuid
     *dateActivated* | `Date` | the start date of the order
     *dateStopped* | `Date` | the date of discontinuation
 
+    
+## Update an order
+
+
 ```console
-POST /order
+POST /order/:target_order_uuid
 {
   "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
   "action": "new",
   "urgency": "ROUTINE",
   "patient": "070f0120-0283-4858-885d-a20d967729cf",
-  "dateActivated": "2018-10-16 12:08:43"
+  "dateStopped": "2019-03-12 11:48:23"
 }
 ```
-    
-## Update an order
-
 * Update an order with given UUID, this method only modifies properties in the request. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
@@ -93,18 +105,11 @@ POST /order
     *dateActivated* | `Date` | the start date of the order
     *dateStopped* | `Date` | the date of discontinuation
 
-```console
-POST /order/:target_order_uuid
-{
-  "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
-  "action": "new",
-  "urgency": "ROUTINE",
-  "patient": "070f0120-0283-4858-885d-a20d967729cf",
-  "dateStopped": "2019-03-12 11:48:23"
-}
-```
-
 ## Delete an order
+
+```console
+DELETE /order/:target_order_uuid?purge=true
+```
 
 * Delete or void an order by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
@@ -114,6 +119,3 @@ POST /order/:target_order_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
-```console
-DELETE /order/:target_order_uuid?purge=true
- ```

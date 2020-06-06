@@ -14,8 +14,11 @@
 
 ### List location attribute types
 
-* ### List all non-retired location attribute types.
+### List all non-retired location attribute types.
 
+```console
+GET /locationattributetype?q="humidity"
+```
     Quickly filter location attribute types with a given search query. Returns a `404 Not Found` status if the location attribute type not exists.
      If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -25,21 +28,31 @@
     --- | --- | ---
     *q* | `Search Query` | Display Name of Location attribute type.
 
-```console
-GET /locationattributetype?q="humidity"
-```
 
-* ### List location attribute type by UUID.
-
-    Retrieve a location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not exists. If the 
-    user not logged in to perform this action, a `401 Unauthorized` status returned.
+### List location attribute type by UUID.
 
 ```console
 GET /locationattributetype/:target_location_attribute_type_uuid
 ```
+    Retrieve a location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not exists. If the 
+    user not logged in to perform this action, a `401 Unauthorized` status returned.
+
 
 ## Create a location attribute type
 
+```console
+POST /locationattributetype
+{
+  "name": "humidity",
+  "description": "This attribute type will record the humidity of the location",
+  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+  "minOccurs": 0,
+  "maxOccurs": 1,
+  "datatypeConfig": "default",
+  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
+  "handlerConfig": "dafault"
+}
+```
 * To Create a location attribute type, you need to specify below attributes in the request body. If the user not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
@@ -56,21 +69,21 @@ GET /locationattributetype/:target_location_attribute_type_uuid
     *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
     *handlerConfig* | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting
 
+## Update a location attribute type
+
 ```console
-POST /locationattributetype
+POST /locationattributetype/:target_location_attribute_type_uuid
 {
   "name": "humidity",
-  "description": "This attribute type will record the humidity of the location",
+  "description": "This attribute type will record the humidity of the location"",
   "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
   "minOccurs": 0,
-  "maxOccurs": 1,
+  "maxOccurs": 2,
   "datatypeConfig": "default",
   "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
   "handlerConfig": "dafault"
 }
 ```
-## Update a location attribute type
-
 *  Update a target location attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if the location attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -93,22 +106,13 @@ status if the location attribute not exists. If the user not logged in to perfor
       *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
       *handlerConfig* | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting
 
-```console
-POST /locationattributetype/:target_location_attribute_type_uuid
-{
-  "name": "humidity",
-  "description": "This attribute type will record the humidity of the location"",
-  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
-  "minOccurs": 0,
-  "maxOccurs": 2,
-  "datatypeConfig": "default",
-  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": "dafault"
-}
-```
+
 
 ## Delete a location attribute type
 
+```console
+DELETE /locationattributetype/:target_location_attribute_type_uuid?purge=true
+```
 * Delete or Retire a target location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
@@ -117,6 +121,3 @@ POST /locationattributetype/:target_location_attribute_type_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’. Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
-```console
-DELETE /locationattributetype/:target_location_attribute_type_uuid?purge=true
-```

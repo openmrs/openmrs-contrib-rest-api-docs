@@ -27,6 +27,10 @@ Set-Cookie: JSESSIONID=FB0629C001449CE14DF1078ACDDBA858; Path=/openmrs; HttpOnly
 The session token is retrieved using Basic authentication on the `/session` endpoint. The response will include a `JSESSIONID` in the header. This session ID is also included in the response object
 
 
+
+The session token is retrieved using Basic authentication on the `/session` endpoint. The response will include a `JSESSIONID` in the header. This session ID is also included in the response object
+
+
 The `sessionId` token should be passed with all subsequent calls as a cookie named `JSESSIONID`.
 
 ## Logout User/End session
@@ -57,13 +61,12 @@ POST /openmrs/ws/rest/v1/password
 
 * After authenticating user can change their own password, by posting to `/password`
 
-
-
 ## Getting all location without authentication
 ```console
 GET /openmrs/ws/rest/v1/location?tag=Login+Location' 
 ```
 While fetching individual locations requires authentication, you can get a list of available locations by passing 
 the special `tag` "Login Location" as a query parameter.
+
 
 
