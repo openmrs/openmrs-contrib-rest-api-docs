@@ -2,13 +2,13 @@
 
 ## System Setting Overview
 
-* System Settings are used to store module and system-wide settings. They primarily consist of a property name and a value and a description explaining how this property is being used
+* System Settings are used to store module and system-wide settings. They primarily consist of a property name and a value and a description explaining how this property is being used.
 
-* System Settings are configuration variables that can be modified without restarting or recompiling the application. They're useful when module code needs to refer to a value that's unique to a particular installation, such as a concept ID number or a file path
+* System Settings are configuration variables that can be modified without restarting or recompiling the application. They're useful when module code needs to refer to a value that's unique to a particular installation, such as a concept ID number or a file path.
 
 * some examples : 
-     * system-wide setting: `Default Location` which specifies the name of the location to use as a system default 
-     * module-specific system setting: `Require Email as Username` is a system setting under the user module which accepts boolean type as a valid value 
+     * system-wide setting: `Default Location` which specifies the name of the location to use as a system default. 
+     * module-specific system setting: `Require Email as Username` is a system setting under the user module which accepts boolean type as a valid value. 
 
 
 ## Available operations for systemsetting type.
@@ -65,11 +65,13 @@ POST /systemsetting
 
     Parameter | Type | Description
     --- | --- | ---
-    *property* | `String` | the property name for this System Setting, names can be up to 255 chars, must be unique, and follow a convention of module ID followed by category & name lower camelCase separated by periods for e.g., addresshierarchy.allowFreetext
-    *description* | `String` | a description for the usage of this property
-    *datatypeClassname* | `String` | Data type for this System Setting.OpenMRS provides Custom data type resource, which gives the flexibility to select the data type accordingly             *datatypeConfig* | `String` | An optional identifier from the fulfiller (e.g., lab            *preferredHandlerClassname*  | `String` | Handler subresource for the Custom Data Type used. Can optionally define a specific handler class wants to use (otherwise, the framework will choose the best handler for the chosen DataType)
-    *handlerConfig*  | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting
-    *value* | `String` | the value assigned to this system setting 
+    *property* | `String` | the property name for this System Setting, names can be up to 255 chars, must be unique, and follow a convention of module ID followed by category & name lower camelCase separated by periods for e.g., addresshierarchy.allowFreetext.
+    *description* | `String` | a description for the usage of this property.
+    *datatypeClassname* | `String` | Data type for this System Setting.OpenMRS provides Custom data type resource, which gives flexibility to select the data type accordingly.
+    *datatypeConfig* | `String` | An optional identifier from the fulfiller e.g., lab
+    *preferredHandlerClassname*  | `String` | Handler subresource for the Custom Data Type used. Can optionally define a specific handler class wants to use (otherwise, the framework will choose the best handler for the chosen DataType).
+    *handlerConfig*  | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting.
+    *value* | `String` | the value assigned to this system setting. 
     
 ## Update a System Setting
 
@@ -92,12 +94,15 @@ POST /systemsetting/:target_systemsetting_uuid
 
     Parameter | Type | Description
     --- | --- | ---
-    *property* | `String` | the property name for this System Setting, names can be up to 255 chars, must be unique, and follow a convention of module ID followed by category & name lower camelCase separated by periods for e.g., addresshierarchy.allowFreetext
-    *description* | `String` | a description for the usage of this property
-    *datatypeClassname* | `String` | Data type for this System Setting.OpenMRS provides Custom data type resource, which gives flexibility to select the data type accordingly             *datatypeConfig* | `String` | An optional identifier from the fulfiller (e.g., lab            *preferredHandlerClassname*  | `String` | Handler subresource for the Custom Data Type used. Can optionally define a specific handler class wants to use (otherwise, the framework will choose the best handler for the chosen DataType)
-    *handlerConfig*  | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting
-    *value* | `String` | the value assigned to this system setting  
-    
+    *property* | `String` | the property name for this System Setting, names can be up to 255 chars, must be unique, and follow a convention of module ID followed by category & name lower camelCase separated by periods for e.g., addresshierarchy.allowFreetext.
+    *description* | `String` | a description for the usage of this property.
+    *datatypeClassname* | `String` | Data type for this System Setting.OpenMRS provides Custom data type resource, which gives flexibility to select the data type accordingly.
+    *datatypeConfig* | `String` | An optional identifier from the fulfiller e.g., lab
+    *preferredHandlerClassname*  | `String` | Handler subresource for the Custom Data Type used. Can optionally define a specific handler class wants to use (otherwise, the framework will choose the best handler for the chosen DataType).
+    *handlerConfig*  | `String` | Allow the handler have any name and config it wants/needs. This will help to identify the data type unambiguously which has been contained and will allow introspecting.
+    *value* | `String` | the value assigned to this system setting.
+
+
 ## Delete a System Setting
 
 ```console
