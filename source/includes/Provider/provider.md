@@ -2,7 +2,7 @@
 
 ## Provider Overview
 
-* A Provider is a person who provides care or services to patients. A provider may be a clinician like a doctor or nurse, 
+* A Provider is a person who provides care or services to patients. A provider may be a clinician like a doctor or a nurse, 
 a social worker, or a lab tech. Generally speaking, any healthcare worker that a patient can have an encounter with is a provider.
 
 * Providers may have full records in OpenMRS as persons, or they may just be a simple name and ID number.
@@ -13,7 +13,7 @@ a social worker, or a lab tech. Generally speaking, any healthcare worker that a
 
 * If you wish to record extra information about providers, you can create Provider Attributes.
 
-* Provider attributes exists specifically to allow implementations to extend the data model.
+* Provider attributes exist specifically to allow implementations to extend the data model.
 
 ## Available operations for Provider. 
 
@@ -29,33 +29,45 @@ a social worker, or a lab tech. Generally speaking, any healthcare worker that a
 
 ## List providers
 
-
-### List all non-retired providers.
-
-```console
-GET /provider?
-q=clerk
-```    
-    Quickly filter providers with given query parameters.Returns a `404 Not Found` status if provider not exists. If user not logged 
-    in to perform this action,a `401 Unauthorized` status returned.
+* ### List all non-retired providers.
     
-### Query Parameters
+    Quickly filter providers with given query parameters. Returns a `404 Not Found` status if provider not exists. If user not logged 
+    in to perform this action, a `401 Unauthorized` status returned.
+    
+    ##### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *q* | `Search Query` | Get provider by name
     
+```console
+GET /provider?
+q=clerk
+```
     
-### Query provider by UUID.
+* ### Query provider by UUID.
 
+    Retrieve a provider by its UUID. Returns a `404 Not Found` status if provider not exists. If user not logged 
+    in to perform this action, a `401 Unauthorized` status returned.
+    
 ```console
 GET /provider/:target_provider_uuid
 ```
-    Retrieve an provider by its UUID. Returns a `404 Not Found` status if provider not exists. If user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
-    
    
 ## Create a provider
+
+* To Create a provider, you need to specify below attributes in the request body. If you are not logged in to perform this action,
+ a `401 Unauthorized` status returned.
+
+    ### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *person* | `Person UUID` | Target person who will be a provider for OpenMRS (required)
+    *identifier* | `String` | Value of the identifier.Identifier is used to virtually group providers in to groups (required)
+    *attributes* | `Array[]: Attribute` |  List of provider attributes 
+    *retired* | `Boolean` | Retired status for the provider.
+    
 
 ```console
 POST /provider
@@ -71,9 +83,11 @@ POST /provider
   "retired": false
 }
 ```
-* To Create an provider you need to specify below attributes in the request body.If you are not logged in to perform this action,
- a `401 Unauthorized` status returned.
+## Update a provider
 
+*  Update a target provider with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
+status if provider not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+    
     ### Attributes
 
     Parameter | Type | Description
@@ -83,9 +97,6 @@ POST /provider
     *attributes* | `Array[]: Attribute` |  List of provider attributes 
     *retired* | `Boolean` | Retired status for the provider.
     
-
-## Update a provider
-
 ```console
 POST /provider/:target_provider_uuid
 {
@@ -100,26 +111,10 @@ POST /provider/:target_provider_uuid
   "retired": false
 }
 ```
-
-*  Update a target provider with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
-    
-    ### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *person* | `Person UUID` | Target person who will be a provider for OpenMRS (required)
-    *identifier* | `String` | Value of the identifier.Identifier is used to virtually group providers in to groups (required)
-    *attributes* | `Array[]: Attribute` |  List of provider attributes 
-    *retired* | `Boolean` | Retired status for the provider.
-    
     
 ## Delete a provider
 
-```console
-DELETE /provider/:target_provider_uuid?purge=true
-```
-* Delete or retire a target provider by its UUID. Returns a `404 Not Found` status if provider not exists.If user not logged 
+* Delete or retire a target provider by its UUID. Returns a `404 Not Found` status if provider not exists. If the user is logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
@@ -128,40 +123,33 @@ DELETE /provider/:target_provider_uuid?purge=true
     --- | --- | ---
     *purge* | `Boolean` | The resource will be retired unless purge = ‘true’
 
+```console
+DELETE /provider/:target_provider_uuid?purge=true
+```
 
-## List provider attribute sub resources
+## List provider attribute subresources
 
-### List all provider attribute sub resources for a provider.
+* ### List all provider attribute subresources for a provider.
+
+    Retrieve all **provider attribute** subresources of a **provider** resource by target_provider_uuid. Returns a 
+    `404 Not Found` status if provider attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ```console
 GET /provider/:target_provider_uuid/attribute 
 ```
-    Retrieve all **provider attribute** sub resources of an  **provider** resource by target_provider_uuid. Returns a 
-    `404 Not Found` status if provider attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
 
-
-### List provider attribute sub resources by it's UUID and parent provider UUID.
-
+* ### List provider attribute subresources by it's UUID and parent provider UUID.
+    
+     Retrieve a **provider attribute** subresources of a **provider** resource. Returns a `404 Not Found` status if the provider attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
+     
 ```console
 GET /provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
-```    
-     Retrieve an **provider attribute** sub resources of a **provider** resource. Returns a `404 Not Found` status if provider 
-     attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
-     returned.
-     
+```
 
 ## Create a provider attribute sub resource with properties
 
-```console
-POST provider/:target_provider_uuid/attribute 
-{
-  "attributeType": "target_provider_attribute_type_uuid",
-  "value": "New provider"
-}
-```
-* To Create an attribute sub resource for a specific provider resource you need to specify below attributes in the request body.
-If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* To Create an attribute subresource for a specific provider resource, you need to specify below attributes in the request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -170,7 +158,31 @@ If user not logged in to perform this action, a `401 Unauthorized` status return
     *attributeType* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type (required)
     *value* | `Depends on Attribute_Type Selected` | Value for the attribute (required)
 
-## Update provider attribute sub resource
+```console
+POST provider/:target_provider_uuid/attribute 
+{
+  "attributeType": "target_provider_attribute_type_uuid",
+  "value": "New provider"
+}
+```
+## Update provider attribute subresource
+
+* Updates a provider attribute subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if the provider attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
+returned.
+
+    ### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *parent_uuid* | `Provider UUID` | Target provider resource UUID
+    *uuid* | `Provider_Attribute UUID` | Target provider attribute resource UUID
+
+    #### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *attributeType* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type
+    *value* | `Depends on Attribute_Type Selected` | Value for the attribute
 
 ```console
 POST provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
@@ -179,36 +191,18 @@ POST provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
     "value": "New provider"
 }
 ```
-* Updates an provider attribute sub resource value with given uuid, this method will only modify value of the sub resource. Returns 
-a `404 Not Found` status if provider attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-returned.
 
-### Query Parameters
+## Delete provider attribute subresource
 
-    Parameter | Type | Description
-    --- | --- | ---
-    *parent_uuid* | `Provider UUID` | Target provider resource UUID
-    *uuid* | `Provider_Attribute UUID` | Target provider attribute resource UUID
-
-### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type
-    *value* | `Depends on Attribute_Type Selected` | Value for the attribute
-
-
-## Delete provider attribute sub resource
-
-```console
-DELETE /provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
-```
-* Delete or Retire a target provider attribute sub resource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
- If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or Retire a target provider attribute subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
+ If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’. Purging will attempt to irreversibly remove the provider attribute type from the system. Provider attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’. Purging will attempt to remove the provider attribute type from the system irreversibly. Provider attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
+```console
+DELETE /provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
+```

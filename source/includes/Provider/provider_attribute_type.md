@@ -20,7 +20,7 @@
 GET /providerattributetype?q="Search Query"
 ```
     Quickly filter provider attribute types with a given search query. Returns a `404 Not Found` status if the provider attribute type not exists.
-    If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+    If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
 ### Query Parameters
 
@@ -35,7 +35,7 @@ GET /providerattributetype?q="Search Query"
 GET /providerattributetype/:target_provider_attribute_type_uuid
 ```
     Retrieve a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not exists. 
-    If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+    If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
 
 ## Create a provider attribute type
@@ -54,7 +54,7 @@ POST /providerattributetype
   "handlerConfig": "dafault"
 }
 ```
-* To Create a provider attribute type you need to specify below attributes in the request body. If user not authenticated or 
+* To Create a provider attribute type, you need to specify below attributes in the request body. If user not authenticated or 
 the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
 ### Attributes
@@ -67,8 +67,8 @@ the authenticated user does not have appropriate permissions, a 401 Unauthorized
     *minOccurs* | `Number` | Minimum number of times this value can be specified for a single provider. Use `0` or `1` as the default value (Required)
     *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single provider (e.g., use 1 to prevent an attribute from being added to a provider multiple times)
     *preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this provider attribute type. The java class must implement [`CustomDataTypeHandler`(https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype.
-    *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
-    *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list and this configuration would tell the handler the possible choices in the list for this specific attribute type
+    *datatypeConfig* | `String` | Provides ability to define custom data types configuration for OpenMRS
+    *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list, and this configuration would tell the handler the possible choices in the list for this specific attribute type
 
 
 ## Update a provider attribute type
@@ -87,8 +87,7 @@ POST /providerattributetype/:target_provider_attribute_type_uuid
 }
 ```
 *  Update a target provider attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
-status if the provider attribute not exists. If user not authenticated or the authenticated user does not have appropriate permissions, 
-a 401 Unauthorized status is returned.
+status if the provider attribute not exists. If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
 ### Attributes
 
@@ -101,7 +100,7 @@ a 401 Unauthorized status is returned.
     *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single provider (e.g., use 1 to prevent an attribute from  being added to a provider multiple times)
     *preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this provider attribute type. The java class must implement [`CustomDataTypeHandler`(https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype.
     *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
-    *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list and this configuration would tell the handler the possible choices in the list for this specific attribute type
+    *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list, and this configuration would tell the handler the possible choices in the list for this specific attribute type
 
 
 ## Delete a provider attribute type
@@ -109,12 +108,11 @@ a 401 Unauthorized status is returned.
 ```console
 DELETE /providerattributetype/:target_provider_attribute_type_uuid?purge=true
 ```
-* Delete or Retire a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not
- exists. If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+* Delete or Retire a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not exists. If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
     ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’.Purging will attempt to remove the attribute type from the system irreversibly. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
