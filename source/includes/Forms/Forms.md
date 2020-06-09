@@ -29,12 +29,16 @@
 
 ## List Forms
 
-* ### search-forms
+### search-forms
+
+```console
+GET /form?
+```
 
     Fetch all non-retired Forms that match any specified parameters otherwise fetch all non-retired forms. Returns a `200 OK` status with the form response,
     and returns a `401` response when the user is not logged in. 
 
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Description
     --- | ---
@@ -44,45 +48,25 @@
     *q* | the search query
     
     
-```console
-GET /form?
-```
 
-* ### List forms by UUID
+### List forms by UUID
+
+```console
+GET /form/:target_form_uuid
+```
 
     Retrieve a form by its UUID. Returns a `404 Not Found` status if the form does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Description
     --- | ---
     *v* | the required representation to return (i.e. ref, default, full or custom )
     *uuid* | the target form UUID 
     
-```console
-GET /form/:target_form_uuid
-```
 
 ## Create-a-form
 
-* To create a Form, you need to specify the below properties in the request. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
-
-    ### Properties
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *name* | `String` | name of the form resource to be created
-    *description* | `String` | description of the form resource to be created
-    *version* | `String` | current version of the form resource to be created
-    *encouterType* | `String` | the specific encounter type where this form is designed to collect data
-    *published* | `boolean` | whether the form has been published or not
-    *formFields* | `Array[]: formFields` | list of formFields associated with this form
-    *xslt* | `String` | specifying XSLT description for the form if it supports XSLT transformations
-    *template* | `String` | template of the form to be created 
-
-
-
-    
 ```console
 POST /form
 {
@@ -98,7 +82,41 @@ POST /form
   "template": "dummy template"
 }
 ```
+
+* To create a Form, you need to specify the below properties in the request. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+    ### Properties
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *name* | `String` | name of the form resource to be created
+    *description* | `String` | description of the form resource to be created
+    *version* | `String` | current version of the form resource to be created
+    *encouterType* | `String` | the specific encounter type where this form is designed to collect data
+    *published* | `boolean` | whether the form has been published or not
+    *formFields* | `Array[]: formFields` | list of formFields associated with this form
+    *xslt* | `String` | specifying XSLT description for the form if it supports XSLT transformations
+    *template* | `String` | template of the form to be created 
+    
+
 ## Update a form
+
+```console
+POST /form/:target_form_uuid
+{
+  "name": "Admission",
+  "description": "dummy description",
+  "version": "1.0",
+  "encounterType": "Vitals",
+  "published": true,
+  "formFields": [
+    "medication","allergies"
+  ],
+  "xslt": "xslt specification for this form",
+  "template": "dummy template"
+}
+```
+
 
 * Update a target Form with given UUID, this method only modifies properties in the request. 
 Returns a `404 Not Found` status if form not exists. If the user is not logged in to perform this action, a `401 Unauthorized status returned`.
@@ -122,23 +140,12 @@ Returns a `404 Not Found` status if form not exists. If the user is not logged i
     *xslt* | `String` | specifying XSLT description for the form if it supports XSLT transformations
     *template* | `String` | template of the form to be created 
 
-```console
-POST /form/:target_form_uuid
-{
-  "name": "Admission",
-  "description": "dummy description",
-  "version": "1.0",
-  "encounterType": "Vitals",
-  "published": true,
-  "formFields": [
-    "medication","allergies"
-  ],
-  "xslt": "xslt specification for this form",
-  "template": "dummy template"
-}
-```
 
 ## Delete a form
+
+```console
+DELETE /form/:target_form_uuid?purge=true
+```
 
 * Delete or retire a target form by its UUID. Returns a `404 Not Found` status if the form does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -149,27 +156,42 @@ POST /form/:target_form_uuid
     **uuid** | `String` | uuid to delete
     *purge* | `Boolean` | The form will be voided/retired unless purge = 'true'
 
-```console
-DELETE /form/:target_form_uuid?purge=true
-```
 
 ## List formfields
 
-* ### List all formFields subresources for a form.
-
-    Retrieve all formFields subresources of a form resource by `target_form_uuid`. Returns a `404 Not Found` status if formFields not exist. If the user is not logged in to perform this action, a `401 unauthorized` status returned.
+### List all formFields subresources for a form.
 
 ```console
 GET /form/:target_form_uuid/formFields
 ```  
-* ### List formFields subresource by its UUID and parent form UUID.
 
-    Retrieve a formFields subresources of a form resource. Returns a `404 Not Found` status if formFields does not exist. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
+    Retrieve all formFields subresources of a form resource by `target_form_uuid`. Returns a `404 Not Found` status if formFields not exist. If the user is not logged in to perform this action, a `401 unauthorized` status returned.
+
+### List formFields subresource by its UUID and parent form UUID.
 
 ```console
 GET /form/:target_form_uuid/formFields/:target_formFields_uuid
 ```
+
+    Retrieve a formFields subresources of a form resource. Returns a `404 Not Found` status if formFields does not exist. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
+
 ## create formfield subresource with properties 
+
+```console
+POST form/:target_form_uuid/formFields
+{
+  form: "UUID",
+  field: "UUID",
+  required: false,
+  parent: "UUID",
+  fieldNumber: 2,
+  fieldPart: "4",
+  pageNumber: 1,
+  minOccurs: 0,
+  maxOccurs: 1,
+  sortWeight: false
+}
+```
 
 * To create a formFields subresource for a specific form resource, you need to specify below properties in your request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -194,8 +216,10 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     *maxOccurs* | `integer` | the maximum number of times this field appears on the form
     *sortWeight* | `boolean` | do we order this field or not, when this field will be searched for 
 
+## Update formFields subresource with properties
+
 ```console
-POST form/:target_form_uuid/formFields
+POST form/:target_form_uuid/formFields/:target_formFields_uuid
 {
   form: "UUID",
   field: "UUID",
@@ -209,7 +233,6 @@ POST form/:target_form_uuid/formFields
   sortWeight: false
 }
 ```
-## Update formFields subresource with properties
 
 * Updates a formFields subresource value with given UUID. This method will only modify the value of the subresource. Returns a `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
@@ -237,23 +260,12 @@ returned.
     *sortWeight* | `boolean` | do we order this field or not, when this field will be searched for 
 
 
-```console
-POST form/:target_form_uuid/formFields/:target_formFields_uuid
-{
-  form: "UUID",
-  field: "UUID",
-  required: false,
-  parent: "UUID",
-  fieldNumber: 2,
-  fieldPart: "4",
-  pageNumber: 1,
-  minOccurs: 0,
-  maxOccurs: 1,
-  sortWeight: false
-}
-```
 
 ## Delete formFields subresource with properties
+
+```console
+DELETE /form/:target_form_uuid/formFields/:target_formFields_uuid
+```
 
 * Delete or retire a target formFields subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -266,7 +278,4 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     **uuid** | `String` | uuid of formFields to delete
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
     
-```console
-DELETE /form/:target_form_uuid/formFields/:target_formFields_uuid
-```
 
