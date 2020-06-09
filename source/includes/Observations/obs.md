@@ -2,15 +2,15 @@
 
 ## Observations Overview
 
-An Observation is one single piece of information that is recorded about a person at a moment in time.
+Observation is one piece of information recorded about a person at the moment in time.
 
-Every observation has a Concept as its question, and depending on the datatype of the concept, it has a value that is a number, date, text, Concept, etc.
+Every observation has a Concept as its question and depending on the datatype of the concept, it has a value that is a number, date, text, Concept, etc.
 
 Most of the information you store in OpenMRS is in the form of Observations, and most Observations happen in an Encounter. When you enter a form in OpenMRS, typically one Encounter is created with anywhere between tens or hundreds of Observations.
 
-Note that an individual Observation is valid only at one moment in time, and it does not carry forward. You may query the system for the last observation for pregnancy status but this does not tell you whether or not the patient is pregnant at any point after the moment of that observation.
+Note that individual Observation is valid only at one moment in time, and it does not carry forward. You may query the system for the last observation for pregnancy status, but this does not tell you whether or not the patient is pregnant at any point after the moment of that observation.
 
-Examples of observations include Serum Creatinine of 0.9mg/dL or Review of cardiopulmonary system is normal.
+Examples of observations include Serum Creatinine of 0.9mg/dL or a Review of the cardiopulmonary system is normal.
  
 ## Available operations for Observations. 
 
@@ -27,8 +27,7 @@ Examples of observations include Serum Creatinine of 0.9mg/dL or Review of cardi
 GET /obs?patient=070f0120-0283-4858-885d-a20d967729cf"
 ```    
     Quickly filter observations with given query parameters. 
-If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
-status is returned.
+If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
 ### Query Parameters
 
@@ -44,8 +43,7 @@ status is returned.
 GET /obs/:target_observation_uuid
 ```
     Retrieve an observation by its UUID.
-If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
-status is returned.
+If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
     
    
 ## Create an observation
@@ -59,8 +57,7 @@ POST /obs
   "value": 70
 }
 ```
-* To Create an observation you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
-status is returned.
+* To Create an observation, you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     ### Attributes
 
@@ -89,8 +86,7 @@ POST /obs/:uuid_of_obs_to_be_updated
 }
 ```
 *  Update a target obs, this method only modifies properties in the request. Returns `404 Not Found` status if the observation does not exist. 
-If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
-status is returned.
+If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
     
     ### Attributes
 
@@ -118,8 +114,7 @@ DELETE /obs/:target_obs_uuid?purge=true
 ```
 
 * Delete or void a target observation. Returns `404 Not Found` status if the observation does not exist. 
-If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
-status is returned.
+If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     ### Query Parameters
 

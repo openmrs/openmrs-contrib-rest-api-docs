@@ -4,7 +4,7 @@
 
 An **Order** represents a request from a provider such as a lab test, procedure, referral, etc.
 
-For example a provider could order a Complete Blood Count laboratory panel for a patient.
+For example, a provider could order a Complete Blood Count laboratory panel for a patient.
 
 An Order only records an intention, not whether or not the action is carried out. The results of an Order are typically recorded later as Observations.
 
@@ -51,7 +51,7 @@ POST /order
   "dateActivated": "2018-10-16 12:08:43"
 }
 ```
-* To create a role you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+* To create a role, you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     ### Attributes
 
@@ -117,5 +117,5 @@ DELETE /order/:target_order_uuid?purge=true
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’.Purging will attempt to irreversibly remove the attribute type from the system. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
+    *purge* | `Boolean` | The resource will be voided unless purge = ‘true’.Purging will attempt to remove the attribute type from the system irreversibly. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.
 
