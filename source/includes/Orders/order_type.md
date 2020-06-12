@@ -4,10 +4,9 @@
 
 * Orders represent requests from providers for some action to care for a patient. 
 Common types of orders are prescriptions (drug orders), lab tests, radiology tests, 
-procedures, and referrals.
+procedures and referrals.
 
-* In nearly all cases, handling different types of orders requires specific behavior of 
-the application. The OpenMRS platform is designed to handle certain types of orders. 
+* In nearly all cases, handling different types of orders requires specific behavior of the application. The OpenMRS platform is designed to handle certain types of orders. 
 Adding new order types will usually only happen when new features to handle the 
 new order type are also being added to the system (using a module or app).
 
