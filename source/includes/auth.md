@@ -9,7 +9,7 @@
 * Alternatively, a session token can be used to interact with the API endpoints.
 
 ## Retrieve session token
-```console
+```http
 GET /openmrs/ws/rest/v1/session 
   -H 'Authorization: Basic Auth <base64 encoded username:password'
 
@@ -24,6 +24,35 @@ Set-Cookie: JSESSIONID=FB0629C001449CE14DF1078ACDDBA858; Path=/openmrs; HttpOnly
     }
 }
 ```
+
+ 
+```java
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+            Request request = new Request.Builder()
+                    .url("https://demo.openmrs.org/openmrs/ws/rest/v1/session")
+                    .method("GET", null)
+                    .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+                    .build();
+            Response response = client.newCall(request).execute();
+
+            System.out.println(response);
+        } catch (IOException exception){    
+            //handle the exception here
+        }
+    }
+}
+
+```
+
 The session token is retrieved using Basic authentication on the `/session` endpoint. The response will include a `JSESSIONID` in the header. This session ID is also included in the response object
 
 
@@ -35,19 +64,19 @@ The `sessionId` token should be passed with all subsequent calls as a cookie nam
 
 ## Logout User/End session
 
-```console
+```http
 DELETE /openmrs/ws/rest/v1/session -H 'Accept: application/json'
 -H 'Authorization: Basic Auth' (required to indetify the user)
 ```
 
 ## Changing Password
-```console
+```http
 POST /openmrs/ws/rest/v1/password/:target_user_uuid 
 {
   "newPassword" : "newPassword"
 }
 ``` 
-```console
+```http
 POST /openmrs/ws/rest/v1/password 
 {
   "oldPassword" : "oldPassword",
@@ -62,7 +91,7 @@ POST /openmrs/ws/rest/v1/password
 * After authenticating user can change their own password, by posting to `/password`
 
 ## Getting all location without authentication
-```console
+```http
 GET /openmrs/ws/rest/v1/location?tag=Login+Location' 
 ```
 While fetching individual locations requires authentication, you can get a list of available locations by passing 
