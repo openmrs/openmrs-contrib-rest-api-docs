@@ -2,7 +2,8 @@
 title: OpenMRS Docs
 
 language_tabs:
-  - console
+  - http
+  - java
 
 toc_footers:
   - <a href='https://openmrs.org/'>OpenMRS website</a>
