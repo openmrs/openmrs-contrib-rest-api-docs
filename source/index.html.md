@@ -2,7 +2,7 @@
 title: OpenMRS Docs
 
 language_tabs:
-  - http
+  - shell
   - java
 
 toc_footers:
