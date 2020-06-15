@@ -10,7 +10,7 @@
 
 
 ## Retrieve session token
-```http
+```shell
 GET /openmrs/ws/rest/v1/session 
   -H 'Authorization: Basic Auth <base64 encoded username:password'
 
@@ -50,7 +50,7 @@ The `sessionId` token should be passed with all subsequent calls as a cookie nam
 
 ## Logout User/End session
 
-```http
+```shell
 DELETE /openmrs/ws/rest/v1/session -H 'Accept: application/json'
 -H 'Authorization: Basic Auth' (required to identify the user)
 ```
@@ -86,7 +86,7 @@ DELETE /openmrs/ws/rest/v1/session -H 'Accept: application/json'
 }
 
 ```
-```http
+```shell
 POST /openmrs/ws/rest/v1/password/:target_user_uuid 
 {
   "newPassword" : "newPassword"
@@ -102,7 +102,7 @@ POST /openmrs/ws/rest/v1/password/:target_user_uuid
 * The new password must contain atleast one integer.
 
   
-```http
+```shell
 POST /openmrs/ws/rest/v1/password 
 {
   "oldPassword" : "oldPassword",
@@ -128,7 +128,7 @@ POST /openmrs/ws/rest/v1/password
 * The new password must contain atleast one integer.
 
 ## Getting all location without authentication
-```http
+```shell
 GET /openmrs/ws/rest/v1/location?tag=Login+Location' 
 ```
 ```java
