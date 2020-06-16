@@ -1,5 +1,33 @@
 # OpenMRS REST API
 
+> Getting started with examples. 
+
+
+```java
+
+//before executing the examples, get the okttp dependency jar and import it the project.
+//these code stubs will be elided from all the examples for clarity
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+	    	// the examples go here
+
+        } catch (IOException exception) {
+
+            //handle exception here
+        }
+    }
+}
+
+```
 Welcome to the OpenMRS REST API documentation! OpenMRS is a software
 platform and a reference application which enables the design of a customized
 medical records system with no programming knowledge (although medical and
