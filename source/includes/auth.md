@@ -128,6 +128,7 @@ POST /openmrs/ws/rest/v1/password
 * The new password must contain atleast one integer.
 
 ## Getting all location without authentication
+
 ```shell
 GET /openmrs/ws/rest/v1/location?tag=Login+Location' 
 ```
