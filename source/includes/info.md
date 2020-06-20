@@ -2,7 +2,6 @@
 
 > Getting started with examples. 
 
-
 ```java
 
 //before executing the examples, get the okttp dependency jar and import it the project.
@@ -67,7 +66,10 @@ from OpenMRS
 
 # Schema
 
-```console
+
+>Fetching concepts
+
+```shell
 curl -X GET "https://demo.openmrs.org/openmrs/ws/rest/v1/concept"
 connection: keep-alive
 content-length: 9731
@@ -76,6 +78,17 @@ date: Wed, 20 Nov 2019 14:13:54 GMT
 etag: "04c83ff0cf2cc35cf05a2075ad117df83"
 server: nginx/1.10.3 (Ubuntu)
 strict-transport-security: max-age=15768000
+```
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
+  .build();
+Response response = client.newCall(request).execute();
 ```
 
 All API access is over HTTPS, and can be accessed from `https://demo.openmrs.org/openmrs/ws/rest/v1`. All data is sent and received as JSON.
@@ -100,24 +113,58 @@ All API access is over HTTPS, and can be accessed from `https://demo.openmrs.org
 
 ### Examples
 
-#### Adding a person name.
+>Adding a person's name
 
-```console
+```shell
 POST /openmrs/ws/rest/v1/person/:target_person_uuid/name
 {
   "givenName": "John",
   "familyName": "Smith"
 }
 ```
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"givenName\": \"John\",\r\n  \"familyName\": \"Smith\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/person/070f0120-0283-4858-885d-a20d967729cf/name
+")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
+  .build();
+Response response = client.newCall(request).execute();
+```
 
-#### Editing a person's name.
+#### Adding a person name.
 
-```console
+>Editing a person's name
+
+```shell
 POST /openmrs/ws/rest/v1/person/:target_person_uuid/name/:target_name_uuid
 {
   "givenName": "Johnny"
 }
 ```
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"givenName\": \"Johnny\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/person/070f0120-0283-4858-885d-a20d967729cf/name/c280a829-7a86-47a5-b876-df8f53e89dac
+")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+#### Editing a person's name.
 
 - A subresource can have only one parent.
 
@@ -127,17 +174,44 @@ POST /openmrs/ws/rest/v1/person/:target_person_uuid/name/:target_name_uuid
 
 #### Instead, these should be queries on the encounter resource:
 
-Get an encounter list for a specific patient.
 
-```console
+###Get an encounter list for a specific patient.
+>Get an encounter list for a specific patient
+
+```shell
  GET /encounter?patient=:target_patient_uuid
 ```
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/encounter?patient=7379bf1c-b64f-4958-b27f-2a769d8d291c")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
+  .build();
+Response response = client.newCall(request).execute();
+```
 
-Get an encounter list for a specific location.
 
-```console
+###Get an encounter list for a specific location.
+>Get an encounter list for a specific location
+
+```shell
  GET /encounter?location=:target_location_uuid
 ```
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/encounter?location=aff27d58-a15c-49a6-9beb-d30dcfc0c66e")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
 
 # Resources with subtypes
 
@@ -148,9 +222,31 @@ Get an encounter list for a specific location.
 
 ### Examples
 
-```console
+>POST examples on order resource
+
+```shell
 POST /openmrs/ws/rest/v1/order
-{"t": "testorder", /*... and other properties */}
+{
+  "type":"testorder",
+  "encounter": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
+  "action": "new",
+  "urgency": "ROUTINE",
+  "dateActivated": "2018-10-16 12:08:43"
+}
+```
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"type\":\"testorder\",\r\n  \"encounter\": \"69f83020-caf2-4c9e-bca7-89b8e62b52e1\",\r\n  \"action\": \"new\",\r\n  \"urgency\": \"ROUTINE\",\r\n  \"dateActivated\": \"2018-10-16 12:08:43\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/order")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
+  .build();
+Response response = client.newCall(request).execute();
 ```
 
 - If you GET a resource that has subtypes, each result will be one of those subtypes,
@@ -158,8 +254,21 @@ POST /openmrs/ws/rest/v1/order
 
 - You may query for only a certain subtype of a resource by providing a t query parameter.
 
-Get encounter orders of drug order subtype.
 
-```console
-GET  /openmrs/ws/rest/v1/order?&t=drugorder&v=full'
+###Get encounter orders of drug order subtype.
+>Get encounter orders of drug order subtype
+
+```shell
+GET  /openmrs/ws/rest/v1/order?type=drugorder&v=full'
+```
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/order?type=drugorder")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
+  .build();
+Response response = client.newCall(request).execute();
 ```
