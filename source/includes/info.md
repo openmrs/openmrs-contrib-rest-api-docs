@@ -2,11 +2,10 @@
 
 > Getting started with examples. 
 
+>1. Before executing the examples, get the okttp dependency jar and import it the project.
+>2. These code stubs will be elided from all the examples for clarity
+
 ```java
-
-//before executing the examples, get the okttp dependency jar and import it the project.
-//these code stubs will be elided from all the examples for clarity
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -113,6 +112,8 @@ All API access is over HTTPS, and can be accessed from `https://demo.openmrs.org
 
 ### Examples
 
+## Adding a person name.
+
 >Adding a person's name
 
 ```shell
@@ -137,9 +138,7 @@ Request request = new Request.Builder()
   .build();
 Response response = client.newCall(request).execute();
 ```
-
-#### Adding a person name.
-
+## Editing a person's name.
 >Editing a person's name
 
 ```shell
@@ -164,18 +163,16 @@ Request request = new Request.Builder()
 Response response = client.newCall(request).execute();
 ```
 
-#### Editing a person's name.
-
 - A subresource can have only one parent.
 
 - If it seems like a resource has two or more parents, then it is most likely a top-level resource.
 
 - For example, "encounters" should not be a subresource of "patient" and "location" resources (answering questions of "all encounters of a patient" and "all encounters at a location").
 
-#### Instead, these should be queries on the encounter resource:
+ Instead, these should be queries on the encounter resource:
 
 
-###Get an encounter list for a specific patient.
+## Get an encounter list for a specific patient.
 >Get an encounter list for a specific patient
 
 ```shell
@@ -194,7 +191,7 @@ Response response = client.newCall(request).execute();
 ```
 
 
-###Get an encounter list for a specific location.
+##Get an encounter list for a specific location.
 >Get an encounter list for a specific location
 
 ```shell
@@ -255,7 +252,7 @@ Response response = client.newCall(request).execute();
 - You may query for only a certain subtype of a resource by providing a t query parameter.
 
 
-###Get encounter orders of drug order subtype.
+##Get encounter orders of drug order subtype.
 >Get encounter orders of drug order subtype
 
 ```shell
