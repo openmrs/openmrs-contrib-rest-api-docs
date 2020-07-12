@@ -100,7 +100,7 @@ POST /Encounter
 * To Create an encounter you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 
-    ### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -136,7 +136,7 @@ POST /encounter/:target_encounter_uuid
 *  Update a target encounter with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if Encounter not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
-    ### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
