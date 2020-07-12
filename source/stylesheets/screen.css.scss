@@ -200,7 +200,7 @@ html, body {
   padding: 0 $nav-padding 0 $nav-padding;
   display: block;
   overflow-x: hidden;
-  white-space: nowrap;
+  white-space: normal;
   text-overflow: ellipsis;
   text-decoration: none;
   color: $nav-text;
