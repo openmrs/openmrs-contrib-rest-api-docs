@@ -10,6 +10,9 @@
 
 
 ## Retrieve session token
+
+> Retrieve session token
+
 ```shell
 GET /openmrs/ws/rest/v1/session 
   -H 'Authorization: Basic Auth <base64 encoded username:password'
@@ -50,6 +53,8 @@ The `sessionId` token should be passed with all subsequent calls as a cookie nam
 
 ## Logout User/End session
 
+> Logout User/End session
+
 ```shell
 DELETE /openmrs/ws/rest/v1/session -H 'Accept: application/json'
 -H 'Authorization: Basic Auth' (required to identify the user)
@@ -68,6 +73,9 @@ DELETE /openmrs/ws/rest/v1/session -H 'Accept: application/json'
 
 
 ## Changing Password
+
+> Password change By Admin
+
 ```java
 
 	OkHttpClient client = new OkHttpClient().newBuilder()
@@ -101,7 +109,8 @@ POST /openmrs/ws/rest/v1/password/:target_user_uuid
   posting a new password to `/password/:target_user_uuid`.
 * The new password must contain atleast one integer.
 
-  
+> Password change By Users
+
 ```shell
 POST /openmrs/ws/rest/v1/password 
 {
@@ -128,6 +137,8 @@ POST /openmrs/ws/rest/v1/password
 * The new password must contain atleast one integer.
 
 ## Getting all location without authentication
+
+> Getting all location without authentication
 
 ```shell
 GET /openmrs/ws/rest/v1/location?tag=Login+Location' 
