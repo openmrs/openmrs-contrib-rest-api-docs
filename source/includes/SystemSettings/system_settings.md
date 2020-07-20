@@ -20,8 +20,24 @@
 
 ## List System Settings
 
-```console
+> List system settings
+
+```shell
 GET /systemsetting?limit=5
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting?limit=5")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=34D261A0DB322FE60502E3FF4DEC6FCC")
+  .build();
+Response response = client.newCall(request).execute();
+
 ```
 * Fetch all non-retired System Settings that match any specified parameters otherwise fetch all non-retired System Settings. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
@@ -38,27 +54,62 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 
 ### Get a particular System Setting
 
-```console
+> Get a particular system setting
+
+```shell
 GET /systemsetting/:target_systemsetting_uuid
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/e368193e-b0aa-4e90-9a1b-15623e291d11")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=34D261A0DB322FE60502E3FF4DEC6FCC")
+  .build();
+Response response = client.newCall(request).execute();
+
 ```
     Retrieve a particular System Setting. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
 
 ## Create a System Setting
 
+> Create a system setting
 
-```console
+```shell
 POST /systemsetting
 {
   "property": "property name",
   "description": "dummy description",
   "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
   "datatypeConfig": "default",
-  "preferredHandlerClassname":"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler"
+  "preferredHandlerClassname":"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
   "handlerConfig": "default",
   "value": "dummy value"
 }
 ```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"property\": \"propert name\",\r\n  \"description\": \"dummy description\",\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\":\"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler\",\r\n  \"handlerConfig\": \"default\",\r\n  \"value\": \"dummy value\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=34D261A0DB322FE60502E3FF4DEC6FCC")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
 * To create a System Setting, you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     ### Attributes
@@ -75,8 +126,9 @@ POST /systemsetting
     
 ## Update a System Setting
 
+> Updating system setting
 
-```console
+```shell
 POST /systemsetting/:target_systemsetting_uuid
 {
   "property": "property name",
@@ -88,7 +140,25 @@ POST /systemsetting/:target_systemsetting_uuid
   "value": "dummy value"
 }
 ```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"property\": \"propert name\",\r\n  \"description\": \"dummy description changed\",\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\":\"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler\",\r\n  \"handlerConfig\": \"default\",\r\n  \"value\": \"dummy value changed\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/14b15bdc-5bd8-42c0-852b-3cd002498613")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=34D261A0DB322FE60502E3FF4DEC6FCC")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
 * Update a System Setting with given UUID, this method only modifies properties in the request. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+* in order to use the examples we should first create a custom system setting and then try and modify it since some of the system settings are read only and might return an error `400 bad request`. 
 
 ### Attributes
 
@@ -105,9 +175,27 @@ POST /systemsetting/:target_systemsetting_uuid
 
 ## Delete a System Setting
 
-```console
+> Delete a system setting
+
+```shell
 DELETE /systemsetting/:target_systemsetting_uuid?purge=true
 ```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/1029a09d-a796-41dc-ba5f-65a559d63f3d")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=34D261A0DB322FE60502E3FF4DEC6FCC")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
 
 * Delete or void a System Setting by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
