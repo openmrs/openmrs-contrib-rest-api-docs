@@ -18,13 +18,31 @@
 
 ## List System Inforamation
 
-```console
+> List system information
+
+```shell
+
 GET /systeminformation?limit=5&startIndex=0&v=default
 
 ```
 
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/systeminformation?limit=5&startIndex=0&v=default
+")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=DECF639CF6A8545F34637E1F339972D8")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
 * Fetch all System Information that match any specified parameters otherwise fetch all the System Information if no query parameters specified. 
-If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+* If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
 ### Query Parameters
 
