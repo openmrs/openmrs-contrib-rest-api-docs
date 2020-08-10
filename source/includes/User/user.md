@@ -17,11 +17,26 @@ The real-life person is represented by a Person record in OpenMRS, and a person 
 
 ### List all non-retired users.
 
-```console
-GET /user?
-q=user1
-```
 
+> Get all non-retired Users 
+
+```shell
+GET /user?
+q=admin
+```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user?q=admin")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=154692F02BBBC664825F3C4C224A474B")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
 
   Quickly filter users with given query parameters. Returns a `404 Not Found` status if the user does not exist.
   If not logged in to perform this action, a `401 Unauthorized` status is returned.
@@ -36,50 +51,84 @@ q=user1
 
 ### Get user by UUID.
 
-```console
+> Get User by UUID
+
+```shell
 GET /user/:target_user_uuid
 ```
 
+```java
+
+1. Here the target UUID used is of the admin user.  
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=154692F02BBBC664825F3C4C224A474B")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
 
   Retrieve a user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 
 ## Create a user
 
-```console
+
+> Create a new User
+
+```shell
 POST /user
 {
-  "name": "Mohit Kumar",
-  "description": "A GSoD participant."
-  "username": "batbrain7"
-  "password": "******"
-  "person" :
-        {
-        "names": [
-            {
-                "givenName": "Mohit",
-                "familyName": "Kumar"
-            }
-        ],
-        "gender": "M",
-        "birthdate": "1997-09-02",
-        "addresses": [
-        {
-         "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
-        "cityVillage": "Bengaluru",
-        "country": "India",
-        "postalCode": "560037"
-        }
-    ]
-},
-"systemId": "string",
-"userProperty": {},
-"secretQuestion" : "What is the name of your high school?"
+   "username":"demoUser",
+   "password":"Password123",
+   "person":{
+      "names":[
+         {
+            "givenName":"Demo",
+            "familyName":"User"
+         }
+      ],
+      "gender":"M",
+      "birthdate":"1997-09-02",
+      "addresses":[
+         {
+            "address1":"30, Vivekananda Layout, Munnekolal,Marathahalli",
+            "cityVillage":"Bengaluru",
+            "country":"India",
+            "postalCode":"560037"
+         }
+      ]
+   },
+   "systemId":"systemId"
 }
+
+```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"username\": \"demoUser\",\r\n    \"password\": \"Password123\",\r\n    \"person\" :\r\n        {\r\n        \"names\": [\r\n            {\r\n                \"givenName\": \"Demo\",\r\n                \"familyName\": \"User\"\r\n            }\r\n        ],\r\n        \"gender\": \"M\",\r\n        \"birthdate\": \"1997-09-02\",\r\n        \"addresses\": [\r\n        {\r\n         \"address1\": \"30, Vivekananda Layout, Munnekolal,Marathahalli\",\r\n        \"cityVillage\": \"Bengaluru\",\r\n        \"country\": \"India\",\r\n        \"postalCode\": \"560037\"\r\n        }\r\n    ]\r\n        },\r\n\"systemId\": \"systemId\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=154692F02BBBC664825F3C4C224A474B")
+  .build();
+Response response = client.newCall(request).execute();
+
 ```
 
 - For convenience, the person's information can be included in order to create the corresponding person record at the same time as their user record. When creating a user record for an existing person, the existing person must only be referenced by UUID. If you are not logged in to perform this action,
 a `401 Unauthorized` status is returned.
+- The password should be minimum 8 chars long with atleast one lower and upper character alphabet along with a numeral.
+- Some properties are not allowed to be set including name and description therefore arent included in the API usage examples.
 
 ### Attributes
 
@@ -98,38 +147,53 @@ Parameter | Type | Description
 
 ## Update a user
 
-```console
+
+> Update a user using its UUID
+
+```shell
 POST /user/:target_user_uuid
 {
-  "name": "Mohit Sharma",
-  "description": "An OpenMRS Developer."
-  "username": "batbrain7"
-  "password": "******"
-  "person" :
-        {
-        "names": [
-            {
-                "givenName": "Mohit",
-                "familyName": "Sharma"
-            }
-        ],
-        "gender": "M",
-        "birthdate": "1997-09-02",
-        "addresses": [
-        {
-         "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
-        "cityVillage": "Bengaluru",
-        "country": "India",
-        "postalCode": "560037"
-        }
-    ]
-},
-"systemId": "string",
-"userProperty": {},
-"secretQuestion" : "In which year did you graduate"
+   "username":"demoUser",
+   "password":"Password123",
+   "person":{
+      "names":[
+         {
+            "givenName":"Demo",
+            "familyName":"User"
+         }
+      ],
+      "gender":"M",
+      "birthdate":"1997-09-02",
+      "addresses":[
+         {
+            "address1":"30, Vivekananda Layout, Munnekolal,Marathahalli",
+            "cityVillage":"Bengaluru",
+            "country":"India",
+            "postalCode":"560037"
+         }
+      ]
+   },
+   "systemId":"systemId"
 }
-```
 
+```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"username\": \"demoUser\",\r\n    \"password\": \"Password123\",\r\n    \"person\" :\r\n        {\r\n        \"names\": [\r\n            {\r\n                \"givenName\": \"Demo\",\r\n                \"familyName\": \"User\"\r\n            }\r\n        ],\r\n        \"gender\": \"M\",\r\n        \"birthdate\": \"1997-09-02\",\r\n        \"addresses\": [\r\n        {\r\n         \"address1\": \"30, Vivekananda Layout, Munnekolal,Marathahalli\",\r\n        \"cityVillage\": \"Bengaluru\",\r\n        \"country\": \"India\",\r\n        \"postalCode\": \"560037\"\r\n        }\r\n    ]\r\n        },\r\n\"systemId\": \"systemId\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user/564b2790-0508-11e3-8ffd-0800200c9a66
+")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=154692F02BBBC664825F3C4C224A474B")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
 - Update a target user with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
   status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
     
@@ -150,9 +214,28 @@ POST /user/:target_user_uuid
 
 ## Delete a user
 
-```console
+> Delete a user using its UUID
+
+```shell
 DELETE /user/:target_user_uuid?purge=true
 ```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user/b953d87d-7e67-47b9-ad1e-fa8b7cdaea4d?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=154692F02BBBC664825F3C4C224A474B")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
 
 - Delete or retire a target user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
 
