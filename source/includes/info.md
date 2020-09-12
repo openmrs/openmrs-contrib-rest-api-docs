@@ -2,10 +2,13 @@
 
 > Getting started with examples. 
 
->1. Before executing the examples, get the okttp dependency jar and import it the project.
->2. These code stubs will be elided from all the examples for clarity
+>1. Before executing the examples, make sure that resources corresponding to the UUID's used in the examples are present on the demo server.
 
 ```java
+// Before executing the examples, get the okttp dependency jar and import it the project.
+// These code stubs will be elided from all the java examples for clarity
+
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -16,11 +19,12 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         try {
-	    	// the examples go here
-
+	    	
+	        // the examples go here
+		
         } catch (IOException exception) {
 
-            //handle exception here
+            // handle exception here
         }
     }
 }
