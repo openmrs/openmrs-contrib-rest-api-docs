@@ -8,6 +8,8 @@
 
 * Alternatively, a session token can be used to interact with the API endpoints.
 
+* for example the base64 encoding of `admin:Admin123` is `YWRtaW46QWRtaW4xMjM=`
+
 
 ## Retrieve session token
 
@@ -16,18 +18,8 @@
 ```shell
 GET /openmrs/ws/rest/v1/session 
   -H 'Authorization: Basic Auth <base64 encoded username:password'
-
-HTTP/1.1 200 OK
-Set-Cookie: JSESSIONID=FB0629C001449CE14DF1078ACDDBA858; Path=/openmrs; HttpOnly
-{
-    "authenticated": true,
-    "locale": "en_GB",
-    "sessionId": "FB0629C001449CE14DF1078ACDDBA858",
-    "user": {
-        "systemId": "admin",
-    }
-}
 ```
+
 ```java
 	OkHttpClient client = new OkHttpClient().newBuilder()
 			.build();
@@ -38,6 +30,21 @@ Set-Cookie: JSESSIONID=FB0629C001449CE14DF1078ACDDBA858; Path=/openmrs; HttpOnly
 			.build();
 	Response response = client.newCall(request).execute();
 
+```
+
+> Success Response
+
+```response
+HTTP/1.1 200 OK
+Set-Cookie: JSESSIONID=FB0629C001449CE14DF1078ACDDBA858; Path=/openmrs; HttpOnly
+{
+    "authenticated": true,
+    "locale": "en_GB",
+    "sessionId": "FB0629C001449CE14DF1078ACDDBA858",
+    "user": {
+        "systemId": "admin",
+    }
+}
 ```
 
  
