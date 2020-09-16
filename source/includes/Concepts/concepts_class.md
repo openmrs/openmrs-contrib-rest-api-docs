@@ -23,7 +23,7 @@
 >List all non-retired concept classes
 
 ```shell
-    GET /conceptclass?limit=1
+GET /conceptclass?limit=1
 ```
 ```java
 OkHttpClient client = new OkHttpClient().newBuilder()
@@ -79,15 +79,15 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass?limit=1", reques
 }
 ```
 
-
    * List all concept classes with a given search query. Returns a `404 Not Found` status if concept classes not exist. 
     If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+
+## List concept class type by UUID.
 
 > List concept class type by UUID
 
 ```shell
-
-    GET /conceptclass/:target_concept_class_uuid
+GET /conceptclass/:target_concept_class_uuid
 ```
 
 ```java
@@ -122,7 +122,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass/8d4907b2-c2cc-11
   .catch(error => console.log('error', error));
 
 ```
-## List concept class type by UUID.
+
 
 
   * Retrieve a concept class by its UUID. Returns a `404 Not Found` status if concept class type not exists. If user not logged 
@@ -133,11 +133,11 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass/8d4907b2-c2cc-11
 > Create a concept class 
 
 ```shell
-        POST /conceptclass
-        {
-          "name": "Procedure",
-          "description": "Describes a clinical procedure"
-        }
+POST /conceptclass
+{
+  "name": "Procedure",
+  "description": "Describes a clinical procedure"
+}
 ```
 ```java
 
@@ -179,8 +179,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass/", requestOption
 ```
 
 
-* To Create a concept class, you need to specify below attributes in the request body. If you are not logged in to perform this action,
- a `401 Unauthorized` status returned.
+* To Create a concept class, you need to specify below attributes in the request body. If you are not logged in to perform this action,a `401 Unauthorized` status returned.
+* A `400 Bad Request` status is returned if the new concept class name is already used for some other concept class. type
 
     #### Attributes
 
@@ -190,14 +190,16 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass/", requestOption
     *description* | `String` | Description
 
     
-### Update a concept class
+## Update a concept class
+
+> Update a concept class
 
 ```shell
-        POST /conceptclass/:target_concept_class_uuid
-        {
-          "name": "Procedure",
-          "description": "Updating the dummy description"
-        }
+POST /conceptclass/:target_concept_class_uuid
+{
+  "name": "Procedure",
+  "description": "Updating the dummy description"
+}
 ```
 ```java
 
@@ -237,8 +239,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass/8afb1247-9c8c-48
 
 ```
 
-*  Update a target concept class with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if concept class not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+*  Update a target concept class with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept class not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Attributes
 
@@ -249,10 +250,13 @@ status if concept class not exists. If the user not logged in to perform this ac
 
     
 
-### Delete a concept class
+## Delete a concept class
+
+> Delete a concept class 
 
 ```shell
-        DELETE /conceptclass/:target_concept_class_uuid?purge=true
+DELETE /conceptclass/:target_concept_class_uuid?purge=true
+
 ```
 
 ```java
@@ -262,7 +266,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass/8afb1247-9c8c-48c4-9253-946ffd44bc8a")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass/8afb1247-9c8c-48c4-9253-946ffd44bc8a?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=FD046011463ABEF58A36F3C87DADC88B")
@@ -283,7 +287,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass/8afb1247-9c8c-48c4-9253-946ffd44bc8a", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass/8afb1247-9c8c-48c4-9253-946ffd44bc8a?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
