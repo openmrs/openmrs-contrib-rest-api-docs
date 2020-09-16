@@ -2,9 +2,9 @@
 
 ## Concept Source Overview
 
-* Concepts are often managed within a dictionary (as a collection of concepts). While OpenMRS has, it's own dictionary of 
-concepts, other dictionaries may exist in other systems or as standardized reference terminologies (like LOINC or ICD). 
-The authorities who manage these other concept dictionaries represent "Concept Sources."
+* Concepts are often managed within a dictionary (as a collection of concepts). While OpenMRS has, it's own dictionary of concepts, other dictionaries may exist in other systems or as standardized reference terminologies (like LOINC or ICD). The authorities who manage these other concept dictionaries represent "Concept Sources."
+* For eg `PIH Malawi`:`Partners in Health Malawi concept dictionary`, `SNOMED CT`:`SNOMED Preferred mapping` etc.
+
 
 ## Available operations for Concept Source. 
 
@@ -18,27 +18,46 @@ The authorities who manage these other concept dictionaries represent "Concept S
 
 ### List all non-retired concept source.
 
-```console
-GET /conceptsource?q="loinc"
+```shell
+GET /conceptsource/conceptsource?q=pih&limit=1
 ```
-   
-    Quickly filter concept source types with a given search query. Returns a `404 Not Found` status if concept source type not exists. 
-    If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+```response
+{
+    "results": [
+        {
+            "uuid": "fb9aaaf1-65e2-4c18-b53c-16b575f2f385",
+            "display": "PIH",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/fb9aaaf1-65e2-4c18-b53c-16b575f2f385"
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource?q=pih&limit=1&startIndex=1"
+        }
+    ]
+}
+```
+    Quickly filter concept source types with a given search query. Returns a `404 Not Found` status if concept source type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
     #### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | `String` | Full or partial match to concept source name. Search is case-insensitive
+    *q* | `String` | Full or partial match to concept source name. Search is case-insensitive for eg. PIH
 
     
 ### Query concept source by UUID.
 
-```console
+```shell
 GET /conceptsource/:target_concept_source_type_uuid
 ```
-    Retrieve a concept source type by its UUID. Returns a `404 Not Found` status if concept source type not exists. If user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
+    Retrieve a concept source type by its UUID. Returns a `404 Not Found` status if concept source type not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
     
    
 ## Create a concept source
