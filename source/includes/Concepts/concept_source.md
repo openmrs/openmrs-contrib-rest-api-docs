@@ -16,11 +16,47 @@
 
 ## List concept source
 
-### List all non-retired concept source.
+## List all non-retired concept source
+
+>List all non-retired concept source
+
 
 ```shell
-GET /conceptsource/conceptsource?q=pih&limit=1
+GET /conceptsource?q=pih&limit=1
 ```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource?q=pih&limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource?q=pih&limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 ```response
 {
     "results": [
@@ -42,27 +78,65 @@ GET /conceptsource/conceptsource?q=pih&limit=1
         }
     ]
 }
+
 ```
-    Quickly filter concept source types with a given search query. Returns a `404 Not Found` status if concept source type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+*   Quickly filter concept source types with a given search query. Returns a `404 Not Found` status if concept source type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
-    #### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *q* | `String` | Full or partial match to concept source name. Search is case-insensitive for eg. PIH
 
     
-### Query concept source by UUID.
+## Query concept source by UUID
+
+> Query concept source by UUID
 
 ```shell
 GET /conceptsource/:target_concept_source_type_uuid
 ```
-    Retrieve a concept source type by its UUID. Returns a `404 Not Found` status if concept source type not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+ *  Retrieve a concept source type by its UUID. Returns a `404 Not Found` status if concept source type not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
     
    
 ## Create a concept source
 
-```console
+> Create a concept source
+
+```shell
 POST /conceptsource
 {
   "name": "SNOMED CT",
@@ -70,8 +144,47 @@ POST /conceptsource
   "hl7Code": "SCT"
 }
 ```
-* To Create a concept source type you need to specify below attributes in the request body. If you are not logged in to perform this action,
- a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"SNOMED CT\",\r\n  \"description\": \"SNOMED Preferred mapping\",\r\n  \"hl7Code\": \"SCT\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D");
+
+var raw = JSON.stringify({"name":"SNOMED CT","description":"SNOMED Preferred mapping","hl7Code":"SCT"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* To Create a concept source type you need to specify below attributes in the request body. If you are not logged in to perform this action,a `401 Unauthorized` status returned.
+* A `500 Internal Server Error` status is returned if the new concept source class name, description or Hl7Code is already used for some other concept source class.
 
     ### Attributes
 
@@ -84,14 +197,56 @@ POST /conceptsource
    
 ## Update a concept source
 
-```console
-POST /conceptsource
+> Update a concept source
+
+```shell
+POST /conceptsource/:target_concept_source_type_uuid
 {
  "name": "SNOMED CTS",
  "description": "SNOMED Preferred mapping",
  "hl7Code": "SCT"
 }
 ```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n \"name\": \"SNOMED CTS\",\r\n \"description\": \"SNOMED Preferred mapping\",\r\n \"hl7Code\": \"SCT\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D");
+
+var raw = JSON.stringify({"name":"SNOMED CTS","description":"SNOMED Preferred mapping","hl7Code":"SCT"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+``` 
+
 *  Update a target concept source type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if concept source not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -107,9 +262,45 @@ status if concept source not exists. If the user is not logged in to perform thi
     
 ## Delete a concept source
 
-```console
+> Delete a concept source
+
+```shell
 DELETE /conceptsource/:target_concept_source_type_uuid?purge=true
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/9ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/9ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));```
+```
+
 * Delete or Retire a target concept source type by its UUID. Returns a `404 Not Found` status if concept source not exists. If user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
