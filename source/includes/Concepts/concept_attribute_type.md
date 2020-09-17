@@ -14,9 +14,9 @@
 
 ## List concept attribute types
 
-### List all non-retired concept attribute types.
+## List all non-retired concept attribute types.
 
-```console
+```shell
 GET /conceptattributetype?q=time
 ```
 
@@ -30,9 +30,9 @@ GET /conceptattributetype?q=time
     *q* | `String` | Full or partial display name of concept source
 
 
-### List concept attribute type by UUID.
+## List concept attribute type by UUID.
 
-```console
+```shell
 GET /conceptattributetype/:target_concept_attribute_type_uuid
 ```
     Retrieve a concept attribute type by its UUID. Returns a `404 Not Found` status if concept attribute type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
@@ -40,7 +40,7 @@ GET /conceptattributetype/:target_concept_attribute_type_uuid
 
 ## Create a concept attribute type
 
-```console
+```shell
 POST /conceptattributetype
 {
   "name": "Time Span",
@@ -71,7 +71,7 @@ Parameter | Type | Description
 
 ## Update a concept attribute type
 
-```console
+```shell
 POST /conceptattributetype
 {
   "name": "Time Span",
@@ -103,7 +103,7 @@ Parameter | Type | Description
 
 ## Delete a concept attribute type
 
-```console
+```shell
 DELETE /conceptattributetype/:target_concept_attribute_type_uuid?purge=true
 ```
 * Delete or retire a target concept attribute type by its UUID. Returns
