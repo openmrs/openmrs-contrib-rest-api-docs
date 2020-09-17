@@ -57,6 +57,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource?q=pih&limit=1",
 
 ```
 
+> Success Response
+
 ```response
 {
     "results": [
@@ -206,7 +208,9 @@ POST /conceptsource/:target_concept_source_type_uuid
  "description": "SNOMED Preferred mapping",
  "hl7Code": "SCT"
 }
+
 ```
+
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
@@ -298,13 +302,12 @@ var requestOptions = {
 fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/9ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
-  .catch(error => console.log('error', error));```
+  .catch(error => console.log('error', error));
 ```
 
-* Delete or Retire a target concept source type by its UUID. Returns a `404 Not Found` status if concept source not exists. If user not logged 
-  in to perform this action, a `401 Unauthorized` status returned.
+* Delete or Retire a target concept source type by its UUID. Returns a `404 Not Found` status if concept source not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Query Parameters
+  ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
