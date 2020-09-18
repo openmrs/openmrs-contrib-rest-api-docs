@@ -143,7 +143,8 @@ POST /conceptsource
 {
   "name": "SNOMED CT",
   "description": "SNOMED Preferred mapping",
-  "hl7Code": "SCT"
+  "hl7Code": "SCT",
+  "uniqueId":"2.16.840.1.113883.6.96"	
 }
 ```
 ```java
@@ -151,25 +152,26 @@ POST /conceptsource
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"SNOMED CT\",\r\n  \"description\": \"SNOMED Preferred mapping\",\r\n  \"hl7Code\": \"SCT\"\r\n}");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"SNOMED CT\",\r\n  \"description\": \"SNOMED Preferred mapping\",\r\n  \"hl7Code\": \"SCT\",\r\n  \"uniqueId\":\"2.16.840.1.113883.6.96\"\t\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource")
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptsource/")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
-  .addHeader("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D")
+  .addHeader("Cookie", "JSESSIONID=3359211CFE448283F1CDCE925E43545E")
   .build();
 Response response = client.newCall(request).execute();
 
 ```
+
 ```javascript
 
 var myHeaders = new Headers();
 myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
 myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=BB426C696078A92639710E2B54C97C4D");
+myHeaders.append("Cookie", "JSESSIONID=3359211CFE448283F1CDCE925E43545E");
 
-var raw = JSON.stringify({"name":"SNOMED CT","description":"SNOMED Preferred mapping","hl7Code":"SCT"});
+var raw = JSON.stringify({"name":"SNOMED CT","description":"SNOMED Preferred mapping","hl7Code":"SCT","uniqueId":"2.16.840.1.113883.6.96"});
 
 var requestOptions = {
   method: 'POST',
@@ -178,7 +180,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource", requestOptions)
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptsource/", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -306,6 +308,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/9ADDDDDDDDDDDDD
 ```
 
 * Delete or Retire a target concept source type by its UUID. Returns a `404 Not Found` status if concept source not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* If the target concept source is referenced somewhere else in the database a `500 Internal Server Error` status is returned.
 
   ### Query Parameters
 
