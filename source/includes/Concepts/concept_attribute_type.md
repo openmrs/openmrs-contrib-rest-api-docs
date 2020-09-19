@@ -17,7 +17,67 @@
 ## List all non-retired concept attribute types.
 
 ```shell
-GET /conceptattributetype?q=time
+GET /conceptattributetype?q=time&limit=1
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "ecc8e1af-3465-4840-85b8-ec5a2298bdcf",
+            "display": "Time Span",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf"
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1&startIndex=1"
+        }
+    ]
+}
+
 ```
 
     Quickly filter concept attribute types with a given search query. Returns a `404 Not Found` status if concept attribute type not exists. 
@@ -35,6 +95,40 @@ GET /conceptattributetype?q=time
 ```shell
 GET /conceptattributetype/:target_concept_attribute_type_uuid
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?ecc8e1af-3465-4840-85b8-ec5a2298bdcf")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?ecc8e1af-3465-4840-85b8-ec5a2298bdcf", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```	
+
     Retrieve a concept attribute type by its UUID. Returns a `404 Not Found` status if concept attribute type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
@@ -72,7 +166,7 @@ Parameter | Type | Description
 ## Update a concept attribute type
 
 ```shell
-POST /conceptattributetype
+POST /conceptattributetype/:target_concept_attribute_type_uuid
 {
   "name": "Time Span",
   "description": "This attribute type will record the time span for the concept",
@@ -84,8 +178,7 @@ POST /conceptattributetype
   "handlerConfig": "dafault"
 }
 ```
-*  Update a target concept attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if concept attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+*  Update a target concept attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ### Attributes
 
@@ -106,10 +199,43 @@ Parameter | Type | Description
 ```shell
 DELETE /conceptattributetype/:target_concept_attribute_type_uuid?purge=true
 ```
-* Delete or retire a target concept attribute type by its UUID. Returns
-  `404 Not Found` status if concept attribute does not exist. If not 
-  authenticated or user does not have sufficient privilege, a 
-  `401 Unauthorized` status is returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Delete or retire a target concept attribute type by its UUID. Returns `404 Not Found` status if concept attribute does not exist. If not authenticated or user does not have sufficient privilege, a `401 Unauthorized` status is returned.
 
     ### Query Parameters
 
