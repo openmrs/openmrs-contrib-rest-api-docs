@@ -3,14 +3,11 @@
 ## Overview
 
 * Concept Mappings are added to facilitate managing concept dictionaries and point to other concepts that have the same meaning. 
-Mappings are useful when you need to receive or send information to external systems, letting you define how your system's 
-concepts relate to external concepts such as standardized medical vocabularies (e.g., ICD, LOINC, SNOMED). 
+* Mappings are useful when you need to receive or send information to external systems, letting you define how your system's concepts relate to external concepts such as standardized medical vocabularies (e.g., ICD, LOINC, SNOMED). 
   
 * For example, add a mapping to a concept in the MCL dictionary. You can save the concept now and create some answers.
 
-* Repeat the steps and create the concepts PLANNING PREGNANCY and CURRENTLY PREGNANT of Class Finding and Datatype Boolean. 
-The last possible answer will be the OTHER of Class Misc and Datatype N/A. After creating three new concepts, you can edit 
-ANTENATAL VISIT REASON and add them as answers.
+* Repeat the steps and create the concepts PLANNING PREGNANCY and CURRENTLY PREGNANT of Class Finding and Datatype Boolean. The last possible answer will be the OTHER of Class Misc and Datatype N/A. After creating three new concepts, you can edit ANTENATAL VISIT REASON and add them as answers.
 
 ## Available operations. 
 
@@ -22,13 +19,72 @@ ANTENATAL VISIT REASON and add them as answers.
 
 ### List concept map types
 
-### List all non-retired concept map types.
+## List all non-retired concept map types.
 
-```console
-  GET /conceptmaptype?q="same"
+```shell
+  GET /conceptmaptype?q=associated
 ```
 
-    Quickly filter concept map types with a given search query. Returns a `404 Not Found` status if concept map type not exists. 
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=C40164E7FA407F9E872B0BBDBB4582B0")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=C40164E7FA407F9E872B0BBDBB4582B0");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+> Success Response
+
+```response
+{
+    "results": [
+        {
+            "uuid": "55e02065-7d8c-11e1-909d-c80aa9edcf4e",
+            "display": "Associated finding",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e"
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1&startIndex=1"
+        }
+    ]
+}
+```
+
+* Quickly filter concept map types with a given search query. Returns a `404 Not Found` status if concept map type not exists. 
     If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ##### Query Parameters
@@ -38,25 +94,56 @@ ANTENATAL VISIT REASON and add them as answers.
     *q* | `String` | Full or partial name search term. Search is case insensitive.
 
 
-### List concept map type by UUID.
+## List concept map type by UUID.
 
-```console
+```shell
   GET /conceptmaptype/:target_concept_map_type_uuid
 ```
+```java
 
-    Retrieve a concept map type by its UUID. Returns a `404 Not Found` status if concept map type not exists. If user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=CDA2E6D4A724D5E5DC294136C185284C")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=CDA2E6D4A724D5E5DC294136C185284C");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a concept map type by its UUID. Returns a `404 Not Found` status if concept map type not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
-### Create a concept map type
+## Create a concept map type
 
-    ```console
-        POST /conceptmaptype
-        {
-          "name": "SAME-AS",
-          "isHidden": false
-        }
-    ```
+```console
+	POST /conceptmaptype
+	{
+	  "name": "SAME-AS",
+	  "isHidden": false
+	}
+```
 
 * To Create a concept map type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
@@ -71,15 +158,14 @@ ANTENATAL VISIT REASON and add them as answers.
     
 ### Update a concept map type
 
-```console
-        POST /conceptmaptype
-        {
-          "name": "SAME-AS",
-          "isHidden": true
-        }
-    ```
-*  Update a target concept map type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if concept map not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+```shell
+POST /conceptmaptype
+{
+  "name": "SAME-AS",
+  "isHidden": true
+}
+```
+*  Update a target concept map type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept map not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Attributes
 
@@ -93,11 +179,46 @@ status if concept map not exists. If the user is not logged in to perform this a
 ### Delete a concept map type
 
 
-    ```console
-        DELETE /conceptmaptype/:target_concept_map_type_uuid?purge=true
-    ```
+```shell
+DELETE /conceptmaptype/:target_concept_map_type_uuid?purge=true
+```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=CDA2E6D4A724D5E5DC294136C185284C")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=CDA2E6D4A724D5E5DC294136C185284C");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
 
 * Delete or Retire a target concept map type by its UUID. Returns a `404 Not Found` status if concept map not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+* A `500 Internal Server Error `status is returned if the concept map is currently in use.
 
     #### Query Parameters
 
