@@ -10,14 +10,38 @@
 3.  [Update a concept reference term](#update-a-concept-reference-term)
 4.  [Delete a concept reference term](#delete-a-concept-reference-term)
 
-### List concept reference terms
+## List concept reference terms
 
-### List all concepts reference terms.
+## List all concepts reference terms.
 
-```console
-    GET /conceptreferenceterm?
-      codeOrName=274663001
+```shell
+    GET /conceptreferenceterm?codeOrName=274663001
 ```
+
+```
+```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "c4091da9-3d7c-37c8-906d-51183e750629",
+            "display": "SNOMED CT: 274663001",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629"
+                }
+            ]
+        }
+    ]
+}
+
+```
+
 
     Quickly filter concept reference term with given query parameters. Returns a `404 Not Found` status if concept reference term type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
