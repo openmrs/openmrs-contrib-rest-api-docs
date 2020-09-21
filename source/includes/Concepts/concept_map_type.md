@@ -17,9 +17,11 @@
 4. [Delete a concept mapping type](#delete-a-concept-map-type)
 
 
-### List concept map types
+## List concept map types
 
 ## List all non-retired concept map types.
+
+> List all non-retired concept map types
 
 ```shell
   GET /conceptmaptype?q=associated
@@ -58,7 +60,6 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype?q=associated&l
 
 ```
 
-
 > Success Response
 
 ```response
@@ -95,6 +96,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype?q=associated&l
 
 
 ## List concept map type by UUID.
+
+> List concept map type by UUID
 
 ```shell
   GET /conceptmaptype/:target_concept_map_type_uuid
@@ -136,6 +139,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-
 
 
 ## Create a concept map type
+
+> Create a concept map type
 
 ```shell
 POST /conceptmaptype
@@ -186,7 +191,6 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype", requestOpti
 
 ```
 
-
 * To Create a concept map type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
 * A `400 Bad request` status is returned if the name is already being used by some concept map type. 
@@ -199,7 +203,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype", requestOpti
     *description* | `String` | A brief description of the concept mapping type
     *isHidden* | `Boolean` | State to record concept map is hidden or not
     
-### Update a concept map type
+## Update a concept map type
+
+> Update a concept map type
 
 ```shell
 POST /conceptmaptype/:target_concept_map_type_uuid
@@ -264,6 +270,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype/35543629-7d8c
     
 ### Delete a concept map type
 
+> Delete a concept map type
 
 ```shell
 DELETE /conceptmaptype/:target_concept_map_type_uuid?purge=true
