@@ -51,7 +51,9 @@ Complex value, analogous to HL7 Embedded Datatype.
 
 ## List concept data types
 
-### List all non-retired concept data types.
+## List all non-retired concept data types.
+
+> List all non-retired concept data types
 
 ```shell
 GET /conceptdatatype"
@@ -118,7 +120,9 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptdatatype?limit=1"
     If the user is not logged in to perform this action, a `401 Unauthorized` status returned. 
 
     
-### Get concept data type by UUID.
+## Get concept data type by UUID.
+
+> Get concept data type by UUID
 
 ```shell
 GET /conceptdatatype/:target_concept_data_type_uuid
@@ -160,6 +164,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptdatatype/8d4a4488-c2cc
     
     
 ## Delete a concept data type
+
+> Delete a concept data type
 
 ```shell
 DELETE /conceptdatatype/:target_concept_data_type_uuid?purge=true
