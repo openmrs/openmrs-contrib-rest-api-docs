@@ -2,7 +2,7 @@
 
 ## Overview
 
-* Concept Mappings are added to facilitate managing concept dictionaries and point to other concepts that have the same meaning. 
+* Concept mappings are generally used to map between a local concept and an external concept, most often a reference (standard) terminology but sometimes concepts from other systems with which you need to Inter operate (i.e., transform data moving between systems).
 * Mappings are useful when you need to receive or send information to external systems, letting you define how your system's concepts relate to external concepts such as standardized medical vocabularies (e.g., ICD, LOINC, SNOMED). 
   
 * For example, add a mapping to a concept in the MCL dictionary. You can save the concept now and create some answers.
@@ -137,16 +137,59 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-
 
 ## Create a concept map type
 
-```console
-	POST /conceptmaptype
-	{
-	  "name": "SAME-AS",
-	  "isHidden": false
-	}
+```shell
+POST /conceptmaptype
+{
+	"name": "SAME-AS",
+	"description": "used to map concepts which are Identical",
+	"isHidden": false
+}
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n\t\"name\": \"SAME-AS\",\r\n\t\"description\":\"used to map concepts which are Identical\",\r\n\t\"isHidden\": false\r\n}\r\n{\r\n\t\"name\": \"SAME-AS\",\r\n\t\"description\":\"used to map concepts which are Identical\"\r\n\t\"isHidden\": false\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=77AE436C4972FB63FC69B7836445489F")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=77AE436C4972FB63FC69B7836445489F");
+
+var raw = "{\n	\"name\": \"SAME-AS\",\n	\"description\":\"used to map concepts which are Identical\",\n	\"isHidden\": false\n}\n{\n	\"name\": \"SAME-AS\",\n	\"description\":\"used to map concepts which are Identical\"\n	\"isHidden\": false\n}\n";
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 
 * To Create a concept map type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
+* A `400 Bad request` status is returned if the name is already being used by some concept map type. 
 
 ### Attributes
 
@@ -159,12 +202,55 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-
 ### Update a concept map type
 
 ```shell
-POST /conceptmaptype
+POST /conceptmaptype/:target_concept_map_type_uuid
 {
   "name": "SAME-AS",
+  "description": "dummy update",
   "isHidden": true
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n\t\"name\": \"SAME-AS\",\r\n\t\"description\": \"dummy update\",\r\n\t\"isHidden\": false\r\n}\r\n{\r\n\t\"name\": \"SAME-AS\",\r\n\t\"description\":\"used to map concepts which are Identical\"\r\n\t\"isHidden\": false\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype/35543629-7d8c-11e1-909d-c80aa9edcf4e")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=77AE436C4972FB63FC69B7836445489F")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=77AE436C4972FB63FC69B7836445489F");
+
+var raw = "{\n	\"name\": \"SAME-AS\",\n	\"description\": \"dummy update\",\n	\"isHidden\": false\n}\n{\n	\"name\": \"SAME-AS\",\n	\"description\":\"used to map concepts which are Identical\"\n	\"isHidden\": false\n}\n";
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype/35543629-7d8c-11e1-909d-c80aa9edcf4e", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 *  Update a target concept map type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept map not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Attributes
