@@ -93,6 +93,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?q=t
 
 ## List concept attribute type by UUID.
 
+> List concept attribute type by UUID
+
 ```shell
 GET /conceptattributetype/:target_concept_attribute_type_uuid
 ```
@@ -134,6 +136,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?ecc
 
 
 ## Create a concept attribute type
+
+> Create a concept attribute type
 
 ```shell
 POST /conceptattributetype
@@ -206,6 +210,8 @@ Parameter | Type | Description
 
 ## Update a concept attribute type
 
+> Update a concept attribute type
+
 ```shell
 POST /conceptattributetype/:target_concept_attribute_type_uuid
 {
@@ -277,6 +283,8 @@ Parameter | Type | Description
 *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list, and this configuration would tell the handler the possible choices in the list for this specific attribute type
 
 ## Delete a concept attribute type
+
+> Delete a concept attribute type
 
 ```shell
 DELETE /conceptattributetype/:target_concept_attribute_type_uuid?purge=true
