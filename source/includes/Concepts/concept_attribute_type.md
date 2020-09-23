@@ -16,6 +16,8 @@
 
 ## List all non-retired concept attribute types.
 
+> List all non-retired concept attribute types
+
 ```shell
 GET /conceptattributetype?q=time&limit=1
 ```
@@ -80,8 +82,7 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?q=t
 
 ```
 
-    Quickly filter concept attribute types with a given search query. Returns a `404 Not Found` status if concept attribute type not exists. 
-    If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* Quickly filter concept attribute types with a given search query. Returns a `404 Not Found` status if concept  attribute type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     #### Query Parameters
 
@@ -129,7 +130,7 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?ecc
 
 ```	
 
-    Retrieve a concept attribute type by its UUID. Returns a `404 Not Found` status if concept attribute type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* Retrieve a concept attribute type by its UUID. Returns a `404 Not Found` status if concept attribute type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
 ## Create a concept attribute type
@@ -144,11 +145,51 @@ POST /conceptattributetype
   "maxOccurs": 1,
   "datatypeConfig": "default",
   "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": "dafault"
+  "handlerConfig": null
 }
 ```
-* To Create a concept attribute type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
-  a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Time Span\",\r\n  \"description\": \"This attribute type will record the time span for the concept\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.LongFreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\": \"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler\",\r\n  \"handlerConfig\": null\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=7F21B551667D3B99C226980B29262DAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=7F21B551667D3B99C226980B29262DAF");
+
+var raw = JSON.stringify({"name":"Time Span","description":"This attribute type will record the time span for the concept","datatypeClassname":"org.openmrs.customdatatype.datatype.LongFreeTextDatatype","minOccurs":0,"maxOccurs":1,"datatypeConfig":"default","preferredHandlerClassname":"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler","handlerConfig":null});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* To Create a concept attribute type, you need to specify below attributes in the request body. If you are not logged in to perform this action,a `401 Unauthorized` status returned.
 
 ### Attributes
 
@@ -169,15 +210,56 @@ Parameter | Type | Description
 POST /conceptattributetype/:target_concept_attribute_type_uuid
 {
   "name": "Time Span",
-  "description": "This attribute type will record the time span for the concept",
+  "description": "Dummy description update",
   "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
   "minOccurs": 0,
   "maxOccurs": 1,
   "datatypeConfig": "default",
   "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": "dafault"
+  "handlerConfig": null
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Time Span\",\r\n  \"description\": \"Dummy description update\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.LongFreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\": \"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler\",\r\n  \"handlerConfig\": null\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/b5d56fd4-9add-4c00-a227-eb69d70669dd")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=7F21B551667D3B99C226980B29262DAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=7F21B551667D3B99C226980B29262DAF");
+
+var raw = JSON.stringify({"name":"Time Span","description":"Dummy description update","datatypeClassname":"org.openmrs.customdatatype.datatype.LongFreeTextDatatype","minOccurs":0,"maxOccurs":1,"datatypeConfig":"default","preferredHandlerClassname":"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler","handlerConfig":null});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/b5d56fd4-9add-4c00-a227-eb69d70669dd", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```		
+
 *  Update a target concept attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ### Attributes
