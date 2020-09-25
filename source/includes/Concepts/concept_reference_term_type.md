@@ -4,6 +4,8 @@
 
 * Concept reference terms represent terms within external vocabularies (typically standardized terminologies like SNOMED, ICD, LOINC, etc.). OpenMRS concept can be mapped to these reference terms through [concept mappings](concept_mapping.md). 
   
+* For example, the concept `left Lung` can be mapped to an external concept `lower lobe of Lung` using a concept mapping `BROADER-THAN`.
+
 ## Available operations. 
 1.  [List concept reference terms](#list-concept-reference-terms)
 2.  [Create a concept reference term](#create-a-concept-reference-term)
@@ -15,10 +17,42 @@
 ## List all concepts reference terms.
 
 ```shell
-    GET /conceptreferenceterm?codeOrName=274663001
+GET /conceptreferenceterm?codeOrName=274663001
 ```
 
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm?codeOrName=274663001")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=4F55735593751E224686B006CD388234")
+  .build();
+Response response = client.newCall(request).execute();
+
 ```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=4F55735593751E224686B006CD388234");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm?codeOrName=274663001", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 ```
 
 > Success Response
@@ -42,45 +76,80 @@
 
 ```
 
-
-    Quickly filter concept reference term with given query parameters. Returns a `404 Not Found` status if concept reference term type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* Quickly filter concept reference term with given query parameters. Returns a `404 Not Found` status if concept reference term type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *codeOrName* | `String` |  Represents a name from a standard medical code
+    *codeOrName* | `String` |  Represents a code or name from a standard medical code
     *source* | `String` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database
 
     
 ### Query concept reference term by UUID.
 
-    ```console
-    GET /conceptreferenceterm/:target_concept_reference_term_type_uuid
-    ```
+```console
+GET /conceptreferenceterm/:target_concept_reference_term_type_uuid
+```
 
-    Retrieve a concept reference term by its UUID. Returns a `404 Not Found` status if concept reference term not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=4F55735593751E224686B006CD388234")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=4F55735593751E224686B006CD388234");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+*  Retrieve a concept reference term by its UUID. Returns a `404 Not Found` status if concept reference term not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
 ### Create a concept reference term
 
 ```console
-        POST /conceptreferenceterm
-        {
-          "code": "274663001",
-          "conceptSource": "1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-          "version": "1.0.0"
-        }
+
+POST /conceptreferenceterm
+{
+  "name": "SNOMED-CT",	
+  "code": "274663001", 
+  "description": ""	
+  "conceptSource": "1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+  "version": "1.0.0"
+}
+
 ```
-* To Create an concept reference term, you need to specify below attributes in the request body. If you are not logged in to perform this action,
- a `401 Unauthorized` status returned.
+* To Create an concept reference term, you need to specify below attributes in the request body. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
     *names* | `String` | Name for the concept reference term
-    *description* | `String` | A concept datatype prescribes the structured format by which you desire the data to be represented. In simple terms, the data type defines the type of data that the concept is intended to collect
+    *description* | `String` | A [concept datatype](concept_data_type.md) prescribes the structured format by which you desire the data to be represented. In simple terms, the data type defines the type of data that the concept is intended to collect
     *code* | `String` | Represents a name from a standard medical code (required)
     *conceptSource* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database (required)
     *version* | `String` | A method to keep track of the number of updates applied to a specific concept reference term type
@@ -89,13 +158,16 @@
 ### Update a concept reference term
 
 ```console
-        POST /conceptreferenceterm/:target_concept_reference_term_type_uuid
-        {
-          "code": "274663001",
-          "conceptSource": "1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-          "version": "1.0.1"
-        }
+
+POST /conceptreferenceterm/:target_concept_reference_term_type_uuid
+{
+  "code": "274663001",
+  "conceptSource": "1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+  "version": "1.0.1"
+}
+
 ```
+
 *  Update a target concept reference term with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if concept reference term not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -113,7 +185,8 @@ status if concept reference term not exists. If the user is not logged in to per
 ### Delete a concept reference term
 
 ```console
-        DELETE /conceptreferenceterm/:target_concept_reference_term_type_uuid?purge=true    ```
+DELETE /conceptreferenceterm/:target_concept_reference_term_type_uuid?purge=true    
+```
 
 * Delete or retire a target concept reference term by its UUID. Returns a `404 Not Found` status if concept reference term not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
