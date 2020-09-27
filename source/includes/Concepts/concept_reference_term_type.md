@@ -130,26 +130,70 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9
 
 ### Create a concept reference term
 
-```console
+```shell
 
 POST /conceptreferenceterm
 {
-  "name": "SNOMED-CT",	
+  "name": "Acute Pain",	
   "code": "274663001", 
-  "description": ""	
+  "description": "description for the concept reference term"	
   "conceptSource": "1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
   "version": "1.0.0"
 }
 
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Acute Pain\",\t\r\n  \"code\": \"274663001\", \r\n  \"description\": \"description for the concept reference term\",\t\r\n  \"conceptSource\": \"1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\",\r\n  \"version\": \"1.0.0\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=B369B31B00020CC1488C42325A76272B")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=B369B31B00020CC1488C42325A76272B");
+
+var raw = JSON.stringify({"name":"Acute Pain","code":"274663001","description":"description for the concept reference term","conceptSource":"1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD","version":"1.0.0"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
 * To Create an concept reference term, you need to specify below attributes in the request body. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
+* A `400 Bad Request` status is returned if the code used is already being used by some other concept reference term with the same concept source
 
 ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
     *names* | `String` | Name for the concept reference term
-    *description* | `String` | A [concept datatype](concept_data_type.md) prescribes the structured format by which you desire the data to be represented. In simple terms, the data type defines the type of data that the concept is intended to collect
+    *description* | `String` | A brief description of the concept reference term
     *code* | `String` | Represents a name from a standard medical code (required)
     *conceptSource* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database (required)
     *version* | `String` | A method to keep track of the number of updates applied to a specific concept reference term type
@@ -157,26 +201,67 @@ POST /conceptreferenceterm
     
 ### Update a concept reference term
 
-```console
+```shell
 
 POST /conceptreferenceterm/:target_concept_reference_term_type_uuid
 {
-  "code": "274663001",
+  "name": "Acute Pain",	
+  "code": "274663001", 
+  "description": "Modified description for the concept reference term"	
   "conceptSource": "1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-  "version": "1.0.1"
+  "version": "1.0.0"
 }
 
 ```
 
-*  Update a target concept reference term with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if concept reference term not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Acute Pain\",\t\r\n  \"code\": \"274663001\", \r\n  \"description\": \"description for the concept reference term\",\t\r\n  \"conceptSource\": \"1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\",\r\n  \"version\": \"1.0.0\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=B369B31B00020CC1488C42325A76272B")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=B369B31B00020CC1488C42325A76272B");
+
+var raw = JSON.stringify({"name":"Acute Pain","code":"274663001","description":"description for the concept reference term","conceptSource":"1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD","version":"1.0.0"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+*  Update a target concept reference term with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept reference term not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
     *names* | `String` | Name for the concept reference term
-    *description* | `String` | A concept datatype prescribes the structured format by which you desire the data to be represented. In simple terms, the datatype defines the type of data that the concept is intended to collect
+    *description* | `String` | A brief description of the concept reference term
     *code* | `String` | Represents a name from a standard medical code (required)
     *conceptSource* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database (required)
     *version* | `String` | A method to keep track of the number of updates applied to a specific concept reference term type
@@ -184,11 +269,49 @@ status if concept reference term not exists. If the user is not logged in to per
     
 ### Delete a concept reference term
 
-```console
+```shell
 DELETE /conceptreferenceterm/:target_concept_reference_term_type_uuid?purge=true    
 ```
 
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=B369B31B00020CC1488C42325A76272B")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=B369B31B00020CC1488C42325A76272B");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
 * Delete or retire a target concept reference term by its UUID. Returns a `404 Not Found` status if concept reference term not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+* A `500 Internal Server Error` status is returned if the concept reference term to be deleted is currently in use.
 
     #### Query Parameters
 
