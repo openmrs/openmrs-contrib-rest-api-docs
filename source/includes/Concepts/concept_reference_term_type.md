@@ -16,6 +16,8 @@
 
 ## List all concepts reference terms.
 
+> List all concepts reference terms
+
 ```shell
 GET /conceptreferenceterm?codeOrName=274663001
 ```
@@ -86,9 +88,11 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm?codeOrNa
     *source* | `String` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database
 
     
-### Query concept reference term by UUID.
+## Query concept reference term by UUID.
 
-```console
+> Query concept reference term by UUID
+
+```shell
 GET /conceptreferenceterm/:target_concept_reference_term_type_uuid
 ```
 
@@ -128,7 +132,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9
 *  Retrieve a concept reference term by its UUID. Returns a `404 Not Found` status if concept reference term not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
-### Create a concept reference term
+## Create a concept reference term
+
+> Create a concept reference term
 
 ```shell
 
@@ -201,6 +207,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm", reques
     
 ### Update a concept reference term
 
+> Update a concept reference term
+
 ```shell
 
 POST /conceptreferenceterm/:target_concept_reference_term_type_uuid
@@ -269,6 +277,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9
     
 ### Delete a concept reference term
 
+> Delete a concept reference term
+
 ```shell
 DELETE /conceptreferenceterm/:target_concept_reference_term_type_uuid?purge=true    
 ```
@@ -308,7 +318,6 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9
   .catch(error => console.log('error', error));
 
 ```
-
 
 * Delete or retire a target concept reference term by its UUID. Returns a `404 Not Found` status if concept reference term not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 * A `500 Internal Server Error` status is returned if the concept reference term to be deleted is currently in use.
