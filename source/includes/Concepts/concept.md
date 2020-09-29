@@ -66,15 +66,76 @@ referenced source.
 
 ## List concepts
 
-### List all concepts.
+## List all concepts.
 
-```console
-GET /concept?
-  term=38341003
-  &source=SNOMED%20CT
+> List all concepts
+
+```shell
+GET /concept?term=38341003&source=SNOMED%20CT&limit=1
 ```
 
-    Quickly filter concepts with given query parameters. Returns a `404 Not Found` status if concepts not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=SNOMED%20CT&limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=6E54C8D18F81C34555DBBB8585951625")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=6E54C8D18F81C34555DBBB8585951625");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=SNOMED%20CT&limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "18316c68-b5f9-4986-b76d-9975cd0ebe31",
+            "display": "True",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/concept/18316c68-b5f9-4986-b76d-9975cd0ebe31"
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=SNOMED+CT&limit=1&startIndex=1"
+        }
+    ]
+}
+
+```
+
+
+* Quickly filter concepts with given query parameters. Returns a `404 Not Found` status if concepts not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
 ### Query Parameters
 
