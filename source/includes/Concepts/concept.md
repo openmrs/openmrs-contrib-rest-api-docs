@@ -17,21 +17,19 @@ your pet.  In this example, there would be one concept -- "name of first pet."
   
 ## Sub Resource types of Concepts
 
-### Concept Attribute.
+### Concept Attribute
 
 * If you wish to record extra information about concept, you can create Concept Attributes and assign them to Concept Types.
 
 * Concept attributes exists specifically to allow implementations to extend the data model.
 
-### Concept Name.
+### Concept Name
 
 * ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale since there can be many names for any concept.
 
-### Concept Mapping.
+### Concept Mapping
 
-* Concept Mappings are added to facilitate managing concept dictionaries and point to other concepts that have the same meaning. 
-Mappings are useful when you need to receive or send information to external systems, letting you define how your system's
- concepts relate to external concepts such as standardized medical vocabularies (e.g., ICD, LOINC, SNOMED).
+* Concept Mappings are added to facilitate managing concept dictionaries and point to other concepts that have the same meaning. Mappings are useful when you need to receive or send information to external systems, letting you define how your system's concepts relate to external concepts such as standardized medical vocabularies (e.g., ICD, LOINC, SNOMED).
 
 * For example, add a mapping to a concept in the MCL dictionary. You can save the concept now and create some answers.
 
@@ -151,10 +149,46 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=
     
 ### Query concept by UUID.
 
-```console
+> Query concept by UUID
+
+```shell
 GET /concept/:target_concept_uuid
 ```
-    Retrieve a concept by its UUID. Returns a `404 Not Found` status if concepts not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a concept by its UUID. Returns a `404 Not Found` status if concepts not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
    
 ## Create a concept
@@ -233,11 +267,47 @@ status if concept not exists. If the user is not logged in to perform this actio
     
 ## Delete a concept
 
-```console
+```shell
 DELETE /concept/:target_concept_uuid?purge=true
 ```
-* Delete or retire a target concept by its UUID. Returns a `404 Not Found` status if concept not exists. If the user is not logged 
-  in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+* Delete or retire a target concept by its UUID. Returns a `404 Not Found` status if concept not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
