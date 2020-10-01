@@ -188,20 +188,137 @@ DELETE /concept/:target_concept_uuid?purge=true
 
 ### List all concept mappings for a concept.
 
-```console
-GET /concept/:target_concept_uuid/mapping 
+```shell
+GET /concept/:target_concept_uuid/mapping?limit=1 
 ```
-    Retrieve all **concept mapping** subresources of a **concept** resource by target_concept_uuid. Returns a 
-    `404 Not Found` status if concept mapping not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping?limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping?limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "display": "ICD-10-WHO: O03.9",
+            "uuid": "145917ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+            "conceptReferenceTerm": {
+                "uuid": "0a0933ab-e97e-3f93-b319-8bb20ed50f64",
+                "display": "ICD-10-WHO: O03.9",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/0a0933ab-e97e-3f93-b319-8bb20ed50f64"
+                    }
+                ]
+            },
+            "conceptMapType": {
+                "uuid": "43ac5109-7d8c-11e1-909d-c80aa9edcf4e",
+                "display": "NARROWER-THAN",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/43ac5109-7d8c-11e1-909d-c80aa9edcf4e"
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/145917ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/145917ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB?v=full"
+                }
+            ],
+            "resourceVersion": "1.9"
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping?limit=1&startIndex=1"
+        }
+    ]
+}
+
+```
+
+* Retrieve all **concept mapping** subresources of a **concept** resource by target_concept_uuid. Returns a `404 Not Found` status if concept mapping not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
 ### List concept mapping by its UUID and parent concept UUID.
 
-```console
+```shell
 GET /concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
 ```
-         Retrieve a **concept mapping** subresources of a **concept** resource. Returns a 
-     `404 Not Found` status if concept mapping not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a **concept mapping** subresources of a **concept** resource. Returns a `404 Not Found` status if concept mapping not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ## Create a concept mapping with properties
 
@@ -212,8 +329,7 @@ POST concept/:target_concept_uuid/mapping
   "conceptMapType": "35543629-7d8c-11e1-909d-c80aa9edcf4e"
 }
 ```
-* To Create a concept mapping subresource for a specific concept resource, you need to specify below attributes in the request body.
-If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* To Create a concept mapping subresource for a specific concept resource, you need to specify below attributes in the request body.If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ### Attributes
 
@@ -246,11 +362,46 @@ Parameter | Type | Description
 
 ## Delete a concept mapping
 
-```console
+```shell
 DELETE concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
 ```
-* Delete or Voided a target concept mapping subresource by its UUID. Returns a `404 Not Found` status if concept mapping not exists. 
- If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Delete or Voided a target concept mapping subresource by its UUID. Returns a `404 Not Found` status if concept mapping not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* A `400 Bad Request` status is returned if the resource dosent support purging.
 
 ### Query Parameters
 
