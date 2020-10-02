@@ -386,15 +386,15 @@ POST concept/:target_concept_uuid/name
   "conceptNameType": "FULLY_SPECIFIED"
 }
 ```
-* To Create a concept name subresource for a specific concept resource, you need to specify below attributes in the request body.
-If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* To Create a concept name subresource for a specific concept resource, you need to specify below attributes in the request body.If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* A `500 Internal Server Error` status is returned if the name is being currently used in a concept name.
 
     ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name for the concept (required)
-    *locale* | `String` | Language to record concept name (required)
+    *name* | `String` | Name for the concept (Required)
+    *locale* | `String` | Language to record concept name (Required)
     *localePreferred* | `String` | This is the preferred name to use within a locale.  By default, this is the fully-specified name; however, full-specified names are sometimes long and more detailed than necessary for day-to-day use.  In those cases, a synonym can be defined to be the locale-preferred name.  There can only be one preferred name within a locale.  The primary term should be the word(s) used by those who will have access to the records to prevent duplication of concept creation.
     *conceptNameType* | `String` | Type of the name to be specified.
      
@@ -402,7 +402,7 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
 ## Update concept name
 
 ```console
-POST concept/:target_concept_uuid/name
+POST concept/:target_concept_uuid/name/:target_concept_name_uuid
 {
   "name": "Bronchospasm",
   "locale": "en",
