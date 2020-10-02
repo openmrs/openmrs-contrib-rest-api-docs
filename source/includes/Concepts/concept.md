@@ -260,22 +260,120 @@ DELETE concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
     
 ## List concept name
 
-### List all concept names for a concept.
+### List all concept names for a concept
 
-```console
-GET /concept/:target_concept_uuid/name 
+```shell
+GET /concept/:target_concept_uuid/name?limit=1 
 ```
-    Retrieve all **concept name** subresources of a **concept** resource by target_concept_uuid. Returns a 
-    `404 Not Found` status if concept name not exists. If the user isnot logged in to perform this action, a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+```response
+{
+    "results": [
+        {
+            "display": "GROSSESSE, FAUSSE COUCHE",
+            "uuid": "106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+            "name": "GROSSESSE, FAUSSE COUCHE",
+            "locale": "fr",
+            "localePreferred": true,
+            "conceptNameType": "FULLY_SPECIFIED",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB?v=full"
+                }
+            ],
+            "resourceVersion": "1.9"
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1&startIndex=1"
+        }
+    ]
+}
+
+```
+
+* Retrieve all **concept name** subresources of a **concept** resource by target_concept_uuid. Returns a `404 Not Found` status if concept name not exists. If the user isnot logged in to perform this action, a `401 Unauthorized` status returned.
 
 
 ### List concept name it's UUID and parent concept UUID.
 
-```console
+```shell
 GET /concept/:target_concept_uuid/name/:target_concept_name_uuid
 ```    
-     Retrieve a **concept name** subresources of a **concept** resource. Returns a 
-     `404 Not Found` status if concept name not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a **concept name** subresources of a **concept** resource. Returns a `404 Not Found` status if concept name not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ## Create a concept name with properties
 
@@ -327,9 +425,45 @@ returned.
 
 ## Delete concept name
 
-```console
+```shell
 DELETE concept/:target_concept_uuid/name/:target_concept_name_uuid
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Delete or retire a target concept name subresource by its UUID. Returns a `404 Not Found` status if concept name not exists. 
  If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
