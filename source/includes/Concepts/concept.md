@@ -322,33 +322,117 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
      
 ## Create a concept mapping with properties
 
-```console
+```shell
 POST concept/:target_concept_uuid/mapping
 {
   "conceptReferenceTerm": "21fb14d7-5cd9-3621-ac30-c9e57320e233",
   "conceptMapType": "35543629-7d8c-11e1-909d-c80aa9edcf4e"
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"conceptReferenceTerm\": \"21fb14d7-5cd9-3621-ac30-c9e57320e233\",\r\n  \"conceptMapType\": \"35543629-7d8c-11e1-909d-c80aa9edcf4e\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=E84B91CD41B12C89101E366386887CF4")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=E84B91CD41B12C89101E366386887CF4");
+
+var raw = JSON.stringify({"conceptReferenceTerm":"21fb14d7-5cd9-3621-ac30-c9e57320e233","conceptMapType":"35543629-7d8c-11e1-909d-c80aa9edcf4e"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
 * To Create a concept mapping subresource for a specific concept resource, you need to specify below attributes in the request body.If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ### Attributes
 
 Parameter | Type | Description
 --- | --- | ---
-*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A concept term defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
+*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A concept reference term defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
 *conceptMapType* | `target_concept_map_type_uuid` | A concept map connects a concept term to a concept (required)
     
  
  
 ## Update a concept mapping
 
-```console
+```shell
 POST concept/:target_concept_uuid/mapping
 {
   "conceptReferenceTerm": "21fb14d7-5cd9-3621-ac30-c9e57320e233",
   "conceptMapType": "35543629-7d8c-11e1-909d-c80aa9edcf4e"
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"conceptReferenceTerm\": \"21fb14d7-5cd9-3621-ac30-c9e57320e233\",\r\n  \"conceptMapType\": \"35543629-7d8c-11e1-909d-c80aa9edcf4e\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/101fea18-161e-4f86-9bd6-35300046c2b4")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=E84B91CD41B12C89101E366386887CF4")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=E84B91CD41B12C89101E366386887CF4");
+
+var raw = JSON.stringify({"conceptReferenceTerm":"21fb14d7-5cd9-3621-ac30-c9e57320e233","conceptMapType":"35543629-7d8c-11e1-909d-c80aa9edcf4e"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/101fea18-161e-4f86-9bd6-35300046c2b4", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 
 * Updates a concept mapping subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if concept mapping not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
@@ -365,6 +449,7 @@ Parameter | Type | Description
 ```shell
 DELETE concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
 ```
+
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
