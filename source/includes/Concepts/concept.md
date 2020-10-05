@@ -377,15 +377,57 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
      
 ## Create a concept name with properties
 
-```console
+```shell
 POST concept/:target_concept_uuid/name
 {
-  "name": "Bronchospasm",
+  "name": "scabies",
   "locale": "en",
   "localePreferred": true,
-  "conceptNameType": "FULLY_SPECIFIED"
+  "conceptNameType": null
 }
+
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"scabies\",\r\n  \"locale\": \"en\",\r\n  \"localePreferred\": true,\r\n  \"conceptNameType\": null\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=E84B91CD41B12C89101E366386887CF4")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=E84B91CD41B12C89101E366386887CF4");
+
+var raw = JSON.stringify({"name":"scabies","locale":"en","localePreferred":true,"conceptNameType":null});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * To Create a concept name subresource for a specific concept resource, you need to specify below attributes in the request body.If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 * A `500 Internal Server Error` status is returned if the name is being currently used in a concept name.
 
@@ -401,15 +443,57 @@ POST concept/:target_concept_uuid/name
  
 ## Update concept name
 
-```console
+```shell
 POST concept/:target_concept_uuid/name/:target_concept_name_uuid
 {
-  "name": "Bronchospasm",
-  "locale": "en",
+  "name": "dummyName",
+  "locale": "fr",
   "localePreferred": true,
   "conceptNameType": "FULLY_SPECIFIED"
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"dummyName\",\r\n  \"locale\": \"fr\",\r\n  \"localePreferred\": true,\r\n  \"conceptNameType\": \"FULLY_SPECIFIED\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/107925BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=5CF7CD95A415309B0C3E5B583B1CBADF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=5CF7CD95A415309B0C3E5B583B1CBADF");
+
+var raw = JSON.stringify({"name":"dummyName","locale":"fr","localePreferred":true,"conceptNameType":"FULLY_SPECIFIED"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/107925BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+  .then(response => response.text())
+
+
+```
+
 * Updates a concept name subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if concept name not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
