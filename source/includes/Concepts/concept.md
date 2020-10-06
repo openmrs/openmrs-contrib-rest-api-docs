@@ -369,6 +369,7 @@ POST concept/:target_concept_uuid/attribute
   "value": "value_for_the_attriute"
 }
 ```
+
 * To Create a concept attribute subresource for a specific concept resource, you need to specify below attributes in the request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -419,30 +420,177 @@ DELETE concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid
 
 ### List all concept descriptions for a concept.
 
-```console
+> List all concept descriptions for a concept
+
+```shell
     GET /concept/:target_concept_uuid/description 
 ```
-    Retrieve all **concept description** subresources of a **concept** resource by target_concept_uuid. Returns a 
-    `404 Not Found` status if concept description not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C");
+
+var raw = "";
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "display": "Pregnancy terminated by a spontaneous abortion.",
+            "uuid": "49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+            "description": "Pregnancy terminated by a spontaneous abortion.",
+            "locale": "en",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF?v=full"
+                }
+            ],
+            "resourceVersion": "1.9"
+        }
+    ]
+}
+
+```
+
+* Retrieve all **concept description** subresources of a **concept** resource by target_concept_uuid. Returns a `404 Not Found` status if concept description not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
 ### List concept description by its UUID and parent concept UUID.
 
-```console
+> List concept description by its UUID and parent concept UUID
+
+```shell
 GET /concept/:target_concept_uuid/description/:target_concept_description_uuid
 ```
-     Retrieve a **concept description** subresources of a **concept** resource. Returns a 
-     `404 Not Found` status if concept description not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C");
+
+var raw = "";
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a **concept description** subresources of a **concept** resource. Returns a `404 Not Found` status if concept description not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ## Create a concept description with properties
 
-```console
+> Create a concept description with properties
+
+```shell
 POST concept/:target_concept_uuid/description
 {
   "description": "Pregnancy terminated by spontaneous abortion.",
   "locale": "en"
 }
 ```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"description\": \"Pregnancy terminated by spontaneous abortion.\",\r\n  \"locale\": \"en\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C");
+
+var raw = JSON.stringify({"description":"Pregnancy terminated by spontaneous abortion.","locale":"en"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+
+
+```
+
 * To Create a concept description subresource for a specific concept resource you need to specify below attributes in the request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -457,13 +605,56 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
  
 ## Update concept description
 
-```console
-POST concept/:target_concept_uuid/description
+> Update concept description
+
+```shell
+POST concept/:target_concept_uuid/description/:target_concept_description_uuid
 {
-  "description": "Pregnancy terminated by spontaneous abortion.",
+  "description": "Pregnancy terminated by spontaneous abortion/miscarriage",
   "locale": "en"
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"description\": \"Pregnancy terminated by spontaneous abortion/miscarriage\",\r\n  \"locale\": \"en\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C");
+
+var raw = JSON.stringify({"description":"Pregnancy terminated by spontaneous abortion/miscarriage","locale":"en"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Updates a concept description subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if concept description not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
@@ -476,9 +667,45 @@ returned.
 
 ## Delete concept description
 
-```console
+> Delete concept description
+
+```shell
 DELETE concept/:target_concept_uuid/description/:target_concept_description_uuid
 ```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Delete or retire a target concept description subresource by its UUID. Returns a `404 Not Found` status if concept description not exists. 
  If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
