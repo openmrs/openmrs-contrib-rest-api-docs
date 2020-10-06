@@ -345,31 +345,183 @@ DELETE concept/:target_concept_uuid/name/:target_concept_name_uuid
 
 ### List all concept attributes for a concept.
 
-```console
+> List all concept attributes for a concept 
+
+```shell
 GET /concept/:target_concept_uuid/attribute 
 ```
-    Retrieve all **concept attribute** subresources of a **concept** resource by target_concept_uuid. Returns a 
-    `404 Not Found` status if a concept attribute not exists. If the user isnot logged in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+> Success Response
+
+```response
+{
+    "results": [
+        {
+            "display": "boolean: true",
+            "uuid": "3edce4be-513d-46df-a038-a559a6e71423",
+            "attributeType": {
+                "uuid": "94bbaf10-e43c-4383-a0a9-69927121ab2e",
+                "display": "boolean",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/94bbaf10-e43c-4383-a0a9-69927121ab2e"
+                    }
+                ]
+            },
+            "value": true,
+            "voided": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423?v=full"
+                }
+            ],
+            "resourceVersion": "2.0"
+        }
+    ]
+}
+
+```
+
+* Retrieve all **concept attribute** subresources of a **concept** resource by target_concept_uuid. Returns a `404 Not Found` status if a concept attribute not exists. If the user isnot logged in to perform this action, a `401 Unauthorized` status returned.
 
 
 ### List concept attribute by its UUID and parent concept UUID.
 
-```console
+```shell
 GET /concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid
-```    
-     Retrieve a **concept attribute** subresources of a **concept** resource. Returns a 
-     `404 Not Found` status if a concept attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+ 
+* Retrieve a **concept attribute** subresources of a **concept** resource. Returns a `404 Not Found` status if a concept attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ## Create a concept attribute with properties
 
-```console
+```shell
+
 POST concept/:target_concept_uuid/attribute
 {
   "attributeType": "target_concept_attribute_type_uuid",
   "value": "value_for_the_attriute"
 }
+
 ```
 
+<<<<<<< HEAD
+=======
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{ \r\n  \"attributeType\": \"94bbaf10-e43c-4383-a0a9-69927121ab2e\",\r\n  \"value\": \"true\"   \r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368");
+
+var raw = JSON.stringify({"attributeType":"94bbaf10-e43c-4383-a0a9-69927121ab2e","value":"true"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+>>>>>>> Fixed the blocker added examples
 * To Create a concept attribute subresource for a specific concept resource, you need to specify below attributes in the request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -384,13 +536,55 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
  
 ## Update concept attribute
 
-```console
+```shell
 POST concept/:target_concept_uuid/attribute
 {
   "attributeType": "target_concept_attribute_type_uuid",
   "value": "value_for_the_attriute"
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{ \r\n  \"attributeType\": \"94bbaf10-e43c-4383-a0a9-69927121ab2e\",\r\n  \"value\": \"false\"   \r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368");
+
+var raw = JSON.stringify({"attributeType":"94bbaf10-e43c-4383-a0a9-69927121ab2e","value":"false"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
 * Updates a concept attribute subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if the concept attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
@@ -403,11 +597,48 @@ returned.
 
 ## Delete concept attribute
 
-```console
-DELETE concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid
+```shell
+DELETE concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid?purge=true
 ```
-* Delete or retire a target concept attribute subresource by its UUID. Returns a `404 Not Found` status if concept attribute not exists. 
- If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Delete or retire a target concept attribute subresource by its UUID. Returns a `404 Not Found` status if concept attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* A `500 Internal Server Error` status is thrown if the concept attribute does not support purging.
 
     ### Query Parameters 
 
