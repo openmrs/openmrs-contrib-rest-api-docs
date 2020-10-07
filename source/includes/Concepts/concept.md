@@ -258,9 +258,10 @@ DELETE concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to remove the concept mapping type from the system irreversibly. Concept mapping types that have been used (i.e., are referenced from existing data) cannot be purged.
     
-## List concept name
 
-### List all concept names for a concept
+## List all concept names for a concept
+
+> List all concept names for a concept
 
 ```shell
 GET /concept/:target_concept_uuid/name?limit=1 
@@ -298,6 +299,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 
 ```
 
+> Success Response
+
 ```response
 {
     "results": [
@@ -334,11 +337,14 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 * Retrieve all **concept name** subresources of a **concept** resource by target_concept_uuid. Returns a `404 Not Found` status if concept name not exists. If the user isnot logged in to perform this action, a `401 Unauthorized` status returned.
 
 
-### List concept name it's UUID and parent concept UUID.
+## List concept name it's UUID and parent concept UUID.
+
+> List concept name it's UUID and parent concept UUID
 
 ```shell
 GET /concept/:target_concept_uuid/name/:target_concept_name_uuid
-```    
+```  
+  
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
@@ -376,6 +382,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 * Retrieve a **concept name** subresources of a **concept** resource. Returns a `404 Not Found` status if concept name not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ## Create a concept name with properties
+
+> Create a concept name with properties
 
 ```shell
 POST concept/:target_concept_uuid/name
@@ -443,6 +451,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAA
  
 ## Update concept name
 
+> Update concept name
+
 ```shell
 POST concept/:target_concept_uuid/name/:target_concept_name_uuid
 {
@@ -469,8 +479,6 @@ Request request = new Request.Builder()
 Response response = client.newCall(request).execute();
 
 ```
-
-
 
 ```javascript
 
@@ -508,6 +516,8 @@ returned.
 
 
 ## Delete concept name
+
+> Delete concept name
 
 ```shell
 DELETE concept/:target_concept_uuid/name/:target_concept_name_uuid
