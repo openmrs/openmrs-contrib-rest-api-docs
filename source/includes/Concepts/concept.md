@@ -184,9 +184,10 @@ DELETE /concept/:target_concept_uuid?purge=true
     --- | --- | ---
     *purge* | `Boolean` | The resource will be retired unless purge = ‘true’
 
-## List concept mapping
 
-### List all concept mappings for a concept.
+## List all concept mappings for a concept.
+
+> List all concept mappings for a concept
 
 ```shell
 GET /concept/:target_concept_uuid/mapping?limit=1 
@@ -279,7 +280,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 * Retrieve all **concept mapping** subresources of a **concept** resource by target_concept_uuid. Returns a `404 Not Found` status if concept mapping not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
-### List concept mapping by its UUID and parent concept UUID.
+## List concept mapping by its UUID and parent concept UUID.
+
+> List concept mapping by its UUID and parent concept UUID
 
 ```shell
 GET /concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
@@ -321,6 +324,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 * Retrieve a **concept mapping** subresources of a **concept** resource. Returns a `404 Not Found` status if concept mapping not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ## Create a concept mapping with properties
+
+> Create a concept mapping with properties
 
 ```shell
 POST concept/:target_concept_uuid/mapping
@@ -370,19 +375,20 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAA
 
 ```
 
-
 * To Create a concept mapping subresource for a specific concept resource, you need to specify below attributes in the request body.If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 ### Attributes
 
 Parameter | Type | Description
 --- | --- | ---
-*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A concept reference term defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
-*conceptMapType* | `target_concept_map_type_uuid` | A concept map connects a concept term to a concept (required)
+*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A [concept reference term](#concept-reference-term) defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
+*conceptMapType* | `target_concept_map_type_uuid` | A [concept map](#concept-map-type) connects a concept term to a concept (required)
     
  
  
 ## Update a concept mapping
+
+> Update a concept mapping
 
 ```shell
 POST concept/:target_concept_uuid/mapping
@@ -433,7 +439,6 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAA
 
 ```
 
-
 * Updates a concept mapping subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if concept mapping not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
@@ -441,10 +446,12 @@ returned.
 
 Parameter | Type | Description
 --- | --- | ---
-*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A concept term defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
-*conceptMapType* | `target_concept_map_type_uuid` | A concept map connects a concept term to a concept (required)
+*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A [concept reference term](#concept-reference-term) defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
+*conceptMapType* | `target_concept_map_type_uuid` | A [concept map](#concept-map-type) connects a concept term to a concept (required)
 
 ## Delete a concept mapping
+
+> Delete a concept mapping
 
 ```shell
 DELETE concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
