@@ -340,10 +340,7 @@ DELETE concept/:target_concept_uuid/name/:target_concept_name_uuid
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to remove the concept name type from the system irreversibly. Concept name types that have been used (i.e., are referenced from existing data) cannot be purged.
     
 
-## List concept attribute
-
-
-### List all concept attributes for a concept.
+## List all concept attributes for a concept.
 
 > List all concept attributes for a concept 
 
@@ -426,7 +423,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 * Retrieve all **concept attribute** subresources of a **concept** resource by target_concept_uuid. Returns a `404 Not Found` status if a concept attribute not exists. If the user isnot logged in to perform this action, a `401 Unauthorized` status returned.
 
 
-### List concept attribute by its UUID and parent concept UUID.
+## List concept attribute by its UUID and parent concept UUID.
+
+> List concept attribute by its UUID and parent concept UUID
 
 ```shell
 GET /concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid
@@ -469,6 +468,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
      
 ## Create a concept attribute with properties
 
+> Create a concept attribute with properties
+
 ```shell
 
 POST concept/:target_concept_uuid/attribute
@@ -479,8 +480,6 @@ POST concept/:target_concept_uuid/attribute
 
 ```
 
-<<<<<<< HEAD
-=======
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
@@ -521,7 +520,6 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 
 ```
 
->>>>>>> Fixed the blocker added examples
 * To Create a concept attribute subresource for a specific concept resource, you need to specify below attributes in the request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -529,12 +527,14 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
 
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this Concept Attribute_Type (required)
+    *attributeType* | `Attribute_Type UUID` | Create Attribute from this [Concept Attribute Type](#concept-attribute-type) (required)
     *value* | `Depends on Attribute_Type Selected` | Value for the attribute (required)
     
  
  
 ## Update concept attribute
+
+> Update concept attribute
 
 ```shell
 POST concept/:target_concept_uuid/attribute
@@ -592,10 +592,12 @@ returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this Concept Attribute_Type (required)
+    *attributeType* | `Attribute_Type UUID` | Create Attribute from this [Concept Attribute Type](#concept-attribute-type) (required)
     *value* | `Depends on Attribute_Type Selected` | Value for the attribute (required)
 
 ## Delete concept attribute
+
+> Delete concept attribute
 
 ```shell
 DELETE concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid?purge=true
