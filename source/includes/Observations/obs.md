@@ -23,10 +23,73 @@ Examples of observations include Serum Creatinine of 0.9mg/dL or a Review of the
 
 ### List all observations.
 
-```console
-GET /obs?patient=070f0120-0283-4858-885d-a20d967729cf"
-```    
-    Quickly filter observations with given query parameters. 
+```shell
+GET /obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=1"
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=FE2FBD1F287477C74C655E0D467BA389")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=FE2FBD1F287477C74C655E0D467BA389");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "99a0c42b-d50e-4ae3-b826-d1959c737e74",
+            "display": "Visit Diagnoses: Primary, Confirmed diagnosis, Disease of bone and joint",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs/99a0c42b-d50e-4ae3-b826-d1959c737e74"
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=2&startIndex=2"
+        }
+    ]
+}
+
+```
+    
+* Quickly filter observations with given query parameters. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
 ### Query Parameters
@@ -34,15 +97,49 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     Parameter | Type | Description
     --- | --- | ---
     *patient* | `target_patient_uuid` | patient resource UUID
-    *concept* | `target_concept_uuid`| concept resource UUID (this parameter to be used with patient)
+    *concept* | `target_concept_uuid`| concept resource UUID (we can use this parameter only if patient UUID is specified for the query)
 
     
 ### Query observations by UUID.
 
-```console
+```shell
 GET /obs/:target_observation_uuid
 ```
-    Retrieve an observation by its UUID.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/obs/94616eb5-6a87-4b83-b1e2-2083b3f7a36b")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=FE2FBD1F287477C74C655E0D467BA389")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=FE2FBD1F287477C74C655E0D467BA389");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs/94616eb5-6a87-4b83-b1e2-2083b3f7a36b", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve an observation by its UUID.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
     
    
