@@ -143,7 +143,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=
     *code* | `String` |  Represents a name from a standard medical code
     *name* | `String` | ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale
     *term* | `String` | Medical coding term or OpenMRS concept dictionary term that could be mapped to a concept
-    *source* | `String` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (ie. LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc), but the concept source can also be a custom (ie. org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database
+    *source* | `String` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (ie. LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc), but the concept source can also be a custom (ie. org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "[concept source](#concept-source)" defined in the database
     *class* | `String` | The concept's class provides a useful way to narrow down the scope of the information that the concept is intended to capture.  In this way, the class is helpful for data extraction.  This classification elaborates how a concept will be represented (i.e. as a question or an answer) when the information is stored.  OpenMRS contains several default classes to use when defining concepts, but implementation sites may also create additional custom concept classes.
     
     
@@ -193,7 +193,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAA
    
 ## Create a concept
 
-```console
+```shell
 POST /concept
 {
   "names": [
@@ -223,14 +223,14 @@ POST /concept
     *setMembers* | `Array of Child Concepts` | Describes the questions contained by a concept set. Each set member is a question concept in and of itself    
     *units* | `String` | Standard unit used to measure the concept
     *allowDecimal* | `String` | Allow to use decimals
-    *conceptClass* | `target_concept_class_uuid` | The classification of a concept. This classification details how a concept will be represented (i.e. as a question or an answer) (required)
+    *conceptClass* | `target_concept_class_uuid` | [concept class](#concept-class) is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) (required)
     *descriptions* | `Array[] String` | A concept map connects a concept term to a concept
-    *mappings* | `Array[] String` | Connects a concept term to a concept.  
+    *mappings* | `Array[] String` | Maps a concept term to a concept.  
    
 
 ## Update a concept
 
-```console
+```shell
 POST /concept/:target_concept_uuid
 {
   "names": [
