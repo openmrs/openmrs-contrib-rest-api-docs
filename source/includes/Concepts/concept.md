@@ -61,9 +61,6 @@ referenced source.
 15. [Update concept description](#update-concept-description)
 16. [Delete concept description](#delete-concept-description
 
-
-## List concepts
-
 ## List all concepts.
 
 > List all concepts
@@ -147,9 +144,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=
     *class* | `String` | The concept's class provides a useful way to narrow down the scope of the information that the concept is intended to capture.  In this way, the class is helpful for data extraction.  This classification elaborates how a concept will be represented (i.e. as a question or an answer) when the information is stored.  OpenMRS contains several default classes to use when defining concepts, but implementation sites may also create additional custom concept classes.
     
     
-### Query concept by UUID.
+## List concept by UUID.
 
-> Query concept by UUID
+> List concept by UUID
 
 ```shell
 GET /concept/:target_concept_uuid
@@ -193,24 +190,80 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAA
    
 ## Create a concept
 
+> Create a concept
+
 ```shell
+
 POST /concept
 {
-  "names": [
-    {
-      "name": "What is the blood type for the patient?",
-      "locale": "en",
-      "localePreferred": true,
-      "conceptNameType": "FULLY_SPECIFIED"
-    }
-  ],
-  "datatype": "8d4a4c94-c2cc-11de-8d13-0010c6dffd0f",
-  "version": "1.2.2",
-  "conceptClass": "8d492774-c2cc-11de-8d13-0010c6dffd0f"
+    "names": [
+        {
+            "name": "What is the blood type for the sick patient?",
+            "locale": "en",
+            "localePreferred": true,
+            "conceptNameType": "FULLY_SPECIFIED"
+        }
+    ],
+    "datatype": "8d4a4c94-c2cc-11de-8d13-0010c6dffd0f",
+    "version": "1.2.2",
+    "conceptClass": "8d492774-c2cc-11de-8d13-0010c6dffd0f",
+    "mappings": [
+        {
+            "conceptReferenceTerm": "21fb14d7-5cd9-3621-ac30-c9e57320e233",
+            "conceptMapType": "35543629-7d8c-11e1-909d-c80aa9edcf4e"
+        }
+    ],
+    "descriptions": [
+        {
+            "description": "Records blood type of sick patients",
+            "locale": "en"
+        }
+    ]
 }
+
 ```
-* To Create a concept, you need to specify below attributes in the request body. If you are not logged in to perform this action,
- a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"names\": [\r\n        {\r\n            \"name\": \"What is the blood type for the sick patient?\",\r\n            \"locale\": \"en\",\r\n            \"localePreferred\": true,\r\n            \"conceptNameType\": \"FULLY_SPECIFIED\"\r\n        }\r\n    ],\r\n    \"datatype\": \"8d4a4c94-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"version\": \"1.2.2\",\r\n    \"conceptClass\": \"8d492774-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"mappings\": [\r\n        {\r\n            \"conceptReferenceTerm\": \"21fb14d7-5cd9-3621-ac30-c9e57320e233\",\r\n            \"conceptMapType\": \"35543629-7d8c-11e1-909d-c80aa9edcf4e\"\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"description\": \"Records blood type of sick patients\",\r\n            \"locale\": \"en\"\r\n        }\r\n    ]\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=FC3F8F0D4A55542536ABB6F2672F727E")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=FC3F8F0D4A55542536ABB6F2672F727E");
+
+var raw = JSON.stringify({"names":[{"name":"What is the blood type for the sick patient?","locale":"en","localePreferred":true,"conceptNameType":"FULLY_SPECIFIED"}],"datatype":"8d4a4c94-c2cc-11de-8d13-0010c6dffd0f","version":"1.2.2","conceptClass":"8d492774-c2cc-11de-8d13-0010c6dffd0f","mappings":[{"conceptReferenceTerm":"21fb14d7-5cd9-3621-ac30-c9e57320e233","conceptMapType":"35543629-7d8c-11e1-909d-c80aa9edcf4e"}],"descriptions":[{"description":"Records blood type of sick patients","locale":"en"}]});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* To Create a concept, you need to specify below attributes in the request body. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -224,30 +277,86 @@ POST /concept
     *units* | `String` | Standard unit used to measure the concept
     *allowDecimal* | `String` | Allow to use decimals
     *conceptClass* | `target_concept_class_uuid` | [concept class](#concept-class) is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) (required)
-    *descriptions* | `Array[] String` | A concept map connects a concept term to a concept
-    *mappings* | `Array[] String` | Maps a concept term to a concept.  
-   
+    *descriptions* | `Array[] [concept-description](#list-concept-descriptions)` | concept descriptions are clear and concise description of the concept, as agreed upon by the organization's members or the most commonly referenced source
+    *mappings* | `Array[] [concept-mapping](#list-concept-mapping)` | A concept map connects a concept reference term to a concept
 
 ## Update a concept
+
+> Update a concept
 
 ```shell
 POST /concept/:target_concept_uuid
 {
-  "names": [
-    {
-      "name": "What is the blood type for the sick patient?",
-      "locale": "en",
-      "localePreferred": true,
-      "conceptNameType": "FULLY_SPECIFIED"
-    }
-  ],
-  "datatype": "8d4a4c94-c2cc-11de-8d13-0010c6dffd0f",
-  "version": "1.2.2",
-  "conceptClass": "8d492774-c2cc-11de-8d13-0010c6dffd0f"
+    "names": [
+        {
+            "name": "What is the blood type for the sick patient?",
+            "locale": "en",
+            "localePreferred": true,
+            "conceptNameType": "FULLY_SPECIFIED"
+        }
+    ],
+    "datatype": "8d4a4c94-c2cc-11de-8d13-0010c6dffd0f",
+    "version": "1.2.2",
+    "conceptClass": "8d492774-c2cc-11de-8d13-0010c6dffd0f",
+    "mappings": [
+        {
+            "conceptReferenceTerm": "21fb14d7-5cd9-3621-ac30-c9e57320e233",
+            "conceptMapType": "35543629-7d8c-11e1-909d-c80aa9edcf4e"
+        }
+    ],
+    "descriptions": [
+        {
+            "description": "Dummy description update for this concept",
+            "locale": "en"
+        }
+    ]
 }
+
 ```
-*  Update a target concept with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if concept not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"names\": [\r\n        {\r\n            \"name\": \"What is the blood type for the sick patient?\",\r\n            \"locale\": \"en\",\r\n            \"localePreferred\": true,\r\n            \"conceptNameType\": \"FULLY_SPECIFIED\"\r\n        }\r\n    ],\r\n    \"datatype\": \"8d4a4c94-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"version\": \"1.2.2\",\r\n    \"conceptClass\": \"8d492774-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"mappings\": [\r\n        {\r\n            \"conceptReferenceTerm\": \"21fb14d7-5cd9-3621-ac30-c9e57320e233\",\r\n            \"conceptMapType\": \"35543629-7d8c-11e1-909d-c80aa9edcf4e\"\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"description\": \"Dummy description update for this concept\",\r\n            \"locale\": \"en\"\r\n        }\r\n    ]\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8bb-a328df04611f")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=FC3F8F0D4A55542536ABB6F2672F727E")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=FC3F8F0D4A55542536ABB6F2672F727E");
+
+var raw = JSON.stringify({"names":[{"name":"What is the blood type for the sick patient?","locale":"en","localePreferred":true,"conceptNameType":"FULLY_SPECIFIED"}],"datatype":"8d4a4c94-c2cc-11de-8d13-0010c6dffd0f","version":"1.2.2","conceptClass":"8d492774-c2cc-11de-8d13-0010c6dffd0f","mappings":[{"conceptReferenceTerm":"21fb14d7-5cd9-3621-ac30-c9e57320e233","conceptMapType":"35543629-7d8c-11e1-909d-c80aa9edcf4e"}],"descriptions":[{"description":"Dummy description update for this concept","locale":"en"}]});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8bb-a328df04611f", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+*  Update a target concept with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
     
     ### Attributes
 
@@ -260,12 +369,14 @@ status if concept not exists. If the user is not logged in to perform this actio
     *setMembers* | `Array of Child Concepts` | Describes the questions contained by a concept set. Each set member is a question concept in and of itself    
     *units* | `String` | Standard unit used to measure the concept
     *allowDecimal* | `String` | Allow to use decimals
-    *conceptClass* | `target_concept_class_uuid` | The classification of a concept. This classification details how a concept will be represented (i.e. as a question or an answer) (required)
-    *descriptions* | `Array[] String` | A concept map connects a concept term to a concept
-    *mappings* | `Array[] String` | Connects a concept term to a concept.  
+    *conceptClass* | `target_concept_class_uuid` | [concept class](#concept-class) is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) (required)
+    *descriptions* | `Array[] [concept-description](#list-concept-descriptions)` | concept descriptions are clear and concise description of the concept, as agreed upon by the organization's members or the most commonly referenced source
+    *mappings* | `Array[] [concept-mapping](#list-concept-mapping)` | A concept map connects a concept reference term to a concept
 
     
 ## Delete a concept
+
+> Delete a concept
 
 ```shell
 DELETE /concept/:target_concept_uuid?purge=true
