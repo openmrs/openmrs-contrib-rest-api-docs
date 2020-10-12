@@ -743,60 +743,250 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
     --- | --- | ---
     *purge* | `Boolean` | The resource will be voided unless purge = ‘true’. Purging will attempt to remove the concept mapping type from the system irreversibly. Concept mapping types that have been used (i.e., are referenced from existing data) cannot be purged.
     
-## List concept name
 
-### List all concept names for a concept.
+## List all concept names for a concept
 
-```console
-GET /concept/:target_concept_uuid/name 
+> List all concept names for a concept
+
+```shell
+GET /concept/:target_concept_uuid/name?limit=1 
 ```
-    Retrieve all **concept name** subresources of a **concept** resource by target_concept_uuid. Returns a 
-    `404 Not Found` status if concept name not exists. If the user isnot logged in to perform this action, a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+> Success Response
+
+```response
+{
+    "results": [
+        {
+            "display": "GROSSESSE, FAUSSE COUCHE",
+            "uuid": "106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+            "name": "GROSSESSE, FAUSSE COUCHE",
+            "locale": "fr",
+            "localePreferred": true,
+            "conceptNameType": "FULLY_SPECIFIED",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB?v=full"
+                }
+            ],
+            "resourceVersion": "1.9"
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1&startIndex=1"
+        }
+    ]
+}
+
+```
+
+* Retrieve all **concept name** subresources of a **concept** resource by target_concept_uuid. Returns a `404 Not Found` status if concept name not exists. If the user isnot logged in to perform this action, a `401 Unauthorized` status returned.
 
 
-### List concept name it's UUID and parent concept UUID.
+## List concept name it's UUID and parent concept UUID.
 
-```console
+> List concept name it's UUID and parent concept UUID
+
+```shell
 GET /concept/:target_concept_uuid/name/:target_concept_name_uuid
-```    
-     Retrieve a **concept name** subresources of a **concept** resource. Returns a 
-     `404 Not Found` status if concept name not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
+```  
+  
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a **concept name** subresources of a **concept** resource. Returns a `404 Not Found` status if concept name not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ## Create a concept name with properties
 
-```console
+> Create a concept name with properties
+
+```shell
 POST concept/:target_concept_uuid/name
 {
-  "name": "Bronchospasm",
+  "name": "scabies",
   "locale": "en",
   "localePreferred": true,
-  "conceptNameType": "FULLY_SPECIFIED"
+  "conceptNameType": null
 }
+
 ```
-* To Create a concept name subresource for a specific concept resource, you need to specify below attributes in the request body.
-If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"scabies\",\r\n  \"locale\": \"en\",\r\n  \"localePreferred\": true,\r\n  \"conceptNameType\": null\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=E84B91CD41B12C89101E366386887CF4")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=E84B91CD41B12C89101E366386887CF4");
+
+var raw = JSON.stringify({"name":"scabies","locale":"en","localePreferred":true,"conceptNameType":null});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* To Create a concept name subresource for a specific concept resource, you need to specify below attributes in the request body.If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* A `500 Internal Server Error` status is returned if the name is being currently used in a concept name.
 
     ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name for the concept (required)
-    *locale* | `String` | Language to record concept name (required)
+    *name* | `String` | Name for the concept (Required)
+    *locale* | `String` | Language to record concept name (Required)
     *localePreferred* | `String` | This is the preferred name to use within a locale.  By default, this is the fully-specified name; however, full-specified names are sometimes long and more detailed than necessary for day-to-day use.  In those cases, a synonym can be defined to be the locale-preferred name.  There can only be one preferred name within a locale.  The primary term should be the word(s) used by those who will have access to the records to prevent duplication of concept creation.
     *conceptNameType* | `String` | Type of the name to be specified.
      
  
 ## Update concept name
 
-```console
-POST concept/:target_concept_uuid/name
+> Update concept name
+
+```shell
+POST concept/:target_concept_uuid/name/:target_concept_name_uuid
 {
-  "name": "Bronchospasm",
-  "locale": "en",
+  "name": "dummyName",
+  "locale": "fr",
   "localePreferred": true,
   "conceptNameType": "FULLY_SPECIFIED"
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"dummyName\",\r\n  \"locale\": \"fr\",\r\n  \"localePreferred\": true,\r\n  \"conceptNameType\": \"FULLY_SPECIFIED\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/107925BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=5CF7CD95A415309B0C3E5B583B1CBADF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=5CF7CD95A415309B0C3E5B583B1CBADF");
+
+var raw = JSON.stringify({"name":"dummyName","locale":"fr","localePreferred":true,"conceptNameType":"FULLY_SPECIFIED"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/107925BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+  .then(response => response.text())
+
+
+```
+
 * Updates a concept name subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if concept name not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
@@ -812,9 +1002,47 @@ returned.
 
 ## Delete concept name
 
-```console
+> Delete concept name
+
+```shell
 DELETE concept/:target_concept_uuid/name/:target_concept_name_uuid
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Delete or retire a target concept name subresource by its UUID. Returns a `404 Not Found` status if concept name not exists. 
  If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
