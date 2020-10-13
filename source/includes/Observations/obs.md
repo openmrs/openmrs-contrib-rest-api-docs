@@ -153,16 +153,16 @@ POST /obs
 ```
 * To Create an observation, you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    ### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *[Person](#person)* | `Person UUID` | The Person this Obs is acting on (Required)
+    *[person](#person)* | `Person UUID` | The Person this Obs is acting on (Required)
     *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp" (Required)
-    *[Concept](#concepts)* | `concept UUID` | the coded value/name given to an obs when it is made (Required)
+    *[concept](#concepts)* | `concept UUID` | the coded value/name given to an obs when it is made (Required)
     *[Location](#location)* | `location UUID` | the location this Obs took place (was taken).
     *order* | `String` | the order of an Obs.
-    *[Encounter](#encounters)* | `encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
+    *[encounter](#encounters)* | `encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
     *accessionNumber* | `String` | An identifier used by the fulfiller (e.g., the lab) to identify the specimen or requisition used to produce this observation.
     *groupMembers* | `Array[]: Obs` |  a list of Obs grouped under this Obs
     *comment* | `String` | An option free text comment about the observation.
@@ -182,18 +182,17 @@ POST /obs/:uuid_of_obs_to_be_updated
 *  Update a target obs, this method only modifies properties in the request. Returns `404 Not Found` status if the observation does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
     
-     ### Attributes
 
-    ### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *[Person](#person)* | `Person UUID` | The Person this Obs is acting on (Required)
+    *[person](#person)* | `Person UUID` | The Person this Obs is acting on (Required)
     *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp" (Required)
-    *[Concept](#concepts)* | `concept UUID` | the coded value/name given to an obs when it is made (Required)
+    *[concept](#concepts)* | `concept UUID` | the coded value/name given to an obs when it is made (Required)
     *[Location](#location)* | `location UUID` | the location this Obs took place (was taken).
     *order* | `String` | the order of an Obs.
-    *[Encounter](#encounters)* | `encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
+    *[encounter](#encounters)* | `encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
     *accessionNumber* | `String` | An identifier used by the fulfiller (e.g., the lab) to identify the specimen or requisition used to produce this observation.
     *groupMembers* | `Array[]: Obs` |  a list of Obs grouped under this Obs
     *comment* | `String` | An option free text comment about the observation.
@@ -201,8 +200,8 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     *status* | `String` | `PRELIMINARY`, `FINAL`, `AMENDED`
     *interpretation* | `String` | `NORMAL`, `ABNORMAL`, `CRITICALLY_ABNORMAL`, `NEGATIVE`, `POSITIVE`,`CRITICALLY_LOW`,  `LOW`, `HIGH`, `CRITICALLY_HIGH`, `VERY_SUSCEPTIBLE`, `SUSCEPTIBLE`, `INTERMEDIATE`, `RESISTANT`, `SIGNIFICANT_CHANGE_DOWN`, `SIGNIFICANT_CHANGE_UP`, `OFF_SCALE_LOW`, `OFF_SCALE_HIGH`
     *voided* | `Boolean` | true if the observation is voided
-
     
+        
 ## Delete an observation
 
 ```shell
