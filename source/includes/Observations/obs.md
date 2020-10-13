@@ -2,15 +2,13 @@
 
 ## Observations Overview
 
-Observation is one piece of information recorded about a person at the moment in time.
+* Observation is one piece of information recorded about a person at the moment in time.Every observation has a Concept as its question and depending on the datatype of the concept, it has a value that is a number, date, text, Concept, etc.
 
-Every observation has a Concept as its question and depending on the datatype of the concept, it has a value that is a number, date, text, Concept, etc.
+* Most of the information you store in OpenMRS is in the form of Observations, and most Observations happen in an Encounter. When you enter a form in OpenMRS, typically one Encounter is created with anywhere between tens or hundreds of Observations.
 
-Most of the information you store in OpenMRS is in the form of Observations, and most Observations happen in an Encounter. When you enter a form in OpenMRS, typically one Encounter is created with anywhere between tens or hundreds of Observations.
+* Note that individual Observation is valid only at one moment in time, and it does not carry forward. You may query the system for the last observation for pregnancy status, but this does not tell you whether or not the patient is pregnant at any point after the moment of that observation.
 
-Note that individual Observation is valid only at one moment in time, and it does not carry forward. You may query the system for the last observation for pregnancy status, but this does not tell you whether or not the patient is pregnant at any point after the moment of that observation.
-
-Examples of observations include Serum Creatinine of 0.9mg/dL or a Review of the cardiopulmonary system is normal.
+* Examples of observations include Serum Creatinine of 0.9mg/dL or a Review of the cardiopulmonary system is normal.
  
 ## Available operations for Observations. 
 
@@ -19,9 +17,8 @@ Examples of observations include Serum Creatinine of 0.9mg/dL or a Review of the
 3. [Update an observation](#update-an-observation)
 4. [Delete an observation](#delete-an-observation)
 
-## List observations
 
-### List all observations.
+## List all observations.
 
 ```shell
 GET /obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=1"
@@ -145,7 +142,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
    
 ## Create an observation
 
-```console
+```shell
 POST /obs 
 {
   "person": "070f0120-0283-4858-885d-a20d967729cf",
@@ -160,23 +157,23 @@ POST /obs
 
     Parameter | Type | Description
     --- | --- | ---
-    *person* | `Person UUID` | the Person this Obs is acting on.
-    *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp"
-    *concept* | `Concept UUID` | the coded value/name given to an obs when it is made.
-    *location* | `Location UUID` | the location this Obs took place (was taken).
+    *[Person](#person)* | `Person UUID` | The Person this Obs is acting on (Required)
+    *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp" (Required)
+    *[Concept](#concepts)* | `concept UUID` | the coded value/name given to an obs when it is made (Required)
+    *[Location](#location)* | `location UUID` | the location this Obs took place (was taken).
     *order* | `String` | the order of an Obs.
-    *encounter* | `Encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
+    *[Encounter](#encounters)* | `encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
     *accessionNumber* | `String` | An identifier used by the fulfiller (e.g., the lab) to identify the specimen or requisition used to produce this observation.
     *groupMembers* | `Array[]: Obs` |  a list of Obs grouped under this Obs
     *comment* | `String` | An option free text comment about the observation.
-    *value* | `String` | The value for the observation (e.g., the answer to a question or the result of a lab test).
+    *value* | `String` | The value for the observation (e.g., the answer to a question or the result of a lab test) (Required)
     *status* | `String` | `PRELIMINARY`, `FINAL`, `AMENDED`
     *interpretation* | `String` | `NORMAL`, `ABNORMAL`, `CRITICALLY_ABNORMAL`, `NEGATIVE`, `POSITIVE`,`CRITICALLY_LOW`,  `LOW`, `HIGH`, `CRITICALLY_HIGH`, `VERY_SUSCEPTIBLE`, `SUSCEPTIBLE`, `INTERMEDIATE`, `RESISTANT`, `SIGNIFICANT_CHANGE_DOWN`, `SIGNIFICANT_CHANGE_UP`, `OFF_SCALE_LOW`, `OFF_SCALE_HIGH`
     *voided* | `Boolean` | true if the observation is voided
     
 ## Update an observation
 
-```console
+```shell
 POST /obs/:uuid_of_obs_to_be_updated
 {
   "value": 71
@@ -185,30 +182,68 @@ POST /obs/:uuid_of_obs_to_be_updated
 *  Update a target obs, this method only modifies properties in the request. Returns `404 Not Found` status if the observation does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
     
+     ### Attributes
+
     ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *person* | `Person UUID` | the Person this Obs is acting on.
-    *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp"
-    *concept* | `Concept UUID` | the coded value/name given to an obs when it is made.
-    *location* | `Location UUID` | the location this Obs took place (was taken).
+    *[Person](#person)* | `Person UUID` | The Person this Obs is acting on (Required)
+    *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp" (Required)
+    *[Concept](#concepts)* | `concept UUID` | the coded value/name given to an obs when it is made (Required)
+    *[Location](#location)* | `location UUID` | the location this Obs took place (was taken).
     *order* | `String` | the order of an Obs.
-    *encounter* | `Encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
+    *[Encounter](#encounters)* | `encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
     *accessionNumber* | `String` | An identifier used by the fulfiller (e.g., the lab) to identify the specimen or requisition used to produce this observation.
     *groupMembers* | `Array[]: Obs` |  a list of Obs grouped under this Obs
     *comment* | `String` | An option free text comment about the observation.
-    *value* | `String` | The value for the observation (e.g., the answer to a question or the result of a lab test).
+    *value* | `String` | The value for the observation (e.g., the answer to a question or the result of a lab test) (Required)
     *status* | `String` | `PRELIMINARY`, `FINAL`, `AMENDED`
     *interpretation* | `String` | `NORMAL`, `ABNORMAL`, `CRITICALLY_ABNORMAL`, `NEGATIVE`, `POSITIVE`,`CRITICALLY_LOW`,  `LOW`, `HIGH`, `CRITICALLY_HIGH`, `VERY_SUSCEPTIBLE`, `SUSCEPTIBLE`, `INTERMEDIATE`, `RESISTANT`, `SIGNIFICANT_CHANGE_DOWN`, `SIGNIFICANT_CHANGE_UP`, `OFF_SCALE_LOW`, `OFF_SCALE_HIGH`
     *voided* | `Boolean` | true if the observation is voided
-   
+
     
 ## Delete an observation
 
-```console
+```shell
 DELETE /obs/:target_obs_uuid?purge=true
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/obs/4b2412bd-b538-4038-81d4-d2af153082b6?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=4C54B3334747032502B326EB3362BA0D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=4C54B3334747032502B326EB3362BA0D");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs/4b2412bd-b538-4038-81d4-d2af153082b6?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 
 * Delete or void a target observation. Returns `404 Not Found` status if the observation does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
