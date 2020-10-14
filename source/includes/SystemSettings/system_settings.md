@@ -109,7 +109,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     *q* | `String` | the search query
 
 
-### Get a particular System Setting
+## Get a particular System Setting
 
 > Get a particular system setting
 
@@ -213,7 +213,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/", requestOptio
 
 * To create a System Setting, you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    ### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -243,6 +243,7 @@ POST /systemsetting/:target_systemsetting_uuid
 }
 
 ```
+
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
@@ -257,6 +258,7 @@ Request request = new Request.Builder()
   .addHeader("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710")
   .build();
 Response response = client.newCall(request).execute();
+
 ```
 
 ```javascript
@@ -305,6 +307,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/443b909a-82d7-4
 ```shell
 DELETE /systemsetting/:target_systemsetting_uuid?purge=true
 ```
+
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
@@ -342,7 +345,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-4
 
 * Delete or void a System Setting by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
