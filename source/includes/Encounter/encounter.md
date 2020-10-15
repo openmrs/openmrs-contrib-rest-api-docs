@@ -36,9 +36,9 @@ Consultation and Dispensing**.
 ## Available operations for Encounter 
 
 1. [List encounters](#list-encounters)
-2. [Create an encounters](#create-a-encounters)
-3. [Update an encounters](#update-a-encounters)
-4. [Delete an encounters](#delete-a-encounters)
+2. [Create an encounter](#create-an-encounter)
+3. [Update an encounter](#update-an-encounter)
+4. [Delete an encounter](#delete-an-encounter)
 5. [List encounter provider sub resource](#list-encounter-provider-sub-resources)
 6. [Create encounter provider  sub resource with properties](#create-encounter-provider-sub-resource-with-properties)
 7. [Update encounter provider  sub resource](#update-encounter-provider-sub-resource)
