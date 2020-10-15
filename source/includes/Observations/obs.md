@@ -20,6 +20,8 @@
 
 ## List all observations.
 
+> List all observations 
+
 ```shell
 GET /obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=1"
 ```
@@ -97,7 +99,9 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     *[concept](#concepts)* | `target_concept_uuid`| concept resource UUID (we can use this parameter only if patient UUID is specified for the query)
 
     
-### Query observations by UUID.
+## Query observations by UUID.
+
+> Query observations by UUID
 
 ```shell
 GET /obs/:target_observation_uuid
@@ -141,6 +145,8 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     
    
 ## Create an observation
+
+> Create an observation
 
 ```shell
 POST /obs 
@@ -215,6 +221,8 @@ Response response = client.newCall(request).execute();
     
 ## Update an observation
 
+> Update an observation
+
 ```shell
 POST /obs/:uuid_of_obs_to_be_updated
 {
@@ -287,6 +295,8 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     
         
 ## Delete an observation
+
+> Delete an observation
 
 ```shell
 DELETE /obs/:target_obs_uuid?purge=true
