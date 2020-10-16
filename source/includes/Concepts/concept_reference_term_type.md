@@ -55,8 +55,6 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm?codeOrNa
 
 ```
 
-```
-
 > Success Response
 
 ```response

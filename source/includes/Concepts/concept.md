@@ -265,7 +265,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept", requestOptions)
 
 * To Create a concept, you need to specify below attributes in the request body. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -276,9 +276,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept", requestOptions)
     *setMembers* | `Array of Child Concepts` | Describes the questions contained by a concept set. Each set member is a question concept in and of itself    
     *units* | `String` | Standard unit used to measure the concept
     *allowDecimal* | `String` | Allow to use decimals
-    *conceptClass* | `target_concept_class_uuid` | [concept class](#concept-class) is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) (required)
-    *descriptions* | `Array[] [concept-description](#list-concept-descriptions)` | concept descriptions are clear and concise description of the concept, as agreed upon by the organization's members or the most commonly referenced source
-    *mappings* | `Array[] [concept-mapping](#list-concept-mapping)` | A concept map connects a concept reference term to a concept
+    *[conceptClass](#concept-class)* | `target_concept_class_uuid` | concept class is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) (required)
+    *[descriptions](#list-concept-descriptions)* | `Array[] concept-description` | concept descriptions are clear and concise description of the concept, as agreed upon by the organization's members or the most commonly referenced source
+    *[mappings](#list-concept-mapping)* | `Array[] concept-mapping` | A concept map connects a concept reference term to a concept
 
 ## Update a concept
 
@@ -358,7 +358,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8
 
 *  Update a target concept with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
     
-    ### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -369,9 +369,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8
     *setMembers* | `Array of Child Concepts` | Describes the questions contained by a concept set. Each set member is a question concept in and of itself    
     *units* | `String` | Standard unit used to measure the concept
     *allowDecimal* | `String` | Allow to use decimals
-    *conceptClass* | `target_concept_class_uuid` | [concept class](#concept-class) is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) (required)
-    *descriptions* | `Array[] [concept-description](#list-concept-descriptions)` | concept descriptions are clear and concise description of the concept, as agreed upon by the organization's members or the most commonly referenced source
-    *mappings* | `Array[] [concept-mapping](#list-concept-mapping)` | A concept map connects a concept reference term to a concept
+    *[conceptClass](#concept-class)* | `target_concept_class_uuid` | concept class is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) (required)
+    *[descriptions](#list-concept-descriptions)* | `Array[] concept-description` | concept descriptions are clear and concise description of the concept, as agreed upon by the organization's members or the most commonly referenced source
+    *[mappings](#list-concept-mapping)* | `Array[] concept-mapping` | A concept map connects a concept reference term to a concept
 
     
 ## Delete a concept
@@ -1236,11 +1236,11 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 * To Create a concept attribute subresource for a specific concept resource, you need to specify below attributes in the request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this [Concept Attribute Type](#concept-attribute-type) (required)
+    *[attributeType](#concept-attribute-type)* | `Attribute_Type UUID` | Create Attribute from this Concept Attribute Type (required)
     *value* | `Depends on Attribute_Type Selected` | Value for the attribute (required)
     
  
