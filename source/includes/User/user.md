@@ -21,22 +21,110 @@ The real-life person is represented by a Person record in OpenMRS, and a person 
 > Get all non-retired Users 
 
 ```shell
-GET /user?
-q=admin
+GET user?q=admin&v=default&limit=1
+
 ```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "45ce6c2e-dd5a-11e6-9d9c-0242ac150002",
+            "display": "admin",
+            "username": "admin",
+            "systemId": "admin",
+            "userProperties": {
+                "loginAttempts": "0",
+                "emrapi.lastViewedPatientIds": "508,507,311,509,510,511"
+            },
+            "person": {
+                "uuid": "24252571-dd5a-11e6-9d9c-0242ac150002",
+                "display": "Super User",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/person/24252571-dd5a-11e6-9d9c-0242ac150002"
+                    }
+                ]
+            },
+            "privileges": [],
+            "roles": [
+                {
+                    "uuid": "8d94f852-c2cc-11de-8d13-0010c6dffd0f",
+                    "display": "System Developer",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/role/8d94f852-c2cc-11de-8d13-0010c6dffd0f"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "8d94f280-c2cc-11de-8d13-0010c6dffd0f",
+                    "display": "Provider",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/role/8d94f280-c2cc-11de-8d13-0010c6dffd0f"
+                        }
+                    ]
+                }
+            ],
+            "retired": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002?v=full"
+                }
+            ],
+            "resourceVersion": "1.8"
+        }
+    ]
+}
+
+```
+
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user?q=admin")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user?q=admin&limit=1
+&v=default")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
-  .addHeader("Cookie", "JSESSIONID=154692F02BBBC664825F3C4C224A474B")
+  .addHeader("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D")
   .build();
 Response response = client.newCall(request).execute();
 
 ```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/user?q=admin&limit=1\n&v=default", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 
   Quickly filter users with given query parameters. Returns a `404 Not Found` status if the user does not exist.
   If not logged in to perform this action, a `401 Unauthorized` status is returned.
@@ -67,13 +155,34 @@ Request request = new Request.Builder()
   .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
-  .addHeader("Cookie", "JSESSIONID=154692F02BBBC664825F3C4C224A474B")
+  .addHeader("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D")
   .build();
 Response response = client.newCall(request).execute();
 
 ```
 
-  Retrieve a user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
+```javascript
+
+1. Here the target UUID used is of the admin user.  
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 
 ## Create a user
