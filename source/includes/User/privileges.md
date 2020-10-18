@@ -14,9 +14,72 @@ A **Privilege** is an authorization to perform a particular action in the system
 
 ### List privilege
 
-```console
-    GET /privilege
+```shell
+    GET /privilege?v=full&limit=1
 ```
+
+```response
+
+{
+    "results": [
+         {
+            "uuid": "24635eec-dd5a-11e6-9d9c-0242ac150002",
+            "display": "Add Concept Proposals",
+            "name": "Add Concept Proposals",
+            "description": "Able to add concept proposals to the system",
+            "retired": false,
+            "auditInfo": {
+                "creator": null,
+                "dateCreated": null,
+                "changedBy": null,
+                "dateChanged": null
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/privilege/24635eec-dd5a-11e6-9d9c-0242ac150002"
+                }
+            ],
+            "resourceVersion": "1.8"
+        }
+    ]
+}
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege?v=full&limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege?v=full&limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 
 * Fetch all privileges that match any specified parameters otherwise fetch all privileges. Returns a `200 OK` status with the privilege response. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
@@ -24,22 +87,55 @@ A **Privilege** is an authorization to perform a particular action in the system
 
 * #### Get privilege by UUID
 
-```console
+```shell
     GET /privilege/:target_privilege_uuid
 ```
 
-    Retrieve a privilege by its UUID. Returns a `404 Not Found` status if the privilege not exists. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege/fd40ed09-b499-405a-8b98-8154a6465e1a")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege/fd40ed09-b499-405a-8b98-8154a6465e1a", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a privilege by its UUID. Returns a `404 Not Found` status if the privilege not exists. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
     
 
 ### Create a privilege
 
-```console
-        POST /privilege
-        {
-            "name": "Delete Patients",
-            "description": "A privilege or permission to delete patients"
-        }
+```shell
+POST /privilege
+{
+    "name": "Delete Patients",
+    "description": "A privilege or permission to delete patients"
+}
 ```
 
 * To create a privilege, you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
@@ -55,11 +151,11 @@ A **Privilege** is an authorization to perform a particular action in the system
 
 ### Update a privilege
 
-```console
-   POST /privilege/:target_privilege_uuid
-   {
-      "description": "A user who can delete all the encounter types"
-   }
+```shell
+POST /privilege/:target_privilege_uuid
+{
+    "description": "A user who can delete all the encounter types"
+}
 ```
 
 * Update a privilege with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
