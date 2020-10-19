@@ -12,7 +12,9 @@ A **Privilege** is an authorization to perform a particular action in the system
 4. [Delete a privilege](#delete-a-privilege)
 
 
-### List privilege
+## List privilege
+
+> List privilege
 
 ```shell
     GET /privilege?v=full&limit=1
@@ -138,14 +140,56 @@ POST /privilege
 }
 ```
 
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"name\": \"Delete Patients\",\r\n    \"description\": \"A privilege or permission to delete patients\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
+
+var raw = JSON.stringify({"name":"Delete Patients","description":"A privilege or permission to delete patients"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
 * To create a privilege, you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+* If the name has already been used for some other privilege in use then a `500 Internal Server Error` status is returned. 
 
     #### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
     *name* | `String` | Name of the privilege(Required)
-    *description* | `String` | Description of the privilege(Required)
+    *description* | `String` | Description of the privilege
 
     
 
@@ -158,24 +202,103 @@ POST /privilege/:target_privilege_uuid
 }
 ```
 
-* Update a privilege with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
-status, if the privilege does not exists. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned. Attempting to update a privilege's name will fail with the error code `400 Bad Request`.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"description\": \"A user who can delete all the encounter types\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege/246364a0-dd5a-11e6-9d9c-0242ac150002")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
+
+var raw = JSON.stringify({"description":"A user who can delete all the encounter types"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege/246364a0-dd5a-11e6-9d9c-0242ac150002", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+* Update a privilege with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`status, if the privilege does not exists. 
+* If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+* Attempting to update a privilege's name will fail with the error code `400 Bad Request`.
 
     #### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *description* | `String` | Description of the privilege (Required)
+    *name* | `String` | Name of the privilege(Required)
+    *description* | `String` | Description of the privilege
 
     
 ### Delete a privilege
 
-```console
+```shell
    DELETE /privilege/:target_privilege_uuid?purge=true
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege/24636447-dd5a-11e6-9d9c-0242ac150002?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege/24636447-dd5a-11e6-9d9c-0242ac150002?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 ```
 
 * Delete a privilege by its UUID. Returns a `404 Not Found` status if the privilege not exists. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
+* A `500 Internal server error` status is returned if user is trying to delete any currently used privilege.
 
     #### Query Parameters
 
