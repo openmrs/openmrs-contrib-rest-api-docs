@@ -18,10 +18,77 @@
 
 ### List all non-retired person attribute types.
 
-```console
-GET /personattributetype?q=race
+```shell
+GET /personattributetype?q=race&v=default
 ```
-    Quickly filter person attribute types with a given search query. If the request is not authenticated or the authenticated user does not have appropriate permissions, a `401 Unauthorized` status is returned.
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "8d871386-c2cc-11de-8d13-0010c6dffd0f",
+            "display": "Race",
+            "name": "Race",
+            "description": "Group of persons related by common descent or heredity",
+            "format": "java.lang.String",
+            "foreignKey": 0,
+            "sortWeight": 6.0,
+            "searchable": false,
+            "editPrivilege": null,
+            "retired": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d871386-c2cc-11de-8d13-0010c6dffd0f"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d871386-c2cc-11de-8d13-0010c6dffd0f?v=full"
+                }
+            ],
+            "resourceVersion": "1.8"
+        }
+    ]
+}
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype?q=race&v=default")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype?q=race&v=default", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+* Quickly filter person attribute types with a given search query. If the request is not authenticated or the authenticated user does not have appropriate permissions, a `401 Unauthorized` status is returned.
 
     ### Query Parameters
 
@@ -32,11 +99,44 @@ GET /personattributetype?q=race
 
 ### Get person attribute type by UUID.
 
-```console
+```shell
 GET /personattributetype/:target_person_attribute_type_uuid
 ```
-    Retrieve a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not exist. If the
-    user not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d871386-c2cc-11de-8d13-0010c6dffd0f")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d871386-c2cc-11de-8d13-0010c6dffd0f", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not exist. If the user not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 
 ## Create a person attribute type
@@ -54,6 +154,7 @@ POST /personattributetype
         "description": "Change and update the person attribute type"
     }
 }
+
 ```
 * To Create a person attribute type you need to specify below attributes in the request body. If the user is not logged in to perform this action,
  a `401 Unauthorized` status is returned.
@@ -88,8 +189,7 @@ POST /personattributetype
 }
 ```
 
-*  Update a target person attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
-status if the person attribute does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+*  Update a target person attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if the person attribute does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
     Parameter | Type | Description
     --- | --- | ---
@@ -104,9 +204,45 @@ status if the person attribute does not exist. If the user is not logged in to p
 
 ## Delete a person attribute type
 
-```console
+```shell
 DELETE /personattributetype/:target_person_attribute_type_uuid?purge=true
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d8718c2-c2cc-11de-8d13-0010c6dffd0f?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d8718c2-c2cc-11de-8d13-0010c6dffd0f?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 
 * Delete or Retire a person attribute type by its UUID. Returns a `404 Not Found` status if the person attribute type does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
