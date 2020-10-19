@@ -20,6 +20,8 @@ A **Privilege** is an authorization to perform a particular action in the system
     GET /privilege?v=full&limit=1
 ```
 
+> Success Response
+
 ```response
 
 {
@@ -87,7 +89,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege?v=full&limit=1", re
 
     
 
-* #### Get privilege by UUID
+## Get privilege by UUID
+
+> Get privilege by UUID
 
 ```shell
     GET /privilege/:target_privilege_uuid
@@ -130,7 +134,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege/fd40ed09-b499-405a-
 
     
 
-### Create a privilege
+## Create a privilege
+
+> Create a privilege
 
 ```shell
 POST /privilege
@@ -193,7 +199,9 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege", requestOptio
 
     
 
-### Update a privilege
+## Update a privilege
+
+> Update a privilege
 
 ```shell
 POST /privilege/:target_privilege_uuid
@@ -255,7 +263,9 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege/246364a0-dd5a-
     *description* | `String` | Description of the privilege
 
     
-### Delete a privilege
+## Delete a privilege
+
+> Delete a privilege
 
 ```shell
    DELETE /privilege/:target_privilege_uuid?purge=true
