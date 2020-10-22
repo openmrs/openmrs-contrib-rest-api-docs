@@ -23,6 +23,8 @@
 GET /personattributetype?q=race&v=default
 ```
 
+> Success Response
+
 ```response
 
 {
