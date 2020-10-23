@@ -20,6 +20,7 @@ includes:
   - SystemInformation/system_information
   - User/user
   - User/role
+  - User/privileges
   - Person/persons
   - Person/person_attribute_type
   - Patient/patients
