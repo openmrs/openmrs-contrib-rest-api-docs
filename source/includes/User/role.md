@@ -6,7 +6,7 @@ A **Role** represents a group of privileges in the system. Roles may inherit pri
 
 ## Available operations for Role.
 
-1. [List roles](##list-roles)
+1. [List roles](#list-roles)
 2. [Create a role](#create-a-role)
 3. [Update a role](#update-a-role)
 4. [Delete a role](#delete-a-role)
