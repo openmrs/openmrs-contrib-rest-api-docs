@@ -333,64 +333,304 @@ status is returned.
  
 ## List person attribute subresource
 
+> List person attribute subresource
 
-```console
+```shell
 GET /person/:target_person_uuid/attribute
 ```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "display": "Birthplace = Birthplace",
+            "uuid": "2c7a8991-2435-47df-b7a4-83ca5c341dcd",
+            "value": "Birthplace",
+            "attributeType": {
+                "uuid": "8d8718c2-c2cc-11de-8d13-0010c6dffd0f",
+                "display": "Birthplace",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d8718c2-c2cc-11de-8d13-0010c6dffd0f",
+                        "resourceAlias": "personattributetype"
+                    }
+                ]
+            },
+            "voided": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute/2c7a8991-2435-47df-b7a4-83ca5c341dcd",
+                    "resourceAlias": "attribute"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute/2c7a8991-2435-47df-b7a4-83ca5c341dcd?v=full",
+                    "resourceAlias": "attribute"
+                }
+            ],
+            "resourceVersion": "1.8"
+        }
+    ]
+}
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+## List person attribute subresource by UUID
+
+> List person attribute subresource by UUID
+
 * List all person attributes for a given person. Returns a `404 Not Found` if the person doesn't exist. If not authenticated or the authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-```console
-GET /person/:target_person_uuid/name/:target_attribute_uuid
+```shell
+GET /person/:target_person_uuid/attribute/:target_attribute_uuid
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute/2c7a8991-2435-47df-b7a4-83ca5c341dcd")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute/2c7a8991-2435-47df-b7a4-83ca5c341dcd", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * List all the person attributes by its `UUID` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person attribute does not exist. If user not logged in to perform this action, a `401 unauthorized` status is returned.
 
 
 ## Create person attribute subresource
 
-```console
+> Create person attribute subresource
+
+```shell
 POST person/:target_person_uuid/attribute
 { 
     "attributeType": "8d8718c2-c2cc-11de-8d13-0010c6dffd0f",
     "value": "Birthplace",
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{ \r\n    \"attributeType\": \"8d8718c2-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"value\": \"Birthplace\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var raw = JSON.stringify({"attributeType":"8d8718c2-c2cc-11de-8d13-0010c6dffd0f","value":"Birthplace"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute", requestOptions)
+  .then(response => response.text())
+
+
+```
+
 * To create a person attribute subresource for a specific person resource you need to specify below properties in your request body.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
-    #### Attributes
+### Attributes
     
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `UUID` | UUID of the attributeType
-    *value* | `String` | value associated with the attribute
+    *attributeType* | `UUID` | UUID of the attributeType (Required)
+    *value* | `String` | value associated with the attribute (Required)
 
 
 ## Update person attribute subresource
 
-```console
-POST person/:target_person_uuid/attribute
+> Update person attribute subresource
+
+```shell
+POST person/:target_person_uuid/attribute/:target_attribute_uuid
 { 
     "attributeType": "8d8718c2-c2cc-11de-8d13-0010c6dffd0f",
-    "value": "Birthplace",
+    "value": "Birthplace"
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{ \r\n    \"attributeType\": \"8d8718c2-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"value\": \"Birthplace\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute/2c7a8991-2435-47df-b7a4-83ca5c341dcd")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var raw = JSON.stringify({"attributeType":"8d8718c2-c2cc-11de-8d13-0010c6dffd0f","value":"Birthplace"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute/2c7a8991-2435-47df-b7a4-83ca5c341dcd", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * To update a person attribute with given UUID value for a specific person resource you need to specify below properties in your request body.
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
-    ### Attributes
+### Attributes
     
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `UUID` | UUID of the attributeType
-    *value* | `String` | value associated with the attribute
+    *attributeType* | `UUID` | UUID of the attributeType (Required)
+    *value* | `String` | value associated with the attribute (Required)
 
 
 ## Delete person attribute subresource
 
-```console
+> Delete person attribute subresource
+
+```shell
 DELETE /person/:target_person_uuid/person/:target_attribute_uuid
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute/2c7a8991-2435-47df-b7a4-83ca5c341dcd?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javscript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/attribute/2c7a8991-2435-47df-b7a4-83ca5c341dcd?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+
+```
+
 * Delete or void a target attribute. Returns `404 Not Found` status if the person does not exist. 
 If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
