@@ -230,29 +230,198 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
  
 ## List person address subresource
 
-```console
+> List person address subresource
+
+```shell
 GET /person/:target_person_uuid/address
 ```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "display": "Address15501",
+            "uuid": "e350d53f-0252-4259-8d87-d97a2d58166e",
+            "preferred": true,
+            "address1": "Address15501",
+            "address2": null,
+            "cityVillage": "City5501",
+            "stateProvince": "State5501",
+            "country": "Country5501",
+            "postalCode": "55501",
+            "countyDistrict": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "address6": null,
+            "startDate": null,
+            "endDate": null,
+            "latitude": null,
+            "longitude": null,
+            "voided": false,
+            "address7": null,
+            "address8": null,
+            "address9": null,
+            "address10": null,
+            "address11": null,
+            "address12": null,
+            "address13": null,
+            "address14": null,
+            "address15": null,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address/e350d53f-0252-4259-8d87-d97a2d58166e",
+                    "resourceAlias": "address"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address/e350d53f-0252-4259-8d87-d97a2d58166e?v=full",
+                    "resourceAlias": "address"
+                }
+            ],
+            "resourceVersion": "2.0"
+        }
+    ]
+}
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
 * List all the person addresses corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address does not exist. If the user is not logged in to perform this action, a `401 unauthorized` status is returned.
 
-```console
+## List person address subresource by UUID
+
+> List person address subresource by UUID
+
+```shell
 GET /person/:target_person_uuid/address/:target_address_uuid
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address/e350d53f-0252-4259-8d87-d97a2d58166e")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address/e350d53f-0252-4259-8d87-d97a2d58166e", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * List all the person addresses by its `target_address_uuid` and corresponding to a `target_person_uuid`. Returns a `404 Not Found` status if person address does not exist. If user not logged in to perform this action, a `401 unauthorized` status is returned.
 
 
 ## Create person address subresource
 
-```console
+> Create person address subresource
+
+```shell
 POST person/:target_person_uuid/address
 { 
     "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
-    "cityVillage": "Bengaluru"
+    "cityVillage": "Bengaluru",
     "stateProvince": "Karnataka",
     "postalCode": "560037",
-    "lattitude": "28.65033",
+    "latitude": "28.65033",
     "longitude": "77.304255"
 }
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{ \r\n    \"address1\": \"30, Vivekananda Layout, Munnekolal,Marathahalli\",\r\n    \"cityVillage\": \"Bengaluru\",\r\n    \"stateProvince\": \"Karnataka\",\r\n    \"postalCode\": \"560037\",\r\n    \"latitude\": \"28.65033\",\r\n    \"longitude\": \"77.304255\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var raw = JSON.stringify({"address1":"30, Vivekananda Layout, Munnekolal,Marathahalli","cityVillage":"Bengaluru","stateProvince":"Karnataka","postalCode":"560037","latitude":"28.65033","longitude":"77.304255"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address", requestOptions)
+
+
 ```
 
 * To create a person address subresource for a specific person resource you need to specify below properties in your request body.
@@ -262,7 +431,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
     
     Parameter | Type | Description
     --- | --- | ---
-    *preferred* | `Boolean` | true if this is the person's preferred address. If a person has multiple addresses, only one can be preferred.
+    *preferred* | `Boolean` | true if this is the person's preferred address. If a person has multiple addresses, only one can be preferred
     *address1* | `String` | address of the person
     *address2* | `String` | second address of the person
     *cityVillage* | `String` | city/village of the person
@@ -276,29 +445,73 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
     *address6* | `String` | sixth address of the person
     *startDate* | `String` | date when the person began living at this address
     *endDate* | `String` | date when the person stopped living at this address
-    *lattitude* | `String` | lattitude of the address
+    *latitude* | `String` | latitude of the address
     *longitude* | `String` | longitude of the address
 
 
 
 ## Update person address subresource
 
-```console
-POST person/:target_person_uuid/address
+> Update person address subresource
+
+```shell
+POST person/:target_person_uuid/address/:target_address_uuid
 { 
     "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
-    "cityVillage": "Bengaluru"
+    "cityVillage": "Bengaluru",
     "stateProvince": "Karnataka",
     "postalCode": "560037",
-    "lattitude": "28.65033",
+    "latitude": "28.65033",
     "longitude": "77.304255"
 }
 ```
 
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{ \r\n    \"address1\": \"30, Vivekananda Layout, Munnekolal,Marathahalli\",\r\n    \"cityVillage\": \"Bengaluru\",\r\n    \"stateProvince\": \"Karnataka\",\r\n    \"postalCode\": \"560037\",\r\n    \"latitude\": \"28.65033\",\r\n    \"longitude\": \"77.304255\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address/62fc41dd-e120-40c5-8a66-b651b0a5fecc")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var raw = JSON.stringify({"address1":"30, Vivekananda Layout, Munnekolal,Marathahalli","cityVillage":"Bengaluru","stateProvince":"Karnataka","postalCode":"560037","latitude":"28.65033","longitude":"77.304255"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address/62fc41dd-e120-40c5-8a66-b651b0a5fecc", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
 * To update a person address with given UUID value for a specific person resource you need to specify below properties in your request body.
 If user not logged in to perform this action, a `401 Unauthorized` status is returned.
     
-    ### Attributes
+   
+### Attributes
     
     Parameter | Type | Description
     --- | --- | ---
@@ -316,14 +529,52 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
     *address6* | `String` | sixth address of the person
     *startDate* | `String` | date when the person began living at this address
     *endDate* | `String` | date when the person stopped living at this address
-    *lattitude* | `String` | lattitude of the address
+    *latitude* | `String` | latitude of the address
     *longitude* | `String` | longitude of the address
 
 
 ## Delete a person address subresource
 
-```console
+> Delete a person address subresource
+
+```shell
 DELETE /person/:target_person_uuid/person/:target_address_uuid
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address/62fc41dd-e120-40c5-8a66-b651b0a5fecc")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address/62fc41dd-e120-40c5-8a66-b651b0a5fecc", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 ```
 
 * Delete or void a target address subresource. Returns `404 Not Found` status if the person does not exist. 
