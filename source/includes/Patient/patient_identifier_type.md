@@ -3,19 +3,6 @@
 ## PatientIdentifierType Overview
 Administrators define what types of identifiers they will collect. These range from National ID numbers, to driver's license numbers, to per-hospital medical record numbers.
 
-## Properties on PatientIdentifierType:
-
-* format: a regular expression defining what the identifier text should contain
-
-* formatDescription: An optional description of the regular expression (used to explain the requirements of the regular expression in terms a user would understand). For example, a regular expression like `\d{4,8}` could have a description like "Must be a number between 4 and 8 digits in length."
-
-* required: a true/false whether every patient MUST have this type
-
-* checkDigit: a true/false whether this identifier has a checkDigit at the end
-
-* validator: full class name of an [IdentifierValidator](https://docs.openmrs.org/doc/org/openmrs/patient/IdentifierValidator.html) (e.g., [`org.openmrs.patient.impl.LuhnIdentifierValidator`](https://docs.openmrs.org/doc/org/openmrs/patient/impl/LuhnIdentifierValidator.html))
-
-* locationBehavior: "REQUIRED" if a location must be associated with the identifier; "NOT_USED" if the identifier does require a location
 
 ## Available operations for PatientIdentifierType
 
@@ -26,25 +13,102 @@ Administrators define what types of identifiers they will collect. These range f
 
 ## List PatientIdentifierType resource
 
-### List patientIdentifierType
-
-```console
-GET /patientidentifiertype
+```shell
+GET /patientidentifiertype?v=default&limit=1
 ```
-    Fetch all non-retired patientIdentifierTypes resources that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patientIdentifierType response. If the user is not logged in a `401 Unauthorized` status is returned.
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "05a29f94-c0ed-11e2-94be-8c13b969e334",
+            "display": "OpenMRS ID",
+            "name": "OpenMRS ID",
+            "description": "OpenMRS patient identifier, with check-digit",
+            "format": null,
+            "formatDescription": null,
+            "required": true,
+            "validator": "org.openmrs.module.idgen.validator.LuhnMod30IdentifierValidator",
+            "locationBehavior": null,
+            "uniquenessBehavior": null,
+            "retired": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334",
+                    "resourceAlias": "patientidentifiertype"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334?v=full",
+                    "resourceAlias": "patientidentifiertype"
+                }
+            ],
+            "resourceVersion": "2.0"
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype?limit=1&v=default&startIndex=1",
+            "resourceAlias": null
+        }
+    ]
+}
+
+```
+
+* Fetch all non-retired patientIdentifierTypes resources that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patientIdentifierType response. If the user is not logged in a `401 Unauthorized` status is returned.
 
 
-### Get patientIdentifierType by UUID.
+## Get patientIdentifierType by UUID.
 
-```console
+```shell
 GET /patientidentifiertype/:target_patientIdentifierType_uuid
 ```
-    Retrieve a patientIdentifierType by its UUID. Returns a `404 Not Found` status if patientIdentifierType does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a patientIdentifierType by its UUID. Returns a `404 Not Found` status if patientIdentifierType does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 
 ## Create a patientIdentifierType
 
-```console
+```shell
 POST /patientidentifiertype
 {
     "name": "Wilson Hosp MRN",
@@ -64,20 +128,22 @@ POST /patientidentifiertype
 
 Parameter | Type | Description
 --- | --- | ---
-*name* | string | label for the identifier
+*name* | string | label for the identifier (Required)
 *description* | string | a small description about the patientIdentifier
 *format* | string | a regular expression defining what the identifier text should contain
-*formatDescription* | string | an optional description of the regular expression
-*required* | boolean | a true/false whether every patient MUST have this type
-*checkDigit* | boolean | a true/false whether this identifier has a checkdigit at the end
-*validator* | string | `org.openmrs.patient.IdentifierValidator`
-*locationBehavior* | "REQUIRED" or "NOT USED" | behavior of the location with respect to the identifier 
+*formatDescription* | string | an optional description of the regular expression,(used to explain the requirements of the regular expression in terms a user would understand). For example, a regular expression like `\d{4,8}` could have a description like "Must be a number between 4 and 8 digits in length."
+*required* | boolean | a true/false whether every patient must have this type
+*checkDigit* | boolean | a true/false whether this identifier has a checkdigit at the end (Required)
+*validator* | string | full class name of an [IdentifierValidator](https://docs.openmrs.org/doc/org/openmrs/patient/IdentifierValidator.html) (e.g., [`org.openmrs.patient.impl.LuhnIdentifierValidator`](https://docs.openmrs.org/doc/org/openmrs/patient/impl/LuhnIdentifierValidator.html))
+
+*locationBehavior* | "REQUIRED" or "NOT USED" | behavior of the location with respect to the identifier,"REQUIRED" if a location must be associated with the identifier; "NOT_USED" if the identifier does require a location
+ 
 *uniquenessBehavior* | string | specify the uniqueness of the behaviour, it can be either Unique, Non Unique or Location.
 
 
 ## Update a patientIdentifierType
 
-```console
+```shell
 POST /patientidentifertype/:target_patientidentifiertype_uuid
 {
     "name": "Amani Identifier",
@@ -85,6 +151,7 @@ POST /patientidentifertype/:target_patientidentifiertype_uuid
     "format": "\\d{1,10}-\\d",
     "formatDescription": "Up to ten digts followed by a hyphen and another digit",
     "required": false,
+    "*checkDigit":true,
     "validator": "org.openmrs.patient.impl.LuhnIdentifierValidator",
     "locationBehavior": "NOT_USED",
     "uniquenessBehavior": "UNIQUE"
@@ -97,7 +164,7 @@ Returns a `404 Not Found` status if patientIdentifierType not exists. If user no
 
 ## Delete a patientIdentifierType
 
-```console
+```shell
 DELETE /patientidentifiertype/:target_patientidentifiertype_uuid?purge=true
 ```
 * Delete or retire a target patientIdentifierType by its UUID. Returns a `404 Not Found` status if patientIdentifierType not exists. If user is not logged in to perform this action, a `401 Unauthorized` status returned.
