@@ -230,7 +230,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"names\": [\r\n        {\r\n            \"name\": \"What is the blood type for the sick patient?\",\r\n            \"locale\": \"en\",\r\n            \"localePreferred\": true,\r\n            \"conceptNameType\": \"FULLY_SPECIFIED\"\r\n        }\r\n    ],\r\n    \"datatype\": \"8d4a4c94-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"version\": \"1.2.2\",\r\n    \"conceptClass\": \"8d492774-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"mappings\": [\r\n        {\r\n            \"conceptReferenceTerm\": \"21fb14d7-5cd9-3621-ac30-c9e57320e233\",\r\n            \"conceptMapType\": \"35543629-7d8c-11e1-909d-c80aa9edcf4e\"\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"description\": \"Records blood type of sick patients\",\r\n            \"locale\": \"en\"\r\n        }\r\n    ]\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept")
+  .url("/openmrs/ws/rest/v1/concept")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -321,7 +321,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"names\": [\r\n        {\r\n            \"name\": \"What is the blood type for the sick patient?\",\r\n            \"locale\": \"en\",\r\n            \"localePreferred\": true,\r\n            \"conceptNameType\": \"FULLY_SPECIFIED\"\r\n        }\r\n    ],\r\n    \"datatype\": \"8d4a4c94-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"version\": \"1.2.2\",\r\n    \"conceptClass\": \"8d492774-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"mappings\": [\r\n        {\r\n            \"conceptReferenceTerm\": \"21fb14d7-5cd9-3621-ac30-c9e57320e233\",\r\n            \"conceptMapType\": \"35543629-7d8c-11e1-909d-c80aa9edcf4e\"\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"description\": \"Dummy description update for this concept\",\r\n            \"locale\": \"en\"\r\n        }\r\n    ]\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8bb-a328df04611f")
+  .url("/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8bb-a328df04611f")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
