@@ -56,7 +56,7 @@ A **Privilege** is an authorization to perform a particular action in the system
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege?v=full&limit=1")
+  .url("/openmrs/ws/rest/v1/privilege?v=full&limit=1")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D")
@@ -77,7 +77,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege?v=full&limit=1", requestOptions)
+fetch("/openmrs/ws/rest/v1/privilege?v=full&limit=1", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -102,7 +102,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege?v=full&limit=1", re
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege/fd40ed09-b499-405a-8b98-8154a6465e1a")
+  .url("/openmrs/ws/rest/v1/privilege/fd40ed09-b499-405a-8b98-8154a6465e1a")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D")
@@ -123,7 +123,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/privilege/fd40ed09-b499-405a-8b98-8154a6465e1a", requestOptions)
+fetch("/openmrs/ws/rest/v1/privilege/fd40ed09-b499-405a-8b98-8154a6465e1a", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
