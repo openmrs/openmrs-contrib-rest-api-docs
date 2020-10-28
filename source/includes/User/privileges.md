@@ -153,7 +153,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"name\": \"Delete Patients\",\r\n    \"description\": \"A privilege or permission to delete patients\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege")
+  .url("/openmrs/ws/rest/v1/privilege")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -179,7 +179,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege", requestOptions)
+fetch("/openmrs/ws/rest/v1/privilege", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -217,7 +217,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"description\": \"A user who can delete all the encounter types\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege/246364a0-dd5a-11e6-9d9c-0242ac150002")
+  .url("/openmrs/ws/rest/v1/privilege/246364a0-dd5a-11e6-9d9c-0242ac150002")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -243,7 +243,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege/246364a0-dd5a-11e6-9d9c-0242ac150002", requestOptions)
+fetch("/openmrs/ws/rest/v1/privilege/246364a0-dd5a-11e6-9d9c-0242ac150002", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -278,7 +278,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege/24636447-dd5a-11e6-9d9c-0242ac150002?purge=true")
+  .url("/openmrs/ws/rest/v1/privilege/24636447-dd5a-11e6-9d9c-0242ac150002?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
@@ -299,7 +299,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/privilege/24636447-dd5a-11e6-9d9c-0242ac150002?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/privilege/24636447-dd5a-11e6-9d9c-0242ac150002?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
