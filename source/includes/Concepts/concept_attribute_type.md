@@ -27,7 +27,7 @@ GET /conceptattributetype?q=time&limit=1
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1")
+  .url("/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2")
@@ -48,7 +48,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -104,7 +104,7 @@ GET /conceptattributetype/:target_concept_attribute_type_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?ecc8e1af-3465-4840-85b8-ec5a2298bdcf")
+  .url("/openmrs/ws/rest/v1/conceptattributetype?ecc8e1af-3465-4840-85b8-ec5a2298bdcf")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2")
@@ -125,7 +125,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?ecc8e1af-3465-4840-85b8-ec5a2298bdcf", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptattributetype?ecc8e1af-3465-4840-85b8-ec5a2298bdcf", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -297,7 +297,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf?purge=true")
+  .url("/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2")
@@ -318,7 +318,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
