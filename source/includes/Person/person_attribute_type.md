@@ -168,7 +168,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"name\": \"Edit Civil Status\",\r\n    \"description\": \"Able to manage the civil status of persons\",\r\n    \"format\": \"org.openmrs.Concept\",\r\n    \"foreignKey\": 1054,\r\n    \"searchable\": false,\r\n    \"editPrivilege\": \"24635eec-dd5a-11e6-9d9c-0242ac150002\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/personattributetype")
+  .url("/openmrs/ws/rest/v1/personattributetype")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
