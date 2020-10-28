@@ -2,7 +2,7 @@
 
 This is the repository for OpenMRS REST API documentation.
 
-The live demo can be viewed at [rest.openmrs.org](https://rest.openmrs.org/).
+The live documentation site can be viewed at [rest.openmrs.org](https://rest.openmrs.org/).
 
 ## Contributing to the documentation
 
