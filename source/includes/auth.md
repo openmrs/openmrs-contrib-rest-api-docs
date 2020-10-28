@@ -24,7 +24,7 @@ GET /openmrs/ws/rest/v1/session
 	OkHttpClient client = new OkHttpClient().newBuilder()
 			.build();
 	Request request = new Request.Builder()
-			.url("https://demo.openmrs.org/openmrs/ws/rest/v1/session")
+			.url("/openmrs/ws/rest/v1/session")
 			.method("GET", null)
 			.addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
 			.build();
@@ -43,7 +43,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/session", requestOptions)
+fetch("/openmrs/ws/rest/v1/session", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -116,7 +116,7 @@ DELETE /openmrs/ws/rest/v1/session -H 'Accept: application/json'
 ```java
 	OkHttpClient client = new OkHttpClient().newBuilder().build();
 	Request request = new Request.Builder()
-		.url("https://demo.openmrs.org/openmrs/ws/rest/v1/session")
+		.url("/openmrs/ws/rest/v1/session")
 		.method("DELETE", null)
 		.addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
 		.build();
@@ -135,7 +135,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/session", requestOptions)
+fetch("/openmrs/ws/rest/v1/session", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -164,7 +164,7 @@ POST /openmrs/ws/rest/v1/password/:target_user_uuid
 	//password should contain atleast 1 integer
 	RequestBody body = RequestBody.create(mediaType, "{ \r\n    \"newPassword\" : \"password1\"\r\n}");
 	Request request = new Request.Builder()
-			.url("https://demo.openmrs.org/openmrs/ws/rest/v1/password/45ce6c2e-dd5a-11e6-9d9c-0242ac150002")
+			.url("/openmrs/ws/rest/v1/password/45ce6c2e-dd5a-11e6-9d9c-0242ac150002")
 			.method("POST", body)
 			.addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
 			.addHeader("Content-Type", "application/json")
@@ -189,7 +189,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/password/45ce6c2e-dd5a-11e6-9d9c-0242ac150002", requestOptions)
+fetch("/openmrs/ws/rest/v1/password/45ce6c2e-dd5a-11e6-9d9c-0242ac150002", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -220,7 +220,7 @@ POST /openmrs/ws/rest/v1/password
 	
 	RequestBody body = RequestBody.create(mediaType, "{\r\n  \"oldPassword\" : \"Admin123\",\r\n  \"newPassword\" : \"newPassword1\"\r\n}");
 	Request request = new Request.Builder()
-	  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/password")
+	  .url("/openmrs/ws/rest/v1/password")
 	  .method("POST", body)
 	  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
 	  .addHeader("Content-Type", "application/json")
@@ -244,7 +244,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/password \n", requestOptions)
+fetch("/openmrs/ws/rest/v1/password \n", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -267,7 +267,7 @@ GET /openmrs/ws/rest/v1/location?tag=Login+Location'
 	OkHttpClient client = new OkHttpClient().newBuilder()
 			.build();
 	Request request = new Request.Builder()
-			.url("https://demo.openmrs.org/openmrs/ws/rest/v1/location?tag=Login+Location")
+			.url("/openmrs/ws/rest/v1/location?tag=Login+Location")
 			.method("GET", null)
 			.addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
 			.build();
@@ -287,7 +287,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/location?tag=Login+Location'\n", requestOptions)
+fetch("/openmrs/ws/rest/v1/location?tag=Login+Location'\n", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
