@@ -32,7 +32,7 @@
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1")
+  .url("/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=C40164E7FA407F9E872B0BBDBB4582B0")
@@ -53,7 +53,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -107,7 +107,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype?q=associated&l
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e")
+  .url("/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=CDA2E6D4A724D5E5DC294136C185284C")
@@ -128,7 +128,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -158,7 +158,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n\t\"name\": \"SAME-AS\",\r\n\t\"description\":\"used to map concepts which are Identical\",\r\n\t\"isHidden\": false\r\n}\r\n{\r\n\t\"name\": \"SAME-AS\",\r\n\t\"description\":\"used to map concepts which are Identical\"\r\n\t\"isHidden\": false\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype")
+  .url("/openmrs/ws/rest/v1//conceptmaptype")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -184,7 +184,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype", requestOptions)
+fetch("/openmrs/ws/rest/v1//conceptmaptype", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -223,7 +223,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n\t\"name\": \"SAME-AS\",\r\n\t\"description\": \"dummy update\",\r\n\t\"isHidden\": false\r\n}\r\n{\r\n\t\"name\": \"SAME-AS\",\r\n\t\"description\":\"used to map concepts which are Identical\"\r\n\t\"isHidden\": false\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype/35543629-7d8c-11e1-909d-c80aa9edcf4e")
+  .url("/openmrs/ws/rest/v1//conceptmaptype/35543629-7d8c-11e1-909d-c80aa9edcf4e")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -250,7 +250,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1//conceptmaptype/35543629-7d8c-11e1-909d-c80aa9edcf4e", requestOptions)
+fetch("/openmrs/ws/rest/v1//conceptmaptype/35543629-7d8c-11e1-909d-c80aa9edcf4e", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -282,7 +282,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e?purge=true")
+  .url("/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=CDA2E6D4A724D5E5DC294136C185284C")
@@ -303,7 +303,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
