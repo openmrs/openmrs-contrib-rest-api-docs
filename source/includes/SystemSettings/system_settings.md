@@ -67,7 +67,7 @@ GET /systemsetting?limit=1&v=full
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/systemsetting?limit=1&v=full")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting?limit=1&v=full")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710")
@@ -88,7 +88,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/systemsetting?limit=1&v=full", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting?limit=1&v=full", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -122,7 +122,7 @@ GET /systemsetting/:target_systemsetting_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710")
@@ -143,7 +143,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -179,7 +179,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"property\": \"property name\",\r\n  \"description\": \"dummy description\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.FreeTextDatatype\",\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\":\"org.openmrs.web.attribute.handler.FreeTextTextareaHandler\",\r\n  \"handlerConfig\": null,\r\n  \"value\": \"dummy value\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/systemsetting/")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -204,7 +204,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/systemsetting/", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -251,7 +251,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"property\": \"property name\",\r\n  \"description\": \"dummy description\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.FreeTextDatatype\",\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\":\"org.openmrs.web.attribute.handler.FreeTextTextareaHandler\",\r\n  \"handlerConfig\": null,\r\n  \"value\": \"dummy value\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/systemsetting/443b909a-82d7-4842-bf6a-f4e773ddcad8")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/443b909a-82d7-4842-bf6a-f4e773ddcad8")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -277,7 +277,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/systemsetting/443b909a-82d7-4842-bf6a-f4e773ddcad8", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/443b909a-82d7-4842-bf6a-f4e773ddcad8", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -315,7 +315,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293?purge=true")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710")
@@ -336,7 +336,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293?purge=true", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
