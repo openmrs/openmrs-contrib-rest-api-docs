@@ -29,7 +29,7 @@ q=admin
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/user?q=admin")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user?q=admin")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=154692F02BBBC664825F3C4C224A474B")
@@ -64,7 +64,7 @@ GET /user/:target_user_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=154692F02BBBC664825F3C4C224A474B")
@@ -115,7 +115,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"username\": \"demoUser\",\r\n    \"password\": \"Password123\",\r\n    \"person\" :\r\n        {\r\n        \"names\": [\r\n            {\r\n                \"givenName\": \"Demo\",\r\n                \"familyName\": \"User\"\r\n            }\r\n        ],\r\n        \"gender\": \"M\",\r\n        \"birthdate\": \"1997-09-02\",\r\n        \"addresses\": [\r\n        {\r\n         \"address1\": \"30, Vivekananda Layout, Munnekolal,Marathahalli\",\r\n        \"cityVillage\": \"Bengaluru\",\r\n        \"country\": \"India\",\r\n        \"postalCode\": \"560037\"\r\n        }\r\n    ]\r\n        },\r\n\"systemId\": \"systemId\"\r\n}");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/user")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -184,7 +184,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"username\": \"demoUser\",\r\n    \"password\": \"Password123\",\r\n    \"person\" :\r\n        {\r\n        \"names\": [\r\n            {\r\n                \"givenName\": \"Demo\",\r\n                \"familyName\": \"User\"\r\n            }\r\n        ],\r\n        \"gender\": \"M\",\r\n        \"birthdate\": \"1997-09-02\",\r\n        \"addresses\": [\r\n        {\r\n         \"address1\": \"30, Vivekananda Layout, Munnekolal,Marathahalli\",\r\n        \"cityVillage\": \"Bengaluru\",\r\n        \"country\": \"India\",\r\n        \"postalCode\": \"560037\"\r\n        }\r\n    ]\r\n        },\r\n\"systemId\": \"systemId\"\r\n}");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/user/564b2790-0508-11e3-8ffd-0800200c9a66
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user/564b2790-0508-11e3-8ffd-0800200c9a66
 ")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
@@ -226,7 +226,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/user/b953d87d-7e67-47b9-ad1e-fa8b7cdaea4d?purge=true")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user/b953d87d-7e67-47b9-ad1e-fa8b7cdaea4d?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=154692F02BBBC664825F3C4C224A474B")
