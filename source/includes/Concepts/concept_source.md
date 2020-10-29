@@ -154,7 +154,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"SNOMED CT\",\r\n  \"description\": \"SNOMED Preferred mapping\",\r\n  \"hl7Code\": \"SCT\",\r\n  \"uniqueId\":\"2.16.840.1.113883.6.96\"\t\r\n}");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptsource/")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -180,7 +180,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptsource/", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
