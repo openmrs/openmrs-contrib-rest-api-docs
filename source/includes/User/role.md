@@ -36,11 +36,11 @@ GET /role?v=default&limit=1
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/role/774b2af3-6437-4e5a-a310-547554c7c65c"
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/role/774b2af3-6437-4e5a-a310-547554c7c65c"
                 },
                 {
                     "rel": "full",
-                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/role/774b2af3-6437-4e5a-a310-547554c7c65c?v=full"
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/role/774b2af3-6437-4e5a-a310-547554c7c65c?v=full"
                 }
             ],
             "resourceVersion": "1.8"
@@ -49,7 +49,7 @@ GET /role?v=default&limit=1
     "links": [
         {
             "rel": "next",
-            "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default&startIndex=1"
+            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default&startIndex=1"
         }
     ]
 }
@@ -61,7 +61,7 @@ GET /role?v=default&limit=1
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
@@ -72,17 +72,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -106,7 +106,7 @@ GET /role/:target_role_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/role/774b2af3-6437-4e5a-a310-547554c7c65c")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/role/774b2af3-6437-4e5a-a310-547554c7c65c")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
@@ -117,17 +117,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/role/774b2af3-6437-4e5a-a310-547554c7c65c", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/role/774b2af3-6437-4e5a-a310-547554c7c65c", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -178,16 +178,16 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA");
 
 var raw = JSON.stringify({"name":"Clinician","description":"A provider assisting the Lead Surgeon.","privileges":[{"name":"Delete Patients","description":"Able to delete patients"}],"inheritedRoles":["774b2af3-6437-4e5a-a310-547554c7c65c"]});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
@@ -239,16 +239,16 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA");
 
 var raw = JSON.stringify({"description":"Manages forms and attaches them to the UI"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
@@ -298,13 +298,13 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
