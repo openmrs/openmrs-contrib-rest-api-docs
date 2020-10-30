@@ -9,17 +9,18 @@ All Persons have these characteristics.
 ## Subresource types
 
 ### Names
-A person can have one or more names, one of which must be marked as the **preferred** name. The preferred name will be displayed in search results and patient screens.
+
+* A person can have one or more names, one of which must be marked as the **preferred** name. The preferred name will be displayed in search results and patient screens.
 
 ### Addresses
 
-A person may have zero or more contact addresses. You may configure the format of these addresses for your particular locale.
+* A person may have zero or more contact addresses. You may configure the format of these addresses for your particular locale.
 
 ### Person Attributes
 
-To support your local needs, you can define additional information about the people in your system, on top of those that are natively supported by OpenMRS. You can define the datatype of a Person Attribute, as well as any constraints on the possible values, using metadata. This metadata is called a Person Attribute Type.
+* To support your local needs, you can define additional information about the people in your system, on top of those that are natively supported by OpenMRS. You can define the datatype of a Person Attribute, as well as any constraints on the possible values, using metadata. This metadata is called a Person Attribute Type.
 
-Person Attributes are suitable for storing other information. But historical values of person attributes are not retained. For example, you should use a person attribute to record a patient's contact telephone number. This information may change, but if it does so, the system need only store the most recent value, and need not retain previous values. It is not appropriate to use a person attribute to store something like the patient's height, which is recorded at a given point in time, but can be expected to change and should be tracked as it does so.
+* Person Attributes are suitable for storing other information. But historical values of person attributes are not retained. For example, you should use a person attribute to record a patient's contact telephone number. This information may change, but if it does so, the system need only store the most recent value, and need not retain previous values. It is not appropriate to use a person attribute to store something like the patient's height, which is recorded at a given point in time, but can be expected to change and should be tracked as it does so.
 
 ## Available Operations for Person type
 
@@ -144,24 +145,132 @@ DELETE /person/:target_person_uuid?purge=true
 
 ## List person name subresource
 
-```console
+> List person name subresource
+
+```shell
 GET /person/:target_person_uuid/name
 ```
-* List all the person name subresource corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. 
-If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
-status is returned.
 
-```console
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "display": "John Taylor",
+            "uuid": "4b68f067-6f4d-451a-bd80-342fc21ea486",
+            "givenName": "John",
+            "middleName": null,
+            "familyName": "Taylor",
+            "familyName2": null,
+            "voided": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/4b68f067-6f4d-451a-bd80-342fc21ea486",
+                    "resourceAlias": "name"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/4b68f067-6f4d-451a-bd80-342fc21ea486?v=full",
+                    "resourceAlias": "name"
+                }
+            ],
+            "resourceVersion": "1.8"
+        }
+    ]
+}
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+## List person name subresource by UUID
+
+> List person name subresource by UUID
+
+* List all the person name subresource corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+
+```shell
 GET /person/:target_person_uuid/name/:target_name_uuid
 ```
-* List the person name by its `UUID` and corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. 
-If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/4b68f067-6f4d-451a-bd80-342fc21ea486")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/4b68f067-6f4d-451a-bd80-342fc21ea486", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+* List the person name by its `UUID` and corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
 
 ## Create person name subresource
 
-```console
+> Create person name subresource
+
+```shell
 POST person/:target_person_uuid/name
 { 
     "givenName": "Mohit",
@@ -169,6 +278,47 @@ POST person/:target_person_uuid/name
     "preferred": true,
     "prefix": "Mr."
 }
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{ \r\n    \"givenName\": \"Mohit\",\r\n    \"familyName\": \"Kumar\",\r\n    \"preferred\": true,\r\n    \"prefix\": \"Mr.\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javscript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var raw = JSON.stringify({"givenName":"Mohit","familyName":"Kumar","preferred":true,"prefix":"Mr."});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 ```
 
 * To create a person name subresource for a specific person resource you need to specify below properties in your request body.
@@ -182,7 +332,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
     *middleName* | `String` | middle name of the person
     *familyName* | `String` | family name/surname of the person
     *familyName2* | `String` | second family name/surname of the person
-    *preferred* | `Boolean` | true if this is the person's preferred name. When a person has only one name, it should be marked as preferred; when a person has multiple names, only one name can be preferred.
+    *preferred* | `Boolean` | true if this is the person's preferred name. When a person has only one name, it should be marked as preferred. When a person has multiple names, only one name can be marked preferred.
     *prefix* | `String` | prefix for the name
     *familyNamePrefix* | `String` | prefix if any for the family name 
     *familyNameSuffix* | `String` | Suffix if any for the family name
@@ -190,14 +340,55 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
 
 ## Update person name subresource
 
-```console
-POST person/:target_person_uuid/name
+> Update person name subresource
+
+```shell
+POST person/:target_person_uuid/name/:target_name_uuid
 { 
     "givenName": "Mohit",
     "familyName": "Verma",
     "preferred": true,
     "prefix": "Dr."
 }
+```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{ \r\n    \"givenName\": \"Mohit\",\r\n    \"familyName\": \"Verma\",\r\n    \"preferred\": true,\r\n    \"prefix\": \"Dr.\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/4e5c5c75-323e-43f4-afad-c5970209d0f9")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var raw = JSON.stringify({"givenName":"Mohit","familyName":"Verma","preferred":true,"prefix":"Dr."});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/4e5c5c75-323e-43f4-afad-c5970209d0f9", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 ```
 
 * To update a person name with given UUID value for a specific person resource, you need to specify below properties in your request body.
@@ -220,8 +411,47 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
 
 ## Delete person name subresource
 
-```console
+> Delete person name subresource
+
+```shell
 DELETE /person/:target_person_uuid/person/:target_name_uuid
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/4e5c5c75-323e-43f4-afad-c5970209d0f9?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javscript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/4e5c5c75-323e-43f4-afad-c5970209d0f9?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+
 ```
 
 * Delete or void a target name subresource. Returns a `404 Not Found` status if an attribute does not exist. 
