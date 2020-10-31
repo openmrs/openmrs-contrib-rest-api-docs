@@ -73,7 +73,7 @@ fetch("/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limi
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs/99a0c42b-d50e-4ae3-b826-d1959c737e74"
+                    "uri": "/openmrs/ws/rest/v1/obs/99a0c42b-d50e-4ae3-b826-d1959c737e74"
                 }
             ]
         }
@@ -81,7 +81,7 @@ fetch("/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limi
     "links": [
         {
             "rel": "next",
-            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=2&startIndex=2"
+            "uri": "/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=2&startIndex=2"
         }
     ]
 }
