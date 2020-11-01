@@ -13,8 +13,44 @@ Administrators define what types of identifiers they will collect. These range f
 
 ## List PatientIdentifierType resource
 
+> List PatientIdentifierType resource
+
 ```shell
 GET /patientidentifiertype?v=default&limit=1
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype?v=default&limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype?v=default&limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 ```
 
 > Success Response
@@ -113,15 +149,55 @@ POST /patientidentifiertype
 {
     "name": "Wilson Hosp MRN",
     "description": "Wilson Hospital Medical Record Number",
-    "format": "\d{1,10}-\d",
+    "format": "\\d{1,10}-\\d",
     "formatDescription": "Up to ten digts followed by a hyphen and another digit",
-    "required": true,
+    "required": false,
     "validator": "org.openmrs.patient.impl.LuhnIdentifierValidator",
-    "checkDigit": true,
-    "locationBehavior": "REQUIRED",
-    "uniquenessBehavior": "Unique"
+    "locationBehavior": "NOT_USED",
+    "uniquenessBehavior": null
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"name\": \"Wilson Hosp MRN\",\r\n    \"description\": \"Wilson Hospital Medical Record Number\",\r\n    \"format\": \"\\\\d{1,10}-\\\\d\",\r\n    \"formatDescription\": \"Up to ten digts followed by a hyphen and another digit\",\r\n    \"required\": false,\r\n    \"validator\": \"org.openmrs.patient.impl.LuhnIdentifierValidator\",\r\n    \"locationBehavior\": \"NOT_USED\",\r\n    \"uniquenessBehavior\": null\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010")
+  .build();
+
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010");
+
+var raw = JSON.stringify({"name":"Wilson Hosp MRN","description":"Wilson Hospital Medical Record Number","format":"\\d{1,10}-\\d","formatDescription":"Up to ten digts followed by a hyphen and another digit","required":false,"validator":"org.openmrs.patient.impl.LuhnIdentifierValidator","locationBehavior":"NOT_USED","uniquenessBehavior":null});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * To create a patientIdentifierType you need to specify the below properties in the request. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 ### Properties
@@ -133,7 +209,6 @@ Parameter | Type | Description
 *format* | string | a regular expression defining what the identifier text should contain
 *formatDescription* | string | an optional description of the regular expression,(used to explain the requirements of the regular expression in terms a user would understand). For example, a regular expression like `\d{4,8}` could have a description like "Must be a number between 4 and 8 digits in length."
 *required* | boolean | a true/false whether every patient must have this type
-*checkDigit* | boolean | a true/false whether this identifier has a checkdigit at the end (Required)
 *validator* | string | full class name of an [IdentifierValidator](https://docs.openmrs.org/doc/org/openmrs/patient/IdentifierValidator.html) (e.g., [`org.openmrs.patient.impl.LuhnIdentifierValidator`](https://docs.openmrs.org/doc/org/openmrs/patient/impl/LuhnIdentifierValidator.html))
 
 *locationBehavior* | "REQUIRED" or "NOT USED" | behavior of the location with respect to the identifier,"REQUIRED" if a location must be associated with the identifier; "NOT_USED" if the identifier does require a location
@@ -146,17 +221,51 @@ Parameter | Type | Description
 ```shell
 POST /patientidentifertype/:target_patientidentifiertype_uuid
 {
-    "name": "Amani Identifier",
-    "description": "Medical record number for Amani Health System",
-    "format": "\\d{1,10}-\\d",
-    "formatDescription": "Up to ten digts followed by a hyphen and another digit",
-    "required": false,
-    "*checkDigit":true,
-    "validator": "org.openmrs.patient.impl.LuhnIdentifierValidator",
-    "locationBehavior": "NOT_USED",
-    "uniquenessBehavior": "UNIQUE"
+    "format": "\\d{1,10}-",
+    "formatDescription": "Up to ten digts followed by a hyphen"
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"format\": \"\\\\d{1,10}-\",\r\n    \"formatDescription\": \"Up to ten digts followed by a hyphen\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010");
+
+var raw = JSON.stringify({"format":"\\d{1,10}-","formatDescription":"Up to ten digts followed by a hyphen"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Update a target patientIdentifierType with given UUID, this method only modifies properties in the request. 
 Returns a `404 Not Found` status if patientIdentifierType not exists. If user not logged in to perform this action, a `401 Unauthorized status returned`.
 
@@ -167,6 +276,42 @@ Returns a `404 Not Found` status if patientIdentifierType not exists. If user no
 ```shell
 DELETE /patientidentifiertype/:target_patientidentifiertype_uuid?purge=true
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Delete or retire a target patientIdentifierType by its UUID. Returns a `404 Not Found` status if patientIdentifierType not exists. If user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
