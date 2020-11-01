@@ -136,23 +136,22 @@ DELETE /patient/:target_patient_uuid?purge=true
     **uuid** | `String` | uuid to delete
     *purge* | `Boolean` | The resource will be voided/retired unless purge = 'true'
 
+
 ## List patientIdentifier sub resources
 
-* ### List all patientIdentifier sub resources for a patient.
-
-```console
+```shell
 GET /patient/:target_patient_uuid/identifier
 ```  
 
-    Retrieve all <b>identifier</b> sub resources of a <b>patient</b> resource by `target_patient_uuid`.Returns a `404 Not Found` status if patientIdentifier not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+* Retrieve all <b>identifier</b> sub resources of a <b>patient</b> resource by `target_patient_uuid`.Returns a `404 Not Found` status if patientIdentifier not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
 
-* ### List patientIdentifier sub resource by it's UUID and parent patient UUID.
+## List patientIdentifier sub resource by it's UUID and parent patient UUID.
 
-```console
+```shell
 GET /patient/:target_patient_uuid/identifier/:target_identifier_uuid
 ```
 
-    Retrieve a <b>patientIdentifier</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if patientIdentifier not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
+* Retrieve a <b>patientIdentifier</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if patientIdentifier not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
 
 ## Create a patientIdentifier sub resource with properties 
 
@@ -169,12 +168,8 @@ POST patient/:target_patient_uuid/identifier
 * To create a patientIdentifier subresource for a specific patient resource you need to specify below properties in your request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Query parameter 
-    Parameter | Description
-    --- | ---
-    `target_patient_uuid` | patient resource uuid
-
-    ### Properties for resource
+    
+### Properties
 
     Parameter | type | Description
     --- | --- | ---
@@ -198,7 +193,7 @@ POST patient/:target_patient_uuid/identifier/:target_identifier_uuid
 * Updates an patientIdentifier subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
-    ### Properties
+### Properties
 
     Parameter | Type | Description
     --- | --- | ---
@@ -214,8 +209,7 @@ returned.
 DELETE /patient/:target_patient_uuid/identifier/:target_identifier_uuid
 ```
 
-* Delete or retire a target identifier subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
-If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* Delete or retire a target identifier subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
