@@ -137,7 +137,8 @@ DELETE /visit/:target_visit_uuid?purge=true
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
 
 ## List attribute subresources
-```console
+
+```shell
 GET /visit/:target_visit_uuid/attribute 
 ```
 * ### List all attribute subresources for a visit.
@@ -155,13 +156,60 @@ GET /visit/:target_visit_uuid/attribute/:target_attribute_uuid
      returned.
 
 ## Create an attribute subresource with properties
-```console
+
+```shell
+
+1. Make sure the `attributeType UUID` is present to avoid error status codes.
+
 POST visit/:target_visit_uuid/attribute 
 {
-    "attributeType": "target_attribute_type_uuid",
-    "value": "value_for_the_attriute"
+    "attributeType": "19a9de73-4d0f-48e4-be7b-b35fe0f8586d",
+    "value": "stable"
 }
+
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"attributeType\": \"19a9de73-4d0f-48e4-be7b-b35fe0f8586d\",\r\n    \"value\": \"stable\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visit/fb7115c6-11f4-4a67-8005-9f5f815738a0/attribute")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=A6DF3A5D6E1A0726D95247C670412050")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=A6DF3A5D6E1A0726D95247C670412050");
+
+var raw = JSON.stringify({"attributeType":"19a9de73-4d0f-48e4-be7b-b35fe0f8586d","value":"stable"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visit/fb7115c6-11f4-4a67-8005-9f5f815738a0/attribute", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
