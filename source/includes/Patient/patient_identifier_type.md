@@ -102,6 +102,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype?v=
 
 ## Get patientIdentifierType by UUID.
 
+> Get patientIdentifierType by UUID
+
 ```shell
 GET /patientidentifiertype/:target_patientIdentifierType_uuid
 ```
@@ -143,6 +145,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype/05
 
 
 ## Create a patientIdentifierType
+
+> Create a patientIdentifierType
 
 ```shell
 POST /patientidentifiertype
@@ -218,6 +222,8 @@ Parameter | Type | Description
 
 ## Update a patientIdentifierType
 
+> Update a patientIdentifierType
+
 ```shell
 POST /patientidentifertype/:target_patientidentifiertype_uuid
 {
@@ -272,6 +278,8 @@ Returns a `404 Not Found` status if patientIdentifierType not exists. If user no
 
 
 ## Delete a patientIdentifierType
+
+> Delete a patientIdentifierType
 
 ```shell
 DELETE /patientidentifiertype/:target_patientidentifiertype_uuid?purge=true
