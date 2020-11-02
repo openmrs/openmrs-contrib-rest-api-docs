@@ -139,6 +139,8 @@ DELETE /patient/:target_patient_uuid?purge=true
 
 ## List patientIdentifier sub resources
 
+> List patientIdentifier sub resources
+
 ```shell
 GET /patient/:target_patient_uuid/identifier
 ```  
@@ -233,6 +235,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patient/e739808f-f166-42
 
 ## List patientIdentifier sub resource by it's UUID and parent patient UUID.
 
+> List patientIdentifier sub resource by it's UUID
+
 ```shell
 GET /patient/:target_patient_uuid/identifier/:target_identifier_uuid
 ```
@@ -274,6 +278,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patient/e739808f-f166-42
 * Retrieve a <b>patientIdentifier</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if patientIdentifier not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
 
 ## Create a patientIdentifier sub resource with properties 
+
+> Create a patientIdentifier sub resource
 
 ```shell
 POST patient/:target_patient_uuid/identifier
@@ -341,6 +347,8 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
 
 ## Update patientIdentifier sub resource with properties
 
+> Update patientIdentifier sub resource
+
 ```shell
 POST patient/:target_patient_uuid/identifier/:target_identifier_uuid
 { 
@@ -402,6 +410,8 @@ returned.
 
 
 ## Delete patientIdentifier sub resource with properties
+
+> Delete patientIdentifier sub resource
 
 ```shell
 DELETE /patient/:target_patient_uuid/identifier/:target_identifier_uuid
