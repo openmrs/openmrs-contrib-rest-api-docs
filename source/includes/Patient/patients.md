@@ -341,8 +341,8 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
     Parameter | type | Description
     --- | --- | ---
     *identifier* | `String` | value of the identifier (Required)
-    *identifierType* | `Identifier_Type_UUID` | Create identifier from this Identifier_type (Required)
-    *location* | `Location UUID` | Get patients for this location
+    *[identifierType](#patientidentifiertype)* | `Identifier_Type_UUID` | Create identifier from this Identifier_type (Required)
+    *[location](#location)* | `Location UUID` | Get patients for this location
     *preferred* | `boolean` | preferred/not preferred identifier
 
 ## Update patientIdentifier sub resource with properties
@@ -404,8 +404,8 @@ returned.
     Parameter | Type | Description
     --- | --- | ---
     *identifier* | `String` | updated value of the identifier
-    *identifierType* | `Identifier_Type_UUID` | Create identifier from this Identifier_type
-    *location* | `Location UUID` | updated location
+    *[identifierType](#patientidentifiertype)* | `Identifier_Type_UUID` | Create identifier from this Identifier_type
+    *[location](#location)* | `Location UUID` | updated location
     *preferred* | `boolean` | updated status of preferred/not preferred identifier
 
 
