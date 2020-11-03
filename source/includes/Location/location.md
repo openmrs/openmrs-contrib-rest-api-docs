@@ -6,8 +6,7 @@
 
 * **Locations may have a hierarchy**, such that each location may have one parent location.
 
-* Also a Location can have one or more Children location example Children's Ward might be a location within the location 
-Amani Clinic.
+* A Location can have one or more Children location example Children's Ward might be a location within the location Amani Clinic.
   
 * You might also store physical areas (for example, Eastern Province, or California) as Locations. 
 
@@ -38,13 +37,156 @@ Amani Clinic.
 ## List location
 
 ```console
-GET /location?
-q="amani"
+GET /location?q=amani&v=default
 ```
-### List all non-retired locations`.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/location?q=amani&v=default")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/location?q=amani&v=default", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "aff27d58-a15c-49a6-9beb-d30dcfc0c66e",
+            "display": "Amani Hospital",
+            "name": "Amani Hospital",
+            "description": null,
+            "address1": null,
+            "address2": null,
+            "cityVillage": null,
+            "stateProvince": null,
+            "country": null,
+            "postalCode": null,
+            "latitude": null,
+            "longitude": null,
+            "countyDistrict": null,
+            "tags": [
+                {
+                    "uuid": "37dd4458-dc9e-4ae6-a1f1-789c1162d37b",
+                    "display": "Visit Location",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/37dd4458-dc9e-4ae6-a1f1-789c1162d37b"
+                        }
+                    ]
+                }
+            ],
+            "parentLocation": null,
+            "childLocations": [
+                {
+                    "uuid": "b1a8b05e-3542-4037-bbd3-998ee9c40574",
+                    "display": "Inpatient Ward",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/location/b1a8b05e-3542-4037-bbd3-998ee9c40574"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "2131aff8-2e2a-480a-b7ab-4ac53250262b",
+                    "display": "Isolation Ward",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/location/2131aff8-2e2a-480a-b7ab-4ac53250262b"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "7fdfa2cb-bc95-405a-88c6-32b7673c0453",
+                    "display": "Laboratory",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/location/7fdfa2cb-bc95-405a-88c6-32b7673c0453"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "58c57d25-8d39-41ab-8422-108a0c277d98",
+                    "display": "Outpatient Clinic",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/location/58c57d25-8d39-41ab-8422-108a0c277d98"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "7f65d926-57d6-4402-ae10-a5b3bcbf7986",
+                    "display": "Pharmacy",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/location/7f65d926-57d6-4402-ae10-a5b3bcbf7986"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "6351fcf4-e311-4a19-90f9-35667d99a8af",
+                    "display": "Registration Desk",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/location/6351fcf4-e311-4a19-90f9-35667d99a8af"
+                        }
+                    ]
+                }
+            ],
+            "retired": false,
+            "attributes": [],
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e?v=full"
+                }
+            ],
+            "resourceVersion": "2.0"
+        }
+    ]
+}
+
+```
     
-    Quickly filter location with given query parameters. Returns a `404 Not Found` status if the location not exists. If the 
-    user not logged in to perform this action, a `401 Unauthorized` status returned.
+* Quickly filter location with given query parameters. Returns a `404 Not Found` status if the location not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
     
 ### Query Parameters
 
@@ -53,13 +195,46 @@ q="amani"
     *q* | `Search Query` | Display Name of Location object.
      
     
-### List location by UUID.
+## List location by UUID.
 
-```console
+```shell
 GET /location/:target_location_uuid
 ```
-    Retrieve a location by its UUID. Returns a `404 Not Found` status if the location not exists. If the user not logged 
-    in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a location by its UUID. Returns a `404 Not Found` status if the location not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
     
    
 ## Create a location
