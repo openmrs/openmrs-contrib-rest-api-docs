@@ -19,13 +19,13 @@ Anyone who has an Encounter or who is enrolled in a Program is a Patient.)
 
 * OpenMRS lets you manually maintain an **Allergy List** for a patient, including the allergen, reaction, severity, etc.
 
-###1. Allergen
+### 1. Allergen
 An allergen refers to a substance capable of triggering a response that starts in the immune system and results in an allergic reaction, for eg in drugs Aspirin, Codeine.., in food beef, eggs.. and others like dust and pollen.
 
-###2. Severity
+### 2. Severity
 Refers to the severity of the allergy e.g. mild , moderate and severe (`uuid:=1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`)
 
-###3. Reactions
+### 3. Reactions
 Reactions refers to the effects of the allergy on anybody for e.g. headache(`uuid:=139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`) or even unknown(`uuid:=1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`) 
 
 
