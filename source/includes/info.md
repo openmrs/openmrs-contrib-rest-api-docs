@@ -3,6 +3,8 @@
 > Getting started with examples. 
 
 >1. Before executing the examples, make sure that resources corresponding to the UUID's used in the examples are present on the demo server.
+>2. Before executing the examples, append the base server url before the examples for e.g.
+ change `/openmrs/ws/rest/v1/concept` as `https://demo.openmrs.org/openmrs/ws/rest/v1/concept` or any other base server URL.
 
 ```java
 // Before executing the examples, get the okttp dependency jar and import it the project.
