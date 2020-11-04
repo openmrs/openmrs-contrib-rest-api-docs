@@ -71,7 +71,7 @@ fetch("/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1", requestOptions)
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e"
+                    "uri": "/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e"
                 }
             ]
         }
@@ -79,7 +79,7 @@ fetch("/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1", requestOptions)
     "links": [
         {
             "rel": "next",
-            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1&startIndex=1"
+            "uri": "/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1&startIndex=1"
         }
     ]
 }
@@ -263,7 +263,7 @@ fetch("/openmrs/ws/rest/v1//conceptmaptype/35543629-7d8c-11e1-909d-c80aa9edcf4e"
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name of the concept mapping type (Required)
+    *name* | `String` | Name of the concept mapping type 
     *description* | `String` |  A brief description of the concept mapping type
     *isHidden* | `Boolean` | State to record concept map is hidden or not
     

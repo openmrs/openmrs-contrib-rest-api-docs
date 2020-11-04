@@ -18,8 +18,6 @@
 
 ## List concept classes
 
-## List all non-retired concept classes.
-
 >List all non-retired concept classes
 
 ```shell
@@ -65,7 +63,7 @@ fetch("/openmrs/ws/rest/v1/conceptclass?limit=1", requestOptions)
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass/8d4907b2-c2cc-11de-8d13-0010c6dffd0f"
+                    "uri": "/openmrs/ws/rest/v1/conceptclass/8d4907b2-c2cc-11de-8d13-0010c6dffd0f"
                 }
             ]
         }
@@ -73,7 +71,7 @@ fetch("/openmrs/ws/rest/v1/conceptclass?limit=1", requestOptions)
     "links": [
         {
             "rel": "next",
-            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptclass?limit=1&startIndex=1"
+            "uri": "/openmrs/ws/rest/v1/conceptclass?limit=1&startIndex=1"
         }
     ]
 }
@@ -245,7 +243,7 @@ fetch("/openmrs/ws/rest/v1/conceptclass/8afb1247-9c8c-48c4-9253-946ffd44bc8a", r
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name of the concept class (Required)
+    *name* | `String` | Name of the concept class
     *description* | `String` | Description
 
     

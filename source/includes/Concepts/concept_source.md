@@ -16,8 +16,6 @@
 
 ## List concept source
 
-## List all non-retired concept source
-
 >List all non-retired concept source
 
 
@@ -68,7 +66,7 @@ fetch("/openmrs/ws/rest/v1/conceptsource?q=pih&limit=1", requestOptions)
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource/fb9aaaf1-65e2-4c18-b53c-16b575f2f385"
+                    "uri": "/openmrs/ws/rest/v1/conceptsource/fb9aaaf1-65e2-4c18-b53c-16b575f2f385"
                 }
             ]
         }
@@ -76,7 +74,7 @@ fetch("/openmrs/ws/rest/v1/conceptsource?q=pih&limit=1", requestOptions)
     "links": [
         {
             "rel": "next",
-            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptsource?q=pih&limit=1&startIndex=1"
+            "uri": "/openmrs/ws/rest/v1/conceptsource?q=pih&limit=1&startIndex=1"
         }
     ]
 }
