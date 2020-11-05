@@ -236,7 +236,9 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
 
 ## List allergy subresources
 
-```console
+> List allergy subresources
+
+```shell
 GET /patient/:target_patient_uuid/allergy/
 ```
 
@@ -245,7 +247,7 @@ GET /patient/:target_patient_uuid/allergy/
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87")
+  .url("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -257,23 +259,25 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: null,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87", requestOptions)
+fetch("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87", requestOptions)
   .then(response => response.text())
 
 
 ```
+
+> Success Response
 
 ```response
 
@@ -380,25 +384,27 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3
 
 ## List allergy subresource by its UUID and parent patient UUID.
 
+> List allergy subresource by its UUID and parent patient UUID
+
 ```shell
 GET /patient/:target_patient_uuid/allergy/:target_allergy_uuid
 ```
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: null,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/2d440f27-7a87-4a14-bd21-efb5e99c58dc", requestOptions)
+fetch("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/2d440f27-7a87-4a14-bd21-efb5e99c58dc", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -411,7 +417,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/2d440f27-7a87-4a14-bd21-efb5e99c58dc")
+  .url("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/2d440f27-7a87-4a14-bd21-efb5e99c58dc")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -424,6 +430,8 @@ Response response = client.newCall(request).execute();
 * Retrieve a <b>allergy</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if allergy not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
 
 ## Create a allergy sub resource with properties 
+
+> Create a allergy sub resource
 
 ```shell
 POST patient/:target_patient_uuid/allergy
@@ -461,7 +469,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"allergen\": {\r\n        \"allergenType\": \"DRUG\",\r\n        \"codedAllergen\": {\r\n            \"uuid\": \"162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n        }\r\n    },\r\n    \"severity\": {\r\n        \"uuid\": \"1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n    },\r\n    \"comment\": \"severe allergy\",\r\n    \"reactions\": [\r\n        {\r\n            \"reaction\": {\r\n                \"uuid\": \"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n            }\r\n        },\r\n        {\r\n            \"reaction\": {\r\n                \"uuid\": \"139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/")
+  .url("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -473,21 +481,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
 
 var raw = JSON.stringify({"allergen":{"allergenType":"DRUG","codedAllergen":{"uuid":"162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}},"severity":{"uuid":"1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},"comment":"severe allergy","reactions":[{"reaction":{"uuid":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}},{"reaction":{"uuid":"139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}}]});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/", requestOptions)
+fetch("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -509,6 +517,8 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
 
 
 ## Update allergy sub resource with properties
+
+> Update allergy sub resource
 
 ```shell
 POST patient/:target_patient_uuid/allergy/:target_allergy_uuid
@@ -545,7 +555,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"allergen\": {\r\n        \"allergenType\": \"DRUG\",\r\n        \"codedAllergen\": {\r\n            \"uuid\": \"162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n        }\r\n    },\r\n    \"severity\": {\r\n        \"uuid\": \"1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n    },\r\n    \"comment\": \"severe allergy\",\r\n    \"reactions\": [\r\n        {\r\n            \"reaction\": {\r\n                \"uuid\": \"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n            }\r\n        },\r\n        {\r\n            \"reaction\": {\r\n                \"uuid\": \"139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783")
+  .url("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -558,21 +568,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
 
 var raw = JSON.stringify({"allergen":{"allergenType":"DRUG","codedAllergen":{"uuid":"162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}},"severity":{"uuid":"1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},"comment":"severe allergy","reactions":[{"reaction":{"uuid":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}},{"reaction":{"uuid":"139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}}]});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783", requestOptions)
+fetch("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -594,6 +604,8 @@ returned.
 
 ## Delete allergy sub resource with properties
 
+> Delete allergy sub resource
+
 ```shell
 DELETE /patient/:target_patient_uuid/allergy/:target_allergy_uuid
 ```
@@ -605,7 +617,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783?purge=true")
+  .url("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7")
@@ -616,17 +628,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
