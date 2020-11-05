@@ -19,7 +19,10 @@
 3. [Update a visit type](#update-a-visit-type)
 4. [Delete a visit type](#delete-a-visit-type)
 
+
 ## list visits types
+
+> list visits types
 
 ```shell
 GET /visittype?q=Facility&v=full
@@ -30,7 +33,7 @@ GET /visittype?q=Facility&v=full
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype?q=Facility&v=full")
+  .url("/openmrs/ws/rest/v1/visittype?q=Facility&v=full")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C")
@@ -41,17 +44,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype?q=Facility&v=full", requestOptions)
+fetch("/openmrs/ws/rest/v1/visittype?q=Facility&v=full", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -109,8 +112,6 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype?q=Facility&v=f
 }
 
 ```
-
-## List all non-retired visits types.
     
 * Quickly filter visit types with a given search query. Returns a `404 Not Found` status if visit type not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
@@ -122,6 +123,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype?q=Facility&v=f
 
 ## List visit type by UUID.
 
+> List visit type by UUID
+
 ```shell
 GET /visittype/:target_visit_type_uuid
 ```
@@ -130,7 +133,7 @@ GET /visittype/:target_visit_type_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype/7b0f5697-27e3-40c4-8bae-f4049abfb4ed")
+  .url("/openmrs/ws/rest/v1/visittype/7b0f5697-27e3-40c4-8bae-f4049abfb4ed")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C")
@@ -141,17 +144,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype/7b0f5697-27e3-40c4-8bae-f4049abfb4ed", requestOptions)
+fetch("/openmrs/ws/rest/v1/visittype/7b0f5697-27e3-40c4-8bae-f4049abfb4ed", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -161,6 +164,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype/7b0f5697-27e3-
 * Retrieve a visit type by its UUID. Returns a `404 Not Found` status if visit type not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
    
 ## Create a visit type
+
+> Create a visit type
 
 ```shell
 POST /visittype
@@ -177,7 +182,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"name\": \"Facility Visit\",\r\n    \"description\": \"Patient visits the clinic/hospital (as opposed to a home visit, or telephone contact)\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype")
+  .url("/openmrs/ws/rest/v1/visittype")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -190,28 +195,26 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
 
 var raw = JSON.stringify({"name":"Facility Visit","description":"Patient visits the clinic/hospital (as opposed to a home visit, or telephone contact)"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype", requestOptions)
+fetch("/openmrs/ws/rest/v1/visittype", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
 ```
-
-
 
 * To Create a visit type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
  a `401 Unauthorized` status returned.
@@ -226,6 +229,7 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype", requestOptio
 
 ## Update a visit type
 
+> Update a visit type
 
 ```shell
 POST /type/:target_visit_type_uuid
@@ -242,7 +246,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"name\": \"Facility Visit\",\r\n    \"description\": \"Modified description\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype/62e364c3-8eb0-46e9-b420-9463a4efdcc9")
+  .url("/openmrs/ws/rest/v1/visittype/62e364c3-8eb0-46e9-b420-9463a4efdcc9")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -254,21 +258,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
 
 var raw = JSON.stringify({"name":"Facility Visit","description":"Modified description"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype/62e364c3-8eb0-46e9-b420-9463a4efdcc9", requestOptions)
+fetch("/openmrs/ws/rest/v1/visittype/62e364c3-8eb0-46e9-b420-9463a4efdcc9", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -289,6 +293,8 @@ status if visit not exists. If user not logged in to perform this action, a `401
     
 ## Delete a visit type
 
+> Delete a visit type
+
 ```shell
 DELETE /visittype/:target_visit_type_uuid?purge=true
 ```
@@ -300,7 +306,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype/62e364c3-8eb0-46e9-b420-9463a4efdcc9?purge=true")
+  .url("/openmrs/ws/rest/v1/visittype/62e364c3-8eb0-46e9-b420-9463a4efdcc9?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C")
@@ -309,17 +315,17 @@ Response response = client.newCall(request).execute();
 ```
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visittype/62e364c3-8eb0-46e9-b420-9463a4efdcc9?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/visittype/62e364c3-8eb0-46e9-b420-9463a4efdcc9?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
