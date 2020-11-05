@@ -193,17 +193,14 @@ DELETE /location/:target_location_uuid?purge=true
 
 ## List location attribute subresources
 
-### List all location attribute subresources for a location.
-
-```console
+```shell
 GET /location/:target_location_uuid/attribute 
 ```
-    Retrieve all <b>attribute</b> sub resources of a  <b>location</b> resource by target_location_uuid.Returns a 
-    `404 Not Found` status if the attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
+* Retrieve all <b>attribute</b> sub resources of a  <b>location</b> resource by target_location_uuid.Returns a `404 Not Found` status if the attribute not exists. 
+* If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
-### List location attribute subresources by own UUID and parent location UUID.
+## List location attribute subresources by own UUID and parent location UUID.
 
 ```console
 GET /location/:target_location_uuid/attribute/:target_attribute_uuid
