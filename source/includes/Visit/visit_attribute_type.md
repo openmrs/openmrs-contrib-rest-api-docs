@@ -16,6 +16,8 @@
 
 ## List visits attribute types
 
+> List visits attribute types
+
 ```shell
 GET /visitattributetype?q=Patient&v=full 
 ```  
@@ -53,6 +55,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visitattributetype?q=Pat
   .catch(error => console.log('error', error));
 
 ```
+
+> Success Response
 
 ```response
 {
@@ -109,7 +113,9 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visitattributetype?q=Pat
 
 ## List visit attribute type by UUID
 
-```console
+> List visit attribute type by UUID
+
+```shell
 GET /visitattributetype/:target_visit_attribute_type_uuid
 ```  
 
@@ -150,6 +156,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visitattributetype/19a9d
     
    
 ## Create a visit attribute type
+
+> Create a visit attribute type
 
 ```shell
 POST /visitattributetype
@@ -225,6 +233,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visitattributetype", req
 
 ## Update a visit attribute type
 
+> Update a visit attribute type
+
 ```shell
 POST /visitattributetype/:target_visit_attribute_type_uuid
 {
@@ -292,6 +302,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visitattributetype/44bac
     
 ## Delete a visit attribute type
 
+> Delete a visit attribute type
+
 ```shell
 DELETE /visitattributetype/:target_visit_attribute_type_uuid?purge=true
 ```
@@ -333,7 +345,7 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/visitattributetype/44bac
 
 * Delete or Retire a target visit attribute type by its UUID. Returns a `404 Not Found` status if the visit attribute type not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
