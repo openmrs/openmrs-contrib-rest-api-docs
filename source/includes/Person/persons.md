@@ -70,7 +70,7 @@ GET /person?q=all&limit=1&v=default
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda/name/8fbf3a24-43e9-4e6c-a56c-798e85760493",
+                        "uri": "/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda/name/8fbf3a24-43e9-4e6c-a56c-798e85760493",
                         "resourceAlias": "name"
                     }
                 ]
@@ -81,7 +81,7 @@ GET /person?q=all&limit=1&v=default
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda/address/a0897bec-f008-4f45-b531-2544aaebd71d",
+                        "uri": "/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda/address/a0897bec-f008-4f45-b531-2544aaebd71d",
                         "resourceAlias": "address"
                     }
                 ]
@@ -93,12 +93,12 @@ GET /person?q=all&limit=1&v=default
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda",
+                    "uri": "/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda",
                     "resourceAlias": "person"
                 },
                 {
                     "rel": "full",
-                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda?v=full",
+                    "uri": "/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda?v=full",
                     "resourceAlias": "person"
                 }
             ],
@@ -108,7 +108,7 @@ GET /person?q=all&limit=1&v=default
     "links": [
         {
             "rel": "next",
-            "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/person?q=all&limit=1&v=default&startIndex=1",
+            "uri": "/openmrs/ws/rest/v1/person?q=all&limit=1&v=default&startIndex=1",
             "resourceAlias": null
         }
     ]
@@ -150,13 +150,13 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
@@ -215,16 +215,16 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
 
 var raw = JSON.stringify({"names":[{"givenName":"Mohit","familyName":"Kumar"}],"gender":"M","birthdate":"1997-09-02","addresses":[{"address1":"30, Vivekananda Layout, Munnekolal,Marathahalli","cityVillage":"Bengaluru","country":"India","postalCode":"560037"}]});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
@@ -287,16 +287,16 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
 
 var raw = JSON.stringify({"gender":"M","birthdate":"1997-01-13"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
@@ -336,13 +336,13 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
