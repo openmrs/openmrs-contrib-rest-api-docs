@@ -14,8 +14,6 @@
 
 ## List concept attribute types
 
-## List all non-retired concept attribute types.
-
 > List all non-retired concept attribute types
 
 ```shell
@@ -27,7 +25,7 @@ GET /conceptattributetype?q=time&limit=1
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1")
+  .url("/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2")
@@ -48,7 +46,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptattributetype?q=time&limit=1", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -104,7 +102,7 @@ GET /conceptattributetype/:target_concept_attribute_type_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?ecc8e1af-3465-4840-85b8-ec5a2298bdcf")
+  .url("/openmrs/ws/rest/v1/conceptattributetype?ecc8e1af-3465-4840-85b8-ec5a2298bdcf")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2")
@@ -125,7 +123,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype?ecc8e1af-3465-4840-85b8-ec5a2298bdcf", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptattributetype?ecc8e1af-3465-4840-85b8-ec5a2298bdcf", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -160,7 +158,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Time Span\",\r\n  \"description\": \"This attribute type will record the time span for the concept\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.LongFreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\": \"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler\",\r\n  \"handlerConfig\": null\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype")
+  .url("/openmrs/ws/rest/v1/conceptattributetype")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -186,7 +184,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptattributetype", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -233,7 +231,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Time Span\",\r\n  \"description\": \"Dummy description update\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.LongFreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\": \"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler\",\r\n  \"handlerConfig\": null\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/b5d56fd4-9add-4c00-a227-eb69d70669dd")
+  .url("/openmrs/ws/rest/v1/conceptattributetype/b5d56fd4-9add-4c00-a227-eb69d70669dd")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -259,7 +257,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/b5d56fd4-9add-4c00-a227-eb69d70669dd", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptattributetype/b5d56fd4-9add-4c00-a227-eb69d70669dd", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -274,7 +272,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/b5d56fd4
 Parameter | Type | Description
 --- | --- | ---
 *name* | `String` | Name of the concept attribute type
-*description* | `String` | Description (Required)
+*description* | `String` | Description 
 *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly
 *minOccurs* | `Number` | Minimum number of times this value can be specified for a single concept. Use `0` or `1` as the default value
 *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single concept (e.g., use 1 to prevent an attribute from being added to a concept multiple times)
@@ -297,7 +295,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf?purge=true")
+  .url("/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=66002746B1A29A6E9CA461CD6309BCC2")
@@ -318,7 +316,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptattributetype/ecc8e1af-3465-4840-85b8-ec5a2298bdcf?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));

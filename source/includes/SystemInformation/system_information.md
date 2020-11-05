@@ -120,7 +120,7 @@ GET /systeminformation
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/systeminformation")
+  .url("/openmrs/ws/rest/v1/systeminformation")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710")
@@ -141,7 +141,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/systeminformation", requestOptions)
+fetch("/openmrs/ws/rest/v1/systeminformation", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));

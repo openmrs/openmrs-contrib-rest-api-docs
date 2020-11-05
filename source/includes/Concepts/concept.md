@@ -40,19 +40,19 @@ referenced source.
 
 ## Available operations for Concepts 
  
-1.  [List concepts](#list-concepts)
+1.  [List concepts](#list-all-concepts)
 2.  [Create a concept](#create-a-concept)
 3.  [Update a concept](#update-a-concept)
 4.  [Delete a concept](#delete-a-concept)
-5.  [List concept mapping](#list-concept-mapping)
+5.  [List concept mapping](#list-all-concept-mappings-for-a-concept)
 6.  [Create concept mapping with properties](#create-a-concept-mapping-with-properties)
 7.  [Update concept mapping](#update-a-concept-mapping)
 8.  [Delete concept mapping](#delete-a-concept-mapping)
-9.  [List concept name](#list-concept-name)
+9.  [List concept name](#list-all-concept-names-for-a-concept)
 10. [Create concept name with properties](#create-a-concept-name-with-properties)
 11. [Update concept name](#update-concept-name)
 12. [Delete concept name](#delete-concept-name)
-13. [List concept attribute](#list-concept-attribute)
+13. [List concept attribute](#list-all-concept-attributes-for-a-concept)
 14. [Create concept attribute with properties](#create-a-concept-attribute-with-properties)
 15. [Update concept attribute](#update-concept-attribute)
 16. [Delete concept attribute](#delete-concept-attribute)
@@ -74,7 +74,7 @@ GET /concept?term=38341003&source=SNOMED%20CT&limit=1
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=SNOMED%20CT&limit=1")
+  .url("/openmrs/ws/rest/v1/concept?term=38341003&source=SNOMED%20CT&limit=1")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=6E54C8D18F81C34555DBBB8585951625")
@@ -95,7 +95,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=SNOMED%20CT&limit=1", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept?term=38341003&source=SNOMED%20CT&limit=1", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -114,7 +114,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/concept/18316c68-b5f9-4986-b76d-9975cd0ebe31"
+                    "uri": "/openmrs/ws/rest/v1/concept/18316c68-b5f9-4986-b76d-9975cd0ebe31"
                 }
             ]
         }
@@ -122,7 +122,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=
     "links": [
         {
             "rel": "next",
-            "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/concept?term=38341003&source=SNOMED+CT&limit=1&startIndex=1"
+            "uri": "/openmrs/ws/rest/v1/concept?term=38341003&source=SNOMED+CT&limit=1&startIndex=1"
         }
     ]
 }
@@ -157,7 +157,7 @@ GET /concept/:target_concept_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  .url("/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254")
@@ -178,7 +178,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -230,7 +230,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"names\": [\r\n        {\r\n            \"name\": \"What is the blood type for the sick patient?\",\r\n            \"locale\": \"en\",\r\n            \"localePreferred\": true,\r\n            \"conceptNameType\": \"FULLY_SPECIFIED\"\r\n        }\r\n    ],\r\n    \"datatype\": \"8d4a4c94-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"version\": \"1.2.2\",\r\n    \"conceptClass\": \"8d492774-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"mappings\": [\r\n        {\r\n            \"conceptReferenceTerm\": \"21fb14d7-5cd9-3621-ac30-c9e57320e233\",\r\n            \"conceptMapType\": \"35543629-7d8c-11e1-909d-c80aa9edcf4e\"\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"description\": \"Records blood type of sick patients\",\r\n            \"locale\": \"en\"\r\n        }\r\n    ]\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept")
+  .url("/openmrs/ws/rest/v1/concept")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -256,7 +256,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -321,7 +321,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"names\": [\r\n        {\r\n            \"name\": \"What is the blood type for the sick patient?\",\r\n            \"locale\": \"en\",\r\n            \"localePreferred\": true,\r\n            \"conceptNameType\": \"FULLY_SPECIFIED\"\r\n        }\r\n    ],\r\n    \"datatype\": \"8d4a4c94-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"version\": \"1.2.2\",\r\n    \"conceptClass\": \"8d492774-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"mappings\": [\r\n        {\r\n            \"conceptReferenceTerm\": \"21fb14d7-5cd9-3621-ac30-c9e57320e233\",\r\n            \"conceptMapType\": \"35543629-7d8c-11e1-909d-c80aa9edcf4e\"\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"description\": \"Dummy description update for this concept\",\r\n            \"locale\": \"en\"\r\n        }\r\n    ]\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8bb-a328df04611f")
+  .url("/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8bb-a328df04611f")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -348,7 +348,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8bb-a328df04611f", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8bb-a328df04611f", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -362,14 +362,14 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8
 
     Parameter | Type | Description
     --- | --- | ---
-    *names* | `String` | ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale (required)
-    *datatype* | `target_concept_datatype_uuid` | A concept datatype prescribes the structured format by which you desire the data to be represented. In simple terms, the datatype defines the type of data that the concept is intended to collect (required)
-    *version* | `String` | A method to keep track of the number of updates applied to a specific concept (required)
+    *names* | `String` | ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale 
+    *datatype* | `target_concept_datatype_uuid` | A concept datatype prescribes the structured format by which you desire the data to be represented. In simple terms, the datatype defines the type of data that the concept is intended to collect 
+    *version* | `String` | A method to keep track of the number of updates applied to a specific concept 
     *answers* | `Array of Child Concepts` | An array of concepts which are answers for the current concept 
     *setMembers* | `Array of Child Concepts` | Describes the questions contained by a concept set. Each set member is a question concept in and of itself    
     *units* | `String` | Standard unit used to measure the concept
     *allowDecimal* | `String` | Allow to use decimals
-    *[conceptClass](#concept-class)* | `target_concept_class_uuid` | concept class is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) (required)
+    *[conceptClass](#concept-class)* | `target_concept_class_uuid` | concept class is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) 
     *[descriptions](#list-concept-descriptions)* | `Array[] concept-description` | concept descriptions are clear and concise description of the concept, as agreed upon by the organization's members or the most commonly referenced source
     *[mappings](#list-concept-mapping)* | `Array[] concept-mapping` | A concept map connects a concept reference term to a concept
 
@@ -389,7 +389,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA?purge=true")
+  .url("/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254")
@@ -410,7 +410,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -439,7 +439,7 @@ GET /concept/:target_concept_uuid/mapping?limit=1
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping?limit=1")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping?limit=1")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254")
@@ -460,7 +460,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping?limit=1", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping?limit=1", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -482,7 +482,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/0a0933ab-e97e-3f93-b319-8bb20ed50f64"
+                        "uri": "/openmrs/ws/rest/v1/conceptreferenceterm/0a0933ab-e97e-3f93-b319-8bb20ed50f64"
                     }
                 ]
             },
@@ -492,18 +492,18 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptmaptype/43ac5109-7d8c-11e1-909d-c80aa9edcf4e"
+                        "uri": "/openmrs/ws/rest/v1/conceptmaptype/43ac5109-7d8c-11e1-909d-c80aa9edcf4e"
                     }
                 ]
             },
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/145917ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                    "uri": "/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/145917ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
                 },
                 {
                     "rel": "full",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/145917ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB?v=full"
+                    "uri": "/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/145917ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB?v=full"
                 }
             ],
             "resourceVersion": "1.9"
@@ -512,7 +512,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
     "links": [
         {
             "rel": "next",
-            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping?limit=1&startIndex=1"
+            "uri": "/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping?limit=1&startIndex=1"
         }
     ]
 }
@@ -535,7 +535,7 @@ GET /concept/:target_concept_uuid/mapping/:target_concept_mapping_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254")
@@ -556,7 +556,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -584,7 +584,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"conceptReferenceTerm\": \"21fb14d7-5cd9-3621-ac30-c9e57320e233\",\r\n  \"conceptMapType\": \"35543629-7d8c-11e1-909d-c80aa9edcf4e\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping")
+  .url("/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -610,7 +610,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -647,7 +647,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"conceptReferenceTerm\": \"21fb14d7-5cd9-3621-ac30-c9e57320e233\",\r\n  \"conceptMapType\": \"35543629-7d8c-11e1-909d-c80aa9edcf4e\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/101fea18-161e-4f86-9bd6-35300046c2b4")
+  .url("/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/101fea18-161e-4f86-9bd6-35300046c2b4")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -674,7 +674,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/101fea18-161e-4f86-9bd6-35300046c2b4", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/101fea18-161e-4f86-9bd6-35300046c2b4", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -688,8 +688,8 @@ returned.
 
 Parameter | Type | Description
 --- | --- | ---
-*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A [concept reference term](#concept-reference-term) defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
-*conceptMapType* | `target_concept_map_type_uuid` | A [concept map](#concept-map-type) connects a concept term to a concept (required)
+*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A [concept reference term](#concept-reference-term) defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept 
+*conceptMapType* | `target_concept_map_type_uuid` | A [concept map](#concept-map-type) connects a concept term to a concept 
 
 ## Delete a concept mapping
 
@@ -706,7 +706,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=ECE2890ED6EC0C39AB31295B5C17E254")
@@ -727,7 +727,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping/133911ABBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -756,7 +756,7 @@ GET /concept/:target_concept_uuid/name?limit=1
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77")
@@ -777,7 +777,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -799,11 +799,11 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                    "uri": "/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
                 },
                 {
                     "rel": "full",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB?v=full"
+                    "uri": "/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB?v=full"
                 }
             ],
             "resourceVersion": "1.9"
@@ -812,7 +812,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
     "links": [
         {
             "rel": "next",
-            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1&startIndex=1"
+            "uri": "/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name?limit=1&startIndex=1"
         }
     ]
 }
@@ -835,7 +835,7 @@ GET /concept/:target_concept_uuid/name/:target_concept_name_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77")
@@ -857,7 +857,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -888,7 +888,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"scabies\",\r\n  \"locale\": \"en\",\r\n  \"localePreferred\": true,\r\n  \"conceptNameType\": null\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name")
+  .url("/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -914,7 +914,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -955,7 +955,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"dummyName\",\r\n  \"locale\": \"fr\",\r\n  \"localePreferred\": true,\r\n  \"conceptNameType\": \"FULLY_SPECIFIED\"\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/107925BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .url("/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/107925BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -981,7 +981,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/107925BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/107925BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
   .then(response => response.text())
 
 
@@ -994,8 +994,8 @@ returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name for the concept (required)
-    *locale* | `String` | Language to record concept name (required)
+    *name* | `String` | Name for the concept 
+    *locale* | `String` | Language to record concept name 
     *localePreferred* | `String` | This is the preferred name to use within a locale.  By default, this is the fully-specified name; however, full-specified names are sometimes long and more detailed than necessary for day-to-day use.  In those cases, a synonym can be defined to be the locale-preferred name.  There can only be one preferred name within a locale.  The primary term should be the word(s) used most often by those who will have access to the records to prevent duplicate concept creation.
     *conceptNameType* | `String` | Type of the name to be specified.
 
@@ -1015,7 +1015,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=E04858F0DEC146C10FA42532E3CD9A77")
@@ -1036,7 +1036,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/name/106383BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -1066,7 +1066,7 @@ GET /concept/:target_concept_uuid/attribute
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368")
@@ -1088,7 +1088,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -1110,7 +1110,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/94bbaf10-e43c-4383-a0a9-69927121ab2e"
+                        "uri": "/openmrs/ws/rest/v1/conceptattributetype/94bbaf10-e43c-4383-a0a9-69927121ab2e"
                     }
                 ]
             },
@@ -1119,11 +1119,11 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423"
+                    "uri": "/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423"
                 },
                 {
                     "rel": "full",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423?v=full"
+                    "uri": "/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423?v=full"
                 }
             ],
             "resourceVersion": "2.0"
@@ -1149,7 +1149,7 @@ GET /concept/:target_concept_uuid/attribute/:target_concept_attribute_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368")
@@ -1170,7 +1170,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -1200,7 +1200,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{ \r\n  \"attributeType\": \"94bbaf10-e43c-4383-a0a9-69927121ab2e\",\r\n  \"value\": \"true\"   \r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -1226,7 +1226,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -1264,7 +1264,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{ \r\n  \"attributeType\": \"94bbaf10-e43c-4383-a0a9-69927121ab2e\",\r\n  \"value\": \"false\"   \r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -1290,7 +1290,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -1305,8 +1305,8 @@ returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this [Concept Attribute Type](#concept-attribute-type) (required)
-    *value* | `Depends on Attribute_Type Selected` | Value for the attribute (required)
+    *attributeType* | `Attribute_Type UUID` | Create Attribute from this [Concept Attribute Type](#concept-attribute-type) 
+    *value* | `Depends on Attribute_Type Selected` | Value for the attribute 
 
 ## Delete concept attribute
 
@@ -1323,7 +1323,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423?purge=true")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=E39DD93D9C64E5FD6F6CD3C512762368")
@@ -1345,7 +1345,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/attribute/3edce4be-513d-46df-a038-a559a6e71423?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -1364,8 +1364,6 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
     
 ## List concept descriptions
 
-### List all concept descriptions for a concept.
-
 > List all concept descriptions for a concept
 
 ```shell
@@ -1377,7 +1375,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C")
@@ -1401,7 +1399,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -1422,11 +1420,11 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+                    "uri": "/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
                 },
                 {
                     "rel": "full",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF?v=full"
+                    "uri": "/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF?v=full"
                 }
             ],
             "resourceVersion": "1.9"
@@ -1439,7 +1437,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 * Retrieve all **concept description** subresources of a **concept** resource by target_concept_uuid. Returns a `404 Not Found` status if concept description not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
-### List concept description by its UUID and parent concept UUID.
+## List concept description by its UUID and parent concept UUID.
 
 > List concept description by its UUID and parent concept UUID
 
@@ -1452,7 +1450,7 @@ GET /concept/:target_concept_uuid/description/:target_concept_description_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C")
@@ -1477,7 +1475,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/49FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -1504,7 +1502,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"description\": \"Pregnancy terminated by spontaneous abortion.\",\r\n  \"locale\": \"en\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -1530,7 +1528,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
 
@@ -1568,7 +1566,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"description\": \"Pregnancy terminated by spontaneous abortion/miscarriage\",\r\n  \"locale\": \"en\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -1594,7 +1592,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -1608,8 +1606,8 @@ returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *description* | `String` | Description text to e provided for the concept (required)
-    *locale* | `String` | Language description provided by (required)
+    *description* | `String` | Description text to e provided for the concept 
+    *locale* | `String` | Language description provided by 
 
 ## Delete concept description
 
@@ -1625,7 +1623,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f")
+  .url("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=8D3CE9C8E6854B5B218C4B09ABA9402C")
@@ -1645,7 +1643,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f", requestOptions)
+fetch("/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/description/7d6b3a32-aa93-4ae5-b222-7fe42e9b052f", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));

@@ -12,7 +12,7 @@
  
 ## Available operations for Observations. 
 
-1. [List observations](#list-observations)
+1. [List observations](#list-all-observations)
 2. [Create an observation](#create-an-observation)
 3. [Update an observation](#update-an-observation)
 4. [Delete an observation](#delete-an-observation)
@@ -31,7 +31,7 @@ GET /obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=1"
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=1")
+  .url("/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=1")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=FE2FBD1F287477C74C655E0D467BA389")
@@ -53,7 +53,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=1", requestOptions)
+fetch("/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=1", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -73,7 +73,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-485
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs/99a0c42b-d50e-4ae3-b826-d1959c737e74"
+                    "uri": "/openmrs/ws/rest/v1/obs/99a0c42b-d50e-4ae3-b826-d1959c737e74"
                 }
             ]
         }
@@ -81,7 +81,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-485
     "links": [
         {
             "rel": "next",
-            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=2&startIndex=2"
+            "uri": "/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=2&startIndex=2"
         }
     ]
 }
@@ -112,7 +112,7 @@ GET /obs/:target_observation_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/obs/94616eb5-6a87-4b83-b1e2-2083b3f7a36b")
+  .url("/openmrs/ws/rest/v1/obs/94616eb5-6a87-4b83-b1e2-2083b3f7a36b")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=FE2FBD1F287477C74C655E0D467BA389")
@@ -133,7 +133,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs/94616eb5-6a87-4b83-b1e2-2083b3f7a36b", requestOptions)
+fetch("/openmrs/ws/rest/v1/obs/94616eb5-6a87-4b83-b1e2-2083b3f7a36b", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -173,7 +173,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs", requestOptions)
+fetch("/openmrs/ws/rest/v1/obs", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -187,7 +187,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"person\": \"070f0120-0283-4858-885d-a20d967729cf\",\r\n  \"concept\": \"5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\r\n  \"obsDatetime\": \"2019-11-14T07:37:31.000+0000\",\r\n  \"value\": 70\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/obs")
+  .url("/openmrs/ws/rest/v1/obs")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -237,7 +237,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"value\": 71\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/obs/727124cd-191e-4073-a619-d3169c228374")
+  .url("/openmrs/ws/rest/v1/obs/727124cd-191e-4073-a619-d3169c228374")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -263,7 +263,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs/727124cd-191e-4073-a619-d3169c228374", requestOptions)
+fetch("/openmrs/ws/rest/v1/obs/727124cd-191e-4073-a619-d3169c228374", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -278,16 +278,16 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 
     Parameter | Type | Description
     --- | --- | ---
-    *[person](#person)* | `Person UUID` | The Person this Obs is acting on (Required)
-    *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp" (Required)
-    *[concept](#concepts)* | `concept UUID` | the coded value/name given to an obs when it is made (Required)
+    *[person](#person)* | `Person UUID` | The Person this Obs is acting on 
+    *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp" 
+    *[concept](#concepts)* | `concept UUID` | the coded value/name given to an obs when it is made 
     *[Location](#location)* | `location UUID` | the location this Obs took place (was taken).
     *order* | `String` | the order of an Obs.
     *[encounter](#encounters)* | `encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
     *accessionNumber* | `String` | An identifier used by the fulfiller (e.g., the lab) to identify the specimen or requisition used to produce this observation.
     *groupMembers* | `Array[]: Obs` |  a list of Obs grouped under this Obs
     *comment* | `String` | An option free text comment about the observation.
-    *value* | `String` | The value for the observation (e.g., the answer to a question or the result of a lab test) (Required)
+    *value* | `String` | The value for the observation (e.g., the answer to a question or the result of a lab test) 
     *status* | `String` | `PRELIMINARY`, `FINAL`, `AMENDED`
     *[valueCodedName](#list-all-concept-names-for-a-concept)*|`Concept Name`| ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale
     *interpretation* | `String` | `NORMAL`, `ABNORMAL`, `CRITICALLY_ABNORMAL`, `NEGATIVE`, `POSITIVE`,`CRITICALLY_LOW`,  `LOW`, `HIGH`, `CRITICALLY_HIGH`, `VERY_SUSCEPTIBLE`, `SUSCEPTIBLE`, `INTERMEDIATE`, `RESISTANT`, `SIGNIFICANT_CHANGE_DOWN`, `SIGNIFICANT_CHANGE_UP`, `OFF_SCALE_LOW`, `OFF_SCALE_HIGH`
@@ -309,7 +309,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/obs/4b2412bd-b538-4038-81d4-d2af153082b6?purge=true")
+  .url("/openmrs/ws/rest/v1/obs/4b2412bd-b538-4038-81d4-d2af153082b6?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=4C54B3334747032502B326EB3362BA0D")
@@ -330,7 +330,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs/4b2412bd-b538-4038-81d4-d2af153082b6?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/obs/4b2412bd-b538-4038-81d4-d2af153082b6?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));

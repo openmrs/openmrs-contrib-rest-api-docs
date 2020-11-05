@@ -14,8 +14,6 @@
 
 ## List concept reference terms
 
-## List all concepts reference terms.
-
 > List all concepts reference terms
 
 ```shell
@@ -27,7 +25,7 @@ GET /conceptreferenceterm?codeOrName=274663001
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm?codeOrName=274663001")
+  .url("/openmrs/ws/rest/v1/conceptreferenceterm?codeOrName=274663001")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=4F55735593751E224686B006CD388234")
@@ -48,7 +46,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm?codeOrName=274663001", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptreferenceterm?codeOrName=274663001", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -67,7 +65,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm?codeOrNa
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629"
+                    "uri": "/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629"
                 }
             ]
         }
@@ -99,7 +97,7 @@ GET /conceptreferenceterm/:target_concept_reference_term_type_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629")
+  .url("/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=4F55735593751E224686B006CD388234")
@@ -120,7 +118,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -154,7 +152,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Acute Pain\",\t\r\n  \"code\": \"274663001\", \r\n  \"description\": \"description for the concept reference term\",\t\r\n  \"conceptSource\": \"1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\",\r\n  \"version\": \"1.0.0\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm")
+  .url("/openmrs/ws/rest/v1/conceptreferenceterm")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -181,7 +179,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptreferenceterm", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -227,7 +225,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Acute Pain\",\t\r\n  \"code\": \"274663001\", \r\n  \"description\": \"description for the concept reference term\",\t\r\n  \"conceptSource\": \"1ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\",\r\n  \"version\": \"1.0.0\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629")
+  .url("/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -253,7 +251,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -268,8 +266,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9
     --- | --- | ---
     *names* | `String` | Name for the concept reference term
     *description* | `String` | A brief description of the concept reference term
-    *code* | `String` | Represents a name from a standard medical code (required)
-    *conceptSource* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database (required)
+    *code* | `String` | Represents a name from a standard medical code 
+    *conceptSource* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database 
     *version* | `String` | A method to keep track of the number of updates applied to a specific concept reference term type
 
     
@@ -288,7 +286,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629?purge=true")
+  .url("/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=B369B31B00020CC1488C42325A76272B")
@@ -310,7 +308,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));

@@ -62,7 +62,7 @@ GET /personattributetype?q=race&v=default
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype?q=race&v=default")
+  .url("/openmrs/ws/rest/v1/personattributetype?q=race&v=default")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
@@ -83,7 +83,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype?q=race&v=default", requestOptions)
+fetch("/openmrs/ws/rest/v1/personattributetype?q=race&v=default", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -113,7 +113,7 @@ GET /personattributetype/:target_person_attribute_type_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d871386-c2cc-11de-8d13-0010c6dffd0f")
+  .url("/openmrs/ws/rest/v1/personattributetype/8d871386-c2cc-11de-8d13-0010c6dffd0f")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
@@ -134,7 +134,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d871386-c2cc-11de-8d13-0010c6dffd0f", requestOptions)
+fetch("/openmrs/ws/rest/v1/personattributetype/8d871386-c2cc-11de-8d13-0010c6dffd0f", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -168,7 +168,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"name\": \"Edit Civil Status\",\r\n    \"description\": \"Able to manage the civil status of persons\",\r\n    \"format\": \"org.openmrs.Concept\",\r\n    \"foreignKey\": 1054,\r\n    \"searchable\": false,\r\n    \"editPrivilege\": \"24635eec-dd5a-11e6-9d9c-0242ac150002\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/personattributetype")
+  .url("/openmrs/ws/rest/v1/personattributetype")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -195,7 +195,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/personattributetype", requestOptions)
+fetch("/openmrs/ws/rest/v1/personattributetype", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -235,7 +235,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"name\": \"Manage Civil Status\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/personattributetype/aa7569c5-f81f-4e63-ab1f-810103f297ba")
+  .url("/openmrs/ws/rest/v1/personattributetype/aa7569c5-f81f-4e63-ab1f-810103f297ba")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -261,7 +261,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/personattributetype/aa7569c5-f81f-4e63-ab1f-810103f297ba", requestOptions)
+fetch("/openmrs/ws/rest/v1/personattributetype/aa7569c5-f81f-4e63-ab1f-810103f297ba", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
 
@@ -299,7 +299,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d8718c2-c2cc-11de-8d13-0010c6dffd0f?purge=true")
+  .url("/openmrs/ws/rest/v1/personattributetype/8d8718c2-c2cc-11de-8d13-0010c6dffd0f?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
@@ -320,7 +320,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/personattributetype/8d8718c2-c2cc-11de-8d13-0010c6dffd0f?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/personattributetype/8d8718c2-c2cc-11de-8d13-0010c6dffd0f?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));

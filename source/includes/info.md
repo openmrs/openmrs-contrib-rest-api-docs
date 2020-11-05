@@ -3,6 +3,8 @@
 > Getting started with examples. 
 
 >1. Before executing the examples, make sure that resources corresponding to the UUID's used in the examples are present on the demo server.
+>2. Before executing the examples, append the base server url before the examples for e.g.
+ change `/openmrs/ws/rest/v1/concept` as `https://demo.openmrs.org/openmrs/ws/rest/v1/concept` or any other base server URL.
 
 ```java
 // Before executing the examples, get the okttp dependency jar and import it the project.
@@ -59,7 +61,7 @@ from OpenMRS
 
 - The OpenMRS REST Web Services module includes dynamically generated documentation.
   For example, see the
-  [swagger documentation](https://demo.openmrs.org/openmrs/module/webservices/rest/apiDocs.htm) on the demo server (username **admin**, password **Admin123**).
+  [swagger documentation](/openmrs/module/webservices/rest/apiDocs.htm) on the demo server (username **admin**, password **Admin123**).
 
 # Purpose
 
@@ -73,7 +75,7 @@ from OpenMRS
 >Fetching concepts
 
 ```shell
-curl -X GET "https://demo.openmrs.org/openmrs/ws/rest/v1/concept"
+curl -X GET "/openmrs/ws/rest/v1/concept"
 connection: keep-alive
 content-length: 9731
 content-type: application/json;charset=UTF-8
@@ -86,7 +88,7 @@ strict-transport-security: max-age=15768000
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/concept")
+  .url("/openmrs/ws/rest/v1/concept")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
@@ -94,7 +96,7 @@ Request request = new Request.Builder()
 Response response = client.newCall(request).execute();
 ```
 
-All API access is over HTTPS, and can be accessed from `https://demo.openmrs.org/openmrs/ws/rest/v1`. All data is sent and received as JSON.
+All API access is over HTTPS, and can be accessed from `/openmrs/ws/rest/v1`. All data is sent and received as JSON.
 
 
 # Resources
@@ -133,7 +135,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"givenName\": \"John\",\r\n  \"familyName\": \"Smith\"\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/person/070f0120-0283-4858-885d-a20d967729cf/name
+  .url("/openmrs/ws/rest/v1/person/070f0120-0283-4858-885d-a20d967729cf/name
 ")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
@@ -157,7 +159,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"givenName\": \"Johnny\"\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/person/070f0120-0283-4858-885d-a20d967729cf/name/c280a829-7a86-47a5-b876-df8f53e89dac
+  .url("/openmrs/ws/rest/v1/person/070f0120-0283-4858-885d-a20d967729cf/name/c280a829-7a86-47a5-b876-df8f53e89dac
 ")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
@@ -186,7 +188,7 @@ Response response = client.newCall(request).execute();
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/encounter?patient=7379bf1c-b64f-4958-b27f-2a769d8d291c")
+  .url("/openmrs/ws/rest/v1/encounter?patient=7379bf1c-b64f-4958-b27f-2a769d8d291c")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
@@ -205,7 +207,7 @@ Response response = client.newCall(request).execute();
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/encounter?location=aff27d58-a15c-49a6-9beb-d30dcfc0c66e")
+  .url("/openmrs/ws/rest/v1/encounter?location=aff27d58-a15c-49a6-9beb-d30dcfc0c66e")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
@@ -241,7 +243,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"type\":\"testorder\",\r\n  \"encounter\": \"69f83020-caf2-4c9e-bca7-89b8e62b52e1\",\r\n  \"action\": \"new\",\r\n  \"urgency\": \"ROUTINE\",\r\n  \"dateActivated\": \"2018-10-16 12:08:43\"\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/order")
+  .url("/openmrs/ws/rest/v1/order")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -266,7 +268,7 @@ GET  /openmrs/ws/rest/v1/order?type=drugorder&v=full'
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/order?type=drugorder")
+  .url("/openmrs/ws/rest/v1/order?type=drugorder")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=6D8DA35A3C57ECF332AFACC843609A23")
