@@ -136,86 +136,323 @@ DELETE /patient/:target_patient_uuid?purge=true
     **uuid** | `String` | uuid to delete
     *purge* | `Boolean` | The resource will be voided/retired unless purge = 'true'
 
+
 ## List patientIdentifier sub resources
 
-* ### List all patientIdentifier sub resources for a patient.
+> List patientIdentifier sub resources
 
-```console
+```shell
 GET /patient/:target_patient_uuid/identifier
 ```  
 
-    Retrieve all <b>identifier</b> sub resources of a <b>patient</b> resource by `target_patient_uuid`.Returns a `404 Not Found` status if patientIdentifier not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+```java
 
-* ### List patientIdentifier sub resource by it's UUID and parent patient UUID.
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient/e739808f-f166-42ae-aaf3-8b3e8fa13fda/identifier")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010")
+  .build();
+Response response = client.newCall(request).execute();
 
-```console
+```
+
+```java
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient/e739808f-f166-42ae-aaf3-8b3e8fa13fda/identifier", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "display": "OpenMRS ID = 1001W2",
+            "uuid": "a122f3ce-4039-4f8c-9d6f-3faf64c7cb69",
+            "identifier": "1001W2",
+            "identifierType": {
+                "uuid": "05a29f94-c0ed-11e2-94be-8c13b969e334",
+                "display": "OpenMRS ID",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334",
+                        "resourceAlias": "patientidentifiertype"
+                    }
+                ]
+            },
+            "location": {
+                "uuid": "8d6c993e-c2cc-11de-8d13-0010c6dffd0f",
+                "display": "Unknown Location",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/location/8d6c993e-c2cc-11de-8d13-0010c6dffd0f",
+                        "resourceAlias": "location"
+                    }
+                ]
+            },
+            "preferred": true,
+            "voided": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patient/e739808f-f166-42ae-aaf3-8b3e8fa13fda/identifier/a122f3ce-4039-4f8c-9d6f-3faf64c7cb69",
+                    "resourceAlias": "identifier"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/patient/e739808f-f166-42ae-aaf3-8b3e8fa13fda/identifier/a122f3ce-4039-4f8c-9d6f-3faf64c7cb69?v=full",
+                    "resourceAlias": "identifier"
+                }
+            ],
+            "resourceVersion": "1.8"
+        }
+    ]
+}
+
+```
+
+* Retrieve all <b>identifier</b> sub resources of a <b>patient</b> resource by `target_patient_uuid`.Returns a `404 Not Found` status if patientIdentifier not exists. If user not logged in to perform this action, a `401 unauthorized` status returned.
+
+## List patientIdentifier sub resource by it's UUID and parent patient UUID.
+
+> List patientIdentifier sub resource by it's UUID
+
+```shell
 GET /patient/:target_patient_uuid/identifier/:target_identifier_uuid
 ```
 
-    Retrieve a <b>patientIdentifier</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if patientIdentifier not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient/e739808f-f166-42ae-aaf3-8b3e8fa13fda/identifier/a122f3ce-4039-4f8c-9d6f-3faf64c7cb69")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient/e739808f-f166-42ae-aaf3-8b3e8fa13fda/identifier/a122f3ce-4039-4f8c-9d6f-3faf64c7cb69", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a <b>patientIdentifier</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if patientIdentifier not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
 
 ## Create a patientIdentifier sub resource with properties 
 
-```console
+> Create a patientIdentifier sub resource
+
+```shell
 POST patient/:target_patient_uuid/identifier
 { 
-    "identifier" : "string",
-    "identifierType" : "target_identifer_uuid",
-    "location" : "target_location_uuid",
-    "preferred" : true/false
+    "identifier" : "111:CLINIC1",
+    "identifierType" : "a5d38e09-efcb-4d91-a526-50ce1ba5011a",
+    "location" : "8d6c993e-c2cc-11de-8d13-0010c6dffd0f",
+    "preferred" : true
 }
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{ \r\n    \"identifier\" : \"111:CLINIC1\",\r\n    \"identifierType\" : \"a5d38e09-efcb-4d91-a526-50ce1ba5011a\",\r\n    \"location\" : \"8d6c993e-c2cc-11de-8d13-0010c6dffd0f\",\r\n    \"preferred\" : true\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient/e739808f-f166-42ae-aaf3-8b3e8fa13fda/identifier/")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010");
+
+var raw = JSON.stringify({"identifier":"111:CLINIC1","identifierType":"a5d38e09-efcb-4d91-a526-50ce1ba5011a","location":"8d6c993e-c2cc-11de-8d13-0010c6dffd0f","preferred":true});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient/e739808f-f166-42ae-aaf3-8b3e8fa13fda/identifier/", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 ```
 
 * To create a patientIdentifier subresource for a specific patient resource you need to specify below properties in your request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Query parameter 
-    Parameter | Description
-    --- | ---
-    `target_patient_uuid` | patient resource uuid
-
-    ### Properties for resource
+    
+### Properties
 
     Parameter | type | Description
     --- | --- | ---
-    *identifier* | `String` | value of the identifier
-    *identifierType* | `Identifier_Type_UUID` | Create identifier from this Identifier_type
-    *location* | `Location UUID` | Get patients for this location
+    *identifier* | `String` | value of the identifier (Required)
+    *[identifierType](#patientidentifiertype)* | `Identifier_Type_UUID` | Create identifier from this Identifier_type (Required)
+    *[location](#location)* | `Location UUID` | Get patients for this location
     *preferred* | `boolean` | preferred/not preferred identifier
 
 ## Update patientIdentifier sub resource with properties
 
-```console
+> Update patientIdentifier sub resource
+
+```shell
 POST patient/:target_patient_uuid/identifier/:target_identifier_uuid
 { 
-"identifier" : "string",
-"identifierType" : "target_identifer_uuid",
-"location" : "target_location_uuid",
-"preferred" : true/false
+    "identifier" : "111:CLINIC2",
 }
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{ \r\n    \"identifier\" : \"111:CLINIC2\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient/e739808f-f166-42ae-aaf3-8b3e8fa13fda/identifier/beb6be1f-07a3-484c-a4ff-92fcb566ddde")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010");
+
+var raw = JSON.stringify({"identifier":"111:CLINIC2"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient/e739808f-f166-42ae-aaf3-8b3e8fa13fda/identifier/beb6be1f-07a3-484c-a4ff-92fcb566ddde", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 ```
 
 * Updates an patientIdentifier subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
-    ### Properties
+### Properties
 
     Parameter | Type | Description
     --- | --- | ---
     *identifier* | `String` | updated value of the identifier
-    *identifierType* | `Identifier_Type_UUID` | Create identifier from this Identifier_type
-    *location* | `Location UUID` | updated location
+    *[identifierType](#patientidentifiertype)* | `Identifier_Type_UUID` | Create identifier from this Identifier_type
+    *[location](#location)* | `Location UUID` | updated location
     *preferred* | `boolean` | updated status of preferred/not preferred identifier
 
 
 ## Delete patientIdentifier sub resource with properties
 
-```console
+> Delete patientIdentifier sub resource
+
+```shell
 DELETE /patient/:target_patient_uuid/identifier/:target_identifier_uuid
 ```
 
-* Delete or retire a target identifier subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
-If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient/c7ea5ea9-bec7-4ad0-a803-0ef2dee8fca5/identifier/e5ce3659-9118-4912-8c2f-6d470c2c7940?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient/c7ea5ea9-bec7-4ad0-a803-0ef2dee8fca5/identifier/e5ce3659-9118-4912-8c2f-6d470c2c7940?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Delete or retire a target identifier subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
