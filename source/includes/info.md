@@ -48,10 +48,10 @@ from OpenMRS.
 ### 1. Instructions for all the examples
 
 
-* Before executing the examples, make sure that resources corresponding to the UUID's used in the examples are present on the demo server. 
+* Before executing the examples, make sure that resources corresponding to the UUID's used in the examples are present on the demo server or any server you are testing these examples onto. 
 
 * Before executing the examples, append the base server url before the examples for e.g.
- change `/openmrs/ws/rest/v1/concept` as `https://demo.openmrs.org/openmrs/ws/rest/v1/concept` or any other base server URL.
+ change `/openmrs/ws/rest/v1/concept` as `https://demo.openmrs.org/openmrs/ws/rest/v1/concept` or any other base server URL you are testing these examples onto.
 
 
 > Java Code Stubs 
