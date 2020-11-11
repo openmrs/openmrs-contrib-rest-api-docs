@@ -29,14 +29,6 @@ a social worker, or a lab tech. Generally speaking, any healthcare worker that a
 
 ## List providers
 
-* Quickly filter providers with given query parameters. Returns a `404 Not Found` status if provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
-    
-### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *q* | `Search Query` | Get provider by name
-    
 ```shell
 GET /provider?q=clerk&v=default
 ```
@@ -46,7 +38,7 @@ GET /provider?q=clerk&v=default
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/provider?q=clerk&v=default")
+  .url("/openmrs/ws/rest/v1/provider?q=clerk&v=default")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=83604888EAFD9CEC35D0D67CB4C80D28")
@@ -57,17 +49,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=83604888EAFD9CEC35D0D67CB4C80D28");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=83604888EAFD9CEC35D0D67CB4C80D28");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/provider?q=clerk&v=default", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider?q=clerk&v=default", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -113,6 +105,16 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/provider?q=clerk&v=default", 
 ```
 
 
+
+* Quickly filter providers with given query parameters. Returns a `404 Not Found` status if provider not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+    
+### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *q* | `Search Query` | Get provider by name
+    
+
     
 ## Query provider by UUID.
 
@@ -126,7 +128,7 @@ GET /provider/:target_provider_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/provider/f36c6f95-f157-4803-ad99-eb0bf8d05454")
+  .url("/openmrs/ws/rest/v1/provider/f36c6f95-f157-4803-ad99-eb0bf8d05454")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=83604888EAFD9CEC35D0D67CB4C80D28")
@@ -137,17 +139,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=83604888EAFD9CEC35D0D67CB4C80D28");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=83604888EAFD9CEC35D0D67CB4C80D28");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/provider/f36c6f95-f157-4803-ad99-eb0bf8d05454", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider/f36c6f95-f157-4803-ad99-eb0bf8d05454", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -191,7 +193,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"person\": \"007037a0-0500-11e3-8ffd-0800200c9a66\",\r\n  \"identifier\": \"doctor\",\r\n  \"attributes\": [\r\n    {\r\n      \"attributeType\": \"12efe9f5-c460-40f1-b776-3a61669549e4\",\r\n      \"value\": \"unknown\"\r\n    }\r\n  ],\r\n  \"retired\": false\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider")
+  .url("/openmrs/ws/rest/v1/provider")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -204,38 +206,27 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
 
 var raw = JSON.stringify({"person":"007037a0-0500-11e3-8ffd-0800200c9a66","identifier":"doctor","attributes":[{"attributeType":"12efe9f5-c460-40f1-b776-3a61669549e4","value":"unknown"}],"retired":false});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider", requestOptions)
 
 
 ```
 
 ## Update a provider
 
-*  Update a target provider with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if provider not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
-    
-    ### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *[person](#person)* | `Person UUID` | Target person who will be a provider for OpenMRS 
-    *identifier* | `String` | Value of the identifier, identifier is used to virtually group providers in to groups 
-    *[attributes](#list-provider-attribute-subresources)* | `Array[]: Attribute` |  List of provider attributes 
-    *retired* | `Boolean` | Retired status for the provider.
-    
 ```shell
 POST /provider/:target_provider_uuid
 {
@@ -250,7 +241,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"identifier\": \"Nurse\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/7eec62f6-2b93-471e-a232-e0c9ed49f735")
+  .url("/openmrs/ws/rest/v1/provider/7eec62f6-2b93-471e-a232-e0c9ed49f735")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -262,38 +253,39 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
 
 var raw = JSON.stringify({"identifier":"Nurse"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/7eec62f6-2b93-471e-a232-e0c9ed49f735", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider/7eec62f6-2b93-471e-a232-e0c9ed49f735", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
 ```
 
-
-## Delete a provider
-
-* Delete or retire a target provider by its UUID. Returns a `404 Not Found` status if provider not exists. If the user is logged 
-  in to perform this action, a `401 Unauthorized` status returned.
-
-    ### Query Parameters
+*  Update a target provider with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if provider not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+    
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’
+    *[person](#person)* | `Person UUID` | Target person who will be a provider for OpenMRS 
+    *identifier* | `String` | Value of the identifier, identifier is used to virtually group providers in to groups 
+    *[attributes](#list-provider-attribute-subresources)* | `Array[]: Attribute` |  List of provider attributes 
+    *retired* | `Boolean` | Retired status for the provider.
+    
+## Delete a provider
 
 ```shell
 DELETE /provider/:target_provider_uuid?purge=true
@@ -306,7 +298,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/7eec62f6-2b93-471e-a232-e0c9ed49f735?purge=true")
+  .url("/openmrs/ws/rest/v1/provider/7eec62f6-2b93-471e-a232-e0c9ed49f735?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3")
@@ -317,17 +309,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/7eec62f6-2b93-471e-a232-e0c9ed49f735?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider/7eec62f6-2b93-471e-a232-e0c9ed49f735?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -335,9 +327,22 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/7eec62f6-2b93-4
 ```
 
 
+* Delete or retire a target provider by its UUID. Returns a `404 Not Found` status if provider not exists. If the user is logged in to perform this action, a `401 Unauthorized` status returned.
+
+    ### Query Parameters
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *purge* | `Boolean` | The resource will be retired unless purge = ‘true’
+
+
+
 ## List provider attribute subresources
 
 * Retrieve all **provider attribute** subresources of a **provider** resource by target_provider_uuid. Returns a `404 Not Found` status if provider attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+
+## List provider attribute subresources by it's UUID and parent provider UUID.
+   
 
 ```shell
 GET /provider/:target_provider_uuid/attribute 
@@ -348,7 +353,7 @@ GET /provider/:target_provider_uuid/attribute
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute")
+  .url("/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3")
@@ -359,17 +364,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -412,8 +417,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-1
 
 ```
 
-## List provider attribute subresources by it's UUID and parent provider UUID.
-    
+
+ 
 * Retrieve a **provider attribute** subresources of a **provider** resource. Returns a `404 Not Found` status if the provider attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ```shell
@@ -425,7 +430,7 @@ GET /provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516")
+  .url("/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3")
@@ -436,17 +441,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -454,16 +459,6 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-1
 ```
 
 ## Create a provider attribute sub resource with properties
-
-* To Create an attribute subresource for a specific provider resource, you need to specify below attributes in the request body.
-If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
-
-    ### Attributes
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *[attributeType](#provider-attribute-type)* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type (required)
-    *value* | `Depends on Attribute_Type Selected` | Value for the attribute (required)
 
 ```shell
 POST provider/:target_provider_uuid/attribute 
@@ -480,7 +475,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"attributeType\": \"cff22d83-27e6-4195-8398-229853c1283f\",\r\n  \"value\": \"Unknown location\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute")
+  .url("/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -492,37 +487,40 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
 
 var raw = JSON.stringify({"attributeType":"cff22d83-27e6-4195-8398-229853c1283f","value":"Unknown location"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute", requestOptions)
   .then(response => response.text())
 
 
 ```
 
 
-## Update provider attribute subresource
+* To Create an attribute subresource for a specific provider resource, you need to specify below attributes in the request body.
+If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-* Updates a provider attribute subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if the provider attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
-
-### Attributes
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *[attributeType](#provider-attribute-type)* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type
-    *value* | `Depends on Attribute_Type Selected` | Value for the attribute
+    *[attributeType](#provider-attribute-type)* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type (required)
+    *value* | `Depends on Attribute_Type Selected` | Value for the attribute (required)
+
+
+
+## Update provider attribute subresource
 
 ```shell
 POST provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
@@ -533,21 +531,21 @@ POST provider/:target_provider_uuid/attribute/:target_provider_attribute_uuid
 
 ```java
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
 
 var raw = JSON.stringify({"value":"Unknown location"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -557,26 +555,37 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-1
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
 
 var raw = JSON.stringify({"value":"Unknown location"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
 ```
+
+
+* Updates a provider attribute subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if the provider attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+### Attributes
+
+    Parameter | Type | Description
+    --- | --- | ---
+    *[attributeType](#provider-attribute-type)* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type
+    *value* | `Depends on Attribute_Type Selected` | Value for the attribute
+
 
 
 ## Delete provider attribute subresource
@@ -601,7 +610,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516")
+  .url("/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3")
@@ -612,17 +621,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=269840E88294F9C726CE86E71A579DE3");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516", requestOptions)
+fetch("/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66/attribute/85db9ede-8866-41fe-bd01-62ccf9530516", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
