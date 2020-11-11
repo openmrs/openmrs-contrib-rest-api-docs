@@ -193,31 +193,181 @@ DELETE /location/:target_location_uuid?purge=true
 
 ## List location attribute subresources
 
+> List location attribute subresources
+
 ```shell
 GET /location/:target_location_uuid/attribute 
 ```
-* Retrieve all <b>attribute</b> sub resources of a  <b>location</b> resource by target_location_uuid.Returns a `404 Not Found` status if the attribute not exists. 
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "display": "humidity: low humidity",
+            "uuid": "83f76320-0fa9-4bd7-b13f-7304ef723e8d",
+            "attributeType": {
+                "uuid": "fa0527cb-8b37-4a0a-8e7a-cff04acc8554",
+                "display": "humidity",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/locationattributetype/fa0527cb-8b37-4a0a-8e7a-cff04acc8554"
+                    }
+                ]
+            },
+            "value": "low humidity",
+            "voided": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute/83f76320-0fa9-4bd7-b13f-7304ef723e8d"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute/83f76320-0fa9-4bd7-b13f-7304ef723e8d?v=full"
+                }
+            ],
+            "resourceVersion": "1.9"
+        }
+    ]
+}
+
+```
+* Retrieve all attribute sub resources of a location resource by target_location_uuid. Returns a `404 Not Found` status if the attribute not exists. 
 * If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
 ## List location attribute subresources by own UUID and parent location UUID.
 
-```console
+> List location attribute subresources by own UUID
+
+```shell
 GET /location/:target_location_uuid/attribute/:target_attribute_uuid
 ```    
-     Retrieve an <b>attribute</b> sub resources of a <b>location</b> resource.Returns a 
-     `404 Not Found` status if the attribute not exists. If the user are not logged in to perform this action, a `401 Unauthorized` status
-     returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute/83f76320-0fa9-4bd7-b13f-7304ef723e8d")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute/83f76320-0fa9-4bd7-b13f-7304ef723e8d", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve an attribute sub resources of a location resource.Returns a `404 Not Found` status if the attribute not exists. 
+* If the user are not logged in to perform this action, a `401 Unauthorized` status returned.
      
 ## Create a location attribute subresource with properties
 
-```console
+```shell
 POST location/:target_location_uuid/attribute 
 {
-    "attributeType": "target_location_attribute_type_uuid",
-    "value": "value_for_the_attriute"
+    "attributeType": "fa0527cb-8b37-4a0a-8e7a-cff04acc8554",
+    "value": "high humidity"
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"attributeType\": \"fa0527cb-8b37-4a0a-8e7a-cff04acc8554\",\r\n    \"value\": \"high humidity\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
+
+var raw = JSON.stringify({"attributeType":"fa0527cb-8b37-4a0a-8e7a-cff04acc8554","value":"high humidity"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute", requestOptions)
+  .then(response => response.text())
+
+
+```
+
 * To Create an attribute subresource for a specific location resource, you need to specify below attributes in the request body.
 If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
@@ -225,39 +375,120 @@ If the user not logged in to perform this action, a `401 Unauthorized` status re
 
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this Location Attribute_Type
-    *value* | `Depends on Attribute_Type Selected` | Value for the attribute
+    *[attributeType](#location-attribute-type)* | `Attribute_Type UUID` | Create Attribute from this Location Attribute_Type (Required)
+    *value* | `Depends on Attribute_Type Selected` | Value for the attribute (Required)
 
  
  
 ## Update a location attribute subresource
 
+> Update a location attribute subresource
 
-```console
+```shell
 POST location/:target_location_uuid/attribute/:target_location_attribute_uuid
 {
-    "attributeType": "target_attribute_type_uuid",
-    "value": "modified_attriute_value"
-} 
+    "value": "low humidity"
+}
 ```
-* Updates a location attribute sub resource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if the attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"value\": \"low humidity\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute/83f76320-0fa9-4bd7-b13f-7304ef723e8d")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
+
+var raw = JSON.stringify({"value":"low humidity"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute/83f76320-0fa9-4bd7-b13f-7304ef723e8d", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Updates a location attribute sub resource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if the attribute not exists. 
+* If the user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
-    ### Attributes
+  ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Location Attribute_Type resource UUID
-    *updated value* | `Depends on Attribute_Type Selected` | Updated value for the attribute
+    *[attributeType](#location-attribute-type)* | `Attribute_Type UUID` | Create Attribute from this Location Attribute_Type (Required)
+    *value* | `Depends on Attribute_Type Selected` | Value for the attribute (Required)
 
 
 ## Delete a location attribute subresource
 
-```console
+> Delete a location attribute subresource
+
+```shell
 DELETE /location/:target_location_uuid/attribute/:target_location_attribute_uuid
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute/83f76320-0fa9-4bd7-b13f-7304ef723e8d?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e/attribute/83f76320-0fa9-4bd7-b13f-7304ef723e8d?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Delete or Retire a target location attribute subresource by its UUID. Returns a `404 Not Found` status if the attribute not exists. 
-If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+* If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
