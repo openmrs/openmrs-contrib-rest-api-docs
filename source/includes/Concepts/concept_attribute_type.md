@@ -14,8 +14,6 @@
 
 ## List concept attribute types
 
-## List all non-retired concept attribute types.
-
 > List all non-retired concept attribute types
 
 ```shell
@@ -274,7 +272,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptattributetype/b5d56fd4
 Parameter | Type | Description
 --- | --- | ---
 *name* | `String` | Name of the concept attribute type
-*description* | `String` | Description (Required)
+*description* | `String` | Description 
 *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly
 *minOccurs* | `Number` | Minimum number of times this value can be specified for a single concept. Use `0` or `1` as the default value
 *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single concept (e.g., use 1 to prevent an attribute from being added to a concept multiple times)

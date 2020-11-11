@@ -14,8 +14,6 @@
 
 ## List concept reference terms
 
-## List all concepts reference terms.
-
 > List all concepts reference terms
 
 ```shell
@@ -67,7 +65,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm?codeOrNa
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629"
+                    "uri": "/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e750629"
                 }
             ]
         }
@@ -268,8 +266,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9
     --- | --- | ---
     *names* | `String` | Name for the concept reference term
     *description* | `String` | A brief description of the concept reference term
-    *code* | `String` | Represents a name from a standard medical code (required)
-    *conceptSource* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database (required)
+    *code* | `String` | Represents a name from a standard medical code 
+    *conceptSource* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database 
     *version* | `String` | A method to keep track of the number of updates applied to a specific concept reference term type
 
     

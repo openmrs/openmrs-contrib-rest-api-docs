@@ -12,7 +12,7 @@
  
 ## Available operations for Observations. 
 
-1. [List observations](#list-observations)
+1. [List observations](#list-all-observations)
 2. [Create an observation](#create-an-observation)
 3. [Update an observation](#update-an-observation)
 4. [Delete an observation](#delete-an-observation)
@@ -73,7 +73,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-485
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs/99a0c42b-d50e-4ae3-b826-d1959c737e74"
+                    "uri": "/openmrs/ws/rest/v1/obs/99a0c42b-d50e-4ae3-b826-d1959c737e74"
                 }
             ]
         }
@@ -81,7 +81,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-485
     "links": [
         {
             "rel": "next",
-            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=2&startIndex=2"
+            "uri": "/openmrs/ws/rest/v1/obs?patient=070f0120-0283-4858-885d-a20d967729cf&limit=2&startIndex=2"
         }
     ]
 }
@@ -278,16 +278,16 @@ If not authenticated or authenticated user does not have sufficient privileges, 
 
     Parameter | Type | Description
     --- | --- | ---
-    *[person](#person)* | `Person UUID` | The Person this Obs is acting on (Required)
-    *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp" (Required)
-    *[concept](#concepts)* | `concept UUID` | the coded value/name given to an obs when it is made (Required)
+    *[person](#person)* | `Person UUID` | The Person this Obs is acting on 
+    *obsDateTime* | `String` | The type of `obsDateTime` is an "ISO 8601 timestamp" 
+    *[concept](#concepts)* | `concept UUID` | the coded value/name given to an obs when it is made 
     *[Location](#location)* | `location UUID` | the location this Obs took place (was taken).
     *order* | `String` | the order of an Obs.
     *[encounter](#encounters)* | `encounter UUID` | what obs are collected and grouped together into. An encounter is a visit.
     *accessionNumber* | `String` | An identifier used by the fulfiller (e.g., the lab) to identify the specimen or requisition used to produce this observation.
     *groupMembers* | `Array[]: Obs` |  a list of Obs grouped under this Obs
     *comment* | `String` | An option free text comment about the observation.
-    *value* | `String` | The value for the observation (e.g., the answer to a question or the result of a lab test) (Required)
+    *value* | `String` | The value for the observation (e.g., the answer to a question or the result of a lab test) 
     *status* | `String` | `PRELIMINARY`, `FINAL`, `AMENDED`
     *[valueCodedName](#list-all-concept-names-for-a-concept)*|`Concept Name`| ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale
     *interpretation* | `String` | `NORMAL`, `ABNORMAL`, `CRITICALLY_ABNORMAL`, `NEGATIVE`, `POSITIVE`,`CRITICALLY_LOW`,  `LOW`, `HIGH`, `CRITICALLY_HIGH`, `VERY_SUSCEPTIBLE`, `SUSCEPTIBLE`, `INTERMEDIATE`, `RESISTANT`, `SIGNIFICANT_CHANGE_DOWN`, `SIGNIFICANT_CHANGE_UP`, `OFF_SCALE_LOW`, `OFF_SCALE_HIGH`

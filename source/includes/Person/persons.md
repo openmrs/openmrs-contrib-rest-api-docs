@@ -43,31 +43,137 @@ All Persons have these characteristics.
 
 ## Search Persons
 
-### Search Persons
+> Search Persons
 
-```console
-GET /person?q=john
+```shell
+GET /person?q=all&limit=1&v=default
 ```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "e739808f-f166-42ae-aaf3-8b3e8fa13fda",
+            "display": "Christopher Allen",
+            "gender": "M",
+            "age": 62,
+            "birthdate": "1958-05-17T00:00:00.000+0000",
+            "birthdateEstimated": false,
+            "dead": false,
+            "deathDate": null,
+            "causeOfDeath": null,
+            "preferredName": {
+                "uuid": "8fbf3a24-43e9-4e6c-a56c-798e85760493",
+                "display": "Christopher Allen",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda/name/8fbf3a24-43e9-4e6c-a56c-798e85760493",
+                        "resourceAlias": "name"
+                    }
+                ]
+            },
+            "preferredAddress": {
+                "uuid": "a0897bec-f008-4f45-b531-2544aaebd71d",
+                "display": "Address12463",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda/address/a0897bec-f008-4f45-b531-2544aaebd71d",
+                        "resourceAlias": "address"
+                    }
+                ]
+            },
+            "attributes": [],
+            "voided": false,
+            "birthtime": null,
+            "deathdateEstimated": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda",
+                    "resourceAlias": "person"
+                },
+                {
+                    "rel": "full",
+                    "uri": "/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda?v=full",
+                    "resourceAlias": "person"
+                }
+            ],
+            "resourceVersion": "1.11"
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "/openmrs/ws/rest/v1/person?q=all&limit=1&v=default&startIndex=1",
+            "resourceAlias": null
+        }
+    ]
+}
+
+```
+
      
-     Fetch all non-voided persons that match the search query parameter. Returns a `200 OK` status with the Person response.
+* Fetch all non-voided persons that match the search query parameter. Returns a `200 OK` status with the Person response.
 
 ### Parameters
 
     Parameter | Type | Description
     --- | --- | ---
-    *q* | *string* | *search by name*
+    *q* | *string* | *search by name* or for listing all the persons `q=all`
 
 
-### List person by UUID
+## List person by UUID
 
-```console
+> List person by UUID
+
+```shell
 GET /person/:target_person_uuid
 ```
 
-    Retrieve a person by their UUID. Returns a `404 Not Found` status if the person does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a person by their UUID. Returns a `404 Not Found` status if the person does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 
 ## Create a person
+
+> Create a person
 
 ```
 POST /person
@@ -91,14 +197,53 @@ POST /person
 }
 ```
 
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"names\": [\r\n        {\r\n        \"givenName\": \"Mohit\",\r\n        \"familyName\": \"Kumar\"\r\n        }\r\n    ],\r\n    \"gender\": \"M\",\r\n    \"birthdate\": \"1997-09-02\",\r\n    \"addresses\": [\r\n        {\r\n        \"address1\": \"30, Vivekananda Layout, Munnekolal,Marathahalli\",\r\n        \"cityVillage\": \"Bengaluru\",\r\n        \"country\": \"India\",\r\n        \"postalCode\": \"560037\"\r\n        }\r\n    ]\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/person")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var raw = JSON.stringify({"names":[{"givenName":"Mohit","familyName":"Kumar"}],"gender":"M","birthdate":"1997-09-02","addresses":[{"address1":"30, Vivekananda Layout, Munnekolal,Marathahalli","cityVillage":"Bengaluru","country":"India","postalCode":"560037"}]});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/person", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
 
 * To create a person you need to specify the below properties in the request. `401 Unauthorized` is returned if the request is not authenticated or if the authenticated user does not have appropriate permissions.
 
-    ### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *names* | `Array[] : names` | List of names
+    *[names](#list-person-name-subresource)* | `Array[] : names` | List of names
     *gender* | String | The patient's gender ("M" for male, "F" for female, or "U" for unknown)
     *age* | Integer | The estimated age in years. Used when birthdate is unknown.
     *birthDate* | String | Date of birth of a person
@@ -108,13 +253,15 @@ POST /person
     *deathDate* | String | Date of death of the person
     *causeOfDeath* | `Concept UUID` | Reason for the death of the person
     *deathdateEstimated* | Boolean | `true` if deathDate is estimate; `false` if deathDate is accurate
-    *addresses* | `Array[] : addresses` | The address details aggregated in an array
-    *attributes* | `Array[] : attributes` | The attribute details aggregated in an array
+    *[addresses](#list-person-address-subresource)* | `Array[] : addresses` | The address details aggregated in an array
+    *[attributes](#list-person-attribute-subresource)* | `Array[] : attributes` | The attribute details aggregated in an array
     
 
 ## Update a person
 
-```console
+> Update a person
+
+```shell
 POST /person/:target_person_uuid
 {
     "gender": "M",
@@ -122,15 +269,89 @@ POST /person/:target_person_uuid
 }
 ```
 
-* Update a person. This method only modifies properties specified in the request. Returns a `404 Not found`.
-If not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status is returned.
+```java
 
-    An example of the request is as follows : 
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"gender\": \"M\",\r\n    \"birthdate\": \"1997-01-13\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var raw = JSON.stringify({"gender":"M","birthdate":"1997-01-13"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Update a person. This method only modifies properties specified in the request. Returns a `404 Not found`.If not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status is returned. 
 
 ## Delete a person
 
-```console
+> Delete a person
+
+```shell
 DELETE /person/:target_person_uuid?purge=true
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 ```
 
 * Delete or Void a target person. Returns a `404 Not Found` status if person not exists. If not authenticated or authenticated user does not have sufficient privileges, `401 Unauthorized` status is returned.

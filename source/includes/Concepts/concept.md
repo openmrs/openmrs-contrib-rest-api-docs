@@ -40,19 +40,19 @@ referenced source.
 
 ## Available operations for Concepts 
  
-1.  [List concepts](#list-concepts)
+1.  [List concepts](#list-all-concepts)
 2.  [Create a concept](#create-a-concept)
 3.  [Update a concept](#update-a-concept)
 4.  [Delete a concept](#delete-a-concept)
-5.  [List concept mapping](#list-concept-mapping)
+5.  [List concept mapping](#list-all-concept-mappings-for-a-concept)
 6.  [Create concept mapping with properties](#create-a-concept-mapping-with-properties)
 7.  [Update concept mapping](#update-a-concept-mapping)
 8.  [Delete concept mapping](#delete-a-concept-mapping)
-9.  [List concept name](#list-concept-name)
+9.  [List concept name](#list-all-concept-names-for-a-concept)
 10. [Create concept name with properties](#create-a-concept-name-with-properties)
 11. [Update concept name](#update-concept-name)
 12. [Delete concept name](#delete-concept-name)
-13. [List concept attribute](#list-concept-attribute)
+13. [List concept attribute](#list-all-concept-attributes-for-a-concept)
 14. [Create concept attribute with properties](#create-a-concept-attribute-with-properties)
 15. [Update concept attribute](#update-concept-attribute)
 16. [Delete concept attribute](#delete-concept-attribute)
@@ -362,14 +362,14 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/49b4cf3b-7dbd-4332-b8
 
     Parameter | Type | Description
     --- | --- | ---
-    *names* | `String` | ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale (required)
-    *datatype* | `target_concept_datatype_uuid` | A concept datatype prescribes the structured format by which you desire the data to be represented. In simple terms, the datatype defines the type of data that the concept is intended to collect (required)
-    *version* | `String` | A method to keep track of the number of updates applied to a specific concept (required)
+    *names* | `String` | ConceptNames are the words or phrases used to express the idea of a Concept within a particular locale 
+    *datatype* | `target_concept_datatype_uuid` | A concept datatype prescribes the structured format by which you desire the data to be represented. In simple terms, the datatype defines the type of data that the concept is intended to collect 
+    *version* | `String` | A method to keep track of the number of updates applied to a specific concept 
     *answers* | `Array of Child Concepts` | An array of concepts which are answers for the current concept 
     *setMembers* | `Array of Child Concepts` | Describes the questions contained by a concept set. Each set member is a question concept in and of itself    
     *units* | `String` | Standard unit used to measure the concept
     *allowDecimal* | `String` | Allow to use decimals
-    *[conceptClass](#concept-class)* | `target_concept_class_uuid` | concept class is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) (required)
+    *[conceptClass](#concept-class)* | `target_concept_class_uuid` | concept class is the classification of a concept This classification details how a concept will be represented (i.e. as a question or an answer) 
     *[descriptions](#list-concept-descriptions)* | `Array[] concept-description` | concept descriptions are clear and concise description of the concept, as agreed upon by the organization's members or the most commonly referenced source
     *[mappings](#list-concept-mapping)* | `Array[] concept-mapping` | A concept map connects a concept reference term to a concept
 
@@ -688,8 +688,8 @@ returned.
 
 Parameter | Type | Description
 --- | --- | ---
-*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A [concept reference term](#concept-reference-term) defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
-*conceptMapType* | `target_concept_map_type_uuid` | A [concept map](#concept-map-type) connects a concept term to a concept (required)
+*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A [concept reference term](#concept-reference-term) defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept 
+*conceptMapType* | `target_concept_map_type_uuid` | A [concept map](#concept-map-type) connects a concept term to a concept 
 
 ## Delete a concept mapping
 
@@ -994,8 +994,8 @@ returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name for the concept (required)
-    *locale* | `String` | Language to record concept name (required)
+    *name* | `String` | Name for the concept 
+    *locale* | `String` | Language to record concept name 
     *localePreferred* | `String` | This is the preferred name to use within a locale.  By default, this is the fully-specified name; however, full-specified names are sometimes long and more detailed than necessary for day-to-day use.  In those cases, a synonym can be defined to be the locale-preferred name.  There can only be one preferred name within a locale.  The primary term should be the word(s) used most often by those who will have access to the records to prevent duplicate concept creation.
     *conceptNameType* | `String` | Type of the name to be specified.
 
@@ -1305,8 +1305,8 @@ returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this [Concept Attribute Type](#concept-attribute-type) (required)
-    *value* | `Depends on Attribute_Type Selected` | Value for the attribute (required)
+    *attributeType* | `Attribute_Type UUID` | Create Attribute from this [Concept Attribute Type](#concept-attribute-type) 
+    *value* | `Depends on Attribute_Type Selected` | Value for the attribute 
 
 ## Delete concept attribute
 
@@ -1363,8 +1363,6 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
     
     
 ## List concept descriptions
-
-### List all concept descriptions for a concept.
 
 > List all concept descriptions for a concept
 
@@ -1439,7 +1437,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/concept/48AAAAAAAAAAAAAAAAAAA
 * Retrieve all **concept description** subresources of a **concept** resource by target_concept_uuid. Returns a `404 Not Found` status if concept description not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
-### List concept description by its UUID and parent concept UUID.
+## List concept description by its UUID and parent concept UUID.
 
 > List concept description by its UUID and parent concept UUID
 
@@ -1608,8 +1606,8 @@ returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *description* | `String` | Description text to e provided for the concept (required)
-    *locale* | `String` | Language description provided by (required)
+    *description* | `String` | Description text to e provided for the concept 
+    *locale* | `String` | Language description provided by 
 
 ## Delete concept description
 
