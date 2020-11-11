@@ -2,7 +2,7 @@
 
 ## Provider Attribute Overview
 
-* If you wish to record extra information about providers, you can create Provider Attributes and assign them to Provider Types.
+* If you wish to record extra information about providers, you can create Provider Attributes and assign them to Provider Types as a subresource.
 
 ## Available operations for Provider Attribute type.
 
@@ -14,13 +14,90 @@
 
 ## List provider attribute types
 
-### List all non-retired provider attribute types.
-
-```console
-GET /providerattributetype?q="Search Query"
+```shell
+GET /providerattributetype?q=Location&v=full
 ```
-    Quickly filter provider attribute types with a given search query. Returns a `404 Not Found` status if the provider attribute type not exists.
-    If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/providerattributetype?q=Location&v=full")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/providerattributetype?q=Location&v=full", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "02b23eb5-d3d1-416d-b5c7-565acb6bc0cb",
+            "display": "Provider Location",
+            "name": "Provider Location",
+            "description": "This attribute type will record the loication of the provider",
+            "minOccurs": 0,
+            "maxOccurs": 1,
+            "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+            "datatypeConfig": "default",
+            "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
+            "handlerConfig": null,
+            "retired": false,
+            "auditInfo": {
+                "creator": {
+                    "uuid": "45ce6c2e-dd5a-11e6-9d9c-0242ac150002",
+                    "display": "admin",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002"
+                        }
+                    ]
+                },
+                "dateCreated": "2020-11-05T20:31:46.000+0000",
+                "changedBy": null,
+                "dateChanged": null
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/providerattributetype/02b23eb5-d3d1-416d-b5c7-565acb6bc0cb"
+                }
+            ],
+            "resourceVersion": "1.9"
+        }
+    ]
+}
+
+```
+
+* Quickly filter provider attribute types with a given search query. Returns a `404 Not Found` status if the provider attribute type not exists.
+* If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
 ### Query Parameters
 
@@ -29,33 +106,110 @@ GET /providerattributetype?q="Search Query"
     *q* | `Search Query` | Display Name of provider attribute type.
 
 
-### List provider attribute type by UUID.
+## List provider attribute type by UUID.
 
-```console
+```shell
 GET /providerattributetype/:target_provider_attribute_type_uuid
 ```
-    Retrieve a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not exists. 
-    If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/providerattributetype/02b23eb5-d3d1-416d-b5c7-565acb6bc0cb")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/providerattributetype/02b23eb5-d3d1-416d-b5c7-565acb6bc0cb", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+* Retrieve a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not exists. 
+* If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
 
 ## Create a provider attribute type
 
 
-```console
+```shell
 POST /providerattributetype
 {
   "name": "Provider Location",
-  "description": "This attribute type will record the loication of the provider",
+  "description": "This attribute type will record the location of the provider",
   "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
   "minOccurs": 0,
   "maxOccurs": 1,
   "datatypeConfig": "default",
   "preferredHandlerClassname":   "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": "dafault"
+  "handlerConfig": null
 }
 ```
-* To Create a provider attribute type, you need to specify below attributes in the request body. If user not authenticated or 
-the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Provider Location\",\r\n  \"description\": \"This attribute type will record the location of the provider\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.LongFreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\":   \"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler\",\r\n  \"handlerConfig\": null\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/providerattributetype")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5");
+
+var raw = JSON.stringify({"name":"Provider Location","description":"This attribute type will record the location of the provider","datatypeClassname":"org.openmrs.customdatatype.datatype.LongFreeTextDatatype","minOccurs":0,"maxOccurs":1,"datatypeConfig":"default","preferredHandlerClassname":"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler","handlerConfig":null});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/providerattributetype", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* To Create a provider attribute type, you need to specify below attributes in the request body. If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
 ### Attributes
 
@@ -66,26 +220,63 @@ the authenticated user does not have appropriate permissions, a 401 Unauthorized
     *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
     *minOccurs* | `Number` | Minimum number of times this value can be specified for a single provider. Use `0` or `1` as the default value (Required)
     *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single provider (e.g., use 1 to prevent an attribute from being added to a provider multiple times)
-    *preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this provider attribute type. The java class must implement [`CustomDataTypeHandler`(https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype.
+    *preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this provider attribute type. The java class must implement [`CustomDataTypeHandler`](https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype.
     *datatypeConfig* | `String` | Provides ability to define custom data types configuration for OpenMRS
     *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list, and this configuration would tell the handler the possible choices in the list for this specific attribute type
 
 
 ## Update a provider attribute type
 
-```console
+```shell
 POST /providerattributetype/:target_provider_attribute_type_uuid
 {
-  "name": "Provider Location",
-  "description": "This attribute type will record the loication of the provider",
-  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+  "name": "Provider Location Attribute",
   "minOccurs": 0,
-  "maxOccurs": 2,
-  "datatypeConfig": "default",
-  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": "dafault"
+  "maxOccurs": 2
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Provider Location Attribute\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 2\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/providerattributetype/02b23eb5-d3d1-416d-b5c7-565acb6bc0cb")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5");
+
+var raw = JSON.stringify({"name":"Provider Location Attribute","minOccurs":0,"maxOccurs":2});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/providerattributetype/02b23eb5-d3d1-416d-b5c7-565acb6bc0cb", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
 *  Update a target provider attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
 status if the provider attribute not exists. If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
@@ -93,21 +284,58 @@ status if the provider attribute not exists. If the user is not authenticated or
 
     Parameter | Type | Description
     --- | --- | ---
-    *name* | `String` | Name of the provider attribute type
-    *description* | `String` | Description (Required)
+    *name* | `String` | Name of the provider attribute type 
+    *description* | `String` | Description 
     *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
     *minOccurs* | `Number` | Minimum number of times this value can be specified for a single provider. Use `0` or `1` as the default value (Required)
-    *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single provider (e.g., use 1 to prevent an attribute from  being added to a provider multiple times)
-    *preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this provider attribute type. The java class must implement [`CustomDataTypeHandler`(https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype.
-    *datatypeConfig* | `String` | Provides ability to define custom data types configuration for openMRS
+    *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single provider (e.g., use 1 to prevent an attribute from being added to a provider multiple times)
+    *preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this provider attribute type. The java class must implement [`CustomDataTypeHandler`](https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype.
+    *datatypeConfig* | `String` | Provides ability to define custom data types configuration for OpenMRS
     *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list, and this configuration would tell the handler the possible choices in the list for this specific attribute type
 
 
 ## Delete a provider attribute type
 
-```console
+```shell
 DELETE /providerattributetype/:target_provider_attribute_type_uuid?purge=true
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/providerattributetype/02b23eb5-d3d1-416d-b5c7-565acb6bc0cb?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/providerattributetype/02b23eb5-d3d1-416d-b5c7-565acb6bc0cb?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Delete or Retire a provider attribute type by its UUID. Returns a `404 Not Found` status if the provider attribute type not exists. If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
     ### Query Parameters
