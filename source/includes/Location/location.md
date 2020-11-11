@@ -36,7 +36,9 @@
 
 ## List location
 
-```console
+> List location
+
+```shell
 GET /location?q=amani&v=default
 ```
 
@@ -45,7 +47,7 @@ GET /location?q=amani&v=default
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/location?q=amani&v=default")
+  .url("/openmrs/ws/rest/v1/location?q=amani&v=default")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633")
@@ -57,22 +59,24 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/location?q=amani&v=default", requestOptions)
+fetch("/openmrs/ws/rest/v1/location?q=amani&v=default", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
 ```
+
+> Success Response
 
 ```response
 
@@ -197,6 +201,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/location?q=amani&v=default", 
     
 ## List location by UUID.
 
+> List location by UUID
+
 ```shell
 GET /location/:target_location_uuid
 ```
@@ -206,7 +212,7 @@ GET /location/:target_location_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e")
+  .url("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633")
@@ -217,17 +223,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e", requestOptions)
+fetch("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -239,39 +245,38 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9
    
 ## Create a location
 
-```console
+> Create a location
+
+```shell
 POST /location
 {
     "name": "Salzburg Hospital",
     "description": "Salzburg hospital location",
     "address1": "Mullner House 48",
-    "address2": "",
     "cityVillage": "salzburg",
     "stateProvince": "salzburg",
     "country": "Austria",
     "postalCode": "5020",
-    "latitude": "",
-    "longitude": "",
     "countyDistrict": "salzburg",
     "tags": [
-    "target_location_tag_uuid"
+        "37dd4458-dc9e-4ae6-a1f1-789c1162d37b"
     ],
-    "parentLocation": "target_parent_location_uuid",
     "childLocations": [
-    "target_child_location_uuid"
+        "7fdfa2cb-bc95-405a-88c6-32b7673c0453",
+        "6351fcf4-e311-4a19-90f9-35667d99a8af"
     ],
     "attributes": [
         {
-            "attributeType": "target_attributeType_uuid",
-            "value": "value_for_attribute"
+            "attributeType": "fa0527cb-8b37-4a0a-8e7a-cff04acc8554",
+            "value": "low humidity"
         }
     ]
 }
-```
-* To Create a location you need to specify below attributes in the request body. If the user not logged in to perform this action,
- a `401 Unauthorized` status returned.
 
-    ### Attributes
+```
+* To Create a location you need to specify below attributes in the request body. If the user not logged in to perform this action,a `401 Unauthorized` status returned.
+
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -285,54 +290,68 @@ POST /location
     *latitude* | `String` | Latitude    
     *longitude* | `String` | Longitude
     *countyDistrict* | `String` | District or Country
-    *tags* | `Array[]: LocationTag UUID` | UUID's of the location tags
-    *parentLocation* | `Parent Location UUID` | UUID of the target parent location
-    *childLocations* | `Array[]: Child Location UUID` | UUID's of the target child locations
-    *attributes* | `Array[]: Attribute UUID` | UUID's of location attributes  
+    *[tags](#location-tag-type)* | `Array[]: LocationTag UUID` | UUID's of the location tags
+    *[parentLocation](#location)* | `Parent Location UUID` | UUID of the target parent location
+    *[childLocations](#location)* | `Array[]: Child Location UUID` | UUID's of the target child locations e.g.(Inpatient ward, outpatient clinic)
+    *[attributes](#list-location-attribute-subresources)* | `Array[]: Attribute UUID` | UUID's of location attributes  
 
 
 ## Update a location
 
+> Update a location
 
-```console
+```shell
 POST /location/:target_location_uuid
 {
-    "name": "Salzburg Hospital",
-    "description": "Modified location of Salzburg hospital location",
-    "address1": "Mullner House 48",
-    "address2": "",
-    "cityVillage": "salzburg",
-    "stateProvince": "salzburg",
-    "country": "Austria",
-    "postalCode": "5020",
-    "latitude": "47.811195",
-    "longitude": "13.03322",
-    "countyDistrict": "salzburg",
-    "tags": [
-    "target_location_tag_uuid"
-    ],
-    "parentLocation": "target_parent_location_uuid",
-    "childLocations": [
-    "target_child_location_uuid"
-    ],
-    "attributes": [
-        {
-            "attributeType": "target_attributeType_uuid",
-            "value": "value_for_attribute"
-        }
-    ]
+    "description": "Modified location of Salzburg hospital location"
 }       
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"description\": \"Modified location of Salzburg hospital location\"\r\n}       \r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
+
+var raw = JSON.stringify({"description":"Modified location of Salzburg hospital location"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 *  Update a target location with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
 status if the location not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Query Parameters
-
-    Parameter | Type | Description
-    --- | --- | ---
-    *uuid* | `target_location_uuid` | Target location resource UUID
     
-    ### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -346,17 +365,53 @@ status if the location not exists. If the user not logged in to perform this act
     *latitude* | `String` | Latitude    
     *longitude* | `String` | Longitude
     *countyDistrict* | `String` | District or Country
-    *tags* | `Array[]: LocationTag UUID` | UUID's of the location tags
-    *parentLocation* | `Parent Location UUID` | UUID of the target parent location
-    *childLocations* | `Array[]: Child Location UUID` | UUID's of the target child locations
-    *attributes* | `Array[]: Attribute UUID` | UUID's of location attributes  
+    *[tags](#location-tag-type)* | `Array[]: LocationTag UUID` | UUID's of the location tags
+    *[parentLocation](#location)* | `Parent Location UUID` | UUID of the target parent location
+    *[childLocations](#location)* | `Array[]: Child Location UUID` | UUID's of the target child locations e.g.(Inpatient ward, outpatient clinic)
+    *[attributes](#list-location-attribute-subresources)* | `Array[]: Attribute UUID` | UUID's of location attributes  
 
     
 ## Delete a location
 
-```console
+```shell
 DELETE /location/:target_location_uuid?purge=true
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/location/aff27d58-a15c-49a6-9beb-d30dcfc0c66e?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Delete or Retire a target location by its UUID. Returns a `404 Not Found` status if the location not exists. If the user not logged 
   in to perform this action, a `401 Unauthorized` status returned.
 
