@@ -12,9 +12,9 @@
 4. [Delete a location attribute type](#delete-a-location-attribute-type)
 
 
-### List location attribute types
+## List location attribute types
 
-### List all non-retired location attribute types.
+> List location attribute types
 
 ```shell
 GET /locationattributetype?q=humidity
@@ -25,7 +25,7 @@ GET /locationattributetype?q=humidity
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/locationattributetype?q=humidity&v=full")
+  .url("/openmrs/ws/rest/v1/locationattributetype?q=humidity&v=full")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704")
@@ -37,23 +37,25 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationattributetype?q=humidity&v=full", requestOptions)
+fetch("/openmrs/ws/rest/v1/locationattributetype?q=humidity&v=full", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
 
 ```
+
+> Success Response
 
 ```response
 
@@ -110,26 +112,61 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationattributetype?q=humid
 
 ### List location attribute type by UUID.
 
-```console
+> List location attribute type by UUID
+
+```shell
 GET /locationattributetype/:target_location_attribute_type_uuid
 ```
-    Retrieve a location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not exists. If the 
-    user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/locationattributetype/fa0527cb-8b37-4a0a-8e7a-cff04acc8554")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/locationattributetype/fa0527cb-8b37-4a0a-8e7a-cff04acc8554", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
 ## Create a location attribute type
+
+> Create a location attribute type
 
 ```shell
 POST /locationattributetype
 {
   "name": "humidity",
   "description": "This attribute type will record the humidity of the location",
-  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+  "datatypeClassname": "org.openmrs.customdatatype.datatype.FreeTextDatatype",
   "minOccurs": 0,
   "maxOccurs": 1,
-  "datatypeConfig": "default",
-  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": null
+  "datatypeConfig": "default"
 }
 ```
 
@@ -138,13 +175,13 @@ POST /locationattributetype
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"humidity\",\r\n  \"description\": \"This attribute type will record the humidity of the location\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.LongFreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\": \"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler\",\r\n  \"handlerConfig\": null\r\n}");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"humidity\",\r\n  \"description\": \"This attribute type will record the humidity of the location\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.FreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/locationattributetype")
+  .url("/openmrs/ws/rest/v1/locationattributetype")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
-  .addHeader("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
   .build();
 Response response = client.newCall(request).execute();
 
@@ -152,26 +189,29 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
 
-var raw = JSON.stringify({"name":"humidity","description":"This attribute type will record the humidity of the location","datatypeClassname":"org.openmrs.customdatatype.datatype.LongFreeTextDatatype","minOccurs":0,"maxOccurs":1,"datatypeConfig":"default","preferredHandlerClassname":"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler","handlerConfig":null});
+var raw = JSON.stringify({"name":"humidity","description":"This attribute type will record the humidity of the location","datatypeClassname":"org.openmrs.customdatatype.datatype.FreeTextDatatype","minOccurs":0,"maxOccurs":1,"datatypeConfig":"default"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
+fetch("/openmrs/ws/rest/v1/locationattributetype", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 
 ```
 
 
-* To Create a location attribute type, you need to specify below attributes in the request body. If the user not logged in to perform this action,
- a `401 Unauthorized` status returned.
+* To Create a location attribute type, you need to specify below attributes in the request body. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -188,6 +228,8 @@ var requestOptions = {
 
 ## Update a location attribute type
 
+> Update a location attribute type
+
 ```shell
 POST /locationattributetype/:target_location_attribute_type_uuid
 {
@@ -203,7 +245,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 2\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c")
+  .url("/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -215,21 +257,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
 
 var raw = JSON.stringify({"minOccurs":0,"maxOccurs":2});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c", requestOptions)
+fetch("/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -256,6 +298,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationattributetype/e2844ee
 
 ## Delete a location attribute type
 
+> Delete a location attribute type
+
 ```shell
 DELETE /locationattributetype/:target_location_attribute_type_uuid?purge=true
 ```
@@ -267,7 +311,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c?purge=true")
+  .url("/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704")
@@ -278,17 +322,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
