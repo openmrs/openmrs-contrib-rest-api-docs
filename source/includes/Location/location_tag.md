@@ -20,6 +20,8 @@
 
 ## List location tags
 
+> List location tags
+
 ```shell
 GET /locationtag?q=visit&v=full
 ```
@@ -29,7 +31,7 @@ GET /locationtag?q=visit&v=full
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag?q=visit&v=full")
+  .url("/openmrs/ws/rest/v1/locationtag?q=visit&v=full")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704")
@@ -40,17 +42,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag?q=visit&v=full", requestOptions)
+fetch("/openmrs/ws/rest/v1/locationtag?q=visit&v=full", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -119,6 +121,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag?q=visit&v=full", 
 
 ## List location tag by UUID.
 
+> List location tag by UUID
+
 ```shell
 GET /locationtag/:target_location_tag_uuid
 ```
@@ -128,7 +132,7 @@ GET /locationtag/:target_location_tag_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/37dd4458-dc9e-4ae6-a1f1-789c1162d37b")
+  .url("/openmrs/ws/rest/v1/locationtag/37dd4458-dc9e-4ae6-a1f1-789c1162d37b")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704")
@@ -139,17 +143,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/37dd4458-dc9e-4ae6-a1f1-789c1162d37b", requestOptions)
+fetch("/openmrs/ws/rest/v1/locationtag/37dd4458-dc9e-4ae6-a1f1-789c1162d37b", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -160,6 +164,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/37dd4458-dc9e-4ae
 
 
 ## Create a location tag
+
+> Create a location tag
 
 ```shell
 POST /locationtag
@@ -177,7 +183,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Visit Location\",\r\n  \"description\": \"Visits are only allowed to happen at locations tagged with this location tag.\",\r\n  \"retired\": false\r\n  }\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/")
+  .url("/openmrs/ws/rest/v1/locationtag/")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -190,21 +196,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
 
 var raw = JSON.stringify({"name":"Visit Location","description":"Visits are only allowed to happen at locations tagged with this location tag.","retired":false});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/", requestOptions)
+fetch("/openmrs/ws/rest/v1/locationtag/", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -226,6 +232,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/", requestOptions
 
 ## Update a location tag
 
+> Update a location tag
+
 ```shell
 POST /locationtag/:target_location_tag_uuid
 {
@@ -240,7 +248,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n  \"retired\": true\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/8d4626ca-7abd-42ad-be48-56767bbcf272")
+  .url("/openmrs/ws/rest/v1/locationtag/8d4626ca-7abd-42ad-be48-56767bbcf272")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -253,21 +261,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
 
 var raw = JSON.stringify({"retired":true});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/8d4626ca-7abd-42ad-be48-56767bbcf272", requestOptions)
+fetch("/openmrs/ws/rest/v1/locationtag/8d4626ca-7abd-42ad-be48-56767bbcf272", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -289,6 +297,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/8d4626ca-7abd-42a
 
 ## Delete a location tag
 
+> Delete a location tag
+
 ```shell
 DELETE /locationtag/:target_location_tag_uuid?purge=true
 ```
@@ -300,7 +310,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/c0b3c7f7-6dec-4c6c-9363-813f755b96e5?purge =true")
+  .url("/openmrs/ws/rest/v1/locationtag/c0b3c7f7-6dec-4c6c-9363-813f755b96e5?purge =true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704")
@@ -311,17 +321,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/locationtag/c0b3c7f7-6dec-4c6c-9363-813f755b96e5?purge =true", requestOptions)
+fetch("/openmrs/ws/rest/v1/locationtag/c0b3c7f7-6dec-4c6c-9363-813f755b96e5?purge =true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
