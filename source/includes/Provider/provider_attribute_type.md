@@ -14,6 +14,8 @@
 
 ## List provider attribute types
 
+> List provider attribute types
+
 ```shell
 GET /providerattributetype?q=Location&v=full
 ```
@@ -51,6 +53,7 @@ fetch("/openmrs/ws/rest/v1/providerattributetype?q=Location&v=full", requestOpti
 
 ```
 
+> Success Response
 
 ```response
 
@@ -106,7 +109,10 @@ fetch("/openmrs/ws/rest/v1/providerattributetype?q=Location&v=full", requestOpti
     *q* | `Search Query` | Display Name of provider attribute type.
 
 
-## List provider attribute type by UUID.
+## List provider attribute type by UUID
+
+
+> List provider attribute type by UUID
 
 ```shell
 GET /providerattributetype/:target_provider_attribute_type_uuid
@@ -153,18 +159,17 @@ fetch("/openmrs/ws/rest/v1/providerattributetype/02b23eb5-d3d1-416d-b5c7-565acb6
 
 ## Create a provider attribute type
 
+> Create a provider attribute type
 
 ```shell
 POST /providerattributetype
 {
   "name": "Provider Location",
   "description": "This attribute type will record the location of the provider",
-  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+  "datatypeClassname": "org.openmrs.customdatatype.datatype.FreeTextDatatype",
   "minOccurs": 0,
   "maxOccurs": 1,
-  "datatypeConfig": "default",
-  "preferredHandlerClassname":   "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": null
+  "datatypeConfig": "default"
 }
 ```
 
@@ -173,13 +178,13 @@ POST /providerattributetype
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Provider Location\",\r\n  \"description\": \"This attribute type will record the location of the provider\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.LongFreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\":   \"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler\",\r\n  \"handlerConfig\": null\r\n}\r\n");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Provider Location\",\r\n  \"description\": \"This attribute type will record the location of the provider\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.FreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\"\r\n}\r\n");
 Request request = new Request.Builder()
   .url("/openmrs/ws/rest/v1/providerattributetype")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
-  .addHeader("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
   .build();
 Response response = client.newCall(request).execute();
 
@@ -191,9 +196,9 @@ Response response = client.newCall(request).execute();
 var requestHeaders = new Headers();
 requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
 requestHeaders.append("Content-Type", "application/json");
-requestHeaders.append("Cookie", "JSESSIONID=02524DC1695063DAFFC0E2B0FA3087A5");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
 
-var raw = JSON.stringify({"name":"Provider Location","description":"This attribute type will record the location of the provider","datatypeClassname":"org.openmrs.customdatatype.datatype.LongFreeTextDatatype","minOccurs":0,"maxOccurs":1,"datatypeConfig":"default","preferredHandlerClassname":"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler","handlerConfig":null});
+var raw = JSON.stringify({"name":"Provider Location","description":"This attribute type will record the location of the provider","datatypeClassname":"org.openmrs.customdatatype.datatype.FreeTextDatatype","minOccurs":0,"maxOccurs":1,"datatypeConfig":"default"});
 
 var requestOptions = {
   method: 'POST',
@@ -206,7 +211,6 @@ fetch("/openmrs/ws/rest/v1/providerattributetype", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
-
 ```
 
 * To Create a provider attribute type, you need to specify below attributes in the request body. If user not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
@@ -226,6 +230,8 @@ fetch("/openmrs/ws/rest/v1/providerattributetype", requestOptions)
 
 
 ## Update a provider attribute type
+
+> Update a provider attribute type
 
 ```shell
 POST /providerattributetype/:target_provider_attribute_type_uuid
@@ -277,8 +283,8 @@ fetch("/openmrs/ws/rest/v1/providerattributetype/02b23eb5-d3d1-416d-b5c7-565acb6
 ```
 
 
-*  Update a target provider attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`
-status if the provider attribute not exists. If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
+*  Update a target provider attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found`status if the provider attribute not exists. 
+* If the user is not authenticated or the authenticated user does not have appropriate permissions, a 401 Unauthorized status is returned.
 
 ### Attributes
 
@@ -295,6 +301,8 @@ status if the provider attribute not exists. If the user is not authenticated or
 
 
 ## Delete a provider attribute type
+
+> Delete a provider attribute type
 
 ```shell
 DELETE /providerattributetype/:target_provider_attribute_type_uuid?purge=true
