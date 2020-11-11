@@ -19,6 +19,16 @@ Anyone who has an Encounter or who is enrolled in a Program is a Patient.)
 
 * OpenMRS lets you manually maintain an **Allergy List** for a patient, including the allergen, reaction, severity, etc.
 
+### 1. Allergen
+An allergen refers to a substance capable of triggering a response that starts in the immune system and results in an allergic reaction, for eg in drugs Aspirin, Codeine.., in food beef, eggs.. and others like dust and pollen.
+
+### 2. Severity
+Refers to the severity of the allergy e.g. mild , moderate and severe (`uuid:=1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`)
+
+### 3. Reactions
+Reactions refers to the effects of the allergy on anybody for e.g. headache(`uuid:=139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`) or even unknown(`uuid:=1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`) 
+
+
 ## Available operations for Patients
 
 1.  [List Patients](#search-patients)
@@ -463,102 +473,416 @@ fetch("/openmrs/ws/rest/v1/patient/c7ea5ea9-bec7-4ad0-a803-0ef2dee8fca5/identifi
 
 ## List allergy subresources
 
-```console
+> List allergy subresources
+
+```shell
+GET /patient/:target_patient_uuid/allergy/
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  body: null,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87", requestOptions)
+  .then(response => response.text())
+
+
+```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "display": "ACE inhibitors",
+            "uuid": "2d440f27-7a87-4a14-bd21-efb5e99c58dc",
+            "allergen": {
+                "allergenType": "DRUG",
+                "codedAllergen": {
+                    "uuid": "162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "display": "ACE inhibitors",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        }
+                    ]
+                },
+                "nonCodedAllergen": ""
+            },
+            "severity": {
+                "uuid": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "display": "Severe",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    }
+                ]
+            },
+            "comment": "take precautions can cause problems",
+            "reactions": [
+                {
+                    "reaction": {
+                        "uuid": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "display": "Unknown",
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                            }
+                        ]
+                    },
+                    "reactionNonCoded": null
+                },
+                {
+                    "reaction": {
+                        "uuid": "139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "display": "Headache",
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                            }
+                        ]
+                    },
+                    "reactionNonCoded": null
+                },
+                {
+                    "reaction": {
+                        "uuid": "159098AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "display": "Hepatotoxicity",
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/159098AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                            }
+                        ]
+                    },
+                    "reactionNonCoded": null
+                }
+            ],
+            "patient": {
+                "uuid": "3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87",
+                "display": "100J7W - AGB Ake",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87"
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/2d440f27-7a87-4a14-bd21-efb5e99c58dc"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/2d440f27-7a87-4a14-bd21-efb5e99c58dc?v=full"
+                }
+            ],
+            "resourceVersion": "1.8"
+        }
+    ]
+}
+
+```
+
+* Retrieve a <b>allergy</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if allergy not exists for that patient. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
+
+
+## List allergy subresource by its UUID and parent patient UUID.
+
+> List allergy subresource by its UUID and parent patient UUID
+
+```shell
 GET /patient/:target_patient_uuid/allergy/:target_allergy_uuid
 ```
-* List allergy subresource by its UUID and parent patient UUID.
 
-    Retrieve a <b>allergy</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if allergy not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  body: null,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/2d440f27-7a87-4a14-bd21-efb5e99c58dc", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/2d440f27-7a87-4a14-bd21-efb5e99c58dc")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+* Retrieve a <b>allergy</b> sub resources of a <b>patient</b> resource. Returns a `404 Not Found` status if allergy not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
 
 ## Create a allergy sub resource with properties 
 
-```console
+> Create a allergy sub resource
+
+```shell
 POST patient/:target_patient_uuid/allergy
 {
-    "allergen": {},
-    "severity": {
-        "uuid": "string"
+    "allergen": {
+        "allergenType": "DRUG",
+        "codedAllergen": {
+            "uuid": "162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
     },
-    "comment": "string",
+    "severity": {
+        "uuid": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "comment": "severe allergy",
     "reactions": [
         {
-            "allergy": {
-            "uuid": "string"
+            "reaction": {
+                "uuid": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            }
         },
-        "reaction": {
-            "uuid": "string"
+        {
+            "reaction": {
+                "uuid": "139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            }
         }
-    }
-]
+    ]
 }
+
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"allergen\": {\r\n        \"allergenType\": \"DRUG\",\r\n        \"codedAllergen\": {\r\n            \"uuid\": \"162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n        }\r\n    },\r\n    \"severity\": {\r\n        \"uuid\": \"1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n    },\r\n    \"comment\": \"severe allergy\",\r\n    \"reactions\": [\r\n        {\r\n            \"reaction\": {\r\n                \"uuid\": \"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n            }\r\n        },\r\n        {\r\n            \"reaction\": {\r\n                \"uuid\": \"139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
+
+var raw = JSON.stringify({"allergen":{"allergenType":"DRUG","codedAllergen":{"uuid":"162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}},"severity":{"uuid":"1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},"comment":"severe allergy","reactions":[{"reaction":{"uuid":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}},{"reaction":{"uuid":"139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}}]});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * To create an allergy subresource for a specific patient resource, you need to specify below properties in your request body.
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Query parameter 
-    Parameter | Description
-    --- | ---
-    `target_patient_uuid` | patient resource uuid
-
-    ### Properties for resource
+    
+### Properties
 
     Parameter | type | Description
     --- | --- | ---
-    *allergen* | `String` | value of the allergen
-    *severity* | `Severity_UUID` | Severity uuid
-    *comment* | `String` | comment for the allergy
-    *allergy* | `allergy_UUID` | allergy uuid
+    *allergen* | `String` | value of the allergen (Required)
+    *severity* | `Severity_UUID` | Severity uuid 
+    *comment* | `String` | comment in reference to the allergy
     *reaction* | `reaction_UUID` | reaction uuid
 
 
 ## Update allergy sub resource with properties
 
-```console
+> Update allergy sub resource
+
+```shell
 POST patient/:target_patient_uuid/allergy/:target_allergy_uuid
 {
-"allergen": {},
-"severity": {
-    "uuid": "string"
-},
-"comment": "string",
-"reactions": [
-    {
-        "allergy": {
-        "uuid": "string"
+    "allergen": {
+        "allergenType": "DRUG",
+        "codedAllergen": {
+            "uuid": "162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
     },
-    "reaction": {
-        "uuid": "string"
-    }
-}
-]
+    "severity": {
+        "uuid": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "comment": "severe allergy",
+    "reactions": [
+        {
+            "reaction": {
+                "uuid": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            }
+        },
+        {
+            "reaction": {
+                "uuid": "139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            }
+        }
+    ]
 }
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"allergen\": {\r\n        \"allergenType\": \"DRUG\",\r\n        \"codedAllergen\": {\r\n            \"uuid\": \"162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n        }\r\n    },\r\n    \"severity\": {\r\n        \"uuid\": \"1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n    },\r\n    \"comment\": \"severe allergy\",\r\n    \"reactions\": [\r\n        {\r\n            \"reaction\": {\r\n                \"uuid\": \"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n            }\r\n        },\r\n        {\r\n            \"reaction\": {\r\n                \"uuid\": \"139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
+
+var raw = JSON.stringify({"allergen":{"allergenType":"DRUG","codedAllergen":{"uuid":"162298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}},"severity":{"uuid":"1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},"comment":"severe allergy","reactions":[{"reaction":{"uuid":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}},{"reaction":{"uuid":"139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}}]});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Updates an allergy subresource value with given UUID, this method will only modify value of the subresource. Returns a `404 Not Found` status if property not exists. If user not logged in to perform this action, a `401 Unauthorized` status
 returned.
 
-    ### Query parameter 
-    
-    Parameter | Description
-    --- | ---
-    `target_patient_uuid` | patient resource uuid
-    `target_allergy_uuid` | allergy resource uuid
-
-    ### Properties for resource
+### Properties
 
     Parameter | type | Description
     --- | --- | ---
     *allergen* | `String` | value of the allergen
     *severity* | `Severity_UUID` | Severity uuid
     *comment* | `String` | comment for the allergy
-    *allergy* | `allergy_UUID` | allergy uuid
     *reaction* | `reaction_UUID` | reaction uuid
 
 
 ## Delete allergy sub resource with properties
 
-```console
+> Delete allergy sub resource
+
+```shell
 DELETE /patient/:target_patient_uuid/allergy/:target_allergy_uuid
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=2375C8D206AB15F32A3FA3FEA5824BC7");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient/3d808dc6-e9b8-4ade-b3fd-32bb0eb08f87/allergy/ba6e3813-1390-4b4d-9c0e-01de47bb7783?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
 * Delete or retire a target allergy subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
 If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
