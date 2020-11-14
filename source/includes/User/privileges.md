@@ -6,7 +6,7 @@ A **Privilege** is an authorization to perform a particular action in the system
 
 ## Available operations.
 
-1. [List privilege](#list-privileges)
+1. [List privilege](#list-privilege)
 2. [Create a privilege](#create-a-privilege)
 3. [Update a privilege](#update-a-privilege)
 4. [Delete a privilege](#delete-a-privilege)
@@ -18,37 +18,6 @@ A **Privilege** is an authorization to perform a particular action in the system
 
 ```shell
     GET /privilege?v=full&limit=1
-```
-
-> Success Response
-
-```response
-
-{
-    "results": [
-         {
-            "uuid": "24635eec-dd5a-11e6-9d9c-0242ac150002",
-            "display": "Add Concept Proposals",
-            "name": "Add Concept Proposals",
-            "description": "Able to add concept proposals to the system",
-            "retired": false,
-            "auditInfo": {
-                "creator": null,
-                "dateCreated": null,
-                "changedBy": null,
-                "dateChanged": null
-            },
-            "links": [
-                {
-                    "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/privilege/24635eec-dd5a-11e6-9d9c-0242ac150002"
-                }
-            ],
-            "resourceVersion": "1.8"
-        }
-    ]
-}
-
 ```
 
 ```java
@@ -83,6 +52,38 @@ fetch("/openmrs/ws/rest/v1/privilege?v=full&limit=1", requestOptions)
   .catch(error => console.log('error', error));
 
 ```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+         {
+            "uuid": "24635eec-dd5a-11e6-9d9c-0242ac150002",
+            "display": "Add Concept Proposals",
+            "name": "Add Concept Proposals",
+            "description": "Able to add concept proposals to the system",
+            "retired": false,
+            "auditInfo": {
+                "creator": null,
+                "dateCreated": null,
+                "changedBy": null,
+                "dateChanged": null
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "uri":"http://demo.openmrs.org/openmrs/ws/rest/v1/privilege/24635eec-dd5a-11e6-9d9c-0242ac150002"
+                }
+            ],
+            "resourceVersion": "1.8"
+        }
+    ]
+}
+
+```
+
 
 
 * Fetch all privileges that match any specified parameters otherwise fetch all privileges. Returns a `200 OK` status with the privilege response. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
