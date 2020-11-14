@@ -283,9 +283,9 @@ a `401 Unauthorized` status is returned.
 Parameter | Type | Description
 --- | --- | ---
 *name* | `String` | Name of the user
-*description* | `String | Description of the user
-*username* | `String | username of the user
-*password* | `String | password of the user
+*description* | `String` | Description of the user
+*username* | `String` | username of the user
+*password* | `String` | password of the user
 *person* | `String` | person resource associated with the user
 *systemId* | `String` | a unique identifier assigned to each user
 *[roles](#role)* | `Array[] : role` | a list of roles attributed to the user
@@ -353,9 +353,9 @@ fetch("/openmrs/ws/rest/v1/user/0f25e7bc-0d76-4889-8fbf-70ad7d7802a9", requestOp
   Parameter | Type | Description
 --- | --- | ---
 *name* | `String` | Name of the user
-*description* | `String | Description of the user
-*username* | `String | username of the user
-*password* | `String | password of the user
+*description* | `String` | Description of the user
+*username* | `String` | username of the user
+*password* | `String` | password of the user
 *person* | `String` | person resource associated with the user
 *systemId* | `String` | a unique identifier assigned to each user
 *[roles](#role)* | `Array[] : role` | a list of roles attributed to the user
