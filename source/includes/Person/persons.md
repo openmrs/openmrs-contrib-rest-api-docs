@@ -474,14 +474,12 @@ fetch("/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name", re
 }
 
 ```
-
+* List all the person name subresource corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
 
 ## List person name subresource by UUID
 
 > List person name subresource by UUID
-
-* List all the person name subresource corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
 
 ```shell
 GET /person/:target_person_uuid/name/:target_name_uuid
@@ -521,7 +519,7 @@ fetch("/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/4b68
 ```
 
 
-* List the person name by its `UUID` and corresponding to a `target_person_uuid`. Returns `404 Not Found` status if the person does not exist. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
+* List the person name by its `UUID` and corresponding to a `target_person_uuid` and a `target_person_name_uuid`. Returns `404 Not Found` status if the person does not exist. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` 
 status is returned.
 
 
@@ -557,7 +555,7 @@ Response response = client.newCall(request).execute();
 ```
 
 
-```javscript
+```javascript
 
 var requestHeaders = new Headers();
 requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
@@ -693,7 +691,7 @@ Response response = client.newCall(request).execute();
 ```
 
 
-```javscript
+```javascript
 
 var requestHeaders = new Headers();
 requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
@@ -713,8 +711,7 @@ fetch("/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/name/4e5c
 
 ```
 
-* Delete or void a target name subresource. Returns a `404 Not Found` status if an attribute does not exist. 
-If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+* Delete or void a target name subresource. Returns a `404 Not Found` status if an attribute does not exist. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
  
 ## List person address subresource
@@ -758,6 +755,7 @@ fetch("/openmrs/ws/rest/v1/person/90f7f0b4-06a8-4a97-9678-e7a977f4b518/address",
   .catch(error => console.log('error', error));
 
 ```
+
 > Success Response
 
 ```response
@@ -1338,7 +1336,7 @@ Response response = client.newCall(request).execute();
 ```
 
 
-```javscript
+```javascript
 
 var requestHeaders = new Headers();
 requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
