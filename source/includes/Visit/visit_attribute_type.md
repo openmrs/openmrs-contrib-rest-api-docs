@@ -164,12 +164,10 @@ POST /visitattributetype
 {
   "name": "Patient condition",
   "description": "This attribute type will record the health conditon of the patient",
-  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+  "datatypeClassname": "org.openmrs.customdatatype.datatype.FreeTextDatatype",
   "minOccurs": 0,
   "maxOccurs": 1,
-  "datatypeConfig": "default",
-  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": null
+  "datatypeConfig": "default"
 }
 ```
 
@@ -178,13 +176,13 @@ POST /visitattributetype
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Patient condition\",\r\n  \"description\": \"This attribute type will record the health conditon of the patient\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.LongFreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\",\r\n  \"preferredHandlerClassname\": \"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler\",\r\n  \"handlerConfig\": null\r\n}\r\n");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"Patient condition\",\r\n  \"description\": \"This attribute type will record the health conditon of the patient\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.FreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/visitattributetype")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visitattributetype")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
-  .addHeader("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C")
+  .addHeader("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270")
   .build();
 Response response = client.newCall(request).execute();
 
@@ -192,21 +190,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var requestHeaders = new Headers();
-requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-requestHeaders.append("Content-Type", "application/json");
-requestHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
 
-var raw = JSON.stringify({"name":"Patient condition","description":"This attribute type will record the health conditon of the patient","datatypeClassname":"org.openmrs.customdatatype.datatype.LongFreeTextDatatype","minOccurs":0,"maxOccurs":1,"datatypeConfig":"default","preferredHandlerClassname":"org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler","handlerConfig":null});
+var raw = JSON.stringify({"name":"Patient condition","description":"This attribute type will record the health conditon of the patient","datatypeClassname":"org.openmrs.customdatatype.datatype.FreeTextDatatype","minOccurs":0,"maxOccurs":1,"datatypeConfig":"default"});
 
 var requestOptions = {
   method: 'POST',
-  headers: requestHeaders,
+  headers: myHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/visitattributetype", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visitattributetype", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));

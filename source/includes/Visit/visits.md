@@ -2,16 +2,15 @@
 
 ## Visits Overview 
 
-* A Visit in OpenMRS represents precisely what it sounds like: a time when a patient is actively interacting with the 
-the healthcare system, typically at a location.
+* A Visit in OpenMRS represents precisely what it sounds like: a time when a patient is actively interacting with the the healthcare system, typically at a location.
 
-* The metadata differentiating different types of visits is a Visit Type. Visit Types displayed in the user interface, also can be searched against.
+* The metadata differentiating different types of visits is a Visit Type.Visits can also be searched against Visit Types displayed in the user interface.
 
 * A visit contains encounters, which store more granular data about treatments or services.
 
-## Let's look at an example of Visits
+* Let's look at an example of Visits
 
-At the Amani Clinic, a patient might typically check-in at registration, be seen by a doctor, and receives medication <b> dispensed </b> in the pharmacy. This would be recorded as one <b> visit </b> of <b> visit type of Outpatient </b>, and contain <b> three encounters (Registration, Consultation, and Dispensing) </b>.
+At the Amani Clinic, a patient might typically check-in at registration, be seen by a doctor, and receives medication dispensed in the pharmacy. This would be recorded as one **visit** of visit type of Outpatient and contain three encounters (Registration, Consultation, and Dispensing).
 
 ## Visits Sub Resource types
 
@@ -419,69 +418,302 @@ fetch("/openmrs/ws/rest/v1/visit/c298d3e1-6def-422a-9d0a-e18906a4ae73?purge=true
     *purge* | `Boolean` | The resource will be voided/retired unless purge = ‘true’
 
 ## List attribute subresources
-```console
+
+> List attribute subresources
+
+```shell
 GET /visit/:target_visit_uuid/attribute 
 ```
-* ### List all attribute subresources for a visit.
 
-    Retrieve all <b>attribute</b> sub resources of a  <b>visit</b> resource by target_visit_uuid.Returns a 
-    `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-    returned.
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
 
 
-```console
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "display": "Patient condition: normal condition",
+            "uuid": "1162d82e-96b8-4e5b-9cdc-17393fc1044e",
+            "attributeType": {
+                "uuid": "77fd562e-4e35-4649-b57f-41c3b75882b3",
+                "display": "Patient condition",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/visitattributetype/77fd562e-4e35-4649-b57f-41c3b75882b3"
+                    }
+                ]
+            },
+            "value": "normal condition",
+            "voided": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e?v=full"
+                }
+            ],
+            "resourceVersion": "1.9"
+        }
+    ]
+}
+
+```
+
+* Retrieve all <b>attribute</b> sub resources of a  <b>visit</b> resource by target_visit_uuid.Returns a `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+
+## List attribute subresources by it's UUID and parent visit UUID.
+
+> List attribute subresources by it's UUID  
+
+```shell
 GET /visit/:target_visit_uuid/attribute/:target_attribute_uuid
 ```
-* ### List attribute subresources by it's UUID and parent visit UUID.
-    
-     Retrieve an <b>attribute</b> sub resources of a <b>visit</b> resource.Returns a 
-     `404 Not Found` status if attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status
-     returned.
 
-## Create an attribute subresource with properties
-```console
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+  
+* Retrieve an attribute sub resources of a visit resource.Returns a `404 Not Found` status if attribute not exists. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
+
+## Create an attribute subresource
+
+> Create an attribute subresource
+
+```shell
+
 POST visit/:target_visit_uuid/attribute 
 {
-    "attributeType": "target_attribute_type_uuid",
-    "value": "value_for_the_attriute"
+    "attributeType": "77fd562e-4e35-4649-b57f-41c3b75882b3",
+    "value": "normal condition"
 }
-```
-* To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body.
-If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Attributes
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"attributeType\": \"77fd562e-4e35-4649-b57f-41c3b75882b3\",\r\n    \"value\": \"normal condition\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
+
+var raw = JSON.stringify({"attributeType":"77fd562e-4e35-4649-b57f-41c3b75882b3","value":"normal condition"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute", requestOptions)
+  .then(response => response.text())
+
+
+```
+
+
+* To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body.If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type
-    *value* | `Depends on Attribute_Type Selected` | Value for the attribute
+    *[attributeType](#visits-attribute-type)* | `Attribute_Type UUID` | Create Attribute from this Attribute_Type (Required)
+    *value* | `Depends on Attribute_Type Selected` | Value for the attribute (Required)
 
 ## Update attribute subresource
-```console
+
+> Update attribute subresource
+
+```shell
+
 POST visit/:target_visit_uuid/attribute/:target_attribute_uuid
 {
-    "attributeType": "target_attribute_type_uuid",
-    "value": "modified_attriute_value"
+    "value": "very critical"
 } 
-```
-* Updates an attribute subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status
-returned.
 
-    ### Attributes
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"value\": \"very critical\"\r\n} ");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
+
+var raw = JSON.stringify({"value":"very critical"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Updates an attribute subresource value with given UUID, this method will only modify the value of the subresource. Returns a `404 Not Found` status if attribute not exists. If user not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Attribute_Type resource UUID
+    *[attributeType](#visits-attribute-type)* | `Attribute_Type UUID` | Attribute_Type resource UUID
     *updated value* | `Depends on Attribute_Type Selected` | Updated value for the attribute
 
 ## Delete attribute subresource
-```console
+
+> Delete attribute subresource
+
+```shell
 DELETE /visit/:target_visit_uuid/attribute/:target_attribute_uuid
 ```
-* Delete or Retire a target attribute subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
-If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+```java
 
-    ### Query Parameters
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Delete or Retire a target attribute subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
