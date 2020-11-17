@@ -202,7 +202,7 @@ Parameter | Type | Description
 *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
 *minOccurs* | `Number` | Minimum number of times this value can be specified for a single concept. Use `0` or `1` as the default value (Required)
 *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single concept (e.g., use 1 to prevent an attribute from being added to a concept multiple times)
-*preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this concept attribute type. The java class must implement [`CustomDataTypeHandler`(https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype
+*preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this concept attribute type. The java class must implement [CustomDataTypeHandler](https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype
 *datatypeConfig* | `String` | Provides ability to define custom data types configuration for OpenMRS
 *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list, and this configuration would tell the handler the possible choices in the list for this specific attribute type
 
@@ -276,7 +276,7 @@ Parameter | Type | Description
 *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly
 *minOccurs* | `Number` | Minimum number of times this value can be specified for a single concept. Use `0` or `1` as the default value
 *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single concept (e.g., use 1 to prevent an attribute from being added to a concept multiple times)
-*preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this concept attribute type. The java class must implement [`CustomDataTypeHandler`(https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype
+*preferredHandlerClassname* | `Handler` | Specifies the Java class to be used when handling this concept attribute type. The java class must implement [CustomDataTypeHandler](https://docs.openmrs.org/doc/org/openmrs/customdatatype/CustomDatatypeHandler.html). If not specified, the system will try to choose the best handler for the chosen datatype
 *datatypeConfig* | `String` | Provides ability to define custom data types configuration for OpenMRS
 *handlerConfig* | `String` | Allow handler to be used for more than one attribute type. The actual configuration depends on the needs of the specified handler. For example, a "Pre-defined List" handler could be made to implement a simple selection list, and this configuration would tell the handler the possible choices in the list for this specific attribute type
 

@@ -5,9 +5,8 @@
 * Concept mappings are generally used to map between a local concept and an external concept, most often a reference (standard) terminology but sometimes concepts from other systems with which you need to Inter operate (i.e., transform data moving between systems).
 * Mappings are useful when you need to receive or send information to external systems, letting you define how your system's concepts relate to external concepts such as standardized medical vocabularies (e.g., ICD, LOINC, SNOMED). 
   
-* For example, add a mapping to a concept in the MCL dictionary. You can save the concept now and create some answers.
-
-* Repeat the steps and create the concepts PLANNING PREGNANCY and CURRENTLY PREGNANT of Class Finding and Datatype Boolean. The last possible answer will be the OTHER of Class Misc and Datatype N/A. After creating three new concepts, you can edit ANTENATAL VISIT REASON and add them as answers.
+* For example, add a mapping to a concept in the MCL dictionary. You can save the concept now and create some answers. for instance,
+create the concepts PLANNING PREGNANCY and CURRENTLY PREGNANT of Class Finding and Datatype Boolean. The last possible answer will be the OTHER of Class Misc and Datatype N/A. After creating three new concepts, you can edit ANTENATAL VISIT REASON and add them as answers.
 
 ## Available operations. 
 
@@ -18,8 +17,6 @@
 
 
 ## List concept map types
-
-## List all non-retired concept map types.
 
 > List all non-retired concept map types
 
@@ -88,7 +85,7 @@ fetch("/openmrs/ws/rest/v1/conceptmaptype?q=associated&limit=1", requestOptions)
 * Quickly filter concept map types with a given search query. Returns a `404 Not Found` status if concept map type not exists. 
     If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ##### Query Parameters
+    ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
@@ -191,8 +188,7 @@ fetch("/openmrs/ws/rest/v1//conceptmaptype", requestOptions)
 
 ```
 
-* To Create a concept map type, you need to specify below attributes in the request body. If you are not logged in to perform this action,
- a `401 Unauthorized` status returned.
+* To Create a concept map type, you need to specify below attributes in the request body. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
 * A `400 Bad request` status is returned if the name is already being used by some concept map type. 
 
 ### Attributes
@@ -259,7 +255,7 @@ fetch("/openmrs/ws/rest/v1//conceptmaptype/35543629-7d8c-11e1-909d-c80aa9edcf4e"
 
 *  Update a target concept map type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept map not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    #### Attributes
+    ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -313,7 +309,7 @@ fetch("/openmrs/ws/rest/v1/conceptmaptype/55e02065-7d8c-11e1-909d-c80aa9edcf4e?p
 * Delete or Retire a target concept map type by its UUID. Returns a `404 Not Found` status if concept map not exists. If user not logged in to perform this action, a `401 Unauthorized` status returned.
 * A `500 Internal Server Error `status is returned if the concept map is currently in use.
 
-    #### Query Parameters
+    ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
