@@ -16,6 +16,8 @@
 
 ## List encounter types
 
+> List encounter types
+
 ```shell
 GET /encountertype?q=Admission
 ```
@@ -54,6 +56,7 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/encountertype?q=Admissio
 
 ```
 
+> Success Response
 
 ```response
 
@@ -102,7 +105,9 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/encountertype?q=Admissio
     *q* | `Search Query` | Query to filter encounter type by its name
 
     
-### Get encounter type by UUID.
+## Get encounter type by UUID.
+
+> Get encounter type by UUID
 
 ```shell
 GET /encountertype/:target_encounter_type_uuid
@@ -145,6 +150,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/encountertype/e22e39fd-7
     
    
 ## Create an encounter type
+
+> Create an encounter type
 
 ```shell
 POST /encountertype
@@ -208,6 +215,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/encountertype", requestO
 
 ## Update an encounter type
 
+> Update an encounter type
+
 ```shell
 POST /encountertype/:target_encounter_type_uuid
 {
@@ -268,6 +277,8 @@ fetch("https://qa-refapp.openmrs.org/openmrs/ws/rest/v1/encountertype/181820aa-8
 
     
 ## Delete an encounter type
+
+> Delete an encounter type
 
 ```shell
 DELETE /encountertype/:target_encounter_type_uuid?purge=true
