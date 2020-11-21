@@ -47,6 +47,7 @@ includes:
   - Orders/order
   - Orders/order_type
   - Forms/Forms
+  - Forms/field_type
   - contrib
   
 
