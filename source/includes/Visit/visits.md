@@ -430,7 +430,7 @@ GET /visit/:target_visit_uuid/attribute
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute")
+  .url("/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270")
@@ -442,17 +442,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute", requestOptions)
+fetch("/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -513,7 +513,7 @@ GET /visit/:target_visit_uuid/attribute/:target_attribute_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e")
+  .url("/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270")
@@ -524,17 +524,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e", requestOptions)
+fetch("/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -565,7 +565,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"attributeType\": \"77fd562e-4e35-4649-b57f-41c3b75882b3\",\r\n    \"value\": \"normal condition\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute")
+  .url("/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -577,21 +577,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
 
 var raw = JSON.stringify({"attributeType":"77fd562e-4e35-4649-b57f-41c3b75882b3","value":"normal condition"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute", requestOptions)
+fetch("/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute", requestOptions)
   .then(response => response.text())
 
 
@@ -627,7 +627,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"value\": \"very critical\"\r\n} ");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e")
+  .url("/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -639,21 +639,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
 
 var raw = JSON.stringify({"value":"very critical"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e", requestOptions)
+fetch("/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -683,7 +683,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e?purge=true")
+  .url("/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270")
@@ -694,17 +694,17 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=A7DBC9603F0BAF39988C59B870111270");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/visit/d29e005a-28d4-4b82-87dd-569ff2a4b8e9/attribute/1162d82e-96b8-4e5b-9cdc-17393fc1044e?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
