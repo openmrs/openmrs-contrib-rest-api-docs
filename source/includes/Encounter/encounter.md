@@ -41,6 +41,7 @@
 
 ## List encounters
 
+> List encounters
 
 ```shell
 GET /encounter?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&concept=18316c68-b5f9-4986-b76d-9975cd0ebe31&fromdate=2016-10-08&v=default&limit=1
@@ -198,7 +199,6 @@ fetch("/openmrs/ws/rest/v1/encounter?patient=96be32d2-9367-4d1d-a285-79a5e5db12b
 ```
 
 * Quickly filter encounters with given query parameters. Returns a `404 Not Found` status if Encounter not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
-* 
     
 ### Query Parameters
 
@@ -214,7 +214,9 @@ fetch("/openmrs/ws/rest/v1/encounter?patient=96be32d2-9367-4d1d-a285-79a5e5db12b
     *todate* | `Date or Timestamp (ISO 8601)` | End date of the encounter (must be used with patient parameter cant be used independently)
     
     
-### List encounter by UUID.
+## List encounter by UUID.
+
+> List encounter by UUID
 
 ```shell
 GET /encounter/:target_encounter_uuid
@@ -361,6 +363,8 @@ fetch("/openmrs/ws/rest/v1/encounter", requestOptions)
 
 ## Update an encounter
 
+> Update an encounter
+
 ```shell
 POST /encounter/:target_encounter_uuid
 {
@@ -427,6 +431,8 @@ fetch("/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632", requ
     *[visit](#visits)* | `Visit UUID` | When creating an encounter for an existing visit, this specifies the visit this encounter will be grouped into.
     
 ## Delete an encounter
+
+> Delete an encounter
 
 ```shell
   DELETE /encounter/:target_encounter_uuid?purge=true
