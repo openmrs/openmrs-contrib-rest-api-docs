@@ -297,7 +297,8 @@ POST /Encounter
     "visit": {
         "patient": "96be32d2-9367-4d1d-a285-79a5e5db12b8",
         "visitType": "7b0f5697-27e3-40c4-8bae-f4049abfb4ed",
-        "startDatetime": "2015-02-24T06:08:25.000+0000"
+        "startDatetime": "2015-02-24T06:08:25.000+0000",
+        "stopDatetime" : "2015-02-24T06:09:25.000+0000"
     }
 }
 
@@ -308,13 +309,13 @@ POST /Encounter
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\r\n    \"encounterDatetime\": \"2015-02-24T06:08:25.000+0000\",\r\n    \"patient\": \"96be32d2-9367-4d1d-a285-79a5e5db12b8\",\r\n    \"encounterType\": \"67a71486-1a54-468f-ac3e-7091a9a79584\",\r\n    \"location\": \"58c57d25-8d39-41ab-8422-108a0c277d98\",\r\n    \"encounterProviders\": [\r\n        {\r\n            \"provider\": \"bb1a7781-7896-40be-aaca-7d1b41d843a6\",\r\n            \"encounterRole\": \"240b26f9-dd88-4172-823d-4a8bfeb7841f\"\r\n        }\r\n    ],\r\n    \"visit\": {\r\n        \"patient\": \"96be32d2-9367-4d1d-a285-79a5e5db12b8\",\r\n        \"visitType\": \"7b0f5697-27e3-40c4-8bae-f4049abfb4ed\",\r\n        \"startDatetime\": \"2015-02-24T06:08:25.000+0000\"\r\n    }\r\n}");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"encounterDatetime\": \"2015-02-24T06:08:25.000+0000\",\r\n    \"patient\": \"96be32d2-9367-4d1d-a285-79a5e5db12b8\",\r\n    \"encounterType\": \"67a71486-1a54-468f-ac3e-7091a9a79584\",\r\n    \"location\": \"58c57d25-8d39-41ab-8422-108a0c277d98\",\r\n    \"encounterProviders\": [\r\n        {\r\n            \"provider\": \"bb1a7781-7896-40be-aaca-7d1b41d843a6\",\r\n            \"encounterRole\": \"240b26f9-dd88-4172-823d-4a8bfeb7841f\"\r\n        }\r\n    ],\r\n    \"visit\": {\r\n        \"patient\": \"96be32d2-9367-4d1d-a285-79a5e5db12b8\",\r\n        \"visitType\": \"7b0f5697-27e3-40c4-8bae-f4049abfb4ed\",\r\n        \"startDatetime\": \"2015-02-24T06:08:25.000+0000\",\r\n        \"stopDatetime\" : \"2015-02-24T06:09:25.000+0000\"\r\n    }\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/encounter")
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/encounter")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
-  .addHeader("Cookie", "JSESSIONID=3EFCD2FD54D00BE8491DFFD43AA706DC")
+  .addHeader("Cookie", "JSESSIONID=3D897DB2CD0E3465BBCF887F133ED465")
   .build();
 Response response = client.newCall(request).execute();
 
@@ -322,25 +323,24 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var requestHeaders = new Headers();
-requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-requestHeaders.append("Content-Type", "application/json");
-requestHeaders.append("Cookie", "JSESSIONID=3EFCD2FD54D00BE8491DFFD43AA706DC");
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=3D897DB2CD0E3465BBCF887F133ED465");
 
-var raw = JSON.stringify({"encounterDatetime":"2015-02-24T06:08:25.000+0000","patient":"96be32d2-9367-4d1d-a285-79a5e5db12b8","encounterType":"67a71486-1a54-468f-ac3e-7091a9a79584","location":"58c57d25-8d39-41ab-8422-108a0c277d98","encounterProviders":[{"provider":"bb1a7781-7896-40be-aaca-7d1b41d843a6","encounterRole":"240b26f9-dd88-4172-823d-4a8bfeb7841f"}],"visit":{"patient":"96be32d2-9367-4d1d-a285-79a5e5db12b8","visitType":"7b0f5697-27e3-40c4-8bae-f4049abfb4ed","startDatetime":"2015-02-24T06:08:25.000+0000"}});
+var raw = JSON.stringify({"encounterDatetime":"2015-02-24T06:08:25.000+0000","patient":"96be32d2-9367-4d1d-a285-79a5e5db12b8","encounterType":"67a71486-1a54-468f-ac3e-7091a9a79584","location":"58c57d25-8d39-41ab-8422-108a0c277d98","encounterProviders":[{"provider":"bb1a7781-7896-40be-aaca-7d1b41d843a6","encounterRole":"240b26f9-dd88-4172-823d-4a8bfeb7841f"}],"visit":{"patient":"96be32d2-9367-4d1d-a285-79a5e5db12b8","visitType":"7b0f5697-27e3-40c4-8bae-f4049abfb4ed","startDatetime":"2015-02-24T06:08:25.000+0000","stopDatetime":"2015-02-24T06:09:25.000+0000"}});
 
 var requestOptions = {
   method: 'POST',
-  headers: requestHeaders,
+  headers: myHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/encounter", requestOptions)
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/encounter", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
-
 
 ```
 
