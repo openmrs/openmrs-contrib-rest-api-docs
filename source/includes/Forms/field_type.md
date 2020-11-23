@@ -26,7 +26,7 @@ GET /fieldtype?
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype?v=full")
+  .url("/openmrs/ws/rest/v1/fieldtype?v=full")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0")
@@ -47,7 +47,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype?v=full", requestOptions)
+fetch("/openmrs/ws/rest/v1/fieldtype?v=full", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -74,7 +74,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype?v=full", requestOpt
                     "links": [
                         {
                             "rel": "self",
-                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002"
+                            "uri": "/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002"
                         }
                     ]
                 },
@@ -85,7 +85,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype?v=full", requestOpt
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f"
+                    "uri": "/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f"
                 }
             ],
             "resourceVersion": "1.8"
@@ -104,7 +104,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype?v=full", requestOpt
                     "links": [
                         {
                             "rel": "self",
-                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002"
+                            "uri": "/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002"
                         }
                     ]
                 },
@@ -115,7 +115,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype?v=full", requestOpt
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype/8d5e8196-c2cc-11de-8d13-0010c6dffd0f"
+                    "uri": "/openmrs/ws/rest/v1/fieldtype/8d5e8196-c2cc-11de-8d13-0010c6dffd0f"
                 }
             ],
             "resourceVersion": "1.8"
@@ -137,7 +137,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype?v=full", requestOpt
     *q* | the search query based on the name of the field type.
 
     
-### Get field type by UUID.
+## Get field type by UUID.
+
+> Get field type by UUID
 
 ```shell
 GET /fieldtype/:target_field_type_uuid
@@ -148,7 +150,7 @@ GET /fieldtype/:target_field_type_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype/8d5e86fa-c2cc-11de-8d13-0010c6dffd0f")
+  .url("/openmrs/ws/rest/v1/fieldtype/8d5e86fa-c2cc-11de-8d13-0010c6dffd0f")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0")
@@ -169,7 +171,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype/8d5e86fa-c2cc-11de-8d13-0010c6dffd0f", requestOptions)
+fetch("/openmrs/ws/rest/v1/fieldtype/8d5e86fa-c2cc-11de-8d13-0010c6dffd0f", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -180,6 +182,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype/8d5e86fa-c2cc-11de-
     
    
 ## Create an field type
+
+> Create an field type
 
 ```shell
 POST /fieldtype
@@ -196,7 +200,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"name\": \"Concept\",\r\n    \"description\": \"fields storing info related to concepts\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype")
+  .url("/openmrs/ws/rest/v1/fieldtype")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -223,7 +227,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype", requestOptions)
+fetch("/openmrs/ws/rest/v1/fieldtype", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -233,7 +237,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype", requestOptions)
 * To create an field type, you need to specify below attributes in the request body. If you are not logged in to perform this action, a `401 Unauthorized` status returned.
 * A `400 Bad Request ` Status is returned if any duplicate name is used in the creation of new field Type.
 
-    #### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -242,6 +246,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype", requestOptions)
    
 
 ## Update an field type
+
+> Update an field type
 
 ```shell
 POST /fieldtype/:target_field_type_uuid
@@ -256,7 +262,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"description\": \"fields type concerning concept related data\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f")
+  .url("/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -282,7 +288,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f", requestOptions)
+fetch("/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -303,6 +309,8 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-
     
 ## Delete an field type
 
+> Delete an field type
+
 ```shell
 DELETE /fieldtype/:target_field_type_uuid?purge=true
 ```
@@ -314,7 +322,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f?purge=true")
+  .url("/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0")
@@ -336,7 +344,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
