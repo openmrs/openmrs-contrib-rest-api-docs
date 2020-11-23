@@ -12,15 +12,96 @@
 4. [Delete a location attribute type](#delete-a-location-attribute-type)
 
 
-### List location attribute types
+## List location attribute types
 
-### List all non-retired location attribute types.
+> List location attribute types
 
-```console
-GET /locationattributetype?q="humidity"
+```shell
+GET /locationattributetype?q=humidity
 ```
-    Quickly filter location attribute types with a given search query. Returns a `404 Not Found` status if the location attribute type not exists.
-     If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/locationattributetype?q=humidity&v=full")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/locationattributetype?q=humidity&v=full", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+
+```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c",
+            "display": "humidity",
+            "name": "humidity",
+            "description": "This attribute type will record the humidity of the location",
+            "minOccurs": 0,
+            "maxOccurs": 1,
+            "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+            "datatypeConfig": "default",
+            "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
+            "handlerConfig": null,
+            "retired": false,
+            "auditInfo": {
+                "creator": {
+                    "uuid": "45ce6c2e-dd5a-11e6-9d9c-0242ac150002",
+                    "display": "admin",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002"
+                        }
+                    ]
+                },
+                "dateCreated": "2020-11-02T20:08:50.000+0000",
+                "changedBy": null,
+                "dateChanged": null
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c"
+                }
+            ],
+            "resourceVersion": "1.9"
+        }
+    ]
+}
+
+```
+
+* Quickly filter location attribute types with a given search query. Returns a `404 Not Found` status if the location attribute type not exists.If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
 
@@ -31,30 +112,106 @@ GET /locationattributetype?q="humidity"
 
 ### List location attribute type by UUID.
 
-```console
+> List location attribute type by UUID
+
+```shell
 GET /locationattributetype/:target_location_attribute_type_uuid
 ```
-    Retrieve a location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not exists. If the 
-    user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/locationattributetype/fa0527cb-8b37-4a0a-8e7a-cff04acc8554")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/locationattributetype/fa0527cb-8b37-4a0a-8e7a-cff04acc8554", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* Retrieve a location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
 
 ## Create a location attribute type
 
-```console
+> Create a location attribute type
+
+```shell
 POST /locationattributetype
 {
   "name": "humidity",
   "description": "This attribute type will record the humidity of the location",
-  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
+  "datatypeClassname": "org.openmrs.customdatatype.datatype.FreeTextDatatype",
   "minOccurs": 0,
   "maxOccurs": 1,
-  "datatypeConfig": "default",
-  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": "dafault"
+  "datatypeConfig": "default"
 }
 ```
-* To Create a location attribute type, you need to specify below attributes in the request body. If the user not logged in to perform this action,
- a `401 Unauthorized` status returned.
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"name\": \"humidity\",\r\n  \"description\": \"This attribute type will record the humidity of the location\",\r\n  \"datatypeClassname\": \"org.openmrs.customdatatype.datatype.FreeTextDatatype\",\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 1,\r\n  \"datatypeConfig\": \"default\"\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/locationattributetype")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=644F0C130F7EA78D917F896CE811FBAF");
+
+var raw = JSON.stringify({"name":"humidity","description":"This attribute type will record the humidity of the location","datatypeClassname":"org.openmrs.customdatatype.datatype.FreeTextDatatype","minOccurs":0,"maxOccurs":1,"datatypeConfig":"default"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/locationattributetype", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+* To Create a location attribute type, you need to specify below attributes in the request body. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Attributes
 
@@ -71,36 +228,67 @@ POST /locationattributetype
 
 ## Update a location attribute type
 
-```console
+> Update a location attribute type
+
+```shell
 POST /locationattributetype/:target_location_attribute_type_uuid
 {
-  "name": "humidity",
-  "description": "This attribute type will record the humidity of the location"",
-  "datatypeClassname": "org.openmrs.customdatatype.datatype.LongFreeTextDatatype",
   "minOccurs": 0,
-  "maxOccurs": 2,
-  "datatypeConfig": "default",
-  "preferredHandlerClassname": "org.openmrs.web.attribute.handler.LongFreeTextTextareaHandler",
-  "handlerConfig": "dafault"
+  "maxOccurs": 2
 }
 ```
-*  Update a target location attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` 
-status if the location attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Query Parameters
+```java
 
-    Parameter | Type | Description
-    --- | --- | ---
-    *uuid* | `target_location_attribute_type_uuid` | Target location attribute type resource UUID
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n  \"minOccurs\": 0,\r\n  \"maxOccurs\": 2\r\n}\r\n");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704")
+  .build();
+Response response = client.newCall(request).execute();
 
-    ### Attributes
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+
+var raw = JSON.stringify({"minOccurs":0,"maxOccurs":2});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+* Update a target location attribute type with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if the location attribute not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
+
+### Attributes
 
       Parameter | Type | Description
       --- | --- | ---
-      *name* | `String` | Name of the location attribute type (Required)
-      *description* | `String` | Description (Required)
+      *name* | `String` | Name of the location attribute type 
+      *description* | `String` | Description
       *datatypeClassname* | `CustomDataType Resource` | Data type for the attribute type resource. OpenMRS provides **Custom data type resource** which gives flexibility to select the data type accordingly (Required)
-      *minOccurs* | `Number` | Minimum number of times this value can be specified for a single location. Use `0` or `1` as the default value (Required)
+      *minOccurs* | `Number` | Minimum number of times this value can be specified for a single location. Use `0` or `1` as the default value
       *maxOccurs* | `Number` | Maximum number of times this value can be specified for a single location (e.g., use 1 to prevent an attribute from being added to a location multiple times)
       *preferredHandlerClassname* | `Handler` |  Handler subresource for the Custom Data Type used. Can optionally define a specific handler class want to use (otherwise the framework will choose the best handler for the chosen DataType). To find which handlers to use for the Custom DataType, please refer here   
       *datatypeConfig* | `String` | Allow the data type have any name and config it wants/needs.
@@ -110,9 +298,47 @@ status if the location attribute not exists. If the user not logged in to perfor
 
 ## Delete a location attribute type
 
-```console
+> Delete a location attribute type
+
+```shell
 DELETE /locationattributetype/:target_location_attribute_type_uuid?purge=true
 ```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c?purge=true")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=177F9C2E5ED43272221D31E103D6B704");
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/locationattributetype/e2844ee5-bfdd-4d07-bfc4-2afaf6bfe60c?purge=true", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 * Delete or Retire a target location attribute type by its UUID. Returns a `404 Not Found` status if the location attribute type not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
     ### Query Parameters
