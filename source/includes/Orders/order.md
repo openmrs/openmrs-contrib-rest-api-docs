@@ -28,7 +28,7 @@ GET /openmrs/ws/rest/v1/order?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&cares
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&caresetting=INPATIENT&limit=1&v=default")
+  .url("/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&caresetting=INPATIENT&limit=1&v=default")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -39,21 +39,20 @@ Response response = client.newCall(request).execute();
 ```
 
 
-
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&caresetting=INPATIENT&limit=1&v=default", requestOptions)
+fetch("/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&caresetting=INPATIENT&limit=1&v=default", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -76,7 +75,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/patient/96be32d2-9367-4d1d-a285-79a5e5db12b8"
+                        "uri": "/openmrs/ws/rest/v1/patient/96be32d2-9367-4d1d-a285-79a5e5db12b8"
                     }
                 ]
             },
@@ -86,7 +85,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/concept/5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        "uri": "/openmrs/ws/rest/v1/concept/5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     }
                 ]
             },
@@ -97,7 +96,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/caresetting/c365e560-c3ec-11e3-9c1a-0800200c9a66"
+                        "uri": "/openmrs/ws/rest/v1/caresetting/c365e560-c3ec-11e3-9c1a-0800200c9a66"
                     }
                 ]
             },
@@ -112,7 +111,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/encounter/69f83020-caf2-4c9e-bca7-89b8e62b52e1"
+                        "uri": "/openmrs/ws/rest/v1/encounter/69f83020-caf2-4c9e-bca7-89b8e62b52e1"
                     }
                 ]
             },
@@ -122,7 +121,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66"
+                        "uri": "/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66"
                     }
                 ]
             },
@@ -140,11 +139,11 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4
                 "links": [
                     {
                         "rel": "self",
-                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/ordertype/52a447d3-a64a-11e3-9aeb-50e549534c5e"
+                        "uri": "/openmrs/ws/rest/v1/ordertype/52a447d3-a64a-11e3-9aeb-50e549534c5e"
                     },
                     {
                         "rel": "full",
-                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/ordertype/52a447d3-a64a-11e3-9aeb-50e549534c5e?v=full"
+                        "uri": "/openmrs/ws/rest/v1/ordertype/52a447d3-a64a-11e3-9aeb-50e549534c5e?v=full"
                     }
                 ],
                 "resourceVersion": "1.10"
@@ -161,11 +160,11 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345"
+                    "uri": "/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345"
                 },
                 {
                     "rel": "full",
-                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345?v=full"
+                    "uri": "/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345?v=full"
                 }
             ],
             "type": "testorder",
@@ -175,7 +174,7 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4
     "links": [
         {
             "rel": "next",
-            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&caresetting=INPATIENT&limit=1&v=default&startIndex=1"
+            "uri": "/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&caresetting=INPATIENT&limit=1&v=default&startIndex=1"
         }
     ]
 }
@@ -212,7 +211,7 @@ GET /order/:target_order_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/order")
+  .url("/openmrs/ws/rest/v1/order")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -224,18 +223,18 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order", requestOptions)
+fetch("/openmrs/ws/rest/v1/order", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -272,7 +271,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\r\n    \"type\": \"testorder\",\r\n    \"action\": \"new\",\r\n    \"urgency\": \"ROUTINE\",\r\n    \"dateActivated\": \"2018-10-16 12:08:43\",\r\n    \"careSetting\": \"INPATIENT\",\r\n    \"encounter\": \"69f83020-caf2-4c9e-bca7-89b8e62b52e1\",\r\n    \"patient\": \"96be32d2-9367-4d1d-a285-79a5e5db12b8\",\r\n    \"concept\": \"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\r\n    \"orderer\": \"f9badd80-ab76-11e2-9e96-0800200c9a66\"\r\n}");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/order/")
+  .url("/openmrs/ws/rest/v1/order/")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -284,21 +283,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0");
 
 var raw = JSON.stringify({"type":"testorder","action":"new","urgency":"ROUTINE","dateActivated":"2018-10-16 12:08:43","careSetting":"INPATIENT","encounter":"69f83020-caf2-4c9e-bca7-89b8e62b52e1","patient":"96be32d2-9367-4d1d-a285-79a5e5db12b8","concept":"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","orderer":"f9badd80-ab76-11e2-9e96-0800200c9a66"});
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order", requestOptions)
+fetch("/openmrs/ws/rest/v1/order", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -338,17 +337,17 @@ DELETE /order/:target_order_uuid?purge=true
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=70434FCF03A8A6D351D3C9E97B7DF674");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=70434FCF03A8A6D351D3C9E97B7DF674");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));```
@@ -360,7 +359,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345?purge=true")
+  .url("/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=70434FCF03A8A6D351D3C9E97B7DF674")
