@@ -623,8 +623,8 @@ fetch("/openmrs/ws/rest/v1/concept/140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/mapping"
 
 Parameter | Type | Description
 --- | --- | ---
-*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A [concept reference term](#concept-reference-term) defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
-*conceptMapType* | `target_concept_map_type_uuid` | A [concept map](#concept-map-type) connects a concept term to a concept (required)
+*[conceptReferenceTerm](#concept-reference-term)* | `target_concept_reference_term_type_uuid` | A concept reference term defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept (required)
+*[conceptMapType](#concept-map-type)* | `target_concept_map_type_uuid` | A concept map connects a concept term to a concept (required)
     
  
  
@@ -688,8 +688,8 @@ returned.
 
 Parameter | Type | Description
 --- | --- | ---
-*conceptReferenceTerm* | `target_concept_reference_term_type_uuid` | A [concept reference term](#concept-reference-term) defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept 
-*conceptMapType* | `target_concept_map_type_uuid` | A [concept map](#concept-map-type) connects a concept term to a concept 
+*[conceptReferenceTerm](#concept-reference-term)* | `target_concept_reference_term_type_uuid` | A concept reference term defines a medical coding term or OpenMRS concept dictionary term that could be mapped to a concept
+*[conceptMapType](#concept-map-type)* | `target_concept_map_type_uuid` | A concept map connects a concept term to a concept
 
 ## Delete a concept mapping
 
@@ -1305,7 +1305,7 @@ returned.
 
     Parameter | Type | Description
     --- | --- | ---
-    *attributeType* | `Attribute_Type UUID` | Create Attribute from this [Concept Attribute Type](#concept-attribute-type) 
+    *[attributeType](#concept-attribute-type) * | `Attribute_Type UUID` | Create Attribute from this Concept Attribute Type
     *value* | `Depends on Attribute_Type Selected` | Value for the attribute 
 
 ## Delete concept attribute

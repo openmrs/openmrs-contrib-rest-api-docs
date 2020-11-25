@@ -12,9 +12,6 @@
 4.   Database Information | This section has the relevant information about the database.  For  e.g. `Database Schema name` : `openmrs-db`  
 5.   Module Information | This section has the record of all the snapshot versions for each of the current modules. For e.g. `Allergy UI Module` : `1.8.3-SNAPSHOT`
  
-  
-
-## Available operations for systeminformation type.
 
 ## List System Inforamation
 
@@ -26,6 +23,38 @@ GET /systeminformation
 
 ```
 
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/systeminformation")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/systeminformation", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
 > Success Response
 
 ```response
@@ -112,39 +141,6 @@ GET /systeminformation
         }
     }
 }
-
-```
-
-```java
-
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/systeminformation")
-  .method("GET", null)
-  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
-  .addHeader("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710")
-  .build();
-Response response = client.newCall(request).execute();
-
-```
-
-```javascript
-
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
-
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
-fetch("/openmrs/ws/rest/v1/systeminformation", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
 
 ```
 

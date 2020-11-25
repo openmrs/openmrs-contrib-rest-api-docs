@@ -8,7 +8,7 @@
 
 ## Available operations.
 
-1. [List person attribute types](#list-person-attribute-types)
+1. [List person attribute types](#list-all-non-retired-person-attribute-types)
 2. [Create a person attribute type](#create-a-person-attribute-type)
 3. [Update a person attribute type](#update-a-person-attribute-type)
 4. [Delete a person attribute type](#delete-a-person-attribute-type)
@@ -21,6 +21,39 @@
 
 ```shell
 GET /personattributetype?q=race&v=default
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/personattributetype?q=race&v=default")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/personattributetype?q=race&v=default", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 ```
 
 > Success Response
@@ -57,38 +90,6 @@ GET /personattributetype?q=race&v=default
 
 ```
 
-```java
-
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/personattributetype?q=race&v=default")
-  .method("GET", null)
-  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
-  .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
-  .build();
-Response response = client.newCall(request).execute();
-
-```
-
-```javascript
-
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
-
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
-fetch("/openmrs/ws/rest/v1/personattributetype?q=race&v=default", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-
-```
 
 
 * Quickly filter person attribute types with a given search query. If the request is not authenticated or the authenticated user does not have appropriate permissions, a `401 Unauthorized` status is returned.

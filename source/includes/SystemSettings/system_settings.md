@@ -26,6 +26,40 @@
 GET /systemsetting?limit=1&v=full
 ```
 
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/systemsetting?limit=1&v=full")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/systemsetting?limit=1&v=full", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 > Success Response
 
 ```response
@@ -62,38 +96,6 @@ GET /systemsetting?limit=1&v=full
 ```
 
 
-```java
-
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/systemsetting?limit=1&v=full")
-  .method("GET", null)
-  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
-  .addHeader("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710")
-  .build();
-Response response = client.newCall(request).execute();
-
-```
-
-```javascript
-
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
-
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
-fetch("/openmrs/ws/rest/v1/systemsetting?limit=1&v=full", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-
-```
 
 
 * Fetch all non-retired System Settings that match any specified parameters otherwise fetch all non-retired System Settings. 
@@ -133,13 +135,13 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 
@@ -190,16 +192,16 @@ Response response = client.newCall(request).execute();
 ```
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
 
 var raw = JSON.stringify({"property":"property name","description":"dummy description","datatypeClassname":"org.openmrs.customdatatype.datatype.FreeTextDatatype","datatypeConfig":"default","preferredHandlerClassname":"org.openmrs.web.attribute.handler.FreeTextTextareaHandler","handlerConfig":null,"value":"dummy value"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
@@ -263,16 +265,16 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
 
 var raw = JSON.stringify({"property":"property name","description":"dummy description","datatypeClassname":"org.openmrs.customdatatype.datatype.FreeTextDatatype","datatypeConfig":"default","preferredHandlerClassname":"org.openmrs.web.attribute.handler.FreeTextTextareaHandler","handlerConfig":null,"value":"dummy value"});
 
 var requestOptions = {
   method: 'POST',
-  headers: myHeaders,
+  headers: requestHeaders,
   body: raw,
   redirect: 'follow'
 };
@@ -326,13 +328,13 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-myHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710");
 
 var requestOptions = {
   method: 'DELETE',
-  headers: myHeaders,
+  headers: requestHeaders,
   redirect: 'follow'
 };
 

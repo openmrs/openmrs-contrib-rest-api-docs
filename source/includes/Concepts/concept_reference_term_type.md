@@ -2,11 +2,12 @@
 
 ## Overview
 
-* Concept reference terms represent terms within external vocabularies (typically standardized terminologies like SNOMED, ICD, LOINC, etc.). OpenMRS concept can be mapped to these reference terms through [concept mappings](concept_mapping.md). 
+* Concept reference terms represent terms within external vocabularies (typically standardized terminologies like SNOMED, ICD, LOINC, etc.). OpenMRS concept can be mapped to these reference terms through [concept mappings](#concept-map-type). 
   
 * For example, the concept `left Lung` can be mapped to an external concept `lower lobe of Lung` using a concept mapping `BROADER-THAN`.
 
-## Available operations. 
+## Available operations
+
 1.  [List concept reference terms](#list-concept-reference-terms)
 2.  [Create a concept reference term](#create-a-concept-reference-term)
 3.  [Update a concept reference term](#update-a-concept-reference-term)
@@ -197,7 +198,7 @@ fetch("/openmrs/ws/rest/v1/conceptreferenceterm", requestOptions)
     *names* | `String` | Name for the concept reference term
     *description* | `String` | A brief description of the concept reference term
     *code* | `String` | Represents a name from a standard medical code (required)
-    *conceptSource* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database (required)
+    *[conceptSource](#concept-source)* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database (required)
     *version* | `String` | A method to keep track of the number of updates applied to a specific concept reference term type
 
     
@@ -260,14 +261,14 @@ fetch("/openmrs/ws/rest/v1/conceptreferenceterm/c4091da9-3d7c-37c8-906d-51183e75
 
 *  Update a target concept reference term with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept reference term not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    ### Attributes
+   ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
     *names* | `String` | Name for the concept reference term
     *description* | `String` | A brief description of the concept reference term
-    *code* | `String` | Represents a name from a standard medical code 
-    *conceptSource* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database 
+    *code* | `String` | Represents a name from a standard medical code (required)
+    *[conceptSource](#concept-source)* | `target_concept_source_UUID` | A concept can have any number of mappings to any number of other vocabularies. Other vocabularies are called "concept sources" in OpenMRS (i.e., LOINC, SNOMED, ICD-9, ICD10, RxNORM, etc.), but the concept source can also be a custom (i.e., org.openmrs.module.mdrtb, PIH, AMPATH, MVP, etc.). Every concept can define a string for its mapping in any "concept source" defined in the database (required)
     *version* | `String` | A method to keep track of the number of updates applied to a specific concept reference term type
 
     

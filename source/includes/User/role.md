@@ -19,6 +19,39 @@ A **Role** represents a group of privileges in the system. Roles may inherit pri
 ```shell
 GET /role?v=default&limit=1
 ```
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
+
+var requestOptions = {
+  method: 'GET',
+  headers: requestHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 > Success Response
 
 ```response
@@ -56,38 +89,6 @@ GET /role?v=default&limit=1
 
 ```
 
-```java
-
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default")
-  .method("GET", null)
-  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
-  .addHeader("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83")
-  .build();
-Response response = client.newCall(request).execute();
-
-```
-
-```javascript
-
-var requestHeaders = new Headers();
-requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-requestHeaders.append("Cookie", "JSESSIONID=1A5193DBE052C38DC303BAD947A05A83");
-
-var requestOptions = {
-  method: 'GET',
-  headers: requestHeaders,
-  redirect: 'follow'
-};
-
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-
-```
 
 
 * Fetch all the roles that match any specified parameters otherwise fetch all roles. Returns a `200 OK` status with the role response. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.

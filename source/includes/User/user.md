@@ -8,7 +8,7 @@ The real-life person is represented by a Person record in OpenMRS, and a person 
 
 ## Available operations for User
 
-1. [List users](##list-all-non-retired-users)
+1. [List users](#list-all-non-retired-users)
 2. [Create a user](#create-a-user)
 3. [Update a user](#update-a-user)
 4. [Delete a user](#delete-a-user)
@@ -23,78 +23,12 @@ GET user?q=admin&v=default&limit=1
 
 ```
 
-> Success Response
-
-```response
-
-{
-    "results": [
-        {
-            "uuid": "45ce6c2e-dd5a-11e6-9d9c-0242ac150002",
-            "display": "admin",
-            "username": "admin",
-            "systemId": "admin",
-            "userProperties": {
-                "loginAttempts": "0",
-                "emrapi.lastViewedPatientIds": "508,507,311,509,510,511"
-            },
-            "person": {
-                "uuid": "24252571-dd5a-11e6-9d9c-0242ac150002",
-                "display": "Super User",
-                "links": [
-                    {
-                        "rel": "self",
-                        "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/person/24252571-dd5a-11e6-9d9c-0242ac150002"
-                    }
-                ]
-            },
-            "privileges": [],
-            "roles": [
-                {
-                    "uuid": "8d94f852-c2cc-11de-8d13-0010c6dffd0f",
-                    "display": "System Developer",
-                    "links": [
-                        {
-                            "rel": "self",
-                            "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/role/8d94f852-c2cc-11de-8d13-0010c6dffd0f"
-                        }
-                    ]
-                },
-                {
-                    "uuid": "8d94f280-c2cc-11de-8d13-0010c6dffd0f",
-                    "display": "Provider",
-                    "links": [
-                        {
-                            "rel": "self",
-                            "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/role/8d94f280-c2cc-11de-8d13-0010c6dffd0f"
-                        }
-                    ]
-                }
-            ],
-            "retired": false,
-            "links": [
-                {
-                    "rel": "self",
-                    "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002"
-                },
-                {
-                    "rel": "full",
-                    "uri": "http://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrshttp://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002?v=full"
-                }
-            ],
-            "resourceVersion": "1.8"
-        }
-    ]
-}
-
-```
-
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user?q=admin&limit=1
+  .url("/openmrs/ws/rest/v1/user?q=admin&limit=1
 &v=default")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
@@ -116,11 +50,76 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/user?q=admin&limit=1\n&v=default", requestOptions)
+fetch("/openmrs/ws/rest/v1/user?q=admin&limit=1\n&v=default", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
+```
+
+
+> Success Response
+
+```response
+{
+    "results": [
+        {
+            "uuid": "45ce6c2e-dd5a-11e6-9d9c-0242ac150002",
+            "display": "admin",
+            "username": "admin",
+            "systemId": "admin",
+            "userProperties": {
+                "loginAttempts": "0",
+                "emrapi.lastViewedPatientIds": "19,513,323,522,523,529"
+            },
+            "person": {
+                "uuid": "24252571-dd5a-11e6-9d9c-0242ac150002",
+                "display": "Super User",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/person/24252571-dd5a-11e6-9d9c-0242ac150002"
+                    }
+                ]
+            },
+            "privileges": [],
+            "roles": [
+                {
+                    "uuid": "8d94f852-c2cc-11de-8d13-0010c6dffd0f",
+                    "display": "System Developer",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/role/8d94f852-c2cc-11de-8d13-0010c6dffd0f"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "8d94f280-c2cc-11de-8d13-0010c6dffd0f",
+                    "display": "Provider",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/role/8d94f280-c2cc-11de-8d13-0010c6dffd0f"
+                        }
+                    ]
+                }
+            ],
+            "retired": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002?v=full"
+                }
+            ],
+            "resourceVersion": "1.8"
+        }
+    ]
+}
 ```
 
 
@@ -163,21 +162,20 @@ Response response = client.newCall(request).execute();
 
 1. Here the target UUID used is of the admin user.  
 
-var requestHeaders = new Headers();
-requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-requestHeaders.append("Cookie", "JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D");
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44");
 
 var requestOptions = {
   method: 'GET',
-  headers: requestHeaders,
+  headers: myHeaders,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002", requestOptions)
+fetch("/openmrs/ws/rest/v1/user/45ce6c2e-dd5a-11e6-9d9c-0242ac150002", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
-
 ```
 
 * Retrieve a user by its UUID. Returns a `404 Not Found` status if the user does not exist. If not logged in to perform this action, a `401 Unauthorized` status is returned.
@@ -234,38 +232,44 @@ POST /user
     ]
 }
 
+```
+
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\r\n    \"username\": \"demoUser\",\r\n    \"password\": \"Password123\",\r\n    \"person\": {\r\n        \"names\": [\r\n            {\r\n                \"givenName\": \"Demo\",\r\n                \"familyName\": \"User\"\r\n            }\r\n        ],\r\n        \"gender\": \"M\",\r\n        \"birthdate\": \"1997-09-02\",\r\n        \"addresses\": [\r\n            {\r\n                \"address1\": \"30, Vivekananda Layout, Munnekolal,Marathahalli\",\r\n                \"cityVillage\": \"Bengaluru\",\r\n                \"country\": \"India\",\r\n                \"postalCode\": \"560037\"\r\n            }\r\n        ]\r\n    },\r\n    \"roles\": [\r\n        {\r\n            \"name\": \"Configures Forms\",\r\n            \"description\": \"Manages forms and attaches them to the UI\"\r\n        }\r\n    ],\r\n   \"systemId\": \"systemId\"\r\n}");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"username\": \"demoUser\",\r\n    \"password\": \"Password123\",\r\n    \"person\": {\r\n        \"names\": [\r\n            {\r\n                \"givenName\": \"Demo\",\r\n                \"familyName\": \"User\"\r\n            }\r\n        ],\r\n        \"gender\": \"M\",\r\n        \"birthdate\": \"1997-09-02\",\r\n        \"addresses\": [\r\n            {\r\n                \"address1\": \"30, Vivekananda Layout, Munnekolal,Marathahalli\",\r\n                \"cityVillage\": \"Bengaluru\",\r\n                \"country\": \"India\",\r\n                \"postalCode\": \"560037\"\r\n            }\r\n        ]\r\n    },\r\n    \"roles\": [\r\n        {\r\n            \"name\": \"Configures Forms\",\r\n            \"description\": \"Manages forms and attaches them to the UI\"\r\n        }\r\n    ],\r\n   \"systemId\": \"systemId\"\r\n}\r\n\r\n");
 Request request = new Request.Builder()
   .url("/openmrs/ws/rest/v1/user")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
-  .addHeader("Cookie", "JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA")
+  .addHeader("Cookie", "JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44")
   .build();
 Response response = client.newCall(request).execute();
-
 ```
 
 ```javascript
 
-var requestHeaders = new Headers();
-requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-requestHeaders.append("Content-Type", "application/json");
-requestHeaders.append("Cookie", "JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA");
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44");
 
 var raw = JSON.stringify({"username":"demoUser","password":"Password123","person":{"names":[{"givenName":"Demo","familyName":"User"}],"gender":"M","birthdate":"1997-09-02","addresses":[{"address1":"30, Vivekananda Layout, Munnekolal,Marathahalli","cityVillage":"Bengaluru","country":"India","postalCode":"560037"}]},"roles":[{"name":"Configures Forms","description":"Manages forms and attaches them to the UI"}],"systemId":"systemId"});
 
 var requestOptions = {
   method: 'POST',
-  headers: requestHeaders,
+  headers: myHeaders,
   body: raw,
   redirect: 'follow'
+};
 
+fetch("/openmrs/ws/rest/v1/user", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 
 ```
 
@@ -279,9 +283,9 @@ a `401 Unauthorized` status is returned.
 Parameter | Type | Description
 --- | --- | ---
 *name* | `String` | Name of the user
-*description* | `String | Description of the user
-*username* | `String | username of the user
-*password* | `String | password of the user
+*description* | `String` | Description of the user
+*username* | `String` | username of the user
+*password* | `String` | password of the user
 *person* | `String` | person resource associated with the user
 *systemId* | `String` | a unique identifier assigned to each user
 *[roles](#role)* | `Array[] : role` | a list of roles attributed to the user
@@ -297,33 +301,7 @@ Parameter | Type | Description
 ```shell
 POST /user/:target_user_uuid
 {
-    "username": "demoUser",
-    "password": "Password123",
-    "person": {
-        "names": [
-            {
-                "givenName": "Demo",
-                "familyName": "User"
-            }
-        ],
-        "gender": "M",
-        "birthdate": "1997-09-02",
-        "addresses": [
-            {
-                "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
-                "cityVillage": "Bengaluru",
-                "country": "India",
-                "postalCode": "560037"
-            }
-        ]
-    },
-    "roles": [
-        {
-            "name": "Configures Forms",
-            "description": "Manages forms and attaches them to the UI"
-        }
-    ],
-   "systemId": "systemId"
+    "username": "demoUserUpdated"
 }
 
 ```
@@ -332,15 +310,13 @@ POST /user/:target_user_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\r\n    \"username\": \"demoUser\",\r\n    \"password\": \"Password123\",\r\n    \"person\": {\r\n        \"names\": [\r\n            {\r\n                \"givenName\": \"Demo\",\r\n                \"familyName\": \"User\"\r\n            }\r\n        ],\r\n        \"gender\": \"M\",\r\n        \"birthdate\": \"1997-09-02\",\r\n        \"addresses\": [\r\n            {\r\n                \"address1\": \"30, Vivekananda Layout, Munnekolal,Marathahalli\",\r\n                \"cityVillage\": \"Bengaluru\",\r\n                \"country\": \"India\",\r\n                \"postalCode\": \"560037\"\r\n            }\r\n        ]\r\n    },\r\n    \"roles\": [\r\n        {\r\n            \"name\": \"Configures Forms\",\r\n            \"description\": \"Manages forms and attaches them to the UI\"\r\n        }\r\n    ],\r\n   \"systemId\": \"systemId\"\r\n}\r\n");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"username\": \"demoUserUpdated\"\r\n}\r\n");
 Request request = new Request.Builder()
-  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/user/0dc65b52-b5ef-4640-b5ff-f305c84a8a22")
-  .url("/openmrs/ws/rest/v1/user/564b2790-0508-11e3-8ffd-0800200c9a66
-")
+  .url("/openmrs/ws/rest/v1/user/0f25e7bc-0d76-4889-8fbf-70ad7d7802a9")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
-  .addHeader("Cookie", "JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA")
+  .addHeader("Cookie", "JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44")
   .build();
 Response response = client.newCall(request).execute();
 
@@ -348,21 +324,21 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 
-var requestHeaders = new Headers();
-requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
-requestHeaders.append("Content-Type", "application/json");
-requestHeaders.append("Cookie", "JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA");
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44");
 
-var raw = JSON.stringify({"username":"demoUser","password":"Password123","person":{"names":[{"givenName":"Demo","familyName":"User"}],"gender":"M","birthdate":"1997-09-02","addresses":[{"address1":"30, Vivekananda Layout, Munnekolal,Marathahalli","cityVillage":"Bengaluru","country":"India","postalCode":"560037"}]},"roles":[{"name":"Configures Forms","description":"Manages forms and attaches them to the UI"}],"systemId":"systemId"});
+var raw = JSON.stringify({"username":"demoUserUpdated"});
 
 var requestOptions = {
   method: 'POST',
-  headers: requestHeaders,
+  headers: myHeaders,
   body: raw,
   redirect: 'follow'
 };
 
-fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/user/0dc65b52-b5ef-4640-b5ff-f305c84a8a22", requestOptions)
+fetch("/openmrs/ws/rest/v1/user/0f25e7bc-0d76-4889-8fbf-70ad7d7802a9", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -377,9 +353,9 @@ fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/user/0dc65b52-b5ef-4640-b5ff-
   Parameter | Type | Description
 --- | --- | ---
 *name* | `String` | Name of the user
-*description* | `String | Description of the user
-*username* | `String | username of the user
-*password* | `String | password of the user
+*description* | `String` | Description of the user
+*username* | `String` | username of the user
+*password* | `String` | password of the user
 *person* | `String` | person resource associated with the user
 *systemId* | `String` | a unique identifier assigned to each user
 *[roles](#role)* | `Array[] : role` | a list of roles attributed to the user

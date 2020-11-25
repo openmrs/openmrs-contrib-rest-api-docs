@@ -180,7 +180,7 @@ fetch("/openmrs/ws/rest/v1/conceptclass/", requestOptions)
 * To Create a concept class, you need to specify below attributes in the request body. If you are not logged in to perform this action,a `401 Unauthorized` status returned.
 * A `400 Bad Request` status is returned if the new concept class name is already used for some other concept class. type
 
-    #### Attributes
+ ### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -239,7 +239,7 @@ fetch("/openmrs/ws/rest/v1/conceptclass/8afb1247-9c8c-48c4-9253-946ffd44bc8a", r
 
 *  Update a target concept class with given UUID, this method only modifies properties in the request. Returns a `404 Not Found` status if concept class not exists. If the user not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    #### Attributes
+### Attributes
 
     Parameter | Type | Description
     --- | --- | ---
@@ -295,7 +295,7 @@ fetch("/openmrs/ws/rest/v1/conceptclass/8afb1247-9c8c-48c4-9253-946ffd44bc8a?pur
 
 * Delete or Retire a target concept class by its UUID. Returns a `404 Not Found` status if concept class not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
 
-    #### Query Parameters
+### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---

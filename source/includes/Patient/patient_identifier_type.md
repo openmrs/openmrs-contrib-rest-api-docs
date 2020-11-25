@@ -6,7 +6,7 @@ Administrators define what types of identifiers they will collect. These range f
 
 ## Available operations for PatientIdentifierType
 
-1. [List PatientIdentifierType resources](#List-patientidentifierType-resource)
+1. [List PatientIdentifierType resources](#list-patientidentifiertype-resource)
 2. [Create a patientIdentifierType record](#create-a-patientidentifierType)
 3. [Update a patientIdentifierType record](#update-a-patientIdentifierType)
 4. [Delete a patientIdentifierType record](#delete-a-patientIdentifierType)
