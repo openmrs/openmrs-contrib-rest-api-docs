@@ -1,0 +1,458 @@
+<h1 id='forms'>Forms</h1><h2 id='forms-overview'>Forms Overview</h2>
+<ul>
+<li>Forms in OpenMRS can be thought of as data collecting tools, which help in collecting patient data during an encounter with the patient (sometimes even after the encounter is over).</li>
+<li>The concept dictionary is a central part of OpenMRS. Concepts can commonly be thought of as questions and possible answers which are present on forms.</li>
+<li>Forms in OpenMRS can be of many types, e.g.,In almost all the instances observation forms which help in capturing observations during an encounter (like admission,Vitals e.t.c)</li>
+</ul>
+<h2 id='subresource-types-of-forms'>Subresource types of Forms</h2><h3 id='formfields'>formFields</h3>
+<ul>
+<li>The FormField relates to the fields present on a form. A form can have many 0 or more fields associated with it in a hierarchical manner.</li>
+<li>formFields can be used for persisting concepts like the date of collection, patient demographics, medications, allergies, and clinical observations</li>
+</ul>
+<h2 id='available-operations-for-forms'>Available operations for Forms</h2>
+<ol>
+<li> <a href="#search-forms">List Forms</a></li>
+<li> <a href="#create-a-form">Create a form</a> </li>
+<li> <a href="#update-a-form">Update a form</a></li>
+<li> <a href="#delete-a-form">Delete a form</a></li>
+<li> <a href="#list-formfields">List formfields</a></li>
+<li> <a href="#create-formfield-subresource-with-properties">Create formFields subresource with properties</a></li>
+<li> <a href="#update-formfields-subresource-with-properties">Update formFields subresource with properties</a></li>
+<li> <a href="#delete-formfields-subresource-with-properties">Delete formFields subresource with properties</a></li>
+</ol>
+<h2 id='list-forms'>List Forms</h2><h3 id='search-forms'>search-forms</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /form?
+</span></code></pre></div>
+<p>Fetch all non-retired Forms that match any specified parameters otherwise fetch all non-retired forms. Returns a <code>200 OK</code> status with the form response,
+    and returns a <code>401</code> response when the user is not logged in. </p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>limit</em></td>
+<td>use this parameter to limit the number of results to be returned</td>
+</tr>
+<tr>
+<td><em>startIndex</em></td>
+<td>the offset where to start the query</td>
+</tr>
+<tr>
+<td><em>v</em></td>
+<td>the required representation to return (i.e., ref, default, full or custom )</td>
+</tr>
+<tr>
+<td><em>q</em></td>
+<td>the search query</td>
+</tr>
+</tbody></table>
+<h3 id='list-forms-by-uuid'>List forms by UUID</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /form/:target_form_uuid
+</span></code></pre></div>
+<p>Retrieve a form by its UUID. Returns a <code>404 Not Found</code> status if the form does not exist in the system. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>v</em></td>
+<td>the required representation to return (i.e. ref, default, full or custom )</td>
+</tr>
+<tr>
+<td><em>uuid</em></td>
+<td>the target form UUID</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-form'>Create-a-form</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST /form
+{
+  "name": "Admission",
+  "description": "dummy description",
+  "version": "1.0",
+  "encounterType": "Vitals",
+  "published": true,
+  "formFields": [
+    "medication","allergies"
+  ],
+  "xslt": "xslt specification for this form",
+  "template": "dummy template"
+}
+</span></code></pre></div>
+<ul>
+<li><p>To create a Form, you need to specify the below properties in the request. If you are not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='properties'>Properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>name</em></td>
+<td><code>String</code></td>
+<td>name of the form resource to be created</td>
+</tr>
+<tr>
+<td><em>description</em></td>
+<td><code>String</code></td>
+<td>description of the form resource to be created</td>
+</tr>
+<tr>
+<td><em>version</em></td>
+<td><code>String</code></td>
+<td>current version of the form resource to be created</td>
+</tr>
+<tr>
+<td><em>encouterType</em></td>
+<td><code>String</code></td>
+<td>the specific encounter type where this form is designed to collect data</td>
+</tr>
+<tr>
+<td><em>published</em></td>
+<td><code>boolean</code></td>
+<td>whether the form has been published or not</td>
+</tr>
+<tr>
+<td><em>formFields</em></td>
+<td><code>Array[]: formFields</code></td>
+<td>list of formFields associated with this form</td>
+</tr>
+<tr>
+<td><em>xslt</em></td>
+<td><code>String</code></td>
+<td>specifying XSLT description for the form if it supports XSLT transformations</td>
+</tr>
+<tr>
+<td><em>template</em></td>
+<td><code>String</code></td>
+<td>template of the form to be created</td>
+</tr>
+</tbody></table></li>
+</ul>
+<h2 id='update-a-form'>Update a form</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST /form/:target_form_uuid
+{
+  "name": "Admission",
+  "description": "dummy description",
+  "version": "1.0",
+  "encounterType": "Vitals",
+  "published": true,
+  "formFields": [
+    "medication","allergies"
+  ],
+  "xslt": "xslt specification for this form",
+  "template": "dummy template"
+}
+</span></code></pre></div>
+<ul>
+<li><p>Update a target Form with given UUID, this method only modifies properties in the request. 
+Returns a <code>404 Not Found</code> status if form not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized status returned</code>.</p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>uuid</em></td>
+<td><code>target_form_uuid</code></td>
+<td>Target form resource UUID</td>
+</tr>
+</tbody></table>
+<h3 id='properties-2'>Properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>name</em></td>
+<td><code>String</code></td>
+<td>name of the form resource to be created</td>
+</tr>
+<tr>
+<td><em>description</em></td>
+<td><code>String</code></td>
+<td>description of the form resource to be created</td>
+</tr>
+<tr>
+<td><em>version</em></td>
+<td><code>String</code></td>
+<td>current version of the form resource to be created</td>
+</tr>
+<tr>
+<td><em>encouterType</em></td>
+<td><code>String</code></td>
+<td>the specific encounter type where this form is designed to collect data</td>
+</tr>
+<tr>
+<td><em>published</em></td>
+<td><code>boolean</code></td>
+<td>whether the form has been published or not</td>
+</tr>
+<tr>
+<td><em>formFields</em></td>
+<td><code>Array[]: formFields</code></td>
+<td>list of formFields associated with this form</td>
+</tr>
+<tr>
+<td><em>xslt</em></td>
+<td><code>String</code></td>
+<td>specifying XSLT description for the form if it supports XSLT transformations</td>
+</tr>
+<tr>
+<td><em>template</em></td>
+<td><code>String</code></td>
+<td>template of the form to be created</td>
+</tr>
+</tbody></table></li>
+</ul>
+<h2 id='delete-a-form'>Delete a form</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">DELETE /form/:target_form_uuid?purge=true
+</span></code></pre></div>
+<ul>
+<li><p>Delete or retire a target form by its UUID. Returns a <code>404 Not Found</code> status if the form does not exist. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>uuid</strong></td>
+<td><code>String</code></td>
+<td>uuid to delete</td>
+</tr>
+<tr>
+<td><em>purge</em></td>
+<td><code>Boolean</code></td>
+<td>The form will be voided/retired unless purge = &#39;true&#39;</td>
+</tr>
+</tbody></table></li>
+</ul>
+<h2 id='list-formfields'>List formfields</h2><h3 id='list-all-formfields-subresources-for-a-form'>List all formFields subresources for a form.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /form/:target_form_uuid/formFields
+</span></code></pre></div>
+<p>Retrieve all formFields subresources of a form resource by <code>target_form_uuid</code>. Returns a <code>404 Not Found</code> status if formFields not exist. If the user is not logged in to perform this action, a <code>401 unauthorized</code> status returned.</p>
+<h3 id='list-formfields-subresource-by-its-uuid-and-parent-form-uuid'>List formFields subresource by its UUID and parent form UUID.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /form/:target_form_uuid/formFields/:target_formFields_uuid
+</span></code></pre></div>
+<p>Retrieve a formFields subresources of a form resource. Returns a <code>404 Not Found</code> status if formFields does not exist. If you are not logged in to perform this action, a <code>401 Unauthorized</code> status returned. </p>
+<h2 id='create-formfield-subresource-with-properties'>create formfield subresource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST form/:target_form_uuid/formFields
+{
+  form: "UUID",
+  field: "UUID",
+  required: false,
+  parent: "UUID",
+  fieldNumber: 2,
+  fieldPart: "4",
+  pageNumber: 1,
+  minOccurs: 0,
+  maxOccurs: 1,
+  sortWeight: false
+}
+</span></code></pre></div>
+<ul>
+<li><p>To create a formFields subresource for a specific form resource, you need to specify below properties in your request body.
+If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h3 id='query-parameter'>Query parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>target_form_uuid</code></td>
+<td>form resource uuid</td>
+</tr>
+</tbody></table>
+<h3 id='properties-for-resource'>Properties for resource</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>form</em></td>
+<td><code>String</code></td>
+<td>UUID of the parent form resource</td>
+</tr>
+<tr>
+<td><em>field</em></td>
+<td><code>String</code></td>
+<td>UUID of the formField to be created for the parent form</td>
+</tr>
+<tr>
+<td><em>required</em></td>
+<td><code>String</code></td>
+<td>if this field is required for the form to be submitted or not</td>
+</tr>
+<tr>
+<td><em>parent</em></td>
+<td><code>String</code></td>
+<td>parent form of this formField</td>
+</tr>
+<tr>
+<td><em>fieldNumber</em></td>
+<td><code>integer</code></td>
+<td>the number specified to this field in form</td>
+</tr>
+<tr>
+<td><em>fieldPart</em></td>
+<td><code>String</code></td>
+<td>the part specified to this field (like 1.4) here 4 is the field part and 1 is the field number.</td>
+</tr>
+<tr>
+<td><em>PageNumber</em></td>
+<td><code>String</code></td>
+<td>the page number where this field appears on the form</td>
+</tr>
+<tr>
+<td><em>minOccurs</em></td>
+<td><code>integer</code></td>
+<td>the minimum number of times this field appears on the form</td>
+</tr>
+<tr>
+<td><em>maxOccurs</em></td>
+<td><code>integer</code></td>
+<td>the maximum number of times this field appears on the form</td>
+</tr>
+<tr>
+<td><em>sortWeight</em></td>
+<td><code>boolean</code></td>
+<td>do we order this field or not, when this field will be searched for</td>
+</tr>
+</tbody></table></li>
+</ul>
+<h2 id='update-formfields-subresource-with-properties'>Update formFields subresource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST form/:target_form_uuid/formFields/:target_formFields_uuid
+{
+  form: "UUID",
+  field: "UUID",
+  required: false,
+  parent: "UUID",
+  fieldNumber: 2,
+  fieldPart: "4",
+  pageNumber: 1,
+  minOccurs: 0,
+  maxOccurs: 1,
+  sortWeight: false
+}
+</span></code></pre></div>
+<ul>
+<li><p>Updates a formFields subresource value with given UUID. This method will only modify the value of the subresource. Returns a <code>404 Not Found</code> status if attribute not exists. If user not logged in to perform this action, a <code>401 Unauthorized</code> status
+returned.</p>
+<h3 id='query-parameter-2'>Query parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>target_form_uuid</code></td>
+<td>form resource uuid</td>
+</tr>
+<tr>
+<td><code>target_formFields_uuid</code></td>
+<td>formFields subresource uuid</td>
+</tr>
+</tbody></table>
+<h3 id='properties-3'>Properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>form</em></td>
+<td><code>String</code></td>
+<td>UUID of the parent form resource</td>
+</tr>
+<tr>
+<td><em>field</em></td>
+<td><code>String</code></td>
+<td>UUID of the formField to be created for the parent form</td>
+</tr>
+<tr>
+<td><em>required</em></td>
+<td><code>String</code></td>
+<td>if this field is required for the form to be submitted or not</td>
+</tr>
+<tr>
+<td><em>parent</em></td>
+<td><code>String</code></td>
+<td>parent form of this formField</td>
+</tr>
+<tr>
+<td><em>fieldNumber</em></td>
+<td><code>integer</code></td>
+<td>the number specified to this field in form</td>
+</tr>
+<tr>
+<td><em>fieldPart</em></td>
+<td><code>String</code></td>
+<td>the part specified to this field (like 1.4) here 4 is the field part and 1 is the field number.</td>
+</tr>
+<tr>
+<td><em>PageNumber</em></td>
+<td><code>String</code></td>
+<td>the page number where this field appears on the form</td>
+</tr>
+<tr>
+<td><em>minOccurs</em></td>
+<td><code>integer</code></td>
+<td>the minimum number of times this field appears on the form</td>
+</tr>
+<tr>
+<td><em>maxOccurs</em></td>
+<td><code>integer</code></td>
+<td>the maximum number of times this field appears on the form</td>
+</tr>
+<tr>
+<td><em>sortWeight</em></td>
+<td><code>boolean</code></td>
+<td>do we order this field or not, when this field will be searched for</td>
+</tr>
+</tbody></table></li>
+</ul>
+<h2 id='delete-formfields-subresource-with-properties'>Delete formFields subresource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">DELETE /form/:target_form_uuid/formFields/:target_formFields_uuid
+</span></code></pre></div>
+<ul>
+<li><p>Delete or retire a target formFields subresource by its UUID. Returns a <code>404 Not Found</code> status if attribute not exists. 
+If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>uuid</strong></td>
+<td><code>String</code></td>
+<td>uuid of parent form to delete</td>
+</tr>
+<tr>
+<td><strong>uuid</strong></td>
+<td><code>String</code></td>
+<td>uuid of formFields to delete</td>
+</tr>
+<tr>
+<td><em>purge</em></td>
+<td><code>Boolean</code></td>
+<td>The resource will be voided/retired unless purge = ‘true’</td>
+</tr>
+</tbody></table></li>
+</ul>

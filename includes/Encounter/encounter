@@ -1,0 +1,361 @@
+<h1 id='encounters'>Encounters</h1><h2 id='encounter-overview'>Encounter Overview</h2>
+<ul>
+<li><p>An encounter represents an interaction between a patient and the healthcare system at a single point in time. 
+Common examples would be a patient seeing a doctor during a clinic visit, a patient going to the lab to have blood drawn for
+testing, or telephone call between a provider and the patient).</p></li>
+<li><p>Each Encounter has an encounter type, date/time, location, and provider.</p></li>
+<li><p>Encounters are classified into Encounter Types, which describe the type of interaction the Encounter represents – e.g., 
+&quot;HIV Initial&quot;, &quot;Pediatric Follow Up&quot;, &quot;Lab&quot;). Implementations can define their own types of encounters.</p></li>
+<li><p>One or more encounters may be grouped within a <strong>Visit</strong> (e.g., an outpatient clinic visit or a hospitalization).</p></li>
+<li><p>Every Encounter can have 0 to n <strong>Observations</strong> associated with it.</p></li>
+<li><p>Every Encounter can have 0 to n <strong>Orders</strong> associated with it.</p></li>
+</ul>
+<h2 id='let-39-s-look-at-an-example-of-encounter'>Let&#39;s look at an example of Encounter</h2>
+<p>During a typical Amani Clinic Outpatient Visit, a patient checks in at registration is seen by a doctor and receives medicine dispensed in the pharmacy. This would be recorded as <strong>one visit</strong> containing three encounters, whose types are <strong>Registration, 
+Consultation and Dispensing</strong>.</p>
+<h2 id='sub-resource-types-of-encounter'>Sub Resource types of Encounter</h2><h3 id='encounter-provider'>Encounter Provider</h3>
+<ul>
+<li><p>A Provider is a person who provides care or services to patients. </p></li>
+<li><p>A provider may be a clinician like a doctor or a nurse, a social worker, or a lab tech. </p></li>
+<li><p>Any healthcare worker that a patient can have an encounter with is a provider.</p></li>
+</ul>
+<h2 id='available-operations-for-encounter'>Available operations for Encounter</h2>
+<ol>
+<li><a href="#list-encounters">List encounters</a></li>
+<li><a href="#create-an-encounter">Create an encounter</a></li>
+<li><a href="#update-an-encounter">Update an encounter</a></li>
+<li><a href="#delete-an-encounter">Delete an encounter</a></li>
+<li><a href="#list-encounter-provider-sub-resources">List encounter provider sub resource</a></li>
+<li><a href="#create-encounter-provider-sub-resource-with-properties">Create encounter provider  sub resource with properties</a></li>
+<li><a href="#update-encounter-provider-sub-resource">Update encounter provider  sub resource</a></li>
+<li><a href="#delete-encounter-provider-sub-resource">Delete encounter provider  sub resource</a></li>
+</ol>
+<h2 id='list-encounters'>List encounters</h2><h3 id='list-all-non-voided-encounters'>List all non-voided encounters.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /encounter?
+patient=96be32d2-9367-4d1d-a285-79a5e5db12b8
+&amp;fromdate=2016-10-08
+</span></code></pre></div>
+<p>Quickly filter encounters with given query parameters. Returns a <code>404 Not Found</code> status if Encounter not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>q</em></td>
+<td><code>Search Query</code></td>
+<td>Get encounter by Encounter UUID, Patient Identifier or name</td>
+</tr>
+<tr>
+<td><em>patient</em></td>
+<td><code>Patient UUID</code></td>
+<td>Get encounter(s) for a patient</td>
+</tr>
+<tr>
+<td><em>encounterType</em></td>
+<td><code>Encounter_Type UUID</code></td>
+<td>Filter by encounter type (must be used with patient)</td>
+</tr>
+<tr>
+<td><em>order</em></td>
+<td><code>Order UUID</code></td>
+<td>Filter to encounter(s) containing the specified order (must be used with patient)</td>
+</tr>
+<tr>
+<td><em>obsConcept</em></td>
+<td><code>Concept UUID</code></td>
+<td>Filter to encounter(s) containing observation(s) for the given concept (must be used with patient)</td>
+</tr>
+<tr>
+<td><em>obsValues</em></td>
+<td><code>String</code></td>
+<td>Filter to encounter(s) containing an observations with the given value (must be used with patient &amp; obsConcept)</td>
+</tr>
+<tr>
+<td><em>fromdate</em></td>
+<td><code>Date or Timestamp (ISO 8601)</code></td>
+<td>Start date of the encounter (must be used with patient)</td>
+</tr>
+<tr>
+<td><em>todate</em></td>
+<td><code>Date or Timestamp (ISO 8601)</code></td>
+<td>End date of the encounter (must be used with patient)</td>
+</tr>
+</tbody></table>
+<h3 id='list-encounter-by-uuid'>List encounter by UUID.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /encounter/:target_encounter_uuid
+</span></code></pre></div>
+<p>Retrieve an encounter by its UUID. Returns a <code>404 Not Found</code> status if Encounter not exists. If user not logged 
+    in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h2 id='create-an-encounter'>Create an encounter</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST /Encounter
+{
+  "encounterDatetime": "2019-10-16 12:08:43",
+  "patient": "070f0120-0283-4858-885d-a20d967729cf",
+  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
+  "location": "aff27d58-a15c-49a6-9beb-d30dcfc0c66e",
+  "encounterProviders": [
+    {
+      "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
+      "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
+    }
+  ]
+}
+</span></code></pre></div>
+<ul>
+<li>To Create an encounter you need to specify below attributes in the request body. If you are not logged in to perform this action,
+a <code>401 Unauthorized</code> status returned.</li>
+</ul>
+<h3 id='attributes'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>encounterDatetime</em></td>
+<td><code>Date (ISO8601 Long)</code></td>
+<td>The date and time the encounter was created (required)</td>
+</tr>
+<tr>
+<td><em>patient</em></td>
+<td><code>Patient UUID</code></td>
+<td>The patient to whom the encounter applies</td>
+</tr>
+<tr>
+<td><em>encounterType</em></td>
+<td><code>EncounterType UUID</code></td>
+<td>The type of encounter – e.g., Initial visit, Return visit, etc. (required)</td>
+</tr>
+<tr>
+<td><em>location</em></td>
+<td><code>Location UUID</code></td>
+<td>The location at which the encounter occurred (required)</td>
+</tr>
+<tr>
+<td><em>encounterProviders</em></td>
+<td><code>Array of Provider UUID and associated Encounter Role UUID</code></td>
+<td>An array of providers and their role within the encounter. At least one provider is required</td>
+</tr>
+<tr>
+<td><em>obs</em></td>
+<td><code>Array[]: Obs</code></td>
+<td>Array of observations and values for the encounter</td>
+</tr>
+<tr>
+<td><em>orders</em></td>
+<td><code>Array[]: Order UUID</code></td>
+<td>List of orders created during the encounter</td>
+</tr>
+<tr>
+<td><em>form</em></td>
+<td><code>Form UUID</code></td>
+<td>Target Form UUID to be filled for the encounter</td>
+</tr>
+<tr>
+<td><em>visit</em></td>
+<td><code>Visit UUID</code></td>
+<td>When creating an encounter for an existing visit, this specifies the visit</td>
+</tr>
+</tbody></table>
+<h2 id='update-an-encounter'>Update an encounter</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST /encounter/:target_encounter_uuid
+{
+  "encounterDatetime": "2019-10-16 12:08:43",
+  "patient": "070f0120-0283-4858-885d-a20d967729cf",
+  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
+  "location": "aff27d58-a15c-49a6-9beb-d30dcfc0c66e",
+  "encounterProviders": [
+    {
+      "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
+      "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
+    }
+  ]
+}
+</span></code></pre></div>
+<ul>
+<li> Update a target encounter with given UUID, this method only modifies properties in the request. Returns a <code>404 Not Found</code> 
+status if Encounter not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</li>
+</ul>
+<h3 id='attributes-2'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>encounterDatetime</em></td>
+<td><code>Date (ISO8601 Long)</code></td>
+<td>The date and time the encounter was created</td>
+</tr>
+<tr>
+<td><em>patient</em></td>
+<td><code>Patient UUID</code></td>
+<td>The patient to whom the encounter applies</td>
+</tr>
+<tr>
+<td><em>encounterType</em></td>
+<td><code>EncounterType UUID</code></td>
+<td>The type of encounter – e.g., Initial visit, Return visit, etc.</td>
+</tr>
+<tr>
+<td><em>location</em></td>
+<td><code>Location UUID</code></td>
+<td>The location at which the encounter occurred</td>
+</tr>
+<tr>
+<td><em>encounterProviders</em></td>
+<td><code>Array of Provider UUID and associated Encounter Role UUID</code></td>
+<td>An array of providers and their role within the encounter. At least one provider is required</td>
+</tr>
+<tr>
+<td><em>obs</em></td>
+<td><code>Array[]: Obs</code></td>
+<td>Array of observations and values for the encounter</td>
+</tr>
+<tr>
+<td><em>orders</em></td>
+<td><code>Array[]: Order UUID</code></td>
+<td>List of orders created during the encounter</td>
+</tr>
+<tr>
+<td><em>form</em></td>
+<td><code>Form UUID</code></td>
+<td>Target Form UUID to be filled for the encounter</td>
+</tr>
+<tr>
+<td><em>visit</em></td>
+<td><code>Visit UUID</code></td>
+<td>When creating an encounter for an existing visit, this specifies the visit</td>
+</tr>
+</tbody></table>
+<h2 id='delete-an-encounter'>Delete an encounter</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">  DELETE /encounter/:target_encounter_uuid?purge=true
+</span></code></pre></div>
+<ul>
+<li><p>Delete or Void a target encounter by its UUID. Returns a <code>404 Not Found</code> status if Encounter not exists. If the user is not logged 
+in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>purge</em></td>
+<td><code>Boolean</code></td>
+<td>The resource will be voided unless purge = ‘true’</td>
+</tr>
+</tbody></table></li>
+</ul>
+<h2 id='list-encounter-provider-subresources'>List encounter provider subresources</h2><h3 id='list-all-encounter-provider-subresources-for-a-visit'>List all encounter provider subresources for a visit.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /encounter/:target_encounter_uuid/encounterprovider 
+</span></code></pre></div>
+<p>Retrieve all <b>encounter provider</b> sub resources of an  <b>encounter</b> resource by target_encounter_uuid. Returns a 
+    <code>404 Not Found</code> status if encounter provider not exists. If user not logged in to perform this action, a <code>401 Unauthorized</code> status
+    returned.</p>
+<h3 id='list-encounter-provider-subresources-by-it-39-s-uuid-and-parent-encounter-uuid'>List encounter provider subresources by it&#39;s UUID and parent encounter UUID.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
+</span></code></pre></div>
+<p>Retrieve an <b>encounter provider</b> sub resources of a <b>encounter</b> resource. Returns a 
+     <code>404 Not Found</code> status if encounter provider not exists. If you are not logged in to perform this action, a <code>401 Unauthorized</code> status
+     returned.</p>
+<h2 id='create-an-encounter-provider-sub-resource-with-properties'>Create an encounter provider sub resource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST encounter/:target_encounter_uuid/encounterprovider 
+{
+  "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
+  "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
+}
+</span></code></pre></div>
+<ul>
+<li><p>To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body.
+If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h3 id='attributes-3'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>provider</em></td>
+<td><code>Provider_Type UUID</code></td>
+<td>UUID of a provider currently registered in OpenMRS (required)</td>
+</tr>
+<tr>
+<td><em>encounterRole</em></td>
+<td><code>Encounter_Role UUID</code></td>
+<td>UUID of encounter role. This is the role provider will participate during this encounter (required)</td>
+</tr>
+</tbody></table></li>
+</ul>
+<h2 id='update-encounter-provider-subresource'>Update encounter provider subresource</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
+{
+  "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
+  "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
+}
+</span></code></pre></div>
+<ul>
+<li><p>Updates an encounter provider subresource value with given UUID, this method will only modify value of the subresource. Returns a <code>404 Not Found</code> status if encounter provider not exists. If user not logged in to perform this action, a <code>401 Unauthorized</code> status
+returned.</p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>parent_uuid</em></td>
+<td><code>Encounter UUID</code></td>
+<td>Target encounter resource UUID</td>
+</tr>
+<tr>
+<td><em>uuid</em></td>
+<td><code>Encounter_Provider UUID</code></td>
+<td>Target encounter provider resource UUID</td>
+</tr>
+</tbody></table>
+<h3 id='attributes-4'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>provider</em></td>
+<td><code>Provider UUID</code></td>
+<td>UUID of a provider currently registered in OpenMRS (required)</td>
+</tr>
+<tr>
+<td><em>encounterRole</em></td>
+<td><code>Encounter_Role UUID</code></td>
+<td>UUID of encounter role. This is the role provider will participate during this encounter (required)</td>
+</tr>
+</tbody></table></li>
+</ul>
+<h2 id='delete-encounter-provider-subresource'>Delete encounter provider subresource</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">DELETE /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
+</span></code></pre></div>
+<ul>
+<li><p>Delete or Voided a target encounter provider subresource by its UUID. Returns a <code>404 Not Found</code> status if attribute not exists. 
+If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>purge</em></td>
+<td><code>Boolean</code></td>
+<td>The resource will be voided unless purge = &#39;true&#39;. Purging will attempt to remove the encounter provider type from the system irreversibly. Encounter provider types that have been used (i.e., are referenced from existing data) cannot be purged.</td>
+</tr>
+</tbody></table></li>
+</ul>

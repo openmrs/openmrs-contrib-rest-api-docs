@@ -1,0 +1,258 @@
+<h1 id='openmrs-rest-api'>OpenMRS REST API</h1>
+<ul>
+<li><p>Welcome to the OpenMRS REST API documentation! OpenMRS is a software
+platform and a reference application which enables the design of a customized
+medical records system with no programming knowledge (although medical and
+systems analysis knowledge is required).</p></li>
+<li><p>It is a common platform upon which medical informatics efforts in developing
+countries can be built. The system is based on a conceptual database structure
+which is not dependent on the actual types of medical information required to
+be collected or on particular data collection forms and so can be customized
+for different uses.</p></li>
+<li><p>This document provides High level documentation of OpenMRS APIs with code
+samples which are in the dark area to the right. If you find anything missing
+or incorrect please consider proposing revision on <a href="https://github.com/openmrs/openmrs-contrib-rest-api-docs">GitHub</a>.</p></li>
+</ul>
+
+<p>This documentation serves as a reference to the bespoke <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> for <a href="https://openmrs.org/">OpenMRS</a>.</p>
+<h2 id='purpose'>Purpose</h2>
+<ul>
+<li><p>The purpose of this documentation is to provide a brief and good taste and experience of the APIs that are used in OpenMRS community to the new developers so that they can onboard in the projects within the organization easily.</p></li>
+<li><p>The documentation also aims to assist the existing developers in getting to know the APIs&#39; conceptual context and how they help the consumers during the interaction in the real world.</p></li>
+</ul>
+<h1 id='getting-started'>Getting Started</h1>
+<ul>
+<li>If you are new to OpenMRS checkout the <a href="https://wiki.openmrs.org/display/docs/Getting+Started+as+a+Developer">Getting Started as a Developer Guide</a>
+from OpenMRS.</li>
+</ul>
+<h2 id='current-version'>Current version</h2>
+<ul>
+<li><p>By default, all requests to <code>/openmrs/ws/rest</code> receive the v1 version of the REST API.</p></li>
+<li><p>The OpenMRS REST Web Services module includes dynamically generated documentation.
+For example, see the
+<a href="/openmrs/module/webservices/rest/apiDocs.htm">swagger documentation</a> on the demo server (username <strong>admin</strong>, password <strong>Admin123</strong>).</p></li>
+</ul>
+<h2 id='schema'>Schema</h2>
+<ul>
+<li>All API access is over HTTPS, and can be accessed from <code>/openmrs/ws/rest/v1</code>. All data is sent and received as JSON.</li>
+<li>The Data-Model behind the OpenMRS RestAPI can be accessed <a href="https://docs.openmrs.org/datamodel/">here</a> </li>
+</ul>
+<h2 id='getting-started-with-examples'>Getting Started with examples</h2><h3 id='1-instructions-for-all-the-examples'>1. Instructions for all the examples</h3>
+<ul>
+<li><p>Before executing the examples, make sure that resources corresponding to the UUID&#39;s used in the examples are present on the demo server or any server you are testing these examples onto. </p></li>
+<li><p>Before executing the examples, append the base server url before the examples for e.g.
+change <code>/openmrs/ws/rest/v1/concept</code> as <code>https://demo.openmrs.org/openmrs/ws/rest/v1/concept</code> or any other base server URL you are testing these examples onto.</p></li>
+</ul>
+
+<blockquote>
+<p>Java Code Stubs </p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+
+            // the examples go here
+
+        } catch (IOException exception) {
+
+            // handle exception here
+        }
+    }
+}
+
+</code></pre></div><h3 id='2-getting-started-with-java-code-samples'>2. Getting Started with Java Code samples</h3>
+<ul>
+<li><p>Before executing the Java examples, get the okttp dependency jar and import it the project.</p></li>
+<li><p>These code stubs will be elided from all the java examples for clarity</p></li>
+</ul>
+<h1 id='terms'>Terms</h1><h2 id='resources'>Resources</h2>
+<blockquote>
+<p>Querying a resource(<code>Role</code>) </p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /role?v<span class="o">=</span>default&amp;limit<span class="o">=</span>1
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/role?limit=1&amp;v=default"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=1A5193DBE052C38DC303BAD947A05A83"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=1A5193DBE052C38DC303BAD947A05A83</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/role?limit=1&amp;v=default</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<ul>
+<li><p>OpenMRS objects (persons, patients, encounters, observations, etc.) are exposed by the REST Web Services modules as a REST resource, as documented here are referred to as <strong>Resources</strong>.</p></li>
+<li><p>Resources have a default representation, which returns key properties. Most resources can be fetched using a full representation (using the parameter <code>v=full</code>) that includes a more comprehensive list of properties.</p></li>
+</ul>
+<h3 id='for-instance-querying-a-resource'>For Instance Querying a Resource</h3><h2 id='subresources'>Subresources</h2>
+<blockquote>
+<p>Accessing a Subresource under parent URL</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /openmrs/ws/rest/v1/person/:target_person_uuid/name
+<span class="o">{</span>
+  <span class="s2">"givenName"</span>: <span class="s2">"John"</span>,
+  <span class="s2">"familyName"</span>: <span class="s2">"Smith"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\r\n  \"givenName\": \"John\",\r\n  \"familyName\": \"Smith\"\r\n}\r\n"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/person/070f0120-0283-4858-885d-a20d967729cf/name"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=A1644AD703C71E603C4E87B79291D075"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=A1644AD703C71E603C4E87B79291D075</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">givenName</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">familyName</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Smith</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/person/070f0120-0283-4858-885d-a20d967729cf/name</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<ul>
+<li><p>Some resources are not defined or do not make sense apart from their parent object. We refer
+to these as subresources.These subresources can be accessed under the parent&#39;s URL.</p></li>
+<li><p>A subresource can have only one parent.If it seems like a resource has two or more parents, then it is most likely a top-level resource.</p></li>
+<li><p>For example, &quot;encounters&quot; should not be a subresource of &quot;patient&quot; and &quot;location&quot; resources (answering questions of &quot;all encounters of a patient&quot; and &quot;all encounters at a location&quot;).Instead, these should be queries on the encounter resource:</p></li>
+<li><p>Examples of subresources are PersonNames, PersonAddresses, ConceptNames, etc.</p></li>
+</ul>
+<h2 id='resources-with-subtypes'>Resources with subtypes</h2>
+<ul>
+<li><p>Some resources can have subtypes. For example, the Order resource contains DrugOrder and TestOrder subtypes.</p></li>
+<li><p>When creating a resource that has subtypes via a <code>POST</code>, you must specify which subtype of the resource you are creating, with a special t property of the resource.</p></li>
+</ul>
+<h3 id='usage-examples-of-resources-with-subtypes'>Usage Examples of Resources with SubTypes</h3>
+<blockquote>
+<p>Usage Examples of Resources(<code>Order</code>) with SubTypes</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /openmrs/ws/rest/v1/order
+<span class="o">{</span>
+  <span class="s2">"type"</span>:<span class="s2">"testorder"</span>,
+  <span class="s2">"action"</span>: <span class="s2">"new"</span>,
+  <span class="s2">"urgency"</span>: <span class="s2">"ROUTINE"</span>,
+  <span class="s2">"dateActivated"</span>: <span class="s2">"2018-10-16 12:08:43"</span>,
+  <span class="s2">"careSetting"</span>: <span class="s2">"INPATIENT"</span> ,
+  <span class="s2">"encounter"</span>: <span class="s2">"69f83020-caf2-4c9e-bca7-89b8e62b52e1"</span>,
+  <span class="s2">"patient"</span>: <span class="s2">"96be32d2-9367-4d1d-a285-79a5e5db12b8"</span>,
+  <span class="s2">"concept"</span>: <span class="s2">"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"</span>,
+  <span class="s2">"orderer"</span>: <span class="s2">"f9badd80-ab76-11e2-9e96-0800200c9a66"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\r\n  \"type\":\"testorder\",\r\n  \"action\": \"new\",\r\n  \"urgency\": \"ROUTINE\",\r\n  \"dateActivated\": \"2018-10-16 12:08:43\",\r\n  \"careSetting\": \"INPATIENT\" ,\r\n  \"encounter\": \"69f83020-caf2-4c9e-bca7-89b8e62b52e1\",\r\n  \"patient\": \"96be32d2-9367-4d1d-a285-79a5e5db12b8\",\r\n  \"concept\": \"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\r\n  \"orderer\": \"f9badd80-ab76-11e2-9e96-0800200c9a66\"\r\n}\r\n"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/order"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=A1644AD703C71E603C4E87B79291D075"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=A1644AD703C71E603C4E87B79291D075</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">testorder</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">action</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">new</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">urgency</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">ROUTINE</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">dateActivated</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">2018-10-16 12:08:43</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">careSetting</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">INPATIENT</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">encounter</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">69f83020-caf2-4c9e-bca7-89b8e62b52e1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">patient</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">96be32d2-9367-4d1d-a285-79a5e5db12b8</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">concept</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">orderer</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">f9badd80-ab76-11e2-9e96-0800200c9a66</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/order</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div><h3 id='querying-resources-with-subtypes'>Querying Resources with subtypes</h3>
+<blockquote>
+<p>Querying Resources with subtypes (drug order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET  /openmrs/ws/rest/v1/order?type<span class="o">=</span>drugorder&amp;v<span class="o">=</span>full
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/order?type=drugorder&amp;v=full"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=A1644AD703C71E603C4E87B79291D075"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=A1644AD703C71E603C4E87B79291D075</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/order?type=drugorder&amp;v=full</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<ul>
+<li><p>If you <code>GET</code> a resource that has subtypes, each result will be one of those subtypes,
+which you can see by looking at the special property of each result.</p></li>
+<li><p>You may query for only a certain subtype of a resource by providing a t query parameter.</p></li>
+</ul>
+<h3 id='querying-resources-with-subtypes-drug-order'>Querying Resources with subtypes (drug order)</h3>

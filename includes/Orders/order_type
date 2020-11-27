@@ -1,0 +1,117 @@
+<h1 id='order-type'>Order type</h1><h2 id='order-type-overview'>Order type Overview</h2>
+<ul>
+<li><p>Orders represent requests from providers for some action to care for a patient. 
+Common types of orders are prescriptions (drug orders), lab tests, radiology tests, 
+procedures and referrals.</p></li>
+<li><p>In nearly all cases, handling different types of orders requires specific behavior of the application. The OpenMRS platform is designed to handle certain types of orders. 
+Adding new order types will usually only happen when new features to handle the 
+new order type are also being added to the system (using a module or app).</p></li>
+</ul>
+<h2 id='available-operations-for-order-type'>Available operations for Order type.</h2>
+<ol>
+<li><a href="#list-orders">List orders</a></li>
+<li><a href="#create-an-order">Create an order</a></li>
+<li><a href="#update-an-order">Update an order</a></li>
+<li><a href="#delete-an-order">Delete an order</a></li>
+</ol>
+<h2 id='list-orders'>List orders</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /ordertype
+</span></code></pre></div>
+<ul>
+<li>Fetch all non-retired order types that match any specified parameters otherwise fetch all non-retired order types. If not authenticated or authenticated user does not have sufficient privileges, a <code>401 Unauthorized</code> status is returned.</li>
+</ul>
+<h3 id='get-a-particular-order-type'>Get a particular order type</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /ordertype/:target_ordertype_uuid
+</span></code></pre></div>
+<p>Retrieve a particular order.
+If not authenticated or authenticated user does not have sufficient privileges, a <code>401 Unauthorized</code> status is returned.</p>
+<h2 id='create-an-order-type'>Create an order type</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST /ordertype
+{
+  "name": "drug order",
+  "description": "One 500mg tablet of Ciprofloxacin, twice a day",
+  "parent": "070f0120-0283-4858-885d-a20d967729cf",
+}
+</span></code></pre></div>
+<ul>
+<li><p>Order types depend on code within the application to properly handle them, so it would be unusual to create a new order type unless some new code (e.g., a module) has been added to the system to handle the new order type.</p>
+<h4 id='attributes'>Attributes</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>name</em></td>
+<td><code>String</code></td>
+<td>the name of the order type</td>
+</tr>
+<tr>
+<td><em>description</em></td>
+<td><code>String</code></td>
+<td>the description of the order type</td>
+</tr>
+<tr>
+<td><em>javaClassName</em></td>
+<td><code>Java Class</code></td>
+<td>the java class</td>
+</tr>
+<tr>
+<td><em>parent</em></td>
+<td><code>Order UUID</code></td>
+<td>the order uuid</td>
+</tr>
+<tr>
+<td><em>conceptClasses</em></td>
+<td><code>Array[] : Concept UUID</code></td>
+<td>classes of concepts that can be used to generate an order of this type</td>
+</tr>
+</tbody></table></li>
+</ul>
+<h2 id='update-an-order-type'>Update an order type</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST /ordertype/:target_ordertype_uuid
+{
+  "name": "drug order",
+  "description": "One 400mg tablet of Ciprofloxacin, twice a day"
+}
+</span></code></pre></div>
+<ul>
+<li><p>Update an order type with given UUID, this method only modifies properties in the request. If the user not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h3 id='attributes-2'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>name</em></td>
+<td><code>String</code></td>
+<td>the name of the order type</td>
+</tr>
+<tr>
+<td><em>description</em></td>
+<td><code>String</code></td>
+<td>the description of the order type</td>
+</tr>
+<tr>
+<td><em>javaClassName</em></td>
+<td><code>Java Class</code></td>
+<td>the java class</td>
+</tr>
+<tr>
+<td><em>parent</em></td>
+<td><code>Order UUID</code></td>
+<td>the order uuid</td>
+</tr>
+<tr>
+<td><em>conceptClasses</em></td>
+<td><code>Array[] : Concept UUID</code></td>
+<td>classes of concepts that can be used to generate an order of this type</td>
+</tr>
+</tbody></table></li>
+</ul>
+<h2 id='delete-an-order-type'>Delete an order type</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">DELETE /ordertype/:target_ordertype_uuid
+</span></code></pre></div>
+<ul>
+<li>Delete or retire an order type by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a <code>401 Unauthorized</code> status is returned.</li>
+</ul>

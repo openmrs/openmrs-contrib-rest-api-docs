@@ -1,0 +1,419 @@
+<h1 id='order'>Order</h1><h2 id='order-overview'>Order Overview</h2>
+<p>An <strong>Order</strong> represents a request from a provider such as a lab test, procedure, referral, etc.</p>
+
+<p>For example, a provider could order a Complete Blood Count laboratory panel for a patient.</p>
+
+<p>An Order only records an intention, not whether or not the action is carried out. The results of an Order are typically recorded later as Observations.</p>
+<h2 id='available-operations-for-order-type'>Available operations for Order type.</h2>
+<ol>
+<li><a href="#list-orders">List orders</a></li>
+<li><a href="#create-an-order">Create an order</a></li>
+<li><a href="#delete-an-order">Delete an order</a></li>
+</ol>
+<h2 id='list-orders'>List orders</h2>
+<blockquote>
+<p>List orders</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /openmrs/ws/rest/v1/order?patient<span class="o">=</span>96be32d2-9367-4d1d-a285-79a5e5db12b8&amp;caresetting<span class="o">=</span>INPATIENT
+
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&amp;caresetting=INPATIENT&amp;limit=1&amp;v=default"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&amp;caresetting=INPATIENT&amp;limit=1&amp;v=default</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+{
+    "results": [
+        {
+            "uuid": "8f9e24b4-0498-493c-b87c-ae1535551345",
+            "orderNumber": "ORD-1",
+            "accessionNumber": null,
+            "patient": {
+                "uuid": "96be32d2-9367-4d1d-a285-79a5e5db12b8",
+                "display": "1000C6 - Elizabeth Johnson",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "/openmrs/ws/rest/v1/patient/96be32d2-9367-4d1d-a285-79a5e5db12b8"
+                    }
+                ]
+            },
+            "concept": {
+                "uuid": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "display": "Pulse",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "/openmrs/ws/rest/v1/concept/5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    }
+                ]
+            },
+            "action": "NEW",
+            "careSetting": {
+                "uuid": "c365e560-c3ec-11e3-9c1a-0800200c9a66",
+                "display": "Inpatient",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "/openmrs/ws/rest/v1/caresetting/c365e560-c3ec-11e3-9c1a-0800200c9a66"
+                    }
+                ]
+            },
+            "previousOrder": null,
+            "dateActivated": "2018-10-16T12:08:43.000+0000",
+            "scheduledDate": null,
+            "dateStopped": null,
+            "autoExpireDate": null,
+            "encounter": {
+                "uuid": "69f83020-caf2-4c9e-bca7-89b8e62b52e1",
+                "display": "Vitals 08/10/2016",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "/openmrs/ws/rest/v1/encounter/69f83020-caf2-4c9e-bca7-89b8e62b52e1"
+                    }
+                ]
+            },
+            "orderer": {
+                "uuid": "f9badd80-ab76-11e2-9e96-0800200c9a66",
+                "display": "UNKNOWN - Super User",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "/openmrs/ws/rest/v1/provider/f9badd80-ab76-11e2-9e96-0800200c9a66"
+                    }
+                ]
+            },
+            "orderReason": null,
+            "orderReasonNonCoded": null,
+            "orderType": {
+                "uuid": "52a447d3-a64a-11e3-9aeb-50e549534c5e",
+                "display": "Test Order",
+                "name": "Test Order",
+                "javaClassName": "org.openmrs.TestOrder",
+                "retired": false,
+                "description": "Order type for test orders",
+                "conceptClasses": [],
+                "parent": null,
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "/openmrs/ws/rest/v1/ordertype/52a447d3-a64a-11e3-9aeb-50e549534c5e"
+                    },
+                    {
+                        "rel": "full",
+                        "uri": "/openmrs/ws/rest/v1/ordertype/52a447d3-a64a-11e3-9aeb-50e549534c5e?v=full"
+                    }
+                ],
+                "resourceVersion": "1.10"
+            },
+            "urgency": "ROUTINE",
+            "instructions": null,
+            "commentToFulfiller": null,
+            "display": "Pulse",
+            "specimenSource": null,
+            "laterality": null,
+            "clinicalHistory": null,
+            "frequency": null,
+            "numberOfRepeats": null,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345"
+                },
+                {
+                    "rel": "full",
+                    "uri": "/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345?v=full"
+                }
+            ],
+            "type": "testorder",
+            "resourceVersion": "1.10"
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "/openmrs/ws/rest/v1/order?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&amp;caresetting=INPATIENT&amp;limit=1&amp;v=default&amp;startIndex=1"
+        }
+    ]
+}
+
+</code></pre></div>
+<ul>
+<li>Fetch all non-retired orders that match any specified parameters otherwise fetch all non-retired orders. </li>
+<li>If not authenticated or authenticated user does not have sufficient privileges, a <code>401 Unauthorized</code> status is returned.</li>
+</ul>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>q</em></td>
+<td><code>String</code></td>
+<td>Full or partial display name of order</td>
+</tr>
+<tr>
+<td><em>patient</em></td>
+<td><code>Patient UUID</code></td>
+<td>the patient for the order</td>
+</tr>
+<tr>
+<td><em>concept</em></td>
+<td><code>Concept UUID</code></td>
+<td>UUID for the concept of the order; the item being requested (e.g., &quot;serum creatinine&quot;) (Must be used with patient parameter not independently)</td>
+</tr>
+<tr>
+<td><em>careSetting</em></td>
+<td><code>String</code></td>
+<td>various levels of care-setting, for e.g.INPATIENT,OUTPATIENT etc. (Must be used with patient parameter not independently)</td>
+</tr>
+<tr>
+<td><em>orderType</em></td>
+<td><code>OrderType UUID</code></td>
+<td>the type of the order (Must be used with patient parameter not independently)</td>
+</tr>
+</tbody></table>
+
+<p><em>activatedOnOrBeforeDate</em> | <code>Date</code> | the activation date of the order (Must be used with patient parameter not independently)
+    <em>activatedOnOrAfterDate</em> | <code>Date</code> | the start date of the order (Must be used with patient parameter not independently)</p>
+<h2 id='get-a-particular-order'>Get a particular order</h2>
+<blockquote>
+<p>Get a particular order</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /order/:target_order_uuid
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/order"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/order</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<ul>
+<li>Retrieve a particular order. If not authenticated or authenticated user does not have sufficient privileges, a <code>401 Unauthorized</code> status is returned.</li>
+</ul>
+<h2 id='create-an-order'>Create an order</h2>
+<blockquote>
+<p>Create an order</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /order
+<span class="o">{</span>
+  <span class="s2">"type"</span>:<span class="s2">"testorder"</span>,
+  <span class="s2">"action"</span>: <span class="s2">"new"</span>,
+  <span class="s2">"urgency"</span>: <span class="s2">"ROUTINE"</span>,
+  <span class="s2">"dateActivated"</span>: <span class="s2">"2018-10-16 12:08:43"</span>,
+  <span class="s2">"careSetting"</span>: <span class="s2">"INPATIENT"</span> ,
+  <span class="s2">"encounter"</span>: <span class="s2">"69f83020-caf2-4c9e-bca7-89b8e62b52e1"</span>,
+  <span class="s2">"patient"</span>: <span class="s2">"96be32d2-9367-4d1d-a285-79a5e5db12b8"</span>,
+  <span class="s2">"concept"</span>: <span class="s2">"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"</span>,
+  <span class="s2">"orderer"</span>: <span class="s2">"f9badd80-ab76-11e2-9e96-0800200c9a66"</span>
+<span class="o">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\r\n    \"type\": \"testorder\",\r\n    \"action\": \"new\",\r\n    \"urgency\": \"ROUTINE\",\r\n    \"dateActivated\": \"2018-10-16 12:08:43\",\r\n    \"careSetting\": \"INPATIENT\",\r\n    \"encounter\": \"69f83020-caf2-4c9e-bca7-89b8e62b52e1\",\r\n    \"patient\": \"96be32d2-9367-4d1d-a285-79a5e5db12b8\",\r\n    \"concept\": \"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\r\n    \"orderer\": \"f9badd80-ab76-11e2-9e96-0800200c9a66\"\r\n}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/order/"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=70434FCF03A8A6D351D3C9E97B7DF674"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">testorder</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">action</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">new</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">urgency</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">ROUTINE</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">dateActivated</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">2018-10-16 12:08:43</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">careSetting</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">INPATIENT</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">encounter</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">69f83020-caf2-4c9e-bca7-89b8e62b52e1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">patient</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">96be32d2-9367-4d1d-a285-79a5e5db12b8</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">concept</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">orderer</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">f9badd80-ab76-11e2-9e96-0800200c9a66</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/order</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<ul>
+<li><p>To create a order, you need to specify below attributes in the request body. If not authenticated or authenticated user does not have sufficient privileges, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='attributes'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>encounter</em></td>
+<td><code>Encounter UUID</code></td>
+<td>the encounter for this order (Required)</td>
+</tr>
+<tr>
+<td><em>orderType</em></td>
+<td><code>OrderType UUID</code></td>
+<td>the type of the order (Required)</td>
+</tr>
+<tr>
+<td><em>action</em></td>
+<td><code>String</code></td>
+<td>Possible actions are <code>NEW</code> (placing a new order), <code>REVISE</code> (revising an existing order), <code>DISCONTINUE</code> (request an active order to be stopped),<code>RENEW</code> (resume a prior order) (Required)</td>
+</tr>
+<tr>
+<td><em>accessionNumber</em></td>
+<td><code>String</code></td>
+<td>An optional identifier from the fulfiller (e.g., lab system) for the specimen or record associated with the order.</td>
+</tr>
+<tr>
+<td><em>patient</em></td>
+<td><code>Patient UUID</code></td>
+<td>the patient for the order (Required)</td>
+</tr>
+<tr>
+<td><em>concept</em></td>
+<td><code>Concept UUID</code></td>
+<td>UUID for the concept of the order; the item being requested (e.g., &quot;serum creatinine&quot;) (Required)</td>
+</tr>
+<tr>
+<td><em>careSetting</em></td>
+<td><code>String</code></td>
+<td>various levels of care-setting, for e.g.INPATIENT,OUTPATIENT etc. (Required)</td>
+</tr>
+<tr>
+<td><em>previousNumber</em></td>
+<td><code>String</code></td>
+<td>when orders are revised, this links to the previous revision of the order</td>
+</tr>
+<tr>
+<td><em>instructions</em></td>
+<td><code>String</code></td>
+<td>the instructions for the order</td>
+</tr>
+<tr>
+<td><em>urgency</em></td>
+<td><code>Urgency</code></td>
+<td><code>ROUTINE</code> (carry out order according to standard procedures),</td>
+</tr>
+</tbody></table>
+
+<p><code>STAT</code> (carry out order immediately), <code>ON_SCHEDULED_DATE</code> (carry out order at a specific time) (Required)
+<em>dateActivated</em> | <code>Date</code> | the start date of the order
+<em>dateStopped</em> | <code>Date</code> | the date of discontinuation</p></li>
+</ul>
+<h2 id='delete-an-order'>Delete an order</h2>
+<blockquote>
+<p>Delete an order</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>DELETE /order/:target_order_uuid?purge<span class="o">=</span><span class="nb">true</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=70434FCF03A8A6D351D3C9E97B7DF674</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345?purge=true</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span><span class="s2">```
+
+```</span><span class="nx">java</span>
+
+<span class="nx">OkHttpClient</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OkHttpClient</span><span class="p">().</span><span class="nx">newBuilder</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+<span class="nx">MediaType</span> <span class="nx">mediaType</span> <span class="o">=</span> <span class="nx">MediaType</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">RequestBody</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">RequestBody</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">mediaType</span><span class="p">,</span> <span class="dl">""</span><span class="p">);</span>
+<span class="nx">Request</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">.</span><span class="nx">Builder</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">url</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/order/8f9e24b4-0498-493c-b87c-ae1535551345?purge=true</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">method</span><span class="p">(</span><span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">addHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">addHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=70434FCF03A8A6D351D3C9E97B7DF674</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+<span class="nx">Response</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">newCall</span><span class="p">(</span><span class="nx">request</span><span class="p">).</span><span class="nx">execute</span><span class="p">();</span>
+
+</code></pre></div>
+<ul>
+<li><p>Delete or void an order by its UUID. If not authenticated or authenticated user does not have sufficient privileges, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>purge</em></td>
+<td><code>Boolean</code></td>
+<td>The resource will be voided unless purge = ‘true’.Purging will attempt to remove the attribute type from the system irreversibly. Attribute types that have been used (i.e., are referenced from existing data) cannot be purged.</td>
+</tr>
+</tbody></table></li>
+</ul>

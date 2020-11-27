@@ -1,0 +1,9 @@
+<h1 id='contributing'>Contributing</h1>
+<p>Help us keep this documentation up to date by forking 
+<a href="https://github.com/openmrs/openmrs-contrib-rest-api-docs">this repository</a> 
+and submitting pull requests with improvements or corrections. The quality of our documentation depends on the collective contributions of persons just like you. Thank you for your contributions!</p>
+
+<p>Our documentation is written in simple 
+<a href="https://guides.github.com/features/mastering-markdown/">markdown</a>. The markdown pages can be found in the repository under in the subfolder 
+<code>source/includes/</code>. We use <a href="https://github.com/slatedocs/slate">Slate</a> to convert our markdown into a friendly and searchable format. More details on contributing may be found in the README of our 
+<a href="https://github.com/openmrs/openmrs-contrib-rest-api-docs">repository</a>.</p>
