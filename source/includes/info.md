@@ -93,9 +93,7 @@ public class Main {
 * Before executing the examples, append the base server url before the examples for e.g.
   change
  `Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/role?limit=1&v=default")` as
- 
- `Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/role?limit=1&v=default")` as `Request request = new Request.Builder()
   .url("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default")
  ` or any other base server URL you are testing these examples onto.
 
@@ -106,9 +104,7 @@ public class Main {
 * Before executing the examples, append the base server url before the examples for e.g.
   change
  `fetch("/openmrs/ws/rest/v1/role?limit=1&v=default", requestOptions)` 
-  as
- 
- `fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default", requestOptions)` 
+  as `fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default", requestOptions)` 
   or any other base server URL you are testing these examples onto.
 
 
