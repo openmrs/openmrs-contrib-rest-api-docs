@@ -28,6 +28,8 @@ This documentation serves as a reference to the bespoke [REST API](https://en.wi
 * If you are new to OpenMRS checkout the [Getting Started as a Developer Guide](https://wiki.openmrs.org/display/docs/Getting+Started+as+a+Developer)
 from OpenMRS.
 
+* For getting a detailed technical API documentation for the REST Module, checkout this wiki [here](https://wiki.openmrs.org/display/docs/REST+Web+Services+API+For+Clients)
+
 ## Current version
 
 * By default, all requests to `/openmrs/ws/rest` receive the v1 version of the REST API.
@@ -50,8 +52,6 @@ from OpenMRS.
 
 * Before executing the examples, make sure that resources corresponding to the UUID's used in the examples are present on the demo server or any server you are testing these examples onto. 
 
-* Before executing the examples, append the base server url before the examples for e.g.
- change `/openmrs/ws/rest/v1/concept` as `https://demo.openmrs.org/openmrs/ws/rest/v1/concept` or any other base server URL you are testing these examples onto.
 
 
 > Java Code Stubs 
@@ -90,6 +90,26 @@ public class Main {
 
 * These code stubs will be elided from all the java examples for clarity
 
+* Before executing the examples, append the base server url before the examples for e.g.
+  change
+ `Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/role?limit=1&v=default")` as
+ 
+ `Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default")
+ ` or any other base server URL you are testing these examples onto.
+
+### 3. Getting Started with JavaScript Code samples
+
+* The easiest way to run these examples would be by using the browser console, after opening the base url you are testing the examples onto.
+
+* Before executing the examples, append the base server url before the examples for e.g.
+  change
+ `fetch("/openmrs/ws/rest/v1/role?limit=1&v=default", requestOptions)` 
+  as
+ 
+ `fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&v=default", requestOptions)` 
+  or any other base server URL you are testing these examples onto.
 
 
 
