@@ -29,14 +29,116 @@
 
 ## List Forms
 
-### search-forms
+> List Forms
 
-```console
-GET /form?
+```shell
+GET /form?v=full&limit=1
 ```
 
-    Fetch all non-retired Forms that match any specified parameters otherwise fetch all non-retired forms. Returns a `200 OK` status with the form response,
-    and returns a `401` response when the user is not logged in. 
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/form?v=full&limit=1")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/form?v=full&limit=1", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+> Success Response
+
+```response
+
+{
+    "results": [
+        {
+            "uuid": "d2c7532c-fb01-11e2-8ff2-fd54ab5fdb2a",
+            "display": "Admission (Simple)",
+            "name": "Admission (Simple)",
+            "description": null,
+            "encounterType": {
+                "uuid": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
+                "display": "Admission",
+                "name": "Admission",
+                "description": "Indicates that the patient has been admitted for inpatient care, and is not expected to leave the hospital unless discharged.",
+                "retired": false,
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/encountertype/e22e39fd-7db2-45e7-80f1-60fa0d5a4378"
+                    },
+                    {
+                        "rel": "full",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/encountertype/e22e39fd-7db2-45e7-80f1-60fa0d5a4378?v=full"
+                    }
+                ],
+                "resourceVersion": "1.8"
+            },
+            "version": "1.0",
+            "build": null,
+            "published": false,
+            "formFields": [],
+            "retired": false,
+            "auditInfo": {
+                "creator": {
+                    "uuid": "A4F30A1B-5EB9-11DF-A648-37A07F9C90FB",
+                    "display": "daemon",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/user/A4F30A1B-5EB9-11DF-A648-37A07F9C90FB"
+                        }
+                    ]
+                },
+                "dateCreated": "2017-01-18T08:54:11.000+0000",
+                "changedBy": null,
+                "dateChanged": null
+            },
+            "resources": [],
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/form/d2c7532c-fb01-11e2-8ff2-fd54ab5fdb2a"
+                }
+            ],
+            "resourceVersion": "1.9"
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/form?v=full&limit=1&startIndex=1"
+        }
+    ]
+}
+
+```
+
+* Fetch all non-retired Forms that match any specified parameters otherwise fetch all non-retired forms. Returns a `200 OK` status with the form response, and returns a `401` response when the user is not logged in. 
 
 ### Query Parameters
 
@@ -49,25 +151,55 @@ GET /form?
     
     
 
-### List forms by UUID
+## List forms by UUID
 
-```console
+> List forms by UUID
+
+```shell
 GET /form/:target_form_uuid
 ```
 
-    Retrieve a form by its UUID. Returns a `404 Not Found` status if the form does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
+```java
 
-### Query Parameters
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://demo.openmrs.org/openmrs/ws/rest/v1/form/d2c7532c-fb01-11e2-8ff2-fd54ab5fdb2a")
+  .method("GET", null)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0")
+  .build();
+Response response = client.newCall(request).execute();
 
-    Parameter | Description
-    --- | ---
-    *v* | the required representation to return (i.e. ref, default, full or custom )
-    *uuid* | the target form UUID 
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+myHeaders.append("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://demo.openmrs.org/openmrs/ws/rest/v1/form/d2c7532c-fb01-11e2-8ff2-fd54ab5fdb2a", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+
+* Retrieve a form by its UUID. Returns a `404 Not Found` status if the form does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
     
 
 ## Create-a-form
 
-```console
+```shell
+
 POST /form
 {
   "name": "Admission",
@@ -77,9 +209,7 @@ POST /form
   "published": true,
   "formFields": [
     "medication","allergies"
-  ],
-  "xslt": "xslt specification for this form",
-  "template": "dummy template"
+  ]
 }
 ```
 
@@ -92,12 +222,9 @@ POST /form
     *name* | `String` | name of the form resource to be created
     *description* | `String` | description of the form resource to be created
     *version* | `String` | current version of the form resource to be created
-    *encouterType* | `String` | the specific encounter type where this form is designed to collect data
+    *[encouterType](#encounter-type)* | `Encounter type UUID` | the specific encounter type where this form is designed to collect data for e.g. vitals,admission.
     *published* | `boolean` | whether the form has been published or not
     *formFields* | `Array[]: formFields` | list of formFields associated with this form
-    *xslt* | `String` | specifying XSLT description for the form if it supports XSLT transformations
-    *template* | `String` | template of the form to be created 
-    
 
 ## Update a form
 
@@ -111,9 +238,7 @@ POST /form/:target_form_uuid
   "published": true,
   "formFields": [
     "medication","allergies"
-  ],
-  "xslt": "xslt specification for this form",
-  "template": "dummy template"
+  ]
 }
 ```
 
