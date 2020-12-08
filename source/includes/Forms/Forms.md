@@ -162,7 +162,7 @@ DELETE /form/:target_form_uuid?purge=true
 ### List all formFields subresources for a form.
 
 ```console
-GET /form/:target_form_uuid/formFields
+GET /form/:target_form_uuid/formfield
 ```  
 
     Retrieve all formFields subresources of a form resource by `target_form_uuid`. Returns a `404 Not Found` status if formFields not exist. If the user is not logged in to perform this action, a `401 unauthorized` status returned.
@@ -170,7 +170,7 @@ GET /form/:target_form_uuid/formFields
 ### List formFields subresource by its UUID and parent form UUID.
 
 ```console
-GET /form/:target_form_uuid/formFields/:target_formFields_uuid
+GET /form/:target_form_uuid/formfield/:target_formFields_uuid
 ```
 
     Retrieve a formFields subresources of a form resource. Returns a `404 Not Found` status if formFields does not exist. If you are not logged in to perform this action, a `401 Unauthorized` status returned. 
@@ -178,7 +178,7 @@ GET /form/:target_form_uuid/formFields/:target_formFields_uuid
 ## create formfield subresource with properties 
 
 ```console
-POST form/:target_form_uuid/formFields
+POST form/:target_form_uuid/formfield
 {
   form: "UUID",
   field: "UUID",
@@ -219,7 +219,7 @@ If the user is not logged in to perform this action, a `401 Unauthorized` status
 ## Update formFields subresource with properties
 
 ```console
-POST form/:target_form_uuid/formFields/:target_formFields_uuid
+POST form/:target_form_uuid/formfield/:target_formFields_uuid
 {
   form: "UUID",
   field: "UUID",
@@ -264,7 +264,7 @@ returned.
 ## Delete formFields subresource with properties
 
 ```console
-DELETE /form/:target_form_uuid/formFields/:target_formFields_uuid
+DELETE /form/:target_form_uuid/formfield/:target_formFields_uuid
 ```
 
 * Delete or retire a target formFields subresource by its UUID. Returns a `404 Not Found` status if attribute not exists. 
