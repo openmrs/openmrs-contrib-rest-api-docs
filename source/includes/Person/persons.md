@@ -210,7 +210,8 @@ fetch("/openmrs/ws/rest/v1/person/e739808f-f166-42ae-aaf3-8b3e8fa13fda", request
 
 > Create a person
 
-```
+
+```shell
 POST /person
 {
     "names": [
