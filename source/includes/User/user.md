@@ -19,7 +19,7 @@ The real-life person is represented by a Person record in OpenMRS, and a person 
 > Get all non-retired Users 
 
 ```shell
-GET user?q=admin&v=default&limit=1
+GET user?q=admin&v=default
 
 ```
 
@@ -28,7 +28,7 @@ GET user?q=admin&v=default&limit=1
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/user?q=admin&limit=1
+  .url("/openmrs/ws/rest/v1/user?q=admin
 &v=default")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
@@ -50,7 +50,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/user?q=admin&limit=1\n&v=default", requestOptions)
+fetch("/openmrs/ws/rest/v1/user?q=admin&v=default", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -123,15 +123,16 @@ fetch("/openmrs/ws/rest/v1/user?q=admin&limit=1\n&v=default", requestOptions)
 ```
 
 
-  Quickly filter users with given query parameters. Returns a `404 Not Found` status if the user does not exist.
+  Quickly filter users with given query parameters. Add parameter `includeAll=true` to also retrieve disabled users. Returns a `404 Not Found` status if the user does not exist.
   If not logged in to perform this action, a `401 Unauthorized` status is returned.
   
 
 ### Query Parameters
 
-| Parameter | Type           | Description                           |
-| --------- | -------------- | ------------------------------------- |
-| _q_       | `Search Query` | Filter users by username or system ID |
+| Parameter    | Type           | Description                           |
+| ------------ | ---------------| ------------------------------------- |
+| _q_          | `Search Query` | Filter users by username or system ID |
+| _includeAll_ | `Boolean`      | If true, returns also disabled users  |
 
 
 ## Get user by UUID.
