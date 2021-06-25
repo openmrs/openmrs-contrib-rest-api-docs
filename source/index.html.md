@@ -25,6 +25,7 @@ includes:
   - Person/person_attribute_type
   - Patient/patients
   - Patient/patient_identifier_type
+  - Patient/patient_identifier_source
   - Relationships/relationship_type  
   - Visit/visits
   - Visit/visit_type
