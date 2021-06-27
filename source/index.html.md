@@ -26,6 +26,8 @@ includes:
   - Patient/patients
   - Patient/patient_identifier_type
   - Patient/patient_identifier_source
+  - Patient/auto_generation_options
+  - Patient/patient_identifier_log_entry
   - Relationships/relationship_type  
   - Visit/visits
   - Visit/visit_type
