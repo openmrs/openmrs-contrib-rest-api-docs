@@ -179,11 +179,14 @@ fetch("/openmrs/ws/rest/v1/patient?q=Sarah&v=default&limit=1", requestOptions)
 
 * Fetch all non-retired patients that match any specified parameters otherwise fetch all non-retired patients. Returns a `200 OK` status with the patient response. 
 
+* Supports finding duplicated patients by specifying `attributesToFindDuplicatesBy` parameter.
+
 ### Query Parameters
 
     Parameter | Type | Description
     --- | --- | ---
     *q* | `Search Query` | Display Name of patient.
+    *attributesToFindDuplicatesBy* | `String` | Patient attributes to find duplicates by. Example of attributes: gender,identifier,birthdate,givenName,middleName,familyName. If you want to include voided patients, add `includeVoided` attribute.
     
 
 ## List patient by UUID.
