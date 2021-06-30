@@ -113,6 +113,7 @@ fetch("/openmrs/ws/rest/v1/provider?q=clerk&v=default", requestOptions)
     Parameter | Type | Description
     --- | --- | ---
     *q* | `Search Query` | Get provider by name
+    *includeAll* | `Boolean` | If true, returns also retired Providers
     
 
     
