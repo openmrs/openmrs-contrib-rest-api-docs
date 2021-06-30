@@ -18,6 +18,7 @@ includes:
   - auth
   - SystemSettings/system_settings
   - SystemInformation/system_information
+  - AdministrationLinks/administration_links
   - User/user
   - User/role
   - User/privileges
