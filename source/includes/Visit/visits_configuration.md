@@ -2,7 +2,7 @@
 
 ## Visits Configuration Overview
 
-Visits introduce set of settings related to Visits Behavior. You can retrieve and update this configuration through REST API.
+Visits introduce a set of settings related to Visits Behavior. You can retrieve and update this configuration through REST API.
 
 ## Available operations for Visits Configuration
 
