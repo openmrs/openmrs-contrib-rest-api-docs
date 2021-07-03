@@ -51,9 +51,9 @@ fetch("/openmrs/ws/rest/v1/visitconfiguration", requestOptions)
 
 ```response
 {
-    "visitEncounterHandler": "org.openmrs.api.handler.NoVisitAssignmentHandler",
+    "encounterVisitsAssignmentHandler": "org.openmrs.api.handler.NoVisitAssignmentHandler",
     "enableVisits": true,
-    "autoCloseVisitsTaskStarted": true,
+    "startAutoCloseVisitsTask": true,
     "visitTypesToAutoClose": [
         {
             "uuid": "48d69339-bb3a-489f-bf23-70e3da9cfc4d",
@@ -88,8 +88,8 @@ Retrieves current configuration.
 POST /visitconfiguration
 {
     "enableVisits": true,
-    "visitEncounterHandler": "org.openmrs.api.handler.NoVisitAssignmentHandler",
-    "autoCloseVisitsTaskStarted": true,
+    "encounterVisitsAssignmentHandler": "org.openmrs.api.handler.NoVisitAssignmentHandler",
+    "startAutoCloseVisitsTask": true,
     "visitTypesToAutoClose": [
         {
             "uuid": "48d69339-bb3a-489f-bf23-70e3da9cfc4d"
@@ -102,7 +102,7 @@ POST /visitconfiguration
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\"enableVisits\": true,\"visitEncounterHandler\":\"org.openmrs.api.handler.NoVisitAssignmentHandler\",\"autoCloseVisitsTaskStarted\": true,\"visitTypesToAutoClose\": [{\"uuid\": \"48d69339-bb3a-489f-bf23-70e3da9cfc4d\"}]}");
+RequestBody body = RequestBody.create(mediaType, "{\"enableVisits\": true,\"encounterVisitsAssignmentHandler\":\"org.openmrs.api.handler.NoVisitAssignmentHandler\",\"startAutoCloseVisitsTask\": true,\"visitTypesToAutoClose\": [{\"uuid\": \"48d69339-bb3a-489f-bf23-70e3da9cfc4d\"}]}");
 Request request = new Request.Builder()
   .url("/openmrs/ws/rest/v1/visitconfiguration")
   .method("POST", body)
@@ -119,7 +119,7 @@ requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
 requestHeaders.append("Content-Type", "application/json");
 requestHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
 
-var raw = JSON.stringify({"enableVisits": true,"visitEncounterHandler":"org.openmrs.api.handler.NoVisitAssignmentHandler","autoCloseVisitsTaskStarted": true,"visitTypesToAutoClose": [{"uuid": "48d69339-bb3a-489f-bf23-70e3da9cfc4d"}]});
+var raw = JSON.stringify({"enableVisits": true,"encounterVisitsAssignmentHandler":"org.openmrs.api.handler.NoVisitAssignmentHandler","startAutoCloseVisitsTask": true,"visitTypesToAutoClose": [{"uuid": "48d69339-bb3a-489f-bf23-70e3da9cfc4d"}]});
 
 var requestOptions = {
   method: 'POST',
@@ -140,6 +140,6 @@ Updates current configuration with the following properties:
     Parameter | Type | Description
     --- | --- | ---
     *enableVisits* | `Boolean` | Are visits enabled
-    *visitEncounterHandler* | `String` | Class name of EncounterVisitHandler subclass
-    *autoCloseVisitsTaskStarted* | `Boolean` | Should visits be automatically closed
+    *encounterVisitsAssignmentHandler* | `String` | Class name of EncounterVisitHandler subclass
+    *startAutoCloseVisitsTask* | `Boolean` | Should visits be automatically closed
     *[visitTypesToAutoClose](#visits-type)* | `Array[]: VisitType` | List of visit types to automatically close. Only UUID field, see an example.
