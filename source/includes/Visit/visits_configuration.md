@@ -14,14 +14,14 @@ Visits introduce set of settings related to Visits Behavior. You can retrieve an
 > Retrieve Configuration
 
 ```shell
-GET /visitsconfiguration
+GET /visitconfiguration
 ```
 
 ```java
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/visitsconfiguration")
+  .url("/openmrs/ws/rest/v1/visitconfiguration")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C")
@@ -41,7 +41,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/visitsconfiguration", requestOptions)
+fetch("/openmrs/ws/rest/v1/visitconfiguration", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -85,7 +85,7 @@ Retrieves current configuration.
 > Update Configuration
 
 ```shell
-POST /visitsconfiguration
+POST /visitconfiguration
 {
     "enableVisits": true,
     "visitEncounterHandler": "org.openmrs.api.handler.NoVisitAssignmentHandler",
@@ -104,7 +104,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\"enableVisits\": true,\"visitEncounterHandler\":\"org.openmrs.api.handler.NoVisitAssignmentHandler\",\"autoCloseVisitsTaskStarted\": true,\"visitTypesToAutoClose\": [{\"uuid\": \"48d69339-bb3a-489f-bf23-70e3da9cfc4d\"}]}");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/visitsconfiguration")
+  .url("/openmrs/ws/rest/v1/visitconfiguration")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -128,7 +128,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/visitsconfiguration", requestOptions)
+fetch("/openmrs/ws/rest/v1/visitconfiguration", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
