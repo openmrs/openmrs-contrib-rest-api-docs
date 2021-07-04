@@ -198,7 +198,7 @@ fetch("/openmrs/ws/rest/v1/encounter?patient=96be32d2-9367-4d1d-a285-79a5e5db12b
 }
 ```
 
-* Quickly filter encounters with given query parameters. Add `includeAll=true` parameter if wanting to include voided encounters. Returns a `404 Not Found` status if Encounter not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* Quickly filter encounters with given query parameters. Add `includeAll=true` parameter if you want to include voided encounters. Returns a `404 Not Found` status if Encounter not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
 ### Query Parameters
 
