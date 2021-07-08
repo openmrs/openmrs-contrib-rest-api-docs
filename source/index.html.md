@@ -34,6 +34,7 @@ includes:
   - Visit/visits
   - Visit/visit_type
   - Visit/visit_attribute_type
+  - Visit/visits_configuration
   - Location/location
   - Location/location_tag
   - Location/location_attribute_type
