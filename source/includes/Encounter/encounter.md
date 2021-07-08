@@ -198,7 +198,7 @@ fetch("/openmrs/ws/rest/v1/encounter?patient=96be32d2-9367-4d1d-a285-79a5e5db12b
 }
 ```
 
-* Quickly filter encounters with given query parameters. Returns a `404 Not Found` status if Encounter not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
+* Quickly filter encounters with given query parameters. Add `includeAll=true` parameter if you want to include voided encounters. Returns a `404 Not Found` status if Encounter not exists. If the user is not logged in to perform this action, a `401 Unauthorized` status returned.
     
 ### Query Parameters
 
@@ -212,7 +212,8 @@ fetch("/openmrs/ws/rest/v1/encounter?patient=96be32d2-9367-4d1d-a285-79a5e5db12b
     *obsValues* | `String` | Filter to encounter(s) containing an observations with the given value (must be used with patient and obsConcept parameters together )
     *fromdate* | `Date or Timestamp (ISO 8601)` | Start date of the encounter (must be used with patient parameter cant be used independently)
     *todate* | `Date or Timestamp (ISO 8601)` | End date of the encounter (must be used with patient parameter cant be used independently)
-    
+    *includeAll* | `Boolean` | If true, returns also voided Encounters  
+
     
 ## List encounter by UUID.
 
