@@ -16,6 +16,7 @@ includes:
   # - errors
   - info
   - auth
+  - AddressTemplate/address_template
   - Alerts/alerts  
   - SystemSettings/system_settings
   - SystemInformation/system_information
