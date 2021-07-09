@@ -21,6 +21,7 @@ includes:
   - SystemSettings/system_settings
   - SystemInformation/system_information
   - AdministrationLinks/administration_links
+  - DatabaseChanges/database_changes
   - User/user
   - User/role
   - User/privileges
