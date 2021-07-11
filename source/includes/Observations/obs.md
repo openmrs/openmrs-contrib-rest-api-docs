@@ -96,6 +96,7 @@ If not authenticated or authenticated user does not have sufficient privileges, 
     Parameter | Type | Description
     --- | --- | ---
     *[patient](#patients)* | `target_patient_uuid` | patient resource UUID
+    *[encounter](#encounters)* | `target_encounter_uuid` | encounter resource UUID
     *[concept](#concepts)* | `target_concept_uuid`| concept resource UUID (we can use this parameter only if patient UUID is specified for the query)
 
     
