@@ -50,6 +50,7 @@ includes:
   - Concepts/concept_map_type
   - Concepts/concept_reference_term_type
   - Concepts/concepts_class
+  - Programs/state_conversions
   - Provider/provider
   - Provider/provider_attribute_type
   - Observations/obs
