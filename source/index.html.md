@@ -52,6 +52,7 @@ includes:
   - Concepts/concepts_class
   - Provider/provider
   - Provider/provider_attribute_type
+  - Tasks/tasks
   - Observations/obs
   - Orders/order
   - Orders/order_type
