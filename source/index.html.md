@@ -51,6 +51,8 @@ includes:
   - Concepts/concept_reference_term_type
   - Concepts/concepts_class
   - Concepts/concept_stop_word
+  - Programs/programs
+  - Programs/program_workflows
   - Programs/state_conversions
   - Provider/provider
   - Provider/provider_attribute_type
