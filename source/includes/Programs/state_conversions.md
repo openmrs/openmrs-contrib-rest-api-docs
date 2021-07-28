@@ -12,14 +12,14 @@
 > List Concept State Conversions
 
 ```shell
-GET /stateconversion
+GET /conceptstateconversion
 ```
 
 ```java
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/stateconversion")
+  .url("/openmrs/ws/rest/v1/conceptstateconversion")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44")
@@ -36,7 +36,7 @@ var requestOptions = {
   headers: myHeaders,
   redirect: 'follow'
 };
-fetch("/openmrs/ws/rest/v1/stateconversion", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptstateconversion", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -153,12 +153,12 @@ fetch("/openmrs/ws/rest/v1/stateconversion", requestOptions)
             "links": [
                 {
                     "rel": "self",
-                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/stateconversion/ddf056be-40dd-44db-a95b-85bddd931131",
+                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/conceptstateconversion/ddf056be-40dd-44db-a95b-85bddd931131",
                     "resourceAlias": "stateconversion"
                 },
                 {
                     "rel": "full",
-                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/stateconversion/ddf056be-40dd-44db-a95b-85bddd931131?v=full",
+                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/conceptstateconversion/ddf056be-40dd-44db-a95b-85bddd931131?v=full",
                     "resourceAlias": "stateconversion"
                 }
             ]
@@ -175,14 +175,14 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
 > List Concept State Conversion by UUID
 
 ```shell
-GET /stateconversion/:uuid
+GET /conceptstateconversion/:uuid
 ```
 
 ```java
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/stateconversion/:uuid")
+  .url("/openmrs/ws/rest/v1/conceptstateconversion/:uuid")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633")
@@ -199,7 +199,7 @@ var requestOptions = {
   headers: requestHeaders,
   redirect: 'follow'
 };
-fetch("/openmrs/ws/rest/v1/stateconversion/:uuid", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptstateconversion/:uuid", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -213,7 +213,7 @@ If user not logged in to perform this action, a `401 Unauthorized` status is ret
 > Create a Concept State Conversion
 
 ```shell
-POST /stateconversion
+POST /conceptstateconversion
 {
     "concept": "116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
     "programWorkflow": "54524222-f41d-4d0d-b688-0fd5331377b4",
@@ -227,7 +227,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\"concept\": \"116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\"programWorkflow\": \"54524222-f41d-4d0d-b688-0fd5331377b4\",\"programWorkflowState\": \"65b552f7-a768-4986-b00c-28f765625450\"}");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/stateconversion")
+  .url("/openmrs/ws/rest/v1/conceptstateconversion")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -248,7 +248,7 @@ var requestOptions = {
   body: raw,
   redirect: 'follow'
 };
-fetch("/openmrs/ws/rest/v1/stateconversion", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptstateconversion", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -270,7 +270,7 @@ To create a Concept State Conversion you need to specify the below properties in
 > Update a Concept State Conversion
 
 ```shell
-POST /stateconversion/:uuid
+POST /conceptstateconversion/:uuid
 {
     "concept": "116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
     "programWorkflow": "54524222-f41d-4d0d-b688-0fd5331377b4",
@@ -284,7 +284,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\"concept\": \"116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\"programWorkflow\": \"54524222-f41d-4d0d-b688-0fd5331377b4\",\"programWorkflowState\": \"65b552f7-a768-4986-b00c-28f765625450\"}");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/stateconversion/:uuid")
+  .url("/openmrs/ws/rest/v1/conceptstateconversion/:uuid")
   .method("POST", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Content-Type", "application/json")
@@ -305,7 +305,7 @@ var requestOptions = {
   body: raw,
   redirect: 'follow'
 };
-fetch("/openmrs/ws/rest/v1/stateconversion/:uuid", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptstateconversion/:uuid", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -327,7 +327,7 @@ Update a Concept State Conversion. This method only modifies properties specifie
 > Delete a Concept State Conversion
 
 ```shell
-DELETE /stateconversion/:uuid?purge=true
+DELETE /conceptstateconversion/:uuid?purge=true
 ```
 
 ```java
@@ -336,7 +336,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/stateconversion/:uuid?purge=true")
+  .url("/openmrs/ws/rest/v1/conceptstateconversion/:uuid?purge=true")
   .method("DELETE", body)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633")
@@ -353,7 +353,7 @@ var requestOptions = {
   headers: requestHeaders,
   redirect: 'follow'
 };
-fetch("/openmrs/ws/rest/v1/stateconversion/:uuid?purge=true", requestOptions)
+fetch("/openmrs/ws/rest/v1/conceptstateconversion/:uuid?purge=true", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
