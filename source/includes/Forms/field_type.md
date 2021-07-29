@@ -189,7 +189,8 @@ fetch("/openmrs/ws/rest/v1/fieldtype/8d5e86fa-c2cc-11de-8d13-0010c6dffd0f", requ
 POST /fieldtype
 {
     "name": "Concept",
-    "description": "fields storing info related to concepts"
+    "description": "fields storing info related to concepts",
+    "isSet": true
 }
 ```
 
@@ -198,7 +199,7 @@ POST /fieldtype
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\r\n    \"name\": \"Concept\",\r\n    \"description\": \"fields storing info related to concepts\"\r\n}\r\n");
+RequestBody body = RequestBody.create(mediaType, "{\"name\": \"Concept\",\"description\": \"fields storing info related to concepts\",\"isSet\": true}");
 Request request = new Request.Builder()
   .url("/openmrs/ws/rest/v1/fieldtype")
   .method("POST", body)
@@ -218,7 +219,7 @@ myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
 myHeaders.append("Content-Type", "application/json");
 myHeaders.append("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0");
 
-var raw = JSON.stringify({"name":"Concept","description":"fields storing info related to concepts"});
+var raw = JSON.stringify({"name": "Concept","description": "fields storing info related to concepts","isSet": true});
 
 var requestOptions = {
   method: 'POST',
@@ -243,6 +244,7 @@ fetch("/openmrs/ws/rest/v1/fieldtype", requestOptions)
     --- | --- | ---
     *name* | `String` | Name for the field type (required)
     *description* | `String` | Description for the field type (required)
+    *isSet* | `Boolean` | Is field type a set
    
 
 ## Update an field type
@@ -252,15 +254,18 @@ fetch("/openmrs/ws/rest/v1/fieldtype", requestOptions)
 ```shell
 POST /fieldtype/:target_field_type_uuid
 {
-    "description": "fields type concerning concept related data"
+    "name": "Concept",
+    "description": "fields storing info related to concepts",
+    "isSet": true
 }
 ```
+
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\r\n    \"description\": \"fields type concerning concept related data\"\r\n}\r\n");
+RequestBody body = RequestBody.create(mediaType, "{\"name\": \"Concept\",\"description\": \"fields storing info related to concepts\",\"isSet\": true}");
 Request request = new Request.Builder()
   .url("/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f")
   .method("POST", body)
@@ -279,7 +284,7 @@ myHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
 myHeaders.append("Content-Type", "application/json");
 myHeaders.append("Cookie", "JSESSIONID=1FB1E7BA1F2EF800D4BDF81D1D1FB1F0");
 
-var raw = JSON.stringify({"description":"fields type concerning concept related data"});
+var raw = JSON.stringify({"name": "Concept","description": "fields storing info related to concepts","isSet": true});
 
 var requestOptions = {
   method: 'POST',
@@ -304,6 +309,7 @@ fetch("/openmrs/ws/rest/v1/fieldtype/8d5e7d7c-c2cc-11de-8d13-0010c6dffd0f", requ
     --- | --- | ---
     *name* | `String` | Name for the field type
     *description* | `String` | Description for the field type
+    *isSet* | `Boolean` | Is field type a set
     
 
     
