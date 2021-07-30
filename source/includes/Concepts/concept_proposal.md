@@ -91,7 +91,7 @@ You can also pass query parameters to add sorting or filtering to your query.
   Parameter | Type | Description
       --- | --- | ---
   *includeCompleted* | `Boolean` | If true, will also include mapped proposals
-  *sortOn* | `String` | If set to "originalText" then will sort proposals alphabetically by original text
+  *sortOn* | `String` | If set to "originalText" then will sort proposals alphabetically by original text. If set to "occurrences" then will sort proposals by number of occurrences of given original text.
   *sortOrder* | `String` | Order of sorting, "asc" or "desc".
 
 
