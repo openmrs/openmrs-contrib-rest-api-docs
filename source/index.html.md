@@ -51,8 +51,13 @@ includes:
   - Concepts/concept_reference_term_type
   - Concepts/concepts_class
   - Concepts/concept_proposal
+  - Concepts/concept_stop_word
+  - Programs/programs
+  - Programs/program_workflows
+  - Programs/concept_state_conversions
   - Provider/provider
   - Provider/provider_attribute_type
+  - Tasks/tasks
   - Observations/obs
   - Orders/order
   - Orders/order_type
