@@ -46,10 +46,10 @@ fetch("/openmrs/ws/rest/v1/implementationid", requestOptions)
 
 ```response
 {
-    "name": "test",
+    "name": "name",
     "description": "recovering teest",
-    "implementationId": "test",
-    "passphrase": "test"
+    "implementationId": "implementationId",
+    "passphrase": "passphrase"
 }
 ```
 
@@ -62,10 +62,10 @@ Retrieves current configuration.
 ```shell
 POST /implementationid
 {
-    "name": "test",
-    "description": "test",
-    "implementationId": "test",
-    "passphrase": "test"
+    "name": "name",
+    "description": "description",
+    "implementationId": "implementationId",
+    "passphrase": "passphrase"
 }
 ```
 
@@ -73,7 +73,7 @@ POST /implementationid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\"name\": \"test\",\"description\": \"test\",\"implementationId\": \"test\",\"passphrase\": \"test\"}");
+RequestBody body = RequestBody.create(mediaType, "{\"name\": \"name\",\"description\": \"description\",\"implementationId\": \"implementationId\",\"passphrase\": \"passphrase\"}");
 Request request = new Request.Builder()
   .url("/openmrs/ws/rest/v1/implementationid")
   .method("POST", body)
@@ -90,7 +90,7 @@ requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
 requestHeaders.append("Content-Type", "application/json");
 requestHeaders.append("Cookie", "JSESSIONID=1B06650EB0428F51EC119C909F58327C");
 
-var raw = JSON.stringify({"name": "test","description": "test","implementationId": "test","passphrase": "test"});
+var raw = JSON.stringify({"name": "name","description": "description","implementationId": "implementationId","passphrase": "passphrase"});
 
 var requestOptions = {
   method: 'POST',
