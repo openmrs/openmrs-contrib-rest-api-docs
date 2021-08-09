@@ -54,6 +54,7 @@ includes:
   - Concepts/concepts_class
   - Concepts/concept_proposal
   - Concepts/concept_stop_word
+  - Drugs/drugs
   - Programs/programs
   - Programs/program_workflows
   - Programs/concept_state_conversions
