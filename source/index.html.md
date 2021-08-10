@@ -21,6 +21,7 @@ includes:
   - SystemSettings/system_settings
   - SystemInformation/system_information
   - SystemInformation/loggedin_users
+  - LocaleAndTheme/locale_and_theme_configuration
   - ImplementationId/implementation_id
   - AdministrationLinks/administration_links
   - DatabaseChanges/database_changes
