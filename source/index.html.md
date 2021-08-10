@@ -20,6 +20,7 @@ includes:
   - Alerts/alerts  
   - SystemSettings/system_settings
   - SystemInformation/system_information
+  - SystemInformation/loggedin_users
   - LocaleAndTheme/locale_and_theme_configuration
   - ImplementationId/implementation_id
   - AdministrationLinks/administration_links
@@ -54,6 +55,7 @@ includes:
   - Concepts/concepts_class
   - Concepts/concept_proposal
   - Concepts/concept_stop_word
+  - Drugs/drugs
   - Programs/programs
   - Programs/program_workflows
   - Programs/concept_state_conversions
