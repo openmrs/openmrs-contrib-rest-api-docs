@@ -20,6 +20,7 @@ includes:
   - Alerts/alerts  
   - SystemSettings/system_settings
   - SystemInformation/system_information
+  - SearchIndex/search_index
   - ImplementationId/implementation_id
   - AdministrationLinks/administration_links
   - DatabaseChanges/database_changes
