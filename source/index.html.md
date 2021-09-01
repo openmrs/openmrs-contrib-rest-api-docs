@@ -16,16 +16,6 @@ includes:
   # - errors
   - info
   - auth
-  - AddressTemplate/address_template
-  - Alerts/alerts  
-  - SystemSettings/system_settings
-  - SystemInformation/system_information
-  - SystemInformation/loggedin_users
-  - SearchIndex/search_index
-  - LocaleAndTheme/locale_and_theme_configuration
-  - ImplementationId/implementation_id
-  - AdministrationLinks/administration_links
-  - DatabaseChanges/database_changes
   - User/user
   - User/role
   - User/privileges
@@ -68,6 +58,16 @@ includes:
   - Orders/order_type
   - Forms/Forms
   - Forms/field_type
+  - AddressTemplate/address_template
+  - Alerts/alerts  
+  - SystemSettings/system_settings
+  - SystemInformation/system_information
+  - SystemInformation/loggedin_users
+  - SearchIndex/search_index
+  - LocaleAndTheme/locale_and_theme_configuration
+  - ImplementationId/implementation_id
+  - AdministrationLinks/administration_links
+  - DatabaseChanges/database_changes
   - contrib
   
 
