@@ -20,21 +20,18 @@ guide you through forking and making a pull request with your suggested changes.
 
 ### Build the REST API Documentation locally
 
-Use git to clone the repository and build and ruby to build it (git and ruby must 
-be installed locally).
+Use Git to clone the repository and use Docker to build and serve it (requires pre-installed git and docker).
 
 1. Clone the openmrs-contrib-rest-api-docs repository: 
 ```
 git clone https://github.com/openmrs/openmrs-contrib-rest-api-docs.git
 ```
-2. install the dependencies: 
+2. Start the server
 ```
-$ bundle install
+docker run --rm --name slate -v $(pwd)/build:/srv/slate/build -v $(pwd)/source/index.html.md:/srv/slate/source/index.html.md -v $(pwd)/source/includes:/srv/slate/source/includes -v $(pwd)/source/images/logo.png:/srv/slate/source/images/logo.png -p 4567:4567 slatedocs/slate serve
 ```
-3. To start the server: 
-```
-$ bundle exec middleman server
-```
+
+Browse to http://localhost:4567/ and you should see the docs!
 
 ### Guide for new PR's
 
