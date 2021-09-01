@@ -1,0 +1,23 @@
+name: REST API Docs
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  slate-documentation:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    # only run if Markdown files updated
+    - uses: wcchristian/gh-pattern-filter-action@1.0.1
+      with:
+        args: .*\\.md$
+    - name: Build documentation
+      run: docker run --rm --name slate -v $(pwd)/build:/srv/slate/build -v $(pwd)/source/index.html.md:/srv/slate/source/index.html.md -v $(pwd)/source/includes:/srv/slate/source/includes -v $(pwd)/source/images/logo.png:/srv/slate/source/images/logo.png -p 4567:4567 slatedocs/slate
+    - name: Deploy documentation
+      if: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/simpler' ) }}
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages
+        folder: build
