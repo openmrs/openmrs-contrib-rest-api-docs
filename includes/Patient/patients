@@ -158,7 +158,8 @@ Anyone who has an Encounter or who is enrolled in a Program is a Patient.)</p></
 
 </code></pre></div>
 <ul>
-<li>Fetch all non-retired patients that match any specified parameters otherwise fetch all non-retired patients. Returns a <code>200 OK</code> status with the patient response. </li>
+<li><p>Fetch all non-retired patients that match any specified parameters otherwise fetch all non-retired patients. Returns a <code>200 OK</code> status with the patient response. </p></li>
+<li><p>Supports finding duplicated patients by specifying <code>attributesToFindDuplicatesBy</code> parameter.</p></li>
 </ul>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
@@ -172,6 +173,11 @@ Anyone who has an Encounter or who is enrolled in a Program is a Patient.)</p></
 <td><em>q</em></td>
 <td><code>Search Query</code></td>
 <td>Display Name of patient.</td>
+</tr>
+<tr>
+<td><em>attributesToFindDuplicatesBy</em></td>
+<td><code>String</code></td>
+<td>Patient attributes to find duplicates by. Example of attributes: gender,identifier,birthdate,givenName,middleName,familyName. If you want to include voided patients, add <code>includeVoided</code> attribute.</td>
 </tr>
 </tbody></table>
 <h2 id='list-patient-by-uuid'>List patient by UUID.</h2>

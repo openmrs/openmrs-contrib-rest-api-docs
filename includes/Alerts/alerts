@@ -1,0 +1,318 @@
+<h1 id='alert'>Alert</h1><h2 id='alert-overview'>Alert Overview</h2>
+<p>Alert is a notification that selected users receive on the main page of Legacy UI.</p>
+<h2 id='available-operations-for-alert'>Available operations for Alert</h2>
+<ol>
+<li><a href="#list-all-alerts">List alerts</a></li>
+<li><a href="#create-an-alert">Create an alert</a></li>
+<li><a href="#update-an-alert">Update an alert</a></li>
+<li><a href="#delete-an-alert">Delete an alert</a></li>
+</ol>
+<h2 id='list-all-alerts'>List all alerts</h2>
+<blockquote>
+<p>Get all alerts</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET alert?v<span class="o">=</span>default
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/alert?v=default
+&amp;v=default"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/alert?v=default</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "results": [
+    {
+      "uuid": "b4f9a6a0-2791-4106-ba94-28cb84d5aaae",
+      "display": "There was an error starting the module: Reference Demo Data Module",
+      "alertId": 6,
+      "text": "There was an error starting the module: Reference Demo Data Module",
+      "satisfiedByAny": true,
+      "dateToExpire": "2021-06-15T00:00:00.000+0200",
+      "alertRead": true,
+      "recipients": [
+        {
+          "uuid": "c3e9fe79-9af1-4d6f-9113-5ded3db4582d",
+          "display": "Super User (admin)",
+          "links": [
+            {
+              "rel": "self",
+              "uri": "http://localhost:8080/openmrs/ws/rest/v1/alert/b4f9a6a0-2791-4106-ba94-28cb84d5aaae/recipient/c3e9fe79-9af1-4d6f-9113-5ded3db4582d",
+              "resourceAlias": "recipient"
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "rel": "self",
+          "uri": "http://localhost:8080/openmrs/ws/rest/v1/alert/b4f9a6a0-2791-4106-ba94-28cb84d5aaae",
+          "resourceAlias": "alert"
+        },
+        {
+          "rel": "full",
+          "uri": "http://localhost:8080/openmrs/ws/rest/v1/alert/b4f9a6a0-2791-4106-ba94-28cb84d5aaae?v=full",
+          "resourceAlias": "alert"
+        }
+      ],
+      "resourceVersion": "1.8"
+    },
+    {
+      "uuid": "bf40f1e9-16cb-452e-bf2c-0f9c0863d3e4",
+      "display": "There was an error starting the module: Attachments",
+      "alertId": 7,
+      "text": "There was an error starting the module: Attachments",
+      "satisfiedByAny": true,
+      "dateToExpire": "2021-06-15T21:33:19.000+0200",
+      "alertRead": true,
+      "recipients": [
+        {
+          "uuid": "6dabf122-75f7-4dba-a12f-28ced570d922",
+          "display": "Super User (admin)",
+          "links": [
+            {
+              "rel": "self",
+              "uri": "http://localhost:8080/openmrs/ws/rest/v1/alert/bf40f1e9-16cb-452e-bf2c-0f9c0863d3e4/recipient/6dabf122-75f7-4dba-a12f-28ced570d922",
+              "resourceAlias": "recipient"
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "rel": "self",
+          "uri": "http://localhost:8080/openmrs/ws/rest/v1/alert/bf40f1e9-16cb-452e-bf2c-0f9c0863d3e4",
+          "resourceAlias": "alert"
+        },
+        {
+          "rel": "full",
+          "uri": "http://localhost:8080/openmrs/ws/rest/v1/alert/bf40f1e9-16cb-452e-bf2c-0f9c0863d3e4?v=full",
+          "resourceAlias": "alert"
+        }
+      ],
+      "resourceVersion": "1.8"
+    }
+  ],
+  "links": [
+    {
+      "rel": "next",
+      "uri": "http://localhost:8080/openmrs/ws/rest/v1/alert?v=default&amp;startIndex=50",
+      "resourceAlias": null
+    }
+  ]
+}
+</code></pre></div>
+<p>You can add an <code>includeExpired=true</code> parameter to return also expired Alerts.
+If not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>includeExpired</em></td>
+<td><code>Boolean</code></td>
+<td>Include expired alerts</td>
+</tr>
+</tbody></table>
+<h2 id='create-an-alert'>Create an alert</h2>
+<blockquote>
+<p>Create an alert</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"text"</span>: <span class="s2">"New alert"</span>,
+    <span class="s2">"satisfiedByAny"</span>: <span class="nb">true</span>,
+    <span class="s2">"dateToExpire"</span>: null,
+    <span class="s2">"recipients"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"recipient"</span>: <span class="s2">"c98a1558-e131-11de-babe-001e378eb67e"</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\"text\": \"New alert\",\"satisfiedByAny\": true,\"dateToExpire\": null,\"recipients\": [{\"recipient\": \"c98a1558-e131-11de-babe-001e378eb67e\"}]}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/alert"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">New alert</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">satisfiedByAny</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span><span class="dl">"</span><span class="s2">dateToExpire</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span><span class="dl">"</span><span class="s2">recipients</span><span class="dl">"</span><span class="p">:</span> <span class="p">[{</span><span class="dl">"</span><span class="s2">recipient</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">c98a1558-e131-11de-babe-001e378eb67e</span><span class="dl">"</span><span class="p">}]});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/alert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>You can create a new alert with its recipients by using User&#39;s UUID as recipient&#39;s field value.
+If you are not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='attributes'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>text</em></td>
+<td><code>String</code></td>
+<td>Text of the alert</td>
+</tr>
+<tr>
+<td><em>satisfiedByAny</em></td>
+<td><code>Boolean</code></td>
+<td>If true, this alert will be marked as read if only one of its recipients has read it</td>
+</tr>
+<tr>
+<td><em>dateToExpire</em></td>
+<td><code>Date</code></td>
+<td>Date when the alert will become expired</td>
+</tr>
+<tr>
+<td><em>recipients</em></td>
+<td><code>Array[] : recipient</code></td>
+<td>List of alert&#39;s recipients</td>
+</tr>
+</tbody></table>
+<h2 id='update-an-alert-using-its-uuid'>Update an alert using its UUID</h2>
+<blockquote>
+<p>Update an alert</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"text"</span>: <span class="s2">"Updated alert"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\r\n    \"text\": \"Updated alert\"\r\n}\r\n"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/alert/:alert_uuid"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Updated alert</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/alert/:alert_uuid</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>Update an alert with given UUID. Returns a <code>404 Not Found</code> status if the alert does not exist. If not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='attributes-2'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>text</em></td>
+<td><code>String</code></td>
+<td>Text of the alert</td>
+</tr>
+<tr>
+<td><em>satisfiedByAny</em></td>
+<td><code>Boolean</code></td>
+<td>If true, this alert will be marked as read if only one of its recipients has read it</td>
+</tr>
+<tr>
+<td><em>dateToExpire</em></td>
+<td><code>Date</code></td>
+<td>Date when the alert will become expired</td>
+</tr>
+<tr>
+<td><em>recipients</em></td>
+<td><code>Array[] : recipient</code></td>
+<td>List of alert&#39;s recipients</td>
+</tr>
+</tbody></table>
+<h2 id='delete-an-alert'>Delete an alert</h2>
+<blockquote>
+<p>Delete an alert using its UUID</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>DELETE /alert/:alert_uuid?purge<span class="o">=</span><span class="nb">true</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/alert/:alert_uuid?purge=true"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=154692F02BBBC664825F3C4C224A474B"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://demo.openmrs.org/openmrs/ws/rest/v1/alert/:alert_uuid?purge=true</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>Deletes (purges) an alert by its UUID. Returns a <code>404 Not Found</code> status if the user does not exist. If not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+
+<p>Voiding alerts is not supported.</p>

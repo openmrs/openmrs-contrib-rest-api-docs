@@ -1,0 +1,357 @@
+<h1 id='autogenerationoption'>AutoGenerationOption</h1><h2 id='autogenerationoption-overview'>AutoGenerationOption Overview</h2>
+<p>AutoGenerationOption is a Resource which encapsulates the options for Auto-Generating a Patient Identifier.</p>
+<h2 id='available-operations-for-autogenerationoption'>Available operations for AutoGenerationOption</h2>
+<ol>
+<li><a href="#list-autogenerationoptions">List AutoGenerationOptions</a></li>
+<li><a href="#create-an-autogenerationoption">Create an AutoGenerationOption</a></li>
+<li><a href="#update-an-autogenerationoption">Update an AutoGenerationOption</a></li>
+<li><a href="#delete-an-autogenerationoption">Delete an AutoGenerationOption</a></li>
+</ol>
+<h2 id='list-autogenerationoptions'>List AutoGenerationOptions</h2>
+<blockquote>
+<p>List AutoGenerationOptions</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET idgen/autogenerationoption?v<span class="o">=</span>default
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/idgen/autogenerationoption?v=default
+&amp;v=default"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/idgen/autogenerationoption?v=default</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "results": [
+        {
+            "uuid": "b57bda1d-dbe5-436e-af0f-331be90fee4e",
+            "identifierType": {
+                "uuid": "05a29f94-c0ed-11e2-94be-8c13b969e334",
+                "display": "OpenMRS ID",
+                "name": "OpenMRS ID",
+                "description": "OpenMRS patient identifier, with check-digit",
+                "format": null,
+                "formatDescription": null,
+                "required": true,
+                "validator": "org.openmrs.module.idgen.validator.LuhnMod30IdentifierValidator",
+                "locationBehavior": null,
+                "uniquenessBehavior": null,
+                "retired": false,
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://localhost:8080/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334",
+                        "resourceAlias": "patientidentifiertype"
+                    },
+                    {
+                        "rel": "full",
+                        "uri": "http://localhost:8080/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334?v=full",
+                        "resourceAlias": "patientidentifiertype"
+                    }
+                ],
+                "resourceVersion": "2.0"
+            },
+            "location": null,
+            "source": {
+                "uuid": "691eed12-c0f1-11e2-94be-8c13b969e334",
+                "name": "Generator for OpenMRS ID",
+                "description": null,
+                "baseCharacterSet": "0123456789ACDEFGHJKLMNPRTUVWXY",
+                "prefix": null,
+                "suffix": null,
+                "firstIdentifierBase": "10000",
+                "minLength": 6,
+                "maxLength": null,
+                "identifierType": {
+                    "uuid": "05a29f94-c0ed-11e2-94be-8c13b969e334",
+                    "display": "OpenMRS ID",
+                    "name": "OpenMRS ID",
+                    "description": "OpenMRS patient identifier, with check-digit",
+                    "format": null,
+                    "formatDescription": null,
+                    "required": true,
+                    "validator": "org.openmrs.module.idgen.validator.LuhnMod30IdentifierValidator",
+                    "locationBehavior": null,
+                    "uniquenessBehavior": null,
+                    "retired": false,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://localhost:8080/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334",
+                            "resourceAlias": "patientidentifiertype"
+                        },
+                        {
+                            "rel": "full",
+                            "uri": "http://localhost:8080/openmrs/ws/rest/v1/patientidentifiertype/05a29f94-c0ed-11e2-94be-8c13b969e334?v=full",
+                            "resourceAlias": "patientidentifiertype"
+                        }
+                    ],
+                    "resourceVersion": "2.0"
+                },
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://localhost:8080/openmrs/ws/rest/v1/idgen/identifiersource/691eed12-c0f1-11e2-94be-8c13b969e334",
+                        "resourceAlias": "identifiersource"
+                    }
+                ],
+                "type": "sequentialidentifiergenerator",
+                "resourceVersion": "1.8"
+            },
+            "manualEntryEnabled": false,
+            "automaticGenerationEnabled": true,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/idgen/autogenerationoption/b57bda1d-dbe5-436e-af0f-331be90fee4e",
+                    "resourceAlias": "autogenerationoption"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/idgen/autogenerationoption/b57bda1d-dbe5-436e-af0f-331be90fee4e?v=full",
+                    "resourceAlias": "autogenerationoption"
+                }
+            ],
+            "resourceVersion": "1.8"
+        }
+    ]
+}
+</code></pre></div>
+<p>Fetches list of AutoGenerationOptions. If not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h2 id='get-autogenerationoption-by-uuid'>Get AutoGenerationOption by UUID.</h2>
+<blockquote>
+<p>Get AutoGenerationOption by UUID</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET idgen/autogenerationoption/:uuid
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/idgen/autogenerationoption/:uuid
+&amp;v=default"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=A2AF09658C73E1ECEC5D3C8C7C249A2D</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/idgen/autogenerationoption/:uuid</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>Retrieves an AutoGenerationOption by its UUID. Returns a <code>404 Not Found</code> status if the object does not exist. If not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h2 id='create-an-autogenerationoption'>Create an AutoGenerationOption</h2>
+<blockquote>
+<p>Create an AutoGenerationOption</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST idgen/autogenerationoption
+<span class="o">{</span>
+    <span class="s2">"source"</span>: <span class="s2">"691eed12-c0f1-11e2-94be-8c13b969e334"</span>,
+    <span class="s2">"identifierType"</span>: <span class="s2">"05a29f94-c0ed-11e2-94be-8c13b969e334"</span>,
+    <span class="s2">"manualEntryEnabled"</span>: <span class="nb">true</span>,
+    <span class="s2">"automaticGenerationEnabled"</span>: <span class="nb">true</span>,
+    <span class="s2">"location"</span>: <span class="s2">"2131aff8-2e2a-480a-b7ab-4ac53250262b"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\"source\": \"691eed12-c0f1-11e2-94be-8c13b969e334\",\"identifierType\": \"05a29f94-c0ed-11e2-94be-8c13b969e334\",\"manualEntryEnabled\": true,\"automaticGenerationEnabled\": true,\"location\": \"2131aff8-2e2a-480a-b7ab-4ac53250262b\"}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/idgen/autogenerationoption"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">source</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">691eed12-c0f1-11e2-94be-8c13b969e334</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">identifierType</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">05a29f94-c0ed-11e2-94be-8c13b969e334</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">manualEntryEnabled</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span><span class="dl">"</span><span class="s2">automaticGenerationEnabled</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span><span class="dl">"</span><span class="s2">location</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2131aff8-2e2a-480a-b7ab-4ac53250262b</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/idgen/autogenerationoption</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>You can create new instance of AutoGenerationOptions by POSTing to the endpoint above with properties below.
+If you are not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='attributes'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em><a href="#patientidentifiersource">source</a></em></td>
+<td><code>PatientIdentifierSource_UUID</code></td>
+<td>Option&#39;s IdentifierSource (Required)</td>
+</tr>
+<tr>
+<td><em><a href="#patientidentifiertype">identifierType</a></em></td>
+<td><code>PatientIdentifierType_UUID</code></td>
+<td>Option&#39;s IdentifierType (Required)</td>
+</tr>
+<tr>
+<td><em>manualEntryEnabled</em></td>
+<td><code>Boolean</code></td>
+<td>Is manual entry enabled for this identifier generator (Required)</td>
+</tr>
+<tr>
+<td><em>automaticGenerationEnabled</em></td>
+<td><code>Boolean</code></td>
+<td>Is auto generation enabled for this identifier generator (Required)</td>
+</tr>
+<tr>
+<td><em><a href="#location">location</a></em></td>
+<td><code>Location_UUID</code></td>
+<td>Location where these Options will be applicable (Optional)</td>
+</tr>
+</tbody></table>
+<h2 id='update-an-autogenerationoption'>Update an AutoGenerationOption</h2>
+<blockquote>
+<p>Update an AutoGenerationOption</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST idgen/autogenerationoption/:uuid
+<span class="o">{</span>
+    <span class="s2">"source"</span>: <span class="s2">"691eed12-c0f1-11e2-94be-8c13b969e334"</span>,
+    <span class="s2">"manualEntryEnabled"</span>: <span class="nb">true</span>,
+    <span class="s2">"automaticGenerationEnabled"</span>: <span class="nb">true</span>,
+    <span class="s2">"location"</span>: <span class="s2">"2131aff8-2e2a-480a-b7ab-4ac53250262b"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\"source\": \"691eed12-c0f1-11e2-94be-8c13b969e334\",\"manualEntryEnabled\": true,\"automaticGenerationEnabled\": true,\"location\": \"2131aff8-2e2a-480a-b7ab-4ac53250262b\"}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/idgen/autogenerationoption/:uuid"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">source</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">691eed12-c0f1-11e2-94be-8c13b969e334</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">manualEntryEnabled</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span><span class="dl">"</span><span class="s2">automaticGenerationEnabled</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span><span class="dl">"</span><span class="s2">location</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2131aff8-2e2a-480a-b7ab-4ac53250262b</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/idgen/autogenerationoption/:uuid</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>You can update existing instance of AutoGenerationOptions by POSTing to the endpoint above with properties below.
+If object with given UUID doesn&#39;t exist, a <code>404 Not Found</code> status is returned.
+If you are not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='attributes-2'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em><a href="#patientidentifiersource">source</a></em></td>
+<td><code>PatientIdentifierSource_UUID</code></td>
+<td>Option&#39;s IdentifierSource (Required)</td>
+</tr>
+<tr>
+<td><em>manualEntryEnabled</em></td>
+<td><code>Boolean</code></td>
+<td>Is manual entry enabled for this identifier generator (Required)</td>
+</tr>
+<tr>
+<td><em>automaticGenerationEnabled</em></td>
+<td><code>Boolean</code></td>
+<td>Is auto generation enabled for this identifier generator (Required)</td>
+</tr>
+<tr>
+<td><em><a href="#location">location</a></em></td>
+<td><code>Location_UUID</code></td>
+<td>Location where these Options will be applicable (Optional)</td>
+</tr>
+</tbody></table>
+<h2 id='delete-an-autogenerationoption'>Delete an AutoGenerationOption</h2>
+<blockquote>
+<p>Delete an AutoGenerationOption</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>DELETE idgen/autogenerationoption/:uuid?purge<span class="o">=</span><span class="nb">true</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/idgen/autogenerationoption/:uuid?purge=true"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=154692F02BBBC664825F3C4C224A474B"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=955E778A4F700C5AA9651DAF6FC9DDDA</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">openmrs/ws/rest/v1/idgen/autogenerationoption/:uuid?purge=true</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>Delete (purge) AutoGenerationOptions by their UUID. Returns a <code>404 Not Found</code> status if the object does not exist. If not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+
+<p>This resource cannot be voided/retired.</p>

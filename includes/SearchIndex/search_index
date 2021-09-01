@@ -1,0 +1,84 @@
+<h1 id='search-index'>Search Index</h1><h2 id='available-operations-for-search-index'>Available operations for Search Index</h2>
+<ol>
+<li><a href="#update-search-index">Update Search Index</a></li>
+</ol>
+<h2 id='update-search-index'>Update Search Index</h2>
+<blockquote>
+<p>Update Search Index</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /searchindexupdate
+<span class="o">{</span>
+    <span class="s2">"resource"</span>: <span class="s2">"patient"</span>,
+    <span class="s2">"subResource"</span>: <span class="s2">"patientidentifier"</span>,
+    <span class="s2">"uuid"</span>: <span class="s2">"fd07779c-b8f1-4b90-b41b-45cf9bc538f8"</span>,
+    <span class="s2">"async"</span>: <span class="nb">false</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\"resource\": \"patient\",\"subResource\": \"patientidentifier\",\"uuid\": \"fd07779c-b8f1-4b90-b41b-45cf9bc538f8\",\"async\": false}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/searchindexupdate"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=1B06650EB0428F51EC119C909F58327C"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=1B06650EB0428F51EC119C909F58327C</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">resource</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">patient</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">subResource</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">patientidentifier</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">fd07779c-b8f1-4b90-b41b-45cf9bc538f8</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">async</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/searchindexupdate</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>Executes rebuild of search index.</p>
+
+<p>You can execute one of three operations:</p>
+
+<ul>
+<li><p>rebuild whole search index by only passing &quot;async&quot; attribute</p></li>
+<li><p>rebuild search index for resource by passing &quot;resource&quot; and optionally &quot;subResource&quot; attributes.</p></li>
+<li><p>rebuild search index for one object by passing &quot;uuid&quot; attribute.</p></li>
+</ul>
+<h3 id='attributes'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>resource</em></td>
+<td><code>String</code></td>
+<td>Resource name of type that you want to regenerate index for</td>
+</tr>
+<tr>
+<td><em>subResource</em></td>
+<td><code>String</code></td>
+<td>Resource name of subtype that you want to regenerate index for</td>
+</tr>
+<tr>
+<td><em>uuid</em></td>
+<td><code>UUID</code></td>
+<td>UUID of object that you want to regenerate index for</td>
+</tr>
+<tr>
+<td><em>async</em></td>
+<td><code>Boolean</code></td>
+<td>Should rebuilding index be executed asynchronously</td>
+</tr>
+</tbody></table>

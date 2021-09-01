@@ -102,6 +102,11 @@ a social worker, or a lab tech. Generally speaking, any healthcare worker that a
 <td><code>Search Query</code></td>
 <td>Get provider by name</td>
 </tr>
+<tr>
+<td><em>includeAll</em></td>
+<td><code>Boolean</code></td>
+<td>If true, returns also retired Providers</td>
+</tr>
 </tbody></table>
 <h2 id='query-provider-by-uuid'>Query provider by UUID.</h2>
 <ul>

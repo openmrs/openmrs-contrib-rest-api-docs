@@ -238,13 +238,13 @@ Returns a <code>404 Not Found</code> status if form not exists. If the user is n
 </tr>
 </tbody></table></li>
 </ul>
-<h2 id='list-formfields'>List formfields</h2><h3 id='list-all-formfields-subresources-for-a-form'>List all formFields subresources for a form.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /form/:target_form_uuid/formFields
+<h2 id='list-formfields'>List formfields</h2><h3 id='list-all-formfields-subresources-for-a-form'>List all formFields subresources for a form.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /form/:target_form_uuid/formfield
 </span></code></pre></div>
 <p>Retrieve all formFields subresources of a form resource by <code>target_form_uuid</code>. Returns a <code>404 Not Found</code> status if formFields not exist. If the user is not logged in to perform this action, a <code>401 unauthorized</code> status returned.</p>
-<h3 id='list-formfields-subresource-by-its-uuid-and-parent-form-uuid'>List formFields subresource by its UUID and parent form UUID.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /form/:target_form_uuid/formFields/:target_formFields_uuid
+<h3 id='list-formfields-subresource-by-its-uuid-and-parent-form-uuid'>List formFields subresource by its UUID and parent form UUID.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /form/:target_form_uuid/formfield/:target_formFields_uuid
 </span></code></pre></div>
 <p>Retrieve a formFields subresources of a form resource. Returns a <code>404 Not Found</code> status if formFields does not exist. If you are not logged in to perform this action, a <code>401 Unauthorized</code> status returned. </p>
-<h2 id='create-formfield-subresource-with-properties'>create formfield subresource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST form/:target_form_uuid/formFields
+<h2 id='create-formfield-subresource-with-properties'>create formfield subresource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST form/:target_form_uuid/formfield
 {
   form: "UUID",
   field: "UUID",
@@ -333,7 +333,7 @@ If the user is not logged in to perform this action, a <code>401 Unauthorized</c
 </tr>
 </tbody></table></li>
 </ul>
-<h2 id='update-formfields-subresource-with-properties'>Update formFields subresource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST form/:target_form_uuid/formFields/:target_formFields_uuid
+<h2 id='update-formfields-subresource-with-properties'>Update formFields subresource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST form/:target_form_uuid/formfield/:target_formFields_uuid
 {
   form: "UUID",
   field: "UUID",
@@ -426,7 +426,7 @@ returned.</p>
 </tr>
 </tbody></table></li>
 </ul>
-<h2 id='delete-formfields-subresource-with-properties'>Delete formFields subresource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">DELETE /form/:target_form_uuid/formFields/:target_formFields_uuid
+<h2 id='delete-formfields-subresource-with-properties'>Delete formFields subresource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">DELETE /form/:target_form_uuid/formfield/:target_formFields_uuid
 </span></code></pre></div>
 <ul>
 <li><p>Delete or retire a target formFields subresource by its UUID. Returns a <code>404 Not Found</code> status if attribute not exists. 

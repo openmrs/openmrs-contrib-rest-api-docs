@@ -1,0 +1,405 @@
+<h1 id='program'>Program</h1><h2 id='program-overview'>Program Overview</h2>
+<p>A program is typically used when a patient is identified as belonging to a group for which a particular set of coordinated interventions is to be followed. For example, programs might be used for diseases such as HIV or tuberculosis or conditions such as pregnancy or interventions such as childhood immunization.</p>
+<h2 id='available-operations-for-program-type'>Available Operations for Program type</h2>
+<ol>
+<li><a href="#list-programs">List Programs</a></li>
+<li><a href="#create-a-program">Create a Program</a></li>
+<li><a href="#update-a-program">Update a Program</a></li>
+<li><a href="#delete-a-program">Delete a Program</a></li>
+</ol>
+<h2 id='list-programs'>List Programs</h2>
+<blockquote>
+<p>List Programs</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /program
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/program"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/program</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "results": [
+        {
+            "uuid": "959dc77c-7c2a-4f0d-9c4e-3a8f48c488e2",
+            "name": "malaria",
+            "allWorkflows": [
+                {
+                    "uuid": "65fd8425-1090-4a24-8db6-c89aa80daa5d",
+                    "concept": {
+                        "uuid": "116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "display": "Malaria",
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://localhost:8080/openmrs/ws/rest/v1/concept/116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                "resourceAlias": "concept"
+                            }
+                        ]
+                    },
+                    "retired": false,
+                    "states": [
+                        {
+                            "uuid": "f0f0c506-a969-4a3b-84dc-d5d7057b9fcd",
+                            "retired": false,
+                            "concept": {
+                                "uuid": "11034efc-1b2b-4cda-a414-74786a76b800",
+                                "display": "dead",
+                                "links": [
+                                    {
+                                        "rel": "self",
+                                        "uri": "http://localhost:8080/openmrs/ws/rest/v1/concept/11034efc-1b2b-4cda-a414-74786a76b800",
+                                        "resourceAlias": "concept"
+                                    }
+                                ]
+                            },
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/workflow/65fd8425-1090-4a24-8db6-c89aa80daa5d/state/f0f0c506-a969-4a3b-84dc-d5d7057b9fcd",
+                                    "resourceAlias": "state"
+                                }
+                            ]
+                        },
+                        {
+                            "uuid": "ce13f1c0-742a-415b-91ad-a0b1bd888bc8",
+                            "retired": false,
+                            "concept": {
+                                "uuid": "51d62167-7642-489b-ad0a-79b3b8654882",
+                                "display": "cured",
+                                "links": [
+                                    {
+                                        "rel": "self",
+                                        "uri": "http://localhost:8080/openmrs/ws/rest/v1/concept/51d62167-7642-489b-ad0a-79b3b8654882",
+                                        "resourceAlias": "concept"
+                                    }
+                                ]
+                            },
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/workflow/65fd8425-1090-4a24-8db6-c89aa80daa5d/state/ce13f1c0-742a-415b-91ad-a0b1bd888bc8",
+                                    "resourceAlias": "state"
+                                }
+                            ]
+                        },
+                        {
+                            "uuid": "535c60a7-d349-4a36-97d0-898e938cdd6f",
+                            "retired": false,
+                            "concept": {
+                                "uuid": "160148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                "display": "Malaria, confirmed",
+                                "links": [
+                                    {
+                                        "rel": "self",
+                                        "uri": "http://localhost:8080/openmrs/ws/rest/v1/concept/160148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "resourceAlias": "concept"
+                                    }
+                                ]
+                            },
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/workflow/65fd8425-1090-4a24-8db6-c89aa80daa5d/state/535c60a7-d349-4a36-97d0-898e938cdd6f",
+                                    "resourceAlias": "state"
+                                }
+                            ]
+                        }
+                    ],
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://localhost:8080/openmrs/ws/rest/v1/workflow/65fd8425-1090-4a24-8db6-c89aa80daa5d",
+                            "resourceAlias": "workflow"
+                        }
+                    ]
+                }
+            ],
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/program/959dc77c-7c2a-4f0d-9c4e-3a8f48c488e2",
+                    "resourceAlias": "program"
+                }
+            ]
+        }
+    ]
+}
+</code></pre></div>
+<p>Fetch all Programs that match the search query parameter, otherwise fetch all Programs. Returns a <code>200 OK</code> status with the Programs response.
+If user not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>q</em></td>
+<td><code>Search Query</code></td>
+<td>Display Name of program.</td>
+</tr>
+</tbody></table>
+<h2 id='list-program-by-uuid'>List Program by UUID.</h2>
+<blockquote>
+<p>List Program by UUID</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /program/:uuid
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/program/:uuid"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=24D0761924138ED7E55C2CB6806B0633"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=24D0761924138ED7E55C2CB6806B0633</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/program/:uuid</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>Retrieve a Program by its UUID. Returns a <code>404 Not Found</code> status if program does not exist.
+If user not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h2 id='create-a-program'>Create a Program</h2>
+<blockquote>
+<p>Create a Program</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /program
+<span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"program"</span>,
+    <span class="s2">"description"</span>: <span class="s2">"program"</span>,
+    <span class="s2">"concept"</span>: <span class="s2">"116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"</span>,
+    <span class="s2">"retired"</span>: <span class="nb">false</span>,
+    <span class="s2">"outcomesConcept"</span>: <span class="s2">"5c938680-c300-4fc0-9a72-e798220f287b"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\n    \"name\": \"program\",\n    \"description\": \"program\",\n    \"concept\": \"116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\n    \"retired\": false,\n    \"outcomesConcept\": \"5c938680-c300-4fc0-9a72-e798220f287b\"\n}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/program"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=24D0761924138ED7E55C2CB6806B0633"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=24D0761924138ED7E55C2CB6806B0633</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">program</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">program</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">concept</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">retired</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span><span class="dl">"</span><span class="s2">outcomesConcept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">5c938680-c300-4fc0-9a72-e798220f287b</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/program</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>To create a program you need to specify the below properties in the request body.  If you are not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='properties'>Properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>name</em></td>
+<td><code>String</code></td>
+<td>Name of the program</td>
+</tr>
+<tr>
+<td><em>description</em></td>
+<td><code>String</code></td>
+<td>Description of the program</td>
+</tr>
+<tr>
+<td><em>retired</em></td>
+<td><code>Boolean</code></td>
+<td>Is program retired</td>
+</tr>
+<tr>
+<td><em><a href="#concepts">concept</a></em></td>
+<td><code>Concept_UUID</code></td>
+<td>Concept resource UUID (Required)</td>
+</tr>
+<tr>
+<td><em><a href="#concepts">outcomesConcept</a></em></td>
+<td><code>Concept_UUID</code></td>
+<td>Concept resource UUID containing program outcomes</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-program'>Update a Program</h2>
+<blockquote>
+<p>Update a Program</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /program/:uuid
+<span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"program"</span>,
+    <span class="s2">"description"</span>: <span class="s2">"program"</span>,
+    <span class="s2">"concept"</span>: <span class="s2">"116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"</span>,
+    <span class="s2">"retired"</span>: <span class="nb">false</span>,
+    <span class="s2">"outcomesConcept"</span>: <span class="s2">"5c938680-c300-4fc0-9a72-e798220f287b"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\n    \"name\": \"program\",\n    \"description\": \"program\",\n    \"concept\": \"116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\n    \"retired\": false,\n    \"outcomesConcept\": \"5c938680-c300-4fc0-9a72-e798220f287b\"\n}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/program/:uuid"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">program</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">program</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">concept</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">retired</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span><span class="dl">"</span><span class="s2">outcomesConcept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">5c938680-c300-4fc0-9a72-e798220f287b</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/program/:uuid</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<p>Update a Program. This method only modifies properties specified in the request. Returns a <code>404 Not found</code>. If not authenticated or authenticated user does not have sufficient privileges, <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='properties-2'>Properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>name</em></td>
+<td><code>String</code></td>
+<td>Name of the program</td>
+</tr>
+<tr>
+<td><em>description</em></td>
+<td><code>String</code></td>
+<td>Description of the program</td>
+</tr>
+<tr>
+<td><em>retired</em></td>
+<td><code>Boolean</code></td>
+<td>Is program retired</td>
+</tr>
+<tr>
+<td><em><a href="#concepts">concept</a></em></td>
+<td><code>Concept_UUID</code></td>
+<td>Concept resource UUID (Required)</td>
+</tr>
+<tr>
+<td><em><a href="#concepts">outcomesConcept</a></em></td>
+<td><code>Concept_UUID</code></td>
+<td>Concept resource UUID containing program outcomes</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-program'>Delete a Program</h2>
+<blockquote>
+<p>Delete a Program</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>DELETE /program/:uuid?purge<span class="o">=</span><span class="nb">true</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/program/:uuid?purge=true"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=24D0761924138ED7E55C2CB6806B0633"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=24D0761924138ED7E55C2CB6806B0633</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/program/:uuid?purge=true</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>Delete or retire a Program by its UUID. Returns a <code>404 Not Found</code> status if patient not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>uuid</em></td>
+<td><code>String</code></td>
+<td>Program&#39;s uuid to delete</td>
+</tr>
+<tr>
+<td><em>purge</em></td>
+<td><code>Boolean</code></td>
+<td>The program will be retired unless purge = &#39;true&#39;</td>
+</tr>
+</tbody></table>

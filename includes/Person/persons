@@ -191,25 +191,25 @@
 <blockquote>
 <p>Create a person</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>POST /person
-{
-    "names": [
-        {
-        "givenName": "Mohit",
-        "familyName": "Kumar"
-        }
-    ],
-    "gender": "M",
-    "birthdate": "1997-09-02",
-    "addresses": [
-        {
-        "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
-        "cityVillage": "Bengaluru",
-        "country": "India",
-        "postalCode": "560037"
-        }
-    ]
-}
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /person
+<span class="o">{</span>
+    <span class="s2">"names"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+        <span class="s2">"givenName"</span>: <span class="s2">"Mohit"</span>,
+        <span class="s2">"familyName"</span>: <span class="s2">"Kumar"</span>
+        <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"gender"</span>: <span class="s2">"M"</span>,
+    <span class="s2">"birthdate"</span>: <span class="s2">"1997-09-02"</span>,
+    <span class="s2">"addresses"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+        <span class="s2">"address1"</span>: <span class="s2">"30, Vivekananda Layout, Munnekolal,Marathahalli"</span>,
+        <span class="s2">"cityVillage"</span>: <span class="s2">"Bengaluru"</span>,
+        <span class="s2">"country"</span>: <span class="s2">"India"</span>,
+        <span class="s2">"postalCode"</span>: <span class="s2">"560037"</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">}</span>
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
 <span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
   <span class="o">.</span><span class="na">build</span><span class="o">();</span>

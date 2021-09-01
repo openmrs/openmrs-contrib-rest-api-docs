@@ -1,23 +1,20 @@
 <h1 id='encounters'>Encounters</h1><h2 id='encounter-overview'>Encounter Overview</h2>
 <ul>
-<li><p>An encounter represents an interaction between a patient and the healthcare system at a single point in time. 
-Common examples would be a patient seeing a doctor during a clinic visit, a patient going to the lab to have blood drawn for
-testing, or telephone call between a provider and the patient).</p></li>
+<li><p>An encounter represents an interaction between a patient and the healthcare system at a single point in time. Common examples would be a patient seeing a doctor during a clinic visit, a patient going to the lab to have blood drawn for testing, or telephone call between a provider and the patient).</p></li>
 <li><p>Each Encounter has an encounter type, date/time, location, and provider.</p></li>
-<li><p>Encounters are classified into Encounter Types, which describe the type of interaction the Encounter represents – e.g., 
-&quot;HIV Initial&quot;, &quot;Pediatric Follow Up&quot;, &quot;Lab&quot;). Implementations can define their own types of encounters.</p></li>
+<li><p>Encounters are classified into Encounter Types, which describe the type of interaction the Encounter represents – e.g., &quot;HIV Initial&quot;, &quot;Pediatric Follow Up&quot;, &quot;Lab&quot;). Implementations can define their own types of encounters.</p></li>
 <li><p>One or more encounters may be grouped within a <strong>Visit</strong> (e.g., an outpatient clinic visit or a hospitalization).</p></li>
 <li><p>Every Encounter can have 0 to n <strong>Observations</strong> associated with it.</p></li>
 <li><p>Every Encounter can have 0 to n <strong>Orders</strong> associated with it.</p></li>
+<li><p>More than one Encouter can be associated with a single visit.</p></li>
 </ul>
 <h2 id='let-39-s-look-at-an-example-of-encounter'>Let&#39;s look at an example of Encounter</h2>
-<p>During a typical Amani Clinic Outpatient Visit, a patient checks in at registration is seen by a doctor and receives medicine dispensed in the pharmacy. This would be recorded as <strong>one visit</strong> containing three encounters, whose types are <strong>Registration, 
-Consultation and Dispensing</strong>.</p>
+<ul>
+<li>During a typical Amani Clinic Outpatient Visit, a patient checks in at registration is seen by a doctor and receives medicine dispensed in the pharmacy. This would be recorded as <strong>one visit</strong> containing three encounters, whose types are <strong>Registration, Consultation and Dispensing</strong>.</li>
+</ul>
 <h2 id='sub-resource-types-of-encounter'>Sub Resource types of Encounter</h2><h3 id='encounter-provider'>Encounter Provider</h3>
 <ul>
-<li><p>A Provider is a person who provides care or services to patients. </p></li>
-<li><p>A provider may be a clinician like a doctor or a nurse, a social worker, or a lab tech. </p></li>
-<li><p>Any healthcare worker that a patient can have an encounter with is a provider.</p></li>
+<li>A <a href="#provider">Provider</a> is a person who provides care or services to patients. A provider may be a clinician like a doctor or a nurse, a social worker, or a lab tech, any healthcare worker that a patient can have an encounter with is a provider.</li>
 </ul>
 <h2 id='available-operations-for-encounter'>Available operations for Encounter</h2>
 <ol>
@@ -30,11 +27,159 @@ Consultation and Dispensing</strong>.</p>
 <li><a href="#update-encounter-provider-sub-resource">Update encounter provider  sub resource</a></li>
 <li><a href="#delete-encounter-provider-sub-resource">Delete encounter provider  sub resource</a></li>
 </ol>
-<h2 id='list-encounters'>List encounters</h2><h3 id='list-all-non-voided-encounters'>List all non-voided encounters.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /encounter?
-patient=96be32d2-9367-4d1d-a285-79a5e5db12b8
-&amp;fromdate=2016-10-08
-</span></code></pre></div>
-<p>Quickly filter encounters with given query parameters. Returns a <code>404 Not Found</code> status if Encounter not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h2 id='list-encounters'>List encounters</h2>
+<blockquote>
+<p>List encounters</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /encounter?patient<span class="o">=</span>96be32d2-9367-4d1d-a285-79a5e5db12b8&amp;concept<span class="o">=</span>18316c68-b5f9-4986-b76d-9975cd0ebe31&amp;fromdate<span class="o">=</span>2016-10-08&amp;v<span class="o">=</span>default&amp;limit<span class="o">=</span>1
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/encounter?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&amp;concept=18316c68-b5f9-4986-b76d-9975cd0ebe31&amp;fromdate=2016-10-08&amp;v=default&amp;limit=1"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=3EFCD2FD54D00BE8491DFFD43AA706DC"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=3EFCD2FD54D00BE8491DFFD43AA706DC</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/encounter?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&amp;concept=18316c68-b5f9-4986-b76d-9975cd0ebe31&amp;fromdate=2016-10-08&amp;v=default&amp;limit=1</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+{
+    "results": [
+        {
+            "uuid": "d3360c01-9813-4ff8-bd81-909af6612632",
+            "display": "Vitals 24/02/2015",
+            "encounterDatetime": "2015-02-24T06:08:25.000+0000",
+            "patient": {
+                "uuid": "96be32d2-9367-4d1d-a285-79a5e5db12b8",
+                "display": "1000C6 - Elizabeth Johnson",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/patient/96be32d2-9367-4d1d-a285-79a5e5db12b8"
+                    }
+                ]
+            },
+            "location": {
+                "uuid": "58c57d25-8d39-41ab-8422-108a0c277d98",
+                "display": "Outpatient Clinic",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/location/58c57d25-8d39-41ab-8422-108a0c277d98"
+                    }
+                ]
+            },
+            "form": {
+                "uuid": "a000cb34-9ec1-4344-a1c8-f692232f6edd",
+                "display": "Vitals",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/form/a000cb34-9ec1-4344-a1c8-f692232f6edd"
+                    }
+                ]
+            },
+            "encounterType": {
+                "uuid": "67a71486-1a54-468f-ac3e-7091a9a79584",
+                "display": "Vitals",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/encountertype/67a71486-1a54-468f-ac3e-7091a9a79584"
+                    }
+                ]
+            },
+            "obs": [
+                {
+                    "uuid": "22639f6e-b4b8-4c99-8a6a-d1faff59cff6",
+                    "display": "Diastolic blood pressure: 36.0",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs/22639f6e-b4b8-4c99-8a6a-d1faff59cff6"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "eb66922c-c0a9-49e4-8648-18d68f9a4499",
+                    "display": "Weight (kg): 63.0",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs/eb66922c-c0a9-49e4-8648-18d68f9a4499"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "c29194d7-af8b-449d-a0e5-7ca6ec19ce65",
+                    "display": "Height (cm): 93.0",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/obs/c29194d7-af8b-449d-a0e5-7ca6ec19ce65"
+                        }
+                    ]
+                }
+            ],
+            "orders": [],
+            "voided": false,
+            "visit": {
+                "uuid": "69b3265b-1521-4c27-8d3f-ae99b689e7a9",
+                "display": "Facility Visit @ Unknown Location - 24/02/2015 06:00",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/visit/69b3265b-1521-4c27-8d3f-ae99b689e7a9"
+                    }
+                ]
+            },
+            "encounterProviders": [],
+            "diagnoses": [],
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632?v=full"
+                }
+            ],
+            "resourceVersion": "2.2"
+        }
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/encounter?patient=96be32d2-9367-4d1d-a285-79a5e5db12b8&amp;concept=18316c68-b5f9-4986-b76d-9975cd0ebe31&amp;fromdate=2016-10-08&amp;v=default&amp;limit=1&amp;startIndex=1"
+        }
+    ]
+}
+</code></pre></div>
+<ul>
+<li>Quickly filter encounters with given query parameters. Add <code>includeAll=true</code> parameter if you want to include voided encounters. Returns a <code>404 Not Found</code> status if Encounter not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</li>
+</ul>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -49,62 +194,161 @@ patient=96be32d2-9367-4d1d-a285-79a5e5db12b8
 <td>Get encounter by Encounter UUID, Patient Identifier or name</td>
 </tr>
 <tr>
-<td><em>patient</em></td>
+<td><em><a href="#patients">patient</a></em></td>
 <td><code>Patient UUID</code></td>
 <td>Get encounter(s) for a patient</td>
 </tr>
 <tr>
-<td><em>encounterType</em></td>
+<td><em><a href="#encounter-type">encounterType</a></em></td>
 <td><code>Encounter_Type UUID</code></td>
-<td>Filter by encounter type (must be used with patient)</td>
+<td>Filter by encounter type (must be used with patient parameter cant be used independently)</td>
 </tr>
 <tr>
-<td><em>order</em></td>
+<td><em><a href="#order">order</a></em></td>
 <td><code>Order UUID</code></td>
 <td>Filter to encounter(s) containing the specified order (must be used with patient)</td>
 </tr>
 <tr>
-<td><em>obsConcept</em></td>
+<td><em><a href="#concepts">obsConcept</a></em></td>
 <td><code>Concept UUID</code></td>
-<td>Filter to encounter(s) containing observation(s) for the given concept (must be used with patient)</td>
+<td>Filter to encounter(s) containing observation(s) for the given concept (must be used with patient parameter cant be used independently)</td>
 </tr>
 <tr>
 <td><em>obsValues</em></td>
 <td><code>String</code></td>
-<td>Filter to encounter(s) containing an observations with the given value (must be used with patient &amp; obsConcept)</td>
+<td>Filter to encounter(s) containing an observations with the given value (must be used with patient and obsConcept parameters together )</td>
 </tr>
 <tr>
 <td><em>fromdate</em></td>
 <td><code>Date or Timestamp (ISO 8601)</code></td>
-<td>Start date of the encounter (must be used with patient)</td>
+<td>Start date of the encounter (must be used with patient parameter cant be used independently)</td>
 </tr>
 <tr>
 <td><em>todate</em></td>
 <td><code>Date or Timestamp (ISO 8601)</code></td>
-<td>End date of the encounter (must be used with patient)</td>
+<td>End date of the encounter (must be used with patient parameter cant be used independently)</td>
+</tr>
+<tr>
+<td><em>includeAll</em></td>
+<td><code>Boolean</code></td>
+<td>If true, returns also voided Encounters</td>
 </tr>
 </tbody></table>
-<h3 id='list-encounter-by-uuid'>List encounter by UUID.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /encounter/:target_encounter_uuid
-</span></code></pre></div>
-<p>Retrieve an encounter by its UUID. Returns a <code>404 Not Found</code> status if Encounter not exists. If user not logged 
-    in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
-<h2 id='create-an-encounter'>Create an encounter</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST /Encounter
-{
-  "encounterDatetime": "2019-10-16 12:08:43",
-  "patient": "070f0120-0283-4858-885d-a20d967729cf",
-  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
-  "location": "aff27d58-a15c-49a6-9beb-d30dcfc0c66e",
-  "encounterProviders": [
-    {
-      "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
-      "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
-    }
-  ]
-}
-</span></code></pre></div>
+<h2 id='list-encounter-by-uuid'>List encounter by UUID.</h2>
+<blockquote>
+<p>List encounter by UUID</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /encounter/:target_encounter_uuid
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=3EFCD2FD54D00BE8491DFFD43AA706DC"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=3EFCD2FD54D00BE8491DFFD43AA706DC</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
 <ul>
-<li>To Create an encounter you need to specify below attributes in the request body. If you are not logged in to perform this action,
-a <code>401 Unauthorized</code> status returned.</li>
+<li>Retrieve an encounter by its UUID. Returns a <code>404 Not Found</code> status if Encounter not exists. If user not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</li>
+</ul>
+<h2 id='create-an-encounter'>Create an encounter</h2>
+<blockquote>
+<p>Creating a new Encouter in existing visit</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /Encounter
+<span class="o">{</span>
+  <span class="s2">"encounterDatetime"</span>: <span class="s2">"2015-02-24T06:08:25.000+0000"</span>,
+  <span class="s2">"patient"</span>: <span class="s2">"96be32d2-9367-4d1d-a285-79a5e5db12b8"</span>,
+  <span class="s2">"encounterType"</span>: <span class="s2">"67a71486-1a54-468f-ac3e-7091a9a79584"</span>,
+  <span class="s2">"location"</span>: <span class="s2">"58c57d25-8d39-41ab-8422-108a0c277d98"</span>,
+  <span class="s2">"encounterProviders"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"provider"</span>: <span class="s2">"bb1a7781-7896-40be-aaca-7d1b41d843a6"</span>,
+      <span class="s2">"encounterRole"</span>: <span class="s2">"240b26f9-dd88-4172-823d-4a8bfeb7841f"</span>
+    <span class="o">}</span>
+  <span class="o">]</span>,
+  <span class="s2">"visit"</span>:<span class="s2">"69b3265b-1521-4c27-8d3f-ae99b689e7a9"</span>
+<span class="o">}</span>
+</code></pre></div>
+<blockquote>
+<p>Creating a new Encouter for a new Visit</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /Encounter
+<span class="o">{</span>
+    <span class="s2">"encounterDatetime"</span>: <span class="s2">"2015-02-24T06:08:25.000+0000"</span>,
+    <span class="s2">"patient"</span>: <span class="s2">"96be32d2-9367-4d1d-a285-79a5e5db12b8"</span>,
+    <span class="s2">"encounterType"</span>: <span class="s2">"67a71486-1a54-468f-ac3e-7091a9a79584"</span>,
+    <span class="s2">"location"</span>: <span class="s2">"58c57d25-8d39-41ab-8422-108a0c277d98"</span>,
+    <span class="s2">"encounterProviders"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"provider"</span>: <span class="s2">"bb1a7781-7896-40be-aaca-7d1b41d843a6"</span>,
+            <span class="s2">"encounterRole"</span>: <span class="s2">"240b26f9-dd88-4172-823d-4a8bfeb7841f"</span>
+        <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"visit"</span>: <span class="o">{</span>
+        <span class="s2">"patient"</span>: <span class="s2">"96be32d2-9367-4d1d-a285-79a5e5db12b8"</span>,
+        <span class="s2">"visitType"</span>: <span class="s2">"7b0f5697-27e3-40c4-8bae-f4049abfb4ed"</span>,
+        <span class="s2">"startDatetime"</span>: <span class="s2">"2015-02-24T06:08:25.000+0000"</span>,
+        <span class="s2">"stopDatetime"</span> : <span class="s2">"2015-02-24T06:09:25.000+0000"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\r\n    \"encounterDatetime\": \"2015-02-24T06:08:25.000+0000\",\r\n    \"patient\": \"96be32d2-9367-4d1d-a285-79a5e5db12b8\",\r\n    \"encounterType\": \"67a71486-1a54-468f-ac3e-7091a9a79584\",\r\n    \"location\": \"58c57d25-8d39-41ab-8422-108a0c277d98\",\r\n    \"encounterProviders\": [\r\n        {\r\n            \"provider\": \"bb1a7781-7896-40be-aaca-7d1b41d843a6\",\r\n            \"encounterRole\": \"240b26f9-dd88-4172-823d-4a8bfeb7841f\"\r\n        }\r\n    ],\r\n    \"visit\": {\r\n        \"patient\": \"96be32d2-9367-4d1d-a285-79a5e5db12b8\",\r\n        \"visitType\": \"7b0f5697-27e3-40c4-8bae-f4049abfb4ed\",\r\n        \"startDatetime\": \"2015-02-24T06:08:25.000+0000\",\r\n        \"stopDatetime\" : \"2015-02-24T06:09:25.000+0000\"\r\n    }\r\n}\r\n"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://demo.openmrs.org/openmrs/ws/rest/v1/encounter"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=3D897DB2CD0E3465BBCF887F133ED465"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=3D897DB2CD0E3465BBCF887F133ED465</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">encounterDatetime</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">2015-02-24T06:08:25.000+0000</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">patient</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">96be32d2-9367-4d1d-a285-79a5e5db12b8</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">encounterType</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">67a71486-1a54-468f-ac3e-7091a9a79584</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">location</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">58c57d25-8d39-41ab-8422-108a0c277d98</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">encounterProviders</span><span class="dl">"</span><span class="p">:[{</span><span class="dl">"</span><span class="s2">provider</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">bb1a7781-7896-40be-aaca-7d1b41d843a6</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">encounterRole</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">240b26f9-dd88-4172-823d-4a8bfeb7841f</span><span class="dl">"</span><span class="p">}],</span><span class="dl">"</span><span class="s2">visit</span><span class="dl">"</span><span class="p">:{</span><span class="dl">"</span><span class="s2">patient</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">96be32d2-9367-4d1d-a285-79a5e5db12b8</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">visitType</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">7b0f5697-27e3-40c4-8bae-f4049abfb4ed</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">startDatetime</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">2015-02-24T06:08:25.000+0000</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">stopDatetime</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">2015-02-24T06:09:25.000+0000</span><span class="dl">"</span><span class="p">}});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://demo.openmrs.org/openmrs/ws/rest/v1/encounter</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<ul>
+<li>To Create an encounter you need to specify below attributes in the request body. If you are not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</li>
 </ul>
 <h3 id='attributes'>Attributes</h3>
 <table><thead>
@@ -117,66 +361,95 @@ a <code>401 Unauthorized</code> status returned.</li>
 <tr>
 <td><em>encounterDatetime</em></td>
 <td><code>Date (ISO8601 Long)</code></td>
-<td>The date and time the encounter was created (required)</td>
+<td>The date and time the encounter was created. Should be between visit start and stop dates (required)</td>
 </tr>
 <tr>
-<td><em>patient</em></td>
+<td><em><a href="#patients">patient</a></em></td>
 <td><code>Patient UUID</code></td>
-<td>The patient to whom the encounter applies</td>
+<td>The patient to whom the encounter applies (Required)</td>
 </tr>
 <tr>
-<td><em>encounterType</em></td>
+<td><em><a href="#encounter-type">encounterType</a></em></td>
 <td><code>EncounterType UUID</code></td>
 <td>The type of encounter – e.g., Initial visit, Return visit, etc. (required)</td>
 </tr>
 <tr>
-<td><em>location</em></td>
+<td><em><a href="#location">location</a></em></td>
 <td><code>Location UUID</code></td>
 <td>The location at which the encounter occurred (required)</td>
 </tr>
 <tr>
-<td><em>encounterProviders</em></td>
+<td><em><a href="#providers">encounterProviders</a></em></td>
 <td><code>Array of Provider UUID and associated Encounter Role UUID</code></td>
 <td>An array of providers and their role within the encounter. At least one provider is required</td>
 </tr>
 <tr>
-<td><em>obs</em></td>
+<td><em><a href="#observations">obs</a></em></td>
 <td><code>Array[]: Obs</code></td>
 <td>Array of observations and values for the encounter</td>
 </tr>
 <tr>
-<td><em>orders</em></td>
+<td><em><a href="#order">orders</a></em></td>
 <td><code>Array[]: Order UUID</code></td>
 <td>List of orders created during the encounter</td>
 </tr>
 <tr>
-<td><em>form</em></td>
+<td><em><a href="#forms">form</a></em></td>
 <td><code>Form UUID</code></td>
 <td>Target Form UUID to be filled for the encounter</td>
 </tr>
 <tr>
-<td><em>visit</em></td>
+<td><em><a href="#visits">visit</a></em></td>
 <td><code>Visit UUID</code></td>
-<td>When creating an encounter for an existing visit, this specifies the visit</td>
+<td>When creating an encounter for an existing visit, this specifies the visit this encounter will be grouped into.</td>
 </tr>
 </tbody></table>
-<h2 id='update-an-encounter'>Update an encounter</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST /encounter/:target_encounter_uuid
-{
-  "encounterDatetime": "2019-10-16 12:08:43",
-  "patient": "070f0120-0283-4858-885d-a20d967729cf",
-  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
-  "location": "aff27d58-a15c-49a6-9beb-d30dcfc0c66e",
-  "encounterProviders": [
-    {
-      "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
-      "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
-    }
-  ]
-}
-</span></code></pre></div>
+<h2 id='update-an-encounter'>Update an encounter</h2>
+<blockquote>
+<p>Update an encounter</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /encounter/:target_encounter_uuid
+<span class="o">{</span>
+  <span class="s2">"encounterDatetime"</span>: <span class="s2">"2015-02-24T06:08:25.000+0001"</span>
+<span class="o">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\r\n  \"encounterDatetime\": \"2015-02-24T06:08:25.000+0001\"\r\n}\r\n"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=FEAED37621B56D3A7C0361AD9858D314"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=FEAED37621B56D3A7C0361AD9858D314</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">encounterDatetime</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">2015-02-24T06:08:25.000+0001</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
 <ul>
-<li> Update a target encounter with given UUID, this method only modifies properties in the request. Returns a <code>404 Not Found</code> 
-status if Encounter not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</li>
+<li> Update a target encounter with given UUID, this method only modifies properties in the request. Returns a <code>404 Not Found</code> status if Encounter not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</li>
 </ul>
 <h3 id='attributes-2'>Attributes</h3>
 <table><thead>
@@ -189,54 +462,86 @@ status if Encounter not exists. If the user is not logged in to perform this act
 <tr>
 <td><em>encounterDatetime</em></td>
 <td><code>Date (ISO8601 Long)</code></td>
-<td>The date and time the encounter was created</td>
+<td>The date and time the encounter was created. Should be between visit start and stop dates.</td>
 </tr>
 <tr>
-<td><em>patient</em></td>
+<td><em><a href="#patients">patient</a></em></td>
 <td><code>Patient UUID</code></td>
 <td>The patient to whom the encounter applies</td>
 </tr>
 <tr>
-<td><em>encounterType</em></td>
+<td><em><a href="#encounter-type">encounterType</a></em></td>
 <td><code>EncounterType UUID</code></td>
 <td>The type of encounter – e.g., Initial visit, Return visit, etc.</td>
 </tr>
 <tr>
-<td><em>location</em></td>
+<td><em><a href="#location">location</a></em></td>
 <td><code>Location UUID</code></td>
 <td>The location at which the encounter occurred</td>
 </tr>
 <tr>
-<td><em>encounterProviders</em></td>
+<td><em><a href="#providers">encounterProviders</a></em></td>
 <td><code>Array of Provider UUID and associated Encounter Role UUID</code></td>
 <td>An array of providers and their role within the encounter. At least one provider is required</td>
 </tr>
 <tr>
-<td><em>obs</em></td>
+<td><em><a href="#observations">obs</a></em></td>
 <td><code>Array[]: Obs</code></td>
 <td>Array of observations and values for the encounter</td>
 </tr>
 <tr>
-<td><em>orders</em></td>
+<td><em><a href="#order">orders</a></em></td>
 <td><code>Array[]: Order UUID</code></td>
 <td>List of orders created during the encounter</td>
 </tr>
 <tr>
-<td><em>form</em></td>
+<td><em><a href="#forms">form</a></em></td>
 <td><code>Form UUID</code></td>
 <td>Target Form UUID to be filled for the encounter</td>
 </tr>
 <tr>
-<td><em>visit</em></td>
+<td><em><a href="#visits">visit</a></em></td>
 <td><code>Visit UUID</code></td>
-<td>When creating an encounter for an existing visit, this specifies the visit</td>
+<td>When creating an encounter for an existing visit, this specifies the visit this encounter will be grouped into.</td>
 </tr>
 </tbody></table>
-<h2 id='delete-an-encounter'>Delete an encounter</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">  DELETE /encounter/:target_encounter_uuid?purge=true
-</span></code></pre></div>
+<h2 id='delete-an-encounter'>Delete an encounter</h2>
+<blockquote>
+<p>Delete an encounter</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>  DELETE /encounter/:target_encounter_uuid?purge<span class="o">=</span><span class="nb">true</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=FEAED37621B56D3A7C0361AD9858D314</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632?purge=true</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632?purge=true"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=FEAED37621B56D3A7C0361AD9858D314"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div>
 <ul>
-<li><p>Delete or Void a target encounter by its UUID. Returns a <code>404 Not Found</code> status if Encounter not exists. If the user is not logged 
-in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<li><p>Delete or Void a target encounter by its UUID. Returns a <code>404 Not Found</code> status if Encounter not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -252,25 +557,163 @@ in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
 </tr>
 </tbody></table></li>
 </ul>
-<h2 id='list-encounter-provider-subresources'>List encounter provider subresources</h2><h3 id='list-all-encounter-provider-subresources-for-a-visit'>List all encounter provider subresources for a visit.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /encounter/:target_encounter_uuid/encounterprovider 
-</span></code></pre></div>
-<p>Retrieve all <b>encounter provider</b> sub resources of an  <b>encounter</b> resource by target_encounter_uuid. Returns a 
-    <code>404 Not Found</code> status if encounter provider not exists. If user not logged in to perform this action, a <code>401 Unauthorized</code> status
-    returned.</p>
-<h3 id='list-encounter-provider-subresources-by-it-39-s-uuid-and-parent-encounter-uuid'>List encounter provider subresources by it&#39;s UUID and parent encounter UUID.</h3><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">GET /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
-</span></code></pre></div>
-<p>Retrieve an <b>encounter provider</b> sub resources of a <b>encounter</b> resource. Returns a 
-     <code>404 Not Found</code> status if encounter provider not exists. If you are not logged in to perform this action, a <code>401 Unauthorized</code> status
-     returned.</p>
-<h2 id='create-an-encounter-provider-sub-resource-with-properties'>Create an encounter provider sub resource with properties</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST encounter/:target_encounter_uuid/encounterprovider 
+<h2 id='list-encounter-provider-subresources'>List encounter provider subresources</h2>
+<blockquote>
+<p>List encounter provider subresources</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /encounter/:target_encounter_uuid/encounterprovider 
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=FEAED37621B56D3A7C0361AD9858D314"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=FEAED37621B56D3A7C0361AD9858D314</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
 {
-  "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
-  "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
+    "results": [
+        {
+            "uuid": "7146fea4-af02-4452-b4ed-240e71da7224",
+            "provider": {
+                "uuid": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
+                "display": "doctor - Jake Smith",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/provider/bb1a7781-7896-40be-aaca-7d1b41d843a6"
+                    }
+                ]
+            },
+            "encounterRole": {
+                "uuid": "240b26f9-dd88-4172-823d-4a8bfeb7841f",
+                "display": "Clinician",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/encounterrole/240b26f9-dd88-4172-823d-4a8bfeb7841f"
+                    }
+                ]
+            },
+            "voided": false,
+            "links": [
+                {
+                    "rel": "full",
+                    "uri": "http://demo.openmrs.org/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider/7146fea4-af02-4452-b4ed-240e71da7224?v=full"
+                }
+            ],
+            "resourceVersion": "1.9"
+        }
+    ]
 }
-</span></code></pre></div>
+
+</code></pre></div>
 <ul>
-<li><p>To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body.
-If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<li>Retrieve all encounter provider sub resources of an encounter resource by target_encounter_uuid. Returns a <code>404 Not Found</code> status if encounter provider not exists. If user not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</li>
+</ul>
+<h2 id='list-encounter-provider-subresources-by-it-39-s-uuid-and-parent-encounter-uuid'>List encounter provider subresources by it&#39;s UUID and parent encounter UUID.</h2>
+<blockquote>
+<p>List encounter provider subresources by it&#39;s UUID</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider/7146fea4-af02-4452-b4ed-240e71da7224"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=FEAED37621B56D3A7C0361AD9858D314"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=FEAED37621B56D3A7C0361AD9858D314</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider/7146fea4-af02-4452-b4ed-240e71da7224</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<ul>
+<li>Retrieve an encounter provider sub resources of a encounter resource. Returns a <code>404 Not Found</code> status if encounter provider not exists. If you are not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</li>
+</ul>
+<h2 id='create-an-encounter-provider-sub-resource-with-properties'>Create an encounter provider sub resource with properties</h2>
+<blockquote>
+<p>Create an encounter provider sub resource with properties</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST encounter/:target_encounter_uuid/encounterprovider 
+<span class="o">{</span>
+  <span class="s2">"provider"</span>: <span class="s2">"bb1a7781-7896-40be-aaca-7d1b41d843a6"</span>,
+  <span class="s2">"encounterRole"</span>: <span class="s2">"240b26f9-dd88-4172-823d-4a8bfeb7841f"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\r\n  \"provider\": \"bb1a7781-7896-40be-aaca-7d1b41d843a6\",\r\n  \"encounterRole\": \"240b26f9-dd88-4172-823d-4a8bfeb7841f\"\r\n}\r\n"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=FEAED37621B56D3A7C0361AD9858D314"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=FEAED37621B56D3A7C0361AD9858D314</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">provider</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">bb1a7781-7896-40be-aaca-7d1b41d843a6</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">encounterRole</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">240b26f9-dd88-4172-823d-4a8bfeb7841f</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+
+
+</code></pre></div>
+<ul>
+<li><p>To Create an attribute subresource for a specific visit resource, you need to specify below attributes in the request body. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
 <h3 id='attributes-3'>Attributes</h3>
 <table><thead>
 <tr>
@@ -280,45 +723,64 @@ If the user is not logged in to perform this action, a <code>401 Unauthorized</c
 </tr>
 </thead><tbody>
 <tr>
-<td><em>provider</em></td>
+<td><em><a href="#providers">provider</a></em></td>
 <td><code>Provider_Type UUID</code></td>
 <td>UUID of a provider currently registered in OpenMRS (required)</td>
 </tr>
 <tr>
-<td><em>encounterRole</em></td>
+<td><em><a href="#encounter-role">encounterRole</a></em></td>
 <td><code>Encounter_Role UUID</code></td>
 <td>UUID of encounter role. This is the role provider will participate during this encounter (required)</td>
 </tr>
 </tbody></table></li>
 </ul>
-<h2 id='update-encounter-provider-subresource'>Update encounter provider subresource</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">POST encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
-{
-  "provider": "bb1a7781-7896-40be-aaca-7d1b41d843a6",
-  "encounterRole": "240b26f9-dd88-4172-823d-4a8bfeb7841f"
-}
-</span></code></pre></div>
+<h2 id='update-encounter-provider-subresource'>Update encounter provider subresource</h2>
+<blockquote>
+<p>Update encounter provider subresource</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
+<span class="o">{</span>
+  <span class="s2">"encounterRole"</span>: <span class="s2">"240b26f9-dd88-4172-823d-4a8bfeb7841f"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\r\n  \"encounterRole\": \"240b26f9-dd88-4172-823d-4a8bfeb7841f\"\r\n}\r\n"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider/7146fea4-af02-4452-b4ed-240e71da7224"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=FEAED37621B56D3A7C0361AD9858D314"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=FEAED37621B56D3A7C0361AD9858D314</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">encounterRole</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">240b26f9-dd88-4172-823d-4a8bfeb7841f</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider/7146fea4-af02-4452-b4ed-240e71da7224</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
 <ul>
-<li><p>Updates an encounter provider subresource value with given UUID, this method will only modify value of the subresource. Returns a <code>404 Not Found</code> status if encounter provider not exists. If user not logged in to perform this action, a <code>401 Unauthorized</code> status
-returned.</p>
-<h3 id='query-parameters-3'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><em>parent_uuid</em></td>
-<td><code>Encounter UUID</code></td>
-<td>Target encounter resource UUID</td>
-</tr>
-<tr>
-<td><em>uuid</em></td>
-<td><code>Encounter_Provider UUID</code></td>
-<td>Target encounter provider resource UUID</td>
-</tr>
-</tbody></table>
+<li>Updates an encounter provider subresource value with given UUID, this method will only modify value of the subresource. Returns a <code>404 Not Found</code> status if encounter provider not exists. If user not logged in to perform this action, a <code>401 Unauthorized</code> status
+returned.</li>
+</ul>
 <h3 id='attributes-4'>Attributes</h3>
 <table><thead>
 <tr>
@@ -328,23 +790,54 @@ returned.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td><em>provider</em></td>
+<td><em><a href="#providers">provider</a></em></td>
 <td><code>Provider UUID</code></td>
-<td>UUID of a provider currently registered in OpenMRS (required)</td>
+<td>UUID of a provider currently registered in OpenMRS</td>
 </tr>
 <tr>
-<td><em>encounterRole</em></td>
+<td><em><a href="#encounter-role">encounterRole</a></em></td>
 <td><code>Encounter_Role UUID</code></td>
-<td>UUID of encounter role. This is the role provider will participate during this encounter (required)</td>
+<td>UUID of encounter role. This is the role provider will participate during this encounter</td>
 </tr>
-</tbody></table></li>
-</ul>
-<h2 id='delete-encounter-provider-subresource'>Delete encounter provider subresource</h2><div class="highlight"><pre class="highlight console tab-console"><code><span class="go">DELETE /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
-</span></code></pre></div>
+</tbody></table>
+<h2 id='delete-encounter-provider-subresource'>Delete encounter provider subresource</h2>
+<blockquote>
+<p>Delete encounter provider subresource</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>DELETE /encounter/:target_encounter_uuid/encounterprovider/:target_encounter_provider_uuid
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider/7146fea4-af02-4452-b4ed-240e71da7224?purge=true"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=FEAED37621B56D3A7C0361AD9858D314"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=FEAED37621B56D3A7C0361AD9858D314</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/encounter/d3360c01-9813-4ff8-bd81-909af6612632/encounterprovider/7146fea4-af02-4452-b4ed-240e71da7224?purge=true</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
 <ul>
-<li><p>Delete or Voided a target encounter provider subresource by its UUID. Returns a <code>404 Not Found</code> status if attribute not exists. 
-If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
-<h3 id='query-parameters-4'>Query Parameters</h3>
+<li><p>Delete or Voided a target encounter provider subresource by its UUID. Returns a <code>404 Not Found</code> status if attribute not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>

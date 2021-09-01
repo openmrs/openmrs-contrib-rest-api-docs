@@ -22,8 +22,9 @@ or incorrect please consider proposing revision on <a href="https://github.com/o
 </ul>
 <h1 id='getting-started'>Getting Started</h1>
 <ul>
-<li>If you are new to OpenMRS checkout the <a href="https://wiki.openmrs.org/display/docs/Getting+Started+as+a+Developer">Getting Started as a Developer Guide</a>
-from OpenMRS.</li>
+<li><p>If you are new to OpenMRS checkout the <a href="https://wiki.openmrs.org/display/docs/Getting+Started+as+a+Developer">Getting Started as a Developer Guide</a>
+from OpenMRS.</p></li>
+<li><p>For getting a detailed technical API documentation for the REST Module, checkout this wiki <a href="https://wiki.openmrs.org/display/docs/REST+Web+Services+API+For+Clients">here</a></p></li>
 </ul>
 <h2 id='current-version'>Current version</h2>
 <ul>
@@ -39,9 +40,7 @@ For example, see the
 </ul>
 <h2 id='getting-started-with-examples'>Getting Started with examples</h2><h3 id='1-instructions-for-all-the-examples'>1. Instructions for all the examples</h3>
 <ul>
-<li><p>Before executing the examples, make sure that resources corresponding to the UUID&#39;s used in the examples are present on the demo server or any server you are testing these examples onto. </p></li>
-<li><p>Before executing the examples, append the base server url before the examples for e.g.
-change <code>/openmrs/ws/rest/v1/concept</code> as <code>https://demo.openmrs.org/openmrs/ws/rest/v1/concept</code> or any other base server URL you are testing these examples onto.</p></li>
+<li>Before executing the examples, make sure that resources corresponding to the UUID&#39;s used in the examples are present on the demo server or any server you are testing these examples onto. </li>
 </ul>
 
 <blockquote>
@@ -73,6 +72,21 @@ public class Main {
 <ul>
 <li><p>Before executing the Java examples, get the okttp dependency jar and import it the project.</p></li>
 <li><p>These code stubs will be elided from all the java examples for clarity</p></li>
+<li><p>Before executing the examples, append the base server url before the examples for e.g.
+change
+<code>Request request = new Request.Builder()
+.url(&quot;/openmrs/ws/rest/v1/role?limit=1&amp;v=default&quot;)</code> as <code>Request request = new Request.Builder()
+.url(&quot;https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&amp;v=default&quot;)
+</code> or any other base server URL you are testing these examples onto.</p></li>
+</ul>
+<h3 id='3-getting-started-with-javascript-code-samples'>3. Getting Started with JavaScript Code samples</h3>
+<ul>
+<li><p>The easiest way to run these examples would be by using the browser console, after opening the base url you are testing the examples onto.</p></li>
+<li><p>Before executing the examples, append the base server url before the examples for e.g.
+change
+<code>fetch(&quot;/openmrs/ws/rest/v1/role?limit=1&amp;v=default&quot;, requestOptions)</code> 
+as <code>fetch(&quot;https://demo.openmrs.org/openmrs/ws/rest/v1/role?limit=1&amp;v=default&quot;, requestOptions)</code> 
+or any other base server URL you are testing these examples onto.</p></li>
 </ul>
 <h1 id='terms'>Terms</h1><h2 id='resources'>Resources</h2>
 <blockquote>

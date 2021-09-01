@@ -1,0 +1,345 @@
+<h1 id='concept-state-conversion'>Concept State Conversion</h1><h2 id='available-operations-for-concept-state-conversion-type'>Available Operations for Concept State Conversion type</h2>
+<ol>
+<li><a href="#list-concept-state-conversions">List Concept State Conversions</a></li>
+<li><a href="#create-concept-state-conversion">Create a Concept State Conversion</a></li>
+<li><a href="#update-concept-state-conversion">Update a Concept State Conversion</a></li>
+<li><a href="#delete-concept-state-conversion">Delete a Concept State Conversion</a></li>
+</ol>
+<h2 id='list-concept-state-conversions'>List Concept State Conversions</h2>
+<blockquote>
+<p>List Concept State Conversions</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /conceptstateconversion
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/conceptstateconversion"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/conceptstateconversion</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "results": [
+        {
+            "uuid": "ddf056be-40dd-44db-a95b-85bddd931131",
+            "concept": {
+                "uuid": "116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "display": "Malaria",
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://localhost:8080/openmrs/ws/rest/v1/concept/116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "resourceAlias": "concept"
+                    }
+                ]
+            },
+            "programWorkflow": {
+                "uuid": "54524222-f41d-4d0d-b688-0fd5331377b4",
+                "concept": {
+                    "uuid": "116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "display": "Malaria",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://localhost:8080/openmrs/ws/rest/v1/concept/116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "resourceAlias": "concept"
+                        }
+                    ]
+                },
+                "retired": false,
+                "states": [
+                    {
+                        "uuid": "8d250876-baac-4592-8f87-d7d7bf00dcdb",
+                        "retired": false,
+                        "concept": {
+                            "uuid": "7737c9ef-80ad-44e6-920f-4106da899df4",
+                            "display": "malaria dead",
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/concept/7737c9ef-80ad-44e6-920f-4106da899df4",
+                                    "resourceAlias": "concept"
+                                }
+                            ]
+                        },
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://localhost:8080/openmrs/ws/rest/v1/workflow/54524222-f41d-4d0d-b688-0fd5331377b4/state/8d250876-baac-4592-8f87-d7d7bf00dcdb",
+                                "resourceAlias": "state"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "65b552f7-a768-4986-b00c-28f765625450",
+                        "retired": false,
+                        "concept": {
+                            "uuid": "160148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "display": "Malaria, confirmed",
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/concept/160148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                    "resourceAlias": "concept"
+                                }
+                            ]
+                        },
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://localhost:8080/openmrs/ws/rest/v1/workflow/54524222-f41d-4d0d-b688-0fd5331377b4/state/65b552f7-a768-4986-b00c-28f765625450",
+                                "resourceAlias": "state"
+                            }
+                        ]
+                    }
+                ],
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://localhost:8080/openmrs/ws/rest/v1/workflow/54524222-f41d-4d0d-b688-0fd5331377b4",
+                        "resourceAlias": "workflow"
+                    }
+                ]
+            },
+            "programWorkflowState": {
+                "uuid": "65b552f7-a768-4986-b00c-28f765625450",
+                "retired": false,
+                "concept": {
+                    "uuid": "160148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "display": "Malaria, confirmed",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://localhost:8080/openmrs/ws/rest/v1/concept/160148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "resourceAlias": "concept"
+                        }
+                    ]
+                },
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://localhost:8080/openmrs/ws/rest/v1/workflow/54524222-f41d-4d0d-b688-0fd5331377b4/state/65b552f7-a768-4986-b00c-28f765625450",
+                        "resourceAlias": "state"
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/conceptstateconversion/ddf056be-40dd-44db-a95b-85bddd931131",
+                    "resourceAlias": "stateconversion"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/conceptstateconversion/ddf056be-40dd-44db-a95b-85bddd931131?v=full",
+                    "resourceAlias": "stateconversion"
+                }
+            ]
+        }
+    ]
+}
+</code></pre></div>
+<p>Fetch all Concept State Conversions. Returns a <code>200 OK</code> status with the Concept State Conversions response.
+If user not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h2 id='list-concept-state-conversion-by-uuid'>List Concept State Conversion by UUID.</h2>
+<blockquote>
+<p>List Concept State Conversion by UUID</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /conceptstateconversion/:uuid
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/conceptstateconversion/:uuid"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=24D0761924138ED7E55C2CB6806B0633"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=24D0761924138ED7E55C2CB6806B0633</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/conceptstateconversion/:uuid</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>Retrieve a Concept State Conversion by its UUID. Returns a <code>404 Not Found</code> status if conversion does not exist.
+If user not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h2 id='create-a-concept-state-conversion'>Create a Concept State Conversion</h2>
+<blockquote>
+<p>Create a Concept State Conversion</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /conceptstateconversion
+<span class="o">{</span>
+    <span class="s2">"concept"</span>: <span class="s2">"116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"</span>,
+    <span class="s2">"programWorkflow"</span>: <span class="s2">"54524222-f41d-4d0d-b688-0fd5331377b4"</span>,
+    <span class="s2">"programWorkflowState"</span>: <span class="s2">"65b552f7-a768-4986-b00c-28f765625450"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\"concept\": \"116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\"programWorkflow\": \"54524222-f41d-4d0d-b688-0fd5331377b4\",\"programWorkflowState\": \"65b552f7-a768-4986-b00c-28f765625450\"}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/conceptstateconversion"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=24D0761924138ED7E55C2CB6806B0633"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=24D0761924138ED7E55C2CB6806B0633</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">concept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">programWorkflow</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">54524222-f41d-4d0d-b688-0fd5331377b4</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">programWorkflowState</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">65b552f7-a768-4986-b00c-28f765625450</span><span class="dl">"</span><span class="p">});</span>
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/conceptstateconversion</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>To create a Concept State Conversion you need to specify the below properties in the request body. If you are not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='properties'>Properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em><a href="#concepts">concept</a></em></td>
+<td><code>Concept_UUID</code></td>
+<td>Concept resource UUID</td>
+</tr>
+<tr>
+<td><em><a href="#program-workflows">programWorkflow</a></em></td>
+<td><code>ProgramWorkflow_UUID</code></td>
+<td>ProgramWorkflow resource UUID</td>
+</tr>
+<tr>
+<td><em><a href="#program-workflows">programWorkflowState</a></em></td>
+<td><code>ProgramWorkflowState_UUID</code></td>
+<td>ProgramWorkflowState resource UUID</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-concept-state-conversion'>Update a Concept State Conversion</h2>
+<blockquote>
+<p>Update a Concept State Conversion</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /conceptstateconversion/:uuid
+<span class="o">{</span>
+    <span class="s2">"concept"</span>: <span class="s2">"116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"</span>,
+    <span class="s2">"programWorkflow"</span>: <span class="s2">"54524222-f41d-4d0d-b688-0fd5331377b4"</span>,
+    <span class="s2">"programWorkflowState"</span>: <span class="s2">"65b552f7-a768-4986-b00c-28f765625450"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\"concept\": \"116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\"programWorkflow\": \"54524222-f41d-4d0d-b688-0fd5331377b4\",\"programWorkflowState\": \"65b552f7-a768-4986-b00c-28f765625450\"}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/conceptstateconversion/:uuid"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">concept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">programWorkflow</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">54524222-f41d-4d0d-b688-0fd5331377b4</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">programWorkflowState</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">65b552f7-a768-4986-b00c-28f765625450</span><span class="dl">"</span><span class="p">});</span>
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/conceptstateconversion/:uuid</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>Update a Concept State Conversion. This method only modifies properties specified in the request. Returns a <code>404 Not Found</code> status if conversion does not exist. If not authenticated or authenticated user does not have sufficient privileges, <code>401 Unauthorized</code> status is returned.</p>
+<h3 id='properties-2'>Properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em><a href="#concepts">concept</a></em></td>
+<td><code>Concept_UUID</code></td>
+<td>Concept resource UUID</td>
+</tr>
+<tr>
+<td><em><a href="#program-workflows">programWorkflow</a></em></td>
+<td><code>ProgramWorkflow_UUID</code></td>
+<td>ProgramWorkflow resource UUID</td>
+</tr>
+<tr>
+<td><em><a href="#program-workflows">programWorkflowState</a></em></td>
+<td><code>ProgramWorkflowState_UUID</code></td>
+<td>ProgramWorkflowState resource UUID</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-concept-state-conversion'>Delete a Concept State Conversion</h2>
+<blockquote>
+<p>Delete a Concept State Conversion</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>DELETE /conceptstateconversion/:uuid?purge<span class="o">=</span><span class="nb">true</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/conceptstateconversion/:uuid?purge=true"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=24D0761924138ED7E55C2CB6806B0633"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=24D0761924138ED7E55C2CB6806B0633</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/conceptstateconversion/:uuid?purge=true</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>Purge a Concept State Conversion by its UUID. Returns a <code>404 Not Found</code> status if conversion does not exists. If the user is not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</p>
