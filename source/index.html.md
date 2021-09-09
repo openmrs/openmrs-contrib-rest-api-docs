@@ -49,6 +49,7 @@ includes:
   - Drugs/drugs
   - Programs/programs
   - Programs/program_workflows
+  - Programs/program_enrollment
   - Programs/concept_state_conversions
   - Provider/provider
   - Provider/provider_attribute_type
