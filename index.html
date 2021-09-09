@@ -1432,6 +1432,26 @@
               </ul>
           </li>
           <li>
+            <a href="#program-enrollment" class="toc-h1 toc-link" data-title="Program Enrollment">Program Enrollment</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#program-enrollment-overview" class="toc-h2 toc-link" data-title="Program Enrollment Overview">Program Enrollment Overview</a>
+                  </li>
+                  <li>
+                    <a href="#available-operations-for-program-enrollment-type" class="toc-h2 toc-link" data-title="Available Operations for Program Enrollment type">Available Operations for Program Enrollment type</a>
+                  </li>
+                  <li>
+                    <a href="#list-program-enrollment-by-uuid" class="toc-h2 toc-link" data-title="List Program Enrollment by UUID">List Program Enrollment by UUID</a>
+                  </li>
+                  <li>
+                    <a href="#list-program-enrollments-by-patient" class="toc-h2 toc-link" data-title="List Program Enrollments by Patient">List Program Enrollments by Patient</a>
+                  </li>
+                  <li>
+                    <a href="#update-program-enrollment-patient-state" class="toc-h2 toc-link" data-title="Update Program Enrollment Patient State">Update Program Enrollment Patient State</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#concept-state-conversion" class="toc-h1 toc-link" data-title="Concept State Conversion">Concept State Conversion</a>
               <ul class="toc-list-h2">
                   <li>
@@ -19818,6 +19838,439 @@ If user not logged in to perform this action, a <code>401 Unauthorized</code> st
 <p>Deletes given by UUID Program Workflow State.
 Returns a <code>404 Not Found</code> status if given state doesn&#39;t exist.
 If user not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h1 id='program-enrollment'>Program Enrollment</h1><h2 id='program-enrollment-overview'>Program Enrollment Overview</h2>
+<p>A program enrollment represents the fact that a patient is enrolled in one of the Programs over a time period at a Location. This is longitudinal data with a start date and end date.</p>
+<h2 id='available-operations-for-program-enrollment-type'>Available Operations for Program Enrollment type</h2>
+<ol>
+<li><a href="#list-program-enrollment-by-uuid">List Program Enrollment by UUID</a></li>
+<li><a href="#list-program-enrollments-by-patient">List Program Enrollments by Patient</a></li>
+<li><a href="#update-program-enrollment-patient-state">Update Program Enrollment Patient State</a></li>
+</ol>
+<h2 id='list-program-enrollment-by-uuid'>List Program Enrollment by UUID</h2>
+<blockquote>
+<p>List Program Enrollment by UUID</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /programenrollment/:uuid
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/programenrollment/:uuid"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/programenrollment/:uuid</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "uuid": "19ff2ee8-691f-4c4c-a0af-644a0d4198a7",
+    "patient": {
+        "uuid": "c5149f66-2695-102d-b4c2-001d929acb54",
+        "display": "NNO 110 CCC - Jen George Henry",
+        "links": [
+            {
+                "rel": "self",
+                "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/patient/c5149f66-2695-102d-b4c2-001d929acb54"
+            }
+        ]
+    },
+    "program": {
+        "uuid": "acbd87f3-566f-4386-a11e-877e612d3911",
+        "name": "Palliative care program",
+        "allWorkflows": [
+            {
+                "uuid": "F2D47AE5-7083-4901-B630-51860D09A884",
+                "concept": {
+                    "uuid": "e7a7c2ca-7433-4851-8687-67e8541ca40b",
+                    "display": "Palliative Care Treatment Status",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/concept/e7a7c2ca-7433-4851-8687-67e8541ca40b"
+                        }
+                    ]
+                },
+                "retired": false,
+                "states": [
+                    {
+                        "uuid": "e92017b9-45cf-41b9-bc69-a5b0232544c1",
+                        "retired": false,
+                        "concept": {
+                            "uuid": "655b604e-977f-11e1-8993-905e29aff6c1",
+                            "display": "Patient transferred out",
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/concept/655b604e-977f-11e1-8993-905e29aff6c1"
+                                }
+                            ]
+                        },
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/workflow/F2D47AE5-7083-4901-B630-51860D09A884/state/e92017b9-45cf-41b9-bc69-a5b0232544c1"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "7c1f852e-5120-4371-8136-f64614f5dfc7",
+                        "retired": false,
+                        "concept": {
+                            "uuid": "65664784-977f-11e1-8993-905e29aff6c1",
+                            "display": "On treatment",
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/concept/65664784-977f-11e1-8993-905e29aff6c1"
+                                }
+                            ]
+                        },
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/workflow/F2D47AE5-7083-4901-B630-51860D09A884/state/7c1f852e-5120-4371-8136-f64614f5dfc7"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "4bed1c08-1fe9-4972-8e7e-e93323c9f2c4",
+                        "retired": false,
+                        "concept": {
+                            "uuid": "655b5e46-977f-11e1-8993-905e29aff6c1",
+                            "display": "Patient died",
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/concept/655b5e46-977f-11e1-8993-905e29aff6c1"
+                                }
+                            ]
+                        },
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/workflow/F2D47AE5-7083-4901-B630-51860D09A884/state/4bed1c08-1fe9-4972-8e7e-e93323c9f2c4"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "0f034ef4-3f70-4514-a020-5fb928fc3394",
+                        "retired": false,
+                        "concept": {
+                            "uuid": "655b5f4a-977f-11e1-8993-905e29aff6c1",
+                            "display": "Patient defaulted",
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/concept/655b5f4a-977f-11e1-8993-905e29aff6c1"
+                                }
+                            ]
+                        },
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/workflow/F2D47AE5-7083-4901-B630-51860D09A884/state/0f034ef4-3f70-4514-a020-5fb928fc3394"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "13490dc8-e5bd-11e7-80c1-9a214cf093ae",
+                        "retired": false,
+                        "concept": {
+                            "uuid": "6566dba4-977f-11e1-8993-905e29aff6c1",
+                            "display": "Discharged",
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/concept/6566dba4-977f-11e1-8993-905e29aff6c1"
+                                }
+                            ]
+                        },
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/workflow/F2D47AE5-7083-4901-B630-51860D09A884/state/13490dc8-e5bd-11e7-80c1-9a214cf093ae"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "b35ed57c-7d54-4795-b678-f0947a135fda",
+                        "retired": false,
+                        "concept": {
+                            "uuid": "655a6acc-977f-11e1-8993-905e29aff6c1",
+                            "display": "Treatment stopped",
+                            "links": [
+                                {
+                                    "rel": "self",
+                                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/concept/655a6acc-977f-11e1-8993-905e29aff6c1"
+                                }
+                            ]
+                        },
+                        "links": [
+                            {
+                                "rel": "self",
+                                "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/workflow/F2D47AE5-7083-4901-B630-51860D09A884/state/b35ed57c-7d54-4795-b678-f0947a135fda"
+                            }
+                        ]
+                    }
+                ],
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/workflow/F2D47AE5-7083-4901-B630-51860D09A884"
+                    }
+                ]
+            }
+        ],
+        "links": [
+            {
+                "rel": "self",
+                "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/program/acbd87f3-566f-4386-a11e-877e612d3911"
+            }
+        ]
+    },
+    "display": "Palliative care program",
+    "dateEnrolled": "2021-01-19T00:00:00.000+0000",
+    "dateCompleted": "2021-09-01T00:00:00.000+0000",
+    "location": {
+        "uuid": "0d414ce2-5ab4-11e0-870c-9f6107fee88e",
+        "display": "Neno District Hospital",
+        "links": [
+            {
+                "rel": "self",
+                "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/location/0d414ce2-5ab4-11e0-870c-9f6107fee88e"
+            }
+        ]
+    },
+    "voided": false,
+    "outcome": null,
+    "states": [
+        {
+            "state": {
+                "uuid": "7c1f852e-5120-4371-8136-f64614f5dfc7",
+                "retired": false,
+                "concept": {
+                    "uuid": "65664784-977f-11e1-8993-905e29aff6c1",
+                    "display": "On treatment",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/concept/65664784-977f-11e1-8993-905e29aff6c1"
+                        }
+                    ]
+                },
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/workflow/F2D47AE5-7083-4901-B630-51860D09A884/state/7c1f852e-5120-4371-8136-f64614f5dfc7"
+                    }
+                ]
+            },
+            "uuid": "fe0b3ca4-0d34-4b28-b686-49ec49dc6e1f",
+            "startDate": "2021-01-19T00:00:00.000+0000",
+            "endDate": "2021-09-01T00:00:00.000+0000",
+            "voided": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/programenrollment/19ff2ee8-691f-4c4c-a0af-644a0d4198a7/state/fe0b3ca4-0d34-4b28-b686-49ec49dc6e1f"
+                }
+            ]
+        },
+        {
+            "state": {
+                "uuid": "b35ed57c-7d54-4795-b678-f0947a135fda",
+                "retired": false,
+                "concept": {
+                    "uuid": "655a6acc-977f-11e1-8993-905e29aff6c1",
+                    "display": "Treatment stopped",
+                    "links": [
+                        {
+                            "rel": "self",
+                            "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/concept/655a6acc-977f-11e1-8993-905e29aff6c1"
+                        }
+                    ]
+                },
+                "links": [
+                    {
+                        "rel": "self",
+                        "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/workflow/F2D47AE5-7083-4901-B630-51860D09A884/state/b35ed57c-7d54-4795-b678-f0947a135fda"
+                    }
+                ]
+            },
+            "uuid": "c44546a6-611b-4231-8a65-4e9d570580cd",
+            "startDate": "2021-09-01T00:00:00.000+0000",
+            "endDate": "2021-09-01T00:00:00.000+0000",
+            "voided": false,
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/programenrollment/19ff2ee8-691f-4c4c-a0af-644a0d4198a7/state/c44546a6-611b-4231-8a65-4e9d570580cd"
+                }
+            ]
+        }
+    ],
+    "attributes": [],
+    "links": [
+        {
+            "rel": "self",
+            "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/programenrollment/19ff2ee8-691f-4c4c-a0af-644a0d4198a7"
+        },
+        {
+            "rel": "full",
+            "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/programenrollment/19ff2ee8-691f-4c4c-a0af-644a0d4198a7?v=full"
+        }
+    ],
+    "resourceVersion": "1.8"
+}
+</code></pre></div>
+<p>Fetch Program Enrollment by UUID. Return a <code>404 Not Found</code> status if given program enrollment doesn&#39;t exist.
+If user is not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h2 id='list-program-enrollments-by-patient'>List Program Enrollments by Patient</h2>
+<blockquote>
+<p>List Program Enrollments by Patient</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /programenrollment?patient<span class="o">=</span>:uuid
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/programenrollment?patient=:uuid"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=DF385B2E6E39E0BB49BB7E079BF31C44</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/programenrollment?patient=:uuid</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "results": [
+        {
+            "uuid": "08044a4d-f323-45ad-98fd-9b421bbf36b6",
+            "display": "CHRONIC CARE PROGRAM",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/programenrollment/08044a4d-f323-45ad-98fd-9b421bbf36b6"
+                }
+            ]
+        },
+        {
+            "uuid": "9a507e64-1520-4441-ba04-49ed63ea9e07",
+            "display": "MENTAL HEALTH CARE PROGRAM",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/programenrollment/9a507e64-1520-4441-ba04-49ed63ea9e07"
+                }
+            ]
+        },
+        {
+            "uuid": "19ff2ee8-691f-4c4c-a0af-644a0d4198a7",
+            "display": "Palliative care program",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://bwenzi.pih-emr.org:8081/openmrs/ws/rest/v1/programenrollment/19ff2ee8-691f-4c4c-a0af-644a0d4198a7"
+                }
+            ]
+        }
+    ]
+}
+</code></pre></div>
+<p>Fetch Program Enrollment by Patient. Returns a <code>200 OK</code> status. If Patient does not exist or has no program enrollments then it returns an empty results array.
+If user is not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+<h2 id='update-program-enrollment-patient-state'>Update Program Enrollment Patient State</h2>
+<blockquote>
+<p>Update Program Enrollment Patient State</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /programenrollment/:uuid
+<span class="o">{</span>
+    <span class="s2">"states"</span>:[<span class="o">{</span>
+        <span class="s2">"state"</span>:<span class="s2">"b35ed57c-7d54-4795-b678-f0947a135fda"</span>,
+        <span class="s2">"startDate"</span>:<span class="s2">"2021-09-01"</span>
+        <span class="o">}]</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\"states\":[{\"state\":\"b35ed57c-7d54-4795-b678-f0947a135fda\",\"startDate\":\"2021-09-01\"}]}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/programenrollment/:uuid"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=ED9DBD5CFD355A973EFFECD642D8331D</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">states</span><span class="dl">"</span><span class="p">:[{</span><span class="dl">"</span><span class="s2">state</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">b35ed57c-7d54-4795-b678-f0947a135fda</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">startDate</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">2021-09-01</span><span class="dl">"</span><span class="p">}]});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/programenrollment/:uuid</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<p>To update a Program Enrollment Patient State by its <code>UUID</code> you need to specify below properties in your request body.
+Returns a <code>404 Not Found</code> status if given state doesn&#39;t exist.
+If user not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</p>
+
+<p>### Attributes</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>states</td>
+<td><code>Array[]:</code> <em><a href="#create-program-workflow-state">Program Workflow States</a></em></td>
+<td>List with of one Program Workflow State</td>
+</tr>
+</tbody></table>
 <h1 id='concept-state-conversion'>Concept State Conversion</h1><h2 id='available-operations-for-concept-state-conversion-type'>Available Operations for Concept State Conversion type</h2>
 <ol>
 <li><a href="#list-concept-state-conversions">List Concept State Conversions</a></li>
