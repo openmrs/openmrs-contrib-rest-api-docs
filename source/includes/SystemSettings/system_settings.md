@@ -153,6 +153,7 @@ fetch("/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293", 
 ```
 
 * Retrieve a particular System Setting. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+* Settings can be obtained by UUID or by name.
 
 
 ## Create a System Setting
