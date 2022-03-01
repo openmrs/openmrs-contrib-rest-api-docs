@@ -124,7 +124,7 @@ GET /systemsetting/:target_systemsetting_uuid
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293")
+  .url("/openmrs/ws/rest/v1/systemsetting/addresshierarchy.allowFreetext")
   .method("GET", null)
   .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
   .addHeader("Cookie", "JSESSIONID=ACC5AAAB3FE29B0A1A2C239EC00B8710")
@@ -145,7 +145,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293", requestOptions)
+fetch("/openmrs/ws/rest/v1/systemsetting/addresshierarchy.allowFreetext", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -153,6 +153,7 @@ fetch("/openmrs/ws/rest/v1/systemsetting/7ada585f-e2cc-456f-8fb2-67af52389293", 
 ```
 
 * Retrieve a particular System Setting. If not authenticated or authenticated user does not have sufficient privileges, a `401 Unauthorized` status is returned.
+* Settings can be obtained by UUID or by name.
 
 
 ## Create a System Setting
