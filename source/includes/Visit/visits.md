@@ -178,8 +178,8 @@ fetch("/openmrs/ws/rest/v1/visit?includeInactive=true&fromStartDate=2016-10-08T0
     --- | --- | ---
     *[patient](#patients)* | `Patient UUID` | Get visits for this patient
     *[location](#location)* | `Location UUID` | Get visits for this location
-    *includeInactive* | `Boolean` | Active/Inactive status of visit
-    *fromStartDate* | `Date (ISO8601 Long)` | Start date of the visit
+    *includeInactive* | `Boolean` | Include inactive visits in the results
+    *fromStartDate* | `Date (ISO8601 Long)` | Include only visits with start date after `fromStartDate`
 
 ## List visit by UUID.
 
