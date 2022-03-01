@@ -176,12 +176,12 @@
 <tr>
 <td><em>includeInactive</em></td>
 <td><code>Boolean</code></td>
-<td>Active/Inactive status of visit</td>
+<td>Include inactive visits in the results</td>
 </tr>
 <tr>
 <td><em>fromStartDate</em></td>
 <td><code>Date (ISO8601 Long)</code></td>
-<td>Start date of the visit</td>
+<td>Include only visits with start date after <code>fromStartDate</code></td>
 </tr>
 </tbody></table>
 <h2 id='list-visit-by-uuid'>List visit by UUID.</h2>
