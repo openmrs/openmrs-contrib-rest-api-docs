@@ -335,7 +335,15 @@ POST /patient
             "givenName":"Thomas",
             "familyName":"Smith"
          }
-      ]
+      ],
+      "addresses": [
+        {
+        "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
+        "cityVillage": "Bengaluru",
+        "country": "India",
+        "postalCode": "560037"
+        }
+    ]
    }
 }
 
@@ -347,7 +355,7 @@ POST /patient
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\r\n \"identifiers\":[ \r\n  {\"identifier\":\"103VWY7\", \r\n \"identifierType\":\"71075074-f02e-4270-89a3-f2dcda436f70\",\r\n \"location\":\"9356400c-a5a2-4532-8f2b-2361b3446eb8\", \r\n \"preferred\":true}\r\n ], \r\n \"person\":{\r\n \"gender\":\"M\", \r\n \"age\":47,\r\n \"birthdate\":\"1970-01-01T00:00:00.000+0100\",\r\n \"birthdateEstimated\":false,\r\n \"dead\":false,\r\n \"deathDate\":null,\r\n \"causeOfDeath\":null,\r\n \"names\":[\r\n {\r\n  \"givenName\":\"Thomas\",\r\n \"familyName\":\"Smith\" \r\n }\r\n ]\r\n }\r\n }");
+RequestBody body = RequestBody.create(mediaType, "{\r\n \"identifiers\":[ \r\n  {\"identifier\":\"103VWY7\", \r\n \"identifierType\":\"71075074-f02e-4270-89a3-f2dcda436f70\",\r\n \"location\":\"9356400c-a5a2-4532-8f2b-2361b3446eb8\", \r\n \"preferred\":true}\r\n ], \r\n \"person\":{\r\n \"gender\":\"M\", \r\n \"age\":47,\r\n \"birthdate\":\"1970-01-01T00:00:00.000+0100\",\r\n \"birthdateEstimated\":false,\r\n \"dead\":false,\r\n \"deathDate\":null,\r\n \"causeOfDeath\":null,\r\n \"names\":[\r\n {\r\n  \"givenName\":\"Thomas\",\r\n \"familyName\":\"Smith\" \r\n }\r\n ],\r\n \"addresses\":[\r\n {\r\n \"address1\":\"30,VivekanandaLayout,Munnekolal,Marathahalli\",\r\n \"cityVillage\":\"Bengaluru\",\r\n \"country\":\"India\",\r\n \"postalCode\":\"560037\"\r\n }\r\n]\r\n}\r\n }");
 Request request = new Request.Builder()
   .url("/openmrs/ws/rest/v1/patient")
   .method("POST", body)
@@ -366,7 +374,7 @@ requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
 requestHeaders.append("Content-Type", "application/json");
 requestHeaders.append("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633");
 
-var raw = JSON.stringify({"identifiers":[{"identifier":"103VWY7","identifierType":"71075074-f02e-4270-89a3-f2dcda436f70","location":"9356400c-a5a2-4532-8f2b-2361b3446eb8","preferred":true}],"person":{"gender":"M","age":47,"birthdate":"1970-01-01T00:00:00.000+0100","birthdateEstimated":false,"dead":false,"deathDate":null,"causeOfDeath":null,"names":[{"givenName":"Thomas","familyName":"Smith"}]}});
+var raw = JSON.stringify({"identifiers":[{"identifier":"103VWY7","identifierType":"71075074-f02e-4270-89a3-f2dcda436f70","location":"9356400c-a5a2-4532-8f2b-2361b3446eb8","preferred":true}],"person":{"gender":"M","age":47,"birthdate":"1970-01-01T00:00:00.000+0100","birthdateEstimated":false,"dead":false,"deathDate":null,"causeOfDeath":null,"names":[{"givenName":"Thomas","familyName":"Smith"}] , "addresses": [{"address1": "30, Vivekananda Layout, Munnekolal,Marathahalli","cityVillage": "Bengaluru","country": "India","postalCode": "560037"}]}});
 
 var requestOptions = {
   method: 'POST',
