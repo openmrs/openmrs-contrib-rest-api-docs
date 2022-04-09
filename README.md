@@ -28,7 +28,12 @@ git clone https://github.com/openmrs/openmrs-contrib-rest-api-docs.git
 ```
 2. Start the server
 ```
-docker run --rm --name slate -v $(pwd)/build:/srv/slate/build -v $(pwd)/source/index.html.md:/srv/slate/source/index.html.md -v $(pwd)/source/includes:/srv/slate/source/includes -v $(pwd)/source/images/logo.png:/srv/slate/source/images/logo.png -p 4567:4567 slatedocs/slate serve
+docker run --rm --name slate \
+  -v "$(pwd)/build:/srv/slate/build" \
+  -v "$(pwd)/source/index.html.md:/srv/slate/source/index.html.md" \
+  -v "$(pwd)/source/includes:/srv/slate/source/includes" \
+  -v "$(pwd)/source/images/logo.png:/srv/slate/source/images/logo.png" \
+  -p 4567:4567 slatedocs/slate serve
 ```
 
 Browse to http://localhost:4567/ and you should see the docs!
