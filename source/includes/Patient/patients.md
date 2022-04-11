@@ -232,10 +232,97 @@ fetch("/openmrs/ws/rest/v1/patient/b52ec6f9-0e26-424c-a4a1-c64f9d571eb3", reques
 
 * Retrieve a patient by its UUID. Returns a `404 Not Found` status if patient does not exist in the system. If the user is not logged in to perform this action, a `401 Unauthorized` status is returned.
 
+## Create a patient 
 
-## Create a patient
+> Create a new patient.
+
+
+```shell
+POST /patient
+{
+   "identifiers":[
+      {
+         "identifier":"103VWY7",
+         "identifierType":"71075074-f02e-4270-89a3-f2dcda436f70",
+         "location":"9356400c-a5a2-4532-8f2b-2361b3446eb8",
+         "preferred":true
+      }
+   ],
+   "person":{
+      "gender":"M",
+      "age":47,
+      "birthdate":"1970-01-01T00:00:00.000+0100",
+      "birthdateEstimated":false,
+      "dead":false,
+      "deathDate":null,
+      "causeOfDeath":null,
+      "names":[
+         {
+            "givenName":"Thomas",
+            "familyName":"Smith"
+         }
+      ],
+      "addresses": [
+        {
+        "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
+        "cityVillage": "Bengaluru",
+        "country": "India",
+        "postalCode": "560037"
+        }
+      ]
+    }
+}
+
+```
+
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n \"identifiers\":[ \r\n  {\"identifier\":\"103VWY7\", \r\n \"identifierType\":\"71075074-f02e-4270-89a3-f2dcda436f70\",\r\n \"location\":\"9356400c-a5a2-4532-8f2b-2361b3446eb8\", \r\n \"preferred\":true}\r\n ], \r\n \"person\":{\r\n \"gender\":\"M\", \r\n \"age\":47,\r\n \"birthdate\":\"1970-01-01T00:00:00.000+0100\",\r\n \"birthdateEstimated\":false,\r\n \"dead\":false,\r\n \"deathDate\":null,\r\n \"causeOfDeath\":null,\r\n \"names\":[\r\n {\r\n  \"givenName\":\"Thomas\",\r\n \"familyName\":\"Smith\" \r\n }\r\n ],\r\n \"addresses\":[\r\n {\r\n \"address1\":\"30,VivekanandaLayout,Munnekolal,Marathahalli\",\r\n \"cityVillage\":\"Bengaluru\",\r\n \"country\":\"India\",\r\n \"postalCode\":\"560037\"\r\n }\r\n]\r\n}\r\n }");
+Request request = new Request.Builder()
+  .url("/openmrs/ws/rest/v1/patient")
+  .method("POST", body)
+  .addHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM=")
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var requestHeaders = new Headers();
+requestHeaders.append("Authorization", "Basic YWRtaW46QWRtaW4xMjM=");
+requestHeaders.append("Content-Type", "application/json");
+requestHeaders.append("Cookie", "JSESSIONID=24D0761924138ED7E55C2CB6806B0633");
+
+var raw = JSON.stringify({"identifiers":[{"identifier":"103VWY7","identifierType":"71075074-f02e-4270-89a3-f2dcda436f70","location":"9356400c-a5a2-4532-8f2b-2361b3446eb8","preferred":true}],"person":{"gender":"M","age":47,"birthdate":"1970-01-01T00:00:00.000+0100","birthdateEstimated":false,"dead":false,"deathDate":null,"causeOfDeath":null,"names":[{"givenName":"Thomas","familyName":"Smith"}] , "addresses": [{"address1": "30, Vivekananda Layout, Munnekolal,Marathahalli","cityVillage": "Bengaluru","country": "India","postalCode": "560037"}]}});
+
+var requestOptions = {
+  method: 'POST',
+  headers: requestHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/patient", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+* If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
+
+## Create a patient from an existing person.
 
 > Create a patient
+
+* If you want to create a patient from an existing person, use this method.
 
 ```shell
 POST /patient
@@ -293,7 +380,6 @@ fetch("/openmrs/ws/rest/v1/patient", requestOptions)
 
 ```
 
-
 * To create a patient you need to specify the below properties in the request. If you are not logged in to perform this action, a `401 Unauthorized` status is returned.
 
 ### Properties
@@ -303,11 +389,12 @@ fetch("/openmrs/ws/rest/v1/patient", requestOptions)
     *[person](#person)* | `Person_UUID` | Person resource UUID (Reqired)
     *[identifiers](#PatientIdentifierType)* | `Array[]: patientIdentifiers` | List of patientIdentifiers (Required)
 
-## Create a patient
 
-> Create a patient
+## Update a patient
 
-1. for instance we just want to add one more identifier
+> Update a patient
+
+1. For instance we just want to add one more identifier
 
 ```shell
 
