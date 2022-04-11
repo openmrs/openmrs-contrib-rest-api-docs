@@ -218,8 +218,89 @@ Anyone who has an Encounter or who is enrolled in a Program is a Patient.)</p></
 </ul>
 <h2 id='create-a-patient'>Create a patient</h2>
 <blockquote>
+<p>Create a new patient.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /patient
+<span class="o">{</span>
+   <span class="s2">"identifiers"</span>:[
+      <span class="o">{</span>
+         <span class="s2">"identifier"</span>:<span class="s2">"103VWY7"</span>,
+         <span class="s2">"identifierType"</span>:<span class="s2">"71075074-f02e-4270-89a3-f2dcda436f70"</span>,
+         <span class="s2">"location"</span>:<span class="s2">"9356400c-a5a2-4532-8f2b-2361b3446eb8"</span>,
+         <span class="s2">"preferred"</span>:true
+      <span class="o">}</span>
+   <span class="o">]</span>,
+   <span class="s2">"person"</span>:<span class="o">{</span>
+      <span class="s2">"gender"</span>:<span class="s2">"M"</span>,
+      <span class="s2">"age"</span>:47,
+      <span class="s2">"birthdate"</span>:<span class="s2">"1970-01-01T00:00:00.000+0100"</span>,
+      <span class="s2">"birthdateEstimated"</span>:false,
+      <span class="s2">"dead"</span>:false,
+      <span class="s2">"deathDate"</span>:null,
+      <span class="s2">"causeOfDeath"</span>:null,
+      <span class="s2">"names"</span>:[
+         <span class="o">{</span>
+            <span class="s2">"givenName"</span>:<span class="s2">"Thomas"</span>,
+            <span class="s2">"familyName"</span>:<span class="s2">"Smith"</span>
+         <span class="o">}</span>
+      <span class="o">]</span>,
+      <span class="s2">"addresses"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+        <span class="s2">"address1"</span>: <span class="s2">"30, Vivekananda Layout, Munnekolal,Marathahalli"</span>,
+        <span class="s2">"cityVillage"</span>: <span class="s2">"Bengaluru"</span>,
+        <span class="s2">"country"</span>: <span class="s2">"India"</span>,
+        <span class="s2">"postalCode"</span>: <span class="s2">"560037"</span>
+        <span class="o">}</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\r\n \"identifiers\":[ \r\n  {\"identifier\":\"103VWY7\", \r\n \"identifierType\":\"71075074-f02e-4270-89a3-f2dcda436f70\",\r\n \"location\":\"9356400c-a5a2-4532-8f2b-2361b3446eb8\", \r\n \"preferred\":true}\r\n ], \r\n \"person\":{\r\n \"gender\":\"M\", \r\n \"age\":47,\r\n \"birthdate\":\"1970-01-01T00:00:00.000+0100\",\r\n \"birthdateEstimated\":false,\r\n \"dead\":false,\r\n \"deathDate\":null,\r\n \"causeOfDeath\":null,\r\n \"names\":[\r\n {\r\n  \"givenName\":\"Thomas\",\r\n \"familyName\":\"Smith\" \r\n }\r\n ],\r\n \"addresses\":[\r\n {\r\n \"address1\":\"30,VivekanandaLayout,Munnekolal,Marathahalli\",\r\n \"cityVillage\":\"Bengaluru\",\r\n \"country\":\"India\",\r\n \"postalCode\":\"560037\"\r\n }\r\n]\r\n}\r\n }"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/patient"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=24D0761924138ED7E55C2CB6806B0633"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=24D0761924138ED7E55C2CB6806B0633</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">identifiers</span><span class="dl">"</span><span class="p">:[{</span><span class="dl">"</span><span class="s2">identifier</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">103VWY7</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">identifierType</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">71075074-f02e-4270-89a3-f2dcda436f70</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">location</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">9356400c-a5a2-4532-8f2b-2361b3446eb8</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">preferred</span><span class="dl">"</span><span class="p">:</span><span class="kc">true</span><span class="p">}],</span><span class="dl">"</span><span class="s2">person</span><span class="dl">"</span><span class="p">:{</span><span class="dl">"</span><span class="s2">gender</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">M</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span><span class="dl">"</span><span class="s2">birthdate</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">1970-01-01T00:00:00.000+0100</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">birthdateEstimated</span><span class="dl">"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="dl">"</span><span class="s2">dead</span><span class="dl">"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="dl">"</span><span class="s2">deathDate</span><span class="dl">"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="dl">"</span><span class="s2">causeOfDeath</span><span class="dl">"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="dl">"</span><span class="s2">names</span><span class="dl">"</span><span class="p">:[{</span><span class="dl">"</span><span class="s2">givenName</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Thomas</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">familyName</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Smith</span><span class="dl">"</span><span class="p">}]</span> <span class="p">,</span> <span class="dl">"</span><span class="s2">addresses</span><span class="dl">"</span><span class="p">:</span> <span class="p">[{</span><span class="dl">"</span><span class="s2">address1</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">30, Vivekananda Layout, Munnekolal,Marathahalli</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">cityVillage</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bengaluru</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">country</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">India</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">postalCode</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">560037</span><span class="dl">"</span><span class="p">}]}});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/patient</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<ul>
+<li>If you are not logged in to perform this action, a <code>401 Unauthorized</code> status is returned.</li>
+</ul>
+<h2 id='create-a-patient-from-an-existing-person'>Create a patient from an existing person.</h2>
+<blockquote>
 <p>Create a patient</p>
 </blockquote>
+
+<ul>
+<li>If you want to create a patient from an existing person, use this method.</li>
+</ul>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>POST /patient
 <span class="o">{</span>
     <span class="s2">"person"</span>: <span class="s2">"b52ec6f9-0e26-424c-a4a1-c64f9d571eb3"</span>,
@@ -290,13 +371,13 @@ Anyone who has an Encounter or who is enrolled in a Program is a Patient.)</p></
 <td>List of patientIdentifiers (Required)</td>
 </tr>
 </tbody></table>
-<h2 id='create-a-patient-2'>Create a patient</h2>
+<h2 id='update-a-patient'>Update a patient</h2>
 <blockquote>
-<p>Create a patient</p>
+<p>Update a patient</p>
 </blockquote>
 
 <ol>
-<li>for instance we just want to add one more identifier</li>
+<li>For instance we just want to add one more identifier</li>
 </ol>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 POST /patient/:target_patient_uuid/identifier
