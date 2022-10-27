@@ -255,6 +255,55 @@ fetch("/openmrs/ws/rest/v1/password \n", requestOptions)
 * After authenticating user can change their own password, by posting to `/password`.
 * The new password must contain atleast one integer.
 
+## Reset Password
+* In instances where the user forgets the password should be able to use this Endpoint to reset the password
+
+> Reset Password 
+
+```shell
+POST /openmrs/ws/rest/v1/passwordreset 
+{
+  "usernameOrEmail" : "demoUser"
+}
+```
+
+```java
+
+	OkHttpClient client = new OkHttpClient().newBuilder().build();
+	MediaType mediaType = MediaType.parse("application/json");
+	
+	RequestBody body = RequestBody.create(mediaType, "{\r\n  \"usernameOrEmail\" : \"demoUser\"}");
+	Request request = new Request.Builder()
+	  .url("/openmrs/ws/rest/v1/passwordreset")
+	  .method("POST", body)
+	  .addHeader("Content-Type", "application/json")
+	  .build();
+	Response response = client.newCall(request).execute();
+
+```
+
+```javascript
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "JSESSIONID=2D158E83ACFB788998C7DB495F07C1B9");
+
+var raw = JSON.stringify({"usernameOrEmail":"demoUser"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("/openmrs/ws/rest/v1/passwordreset \n", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+```
+* After approving the validity of the username or email provided the system creates activation key link which is sent to the user's email address 
+
 ## Getting all location without authentication
 
 > Getting all location without authentication
