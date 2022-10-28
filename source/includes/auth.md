@@ -256,7 +256,7 @@ fetch("/openmrs/ws/rest/v1/password \n", requestOptions)
 * The new password must contain atleast one integer.
 
 ## Reset Password
-* In instances where the user forgets the password should be able to use this Endpoint to reset the password
+* Reset password API endpoint is only used when the system user doesn't remember the required password
 
 > Reset Password 
 
@@ -302,7 +302,7 @@ fetch("/openmrs/ws/rest/v1/passwordreset \n", requestOptions)
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 ```
-* After approving the validity of the username or email provided the system creates activation key link which is sent to the user's email address 
+* After verification of the provided username or email, Then user will receive an email containing password change link.
 
 ## Getting all location without authentication
 
