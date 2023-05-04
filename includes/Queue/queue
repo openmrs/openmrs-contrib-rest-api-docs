@@ -1,0 +1,352 @@
+<h1 id='queue'>Queue</h1><h2 id='queue-overview'>Queue Overview</h2>
+<ul>
+<li>A queue in OpenMRS represents a line of patients waiting for a particular service in a specific location. For example, queues might be used for services such as triage, clinical consultation, lab or pharmacy.</li>
+</ul>
+<h2 id='available-operations-for-queues'>Available operations for Queues</h2>
+<ol>
+<li><a href="#list-queues">List queues</a></li>
+<li><a href="#create-queue">Create queue</a></li>
+<li><a href="#update-queue">Update queue</a></li>
+<li><a href="#void-queue">Void queue</a></li>
+</ol>
+<h2 id='list-queues'>List queues</h2>
+<blockquote>
+<p>List queues</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/queue)
+  .method("</span><span class="no">GET</span><span class="s">", null)
+  .addHeader("</span><span class="nc">Authorization</span><span class="s">", "</span><span class="nc">Basic</span> <span class="nc">YWRtaW46QWRtaW4xMjM</span><span class="o">=</span><span class="s">")
+  .addHeader("</span><span class="nc">Cookie</span><span class="s">", "</span><span class="no">JSESSIONID</span><span class="o">=</span><span class="mi">1</span><span class="no">B06650EB0428F51EC119C909F58327C</span><span class="err">"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=1B06650EB0428F51EC119C909F58327C</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/queue, requestOptions)
+  .then(response =&gt; response.text())
+  .then(result =&gt; console.log(result))
+  .catch(error =&gt; console.log('error', error));
+
+</span></code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "results": [
+        {
+            "uuid": "4890b934-73c3-4c91-a93b-ce48f728b520",
+            "display": "Clinical consultation",
+            "name": "Clinical consultation",
+            "description": "Clinical consultation",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/queue/4890b934-73c3-4c91-a93b-ce48f728b520"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/queue/4890b934-73c3-4c91-a93b-ce48f728b520?v=full"
+                }
+            ]
+        },
+        {
+            "uuid": "ae0e1ad7-08ba-4a3d-aeed-a757591faf83",
+            "display": "Triage service",
+            "name": "Triage service",
+            "description": "Triage service",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/queue/ae0e1ad7-08ba-4a3d-aeed-a757591faf83"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/queue/ae0e1ad7-08ba-4a3d-aeed-a757591faf83?v=full"
+                }
+            ]
+        },
+        {
+            "uuid": "501b135b-1733-445e-9616-a4a05cee1bdd",
+            "display": "Lab service",
+            "name": "Lab service",
+            "description": "Lab service",
+            "links": [
+                {
+                    "rel": "self",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/queue/501b135b-1733-445e-9616-a4a05cee1bdd"
+                },
+                {
+                    "rel": "full",
+                    "uri": "http://qa-refapp.openmrs.org/openmrs/ws/rest/v1/queue/501b135b-1733-445e-9616-a4a05cee1bdd?v=full"
+                }
+            ]
+        }
+    ]
+}
+</code></pre></div>
+<ul>
+<li>If user not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</li>
+</ul>
+<h2 id='list-queue-by-uuid'>List queue by UUID</h2>
+<blockquote>
+<p>List queue by UUID</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /queue/:target_queue_uuid
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/queue/36475629-6652-44e9-a42b-c2b3b7438f72"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=1B06650EB0428F51EC119C909F58327C"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=1B06650EB0428F51EC119C909F58327C</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">"</span><span class="s2">follow</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span>
+  <span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/queue/36475629-6652-44e9-a42b-c2b3b7438f72</span><span class="dl">"</span><span class="p">,</span>
+  <span class="nx">requestOptions</span>
+<span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<ul>
+<li>Retrieve a queue by its UUID. Returns a <code>404 Not Found</code> if queue to be retrieved not exist. If user not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</li>
+</ul>
+<h2 id='create-queue'>Create queue</h2>
+<blockquote>
+<p>Create queue</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /queue
+<span class="o">{</span>
+  <span class="s2">"name"</span>: <span class="s2">"Triage queue"</span>,
+  <span class="s2">"description"</span>: <span class="s2">"This triage queue description"</span>,
+  <span class="s2">"service"</span>: <span class="o">{</span>
+    <span class="s2">"uuid"</span>: <span class="s2">"d3db3805-2b90-4330-9064-eb6d42cbf582"</span>
+  <span class="o">}</span>,
+  <span class="s2">"location"</span>: <span class="o">{</span>
+    <span class="s2">"uuid"</span>: <span class="s2">"8d6c993e-c2cc-11de-8d13-0010c6dffd0f"</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+ <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\n  \"name\": \"Triage queue\",\n  \"description\": \"This triage queue description\",\n  \"service\": {\n    \"uuid\": \"d3db3805-2b90-4330-9064-eb6d42cbf582\"\n  },\n  \"location\": {\n    \"uuid\": \"8d6c993e-c2cc-11de-8d13-0010c6dffd0f\"\n  }\n}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+ <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/queue"</span><span class="o">)</span>
+ <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+ <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+ <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+ <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=1B06650EB0428F51EC119C909F58327C"</span><span class="o">)</span>
+ <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=1B06650EB0428F51EC119C909F58327C</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Triage queue</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This triage queue description</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">service</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">uuid</span><span class="p">:</span> <span class="dl">"</span><span class="s2">d3db3805-2b90-4330-9064-eb6d42cbf582</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">location</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">uuid</span><span class="p">:</span> <span class="dl">"</span><span class="s2">8d6c993e-c2cc-11de-8d13-0010c6dffd0f</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">"</span><span class="s2">follow</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/queue</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<ul>
+<li>To create a queue you need to specify below attributes in the request body. If you are not logged in to perform this action, a <code>401 Unauthorized</code> status returned.</li>
+</ul>
+<h3 id='attributes'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>name</em></td>
+<td><code>String</code></td>
+<td>Name of the queue</td>
+</tr>
+<tr>
+<td><em>description</em></td>
+<td><code>String</code></td>
+<td>Description of the queue</td>
+</tr>
+<tr>
+<td><em>service</em></td>
+<td><code>Concept_UUID</code></td>
+<td>Concept UUID describing this queue/service</td>
+</tr>
+<tr>
+<td><em><a href="#location">location</a></em></td>
+<td><code>Location UUID</code></td>
+<td>Location resource UUID</td>
+</tr>
+</tbody></table>
+<h2 id='update-queue'>Update queue</h2>
+<blockquote>
+<p>Update queue</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST /queue/:target_queue_uuid
+<span class="o">{</span>
+  <span class="s2">"name"</span>: <span class="s2">"TRIAGE QUEUE (updated)"</span>,
+  <span class="s2">"description"</span>: <span class="s2">"Queue for patients waiting for triage(updated)"</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\n  \"name\": \"TRIAGE QUEUE (updated)\",\n  \"description\": \"Queue for patients waiting for triage(updated)\"\n}"</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/queue/c298d3e1-6def-422a-9d0a-e18906a4ae73"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"POST"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=1B06650EB0428F51EC119C909F58327C"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=1B06650EB0428F51EC119C909F58327C</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TRIAGE QUEUE (updated)</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Queue for patients waiting for triage(updated)</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">"</span><span class="s2">follow</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span>
+  <span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/queue/c298d3e1-6def-422a-9d0a-e18906a4ae73</span><span class="dl">"</span><span class="p">,</span>
+  <span class="nx">requestOptions</span>
+<span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<ul>
+<li>Updates the queue record. Only modifies the properties specified in the request. Returns a 404 Not found status if the queue(to be updated) doesn&#39;t exist. If not authenticated, 401 Unauthorized status is returned.</li>
+</ul>
+<h3 id='attributes-2'>Attributes</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UUID</td>
+<td><code>Queue UUID</code></td>
+<td>UUID of queue to be updated</td>
+</tr>
+</tbody></table>
+<h2 id='delete-queue'>Delete queue</h2>
+<blockquote>
+<p>Delete the target queue</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>DELETE /queue/&lt;UUID&gt;?purge<span class="o">=</span><span class="nb">false</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/queue/c298d3e1-6def-422a-9d0a-e18906a4ae73?purge=false"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=1B06650EB0428F51EC119C909F58327C"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=1B06650EB0428F51EC119C909F58327C</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">"</span><span class="s2">follow</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span>
+  <span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/queue/c298d3e1-6def-422a-9d0a-e18906a4ae73?purge=false</span><span class="dl">"</span><span class="p">,</span>
+  <span class="nx">requestOptions</span>
+<span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<ul>
+<li>Voids or delete the target queue. Returns a 404 Not found status if the queue(to be voided) doesn&#39;t exist. If not authenticated, 401 Unauthorized status is returned.</li>
+</ul>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>purge</em></td>
+<td><code>Boolean</code></td>
+<td>The resource will be voided/retired unless purge = ‘true’</td>
+</tr>
+<tr>
+<td>UUID</td>
+<td><code>Queue UUID</code></td>
+<td>Queue resource UUID</td>
+</tr>
+</tbody></table>
