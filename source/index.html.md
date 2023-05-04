@@ -60,7 +60,8 @@ includes:
   - Forms/Forms
   - Forms/field_type
   - AddressTemplate/address_template
-  - Alerts/alerts  
+  - Alerts/alerts 
+  - Queue/queue 
   - SystemSettings/system_settings
   - SystemInformation/system_information
   - SystemInformation/loggedin_users
