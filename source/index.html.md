@@ -61,7 +61,8 @@ includes:
   - Forms/field_type
   - AddressTemplate/address_template
   - Alerts/alerts 
-  - Queue/queue 
+  - Queue/queue
+  - Queue/queue_entry 
   - SystemSettings/system_settings
   - SystemInformation/system_information
   - SystemInformation/loggedin_users
