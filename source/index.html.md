@@ -62,6 +62,7 @@ includes:
   - AddressTemplate/address_template
   - Alerts/alerts 
   - Queue/queue 
+  - Queue/queue_room
   - SystemSettings/system_settings
   - SystemInformation/system_information
   - SystemInformation/loggedin_users
