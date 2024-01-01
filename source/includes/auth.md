@@ -93,13 +93,7 @@ fetch("/openmrs/ws/rest/v1/session", requestOptions)
 }
 ```
 
- 
-
-* The session token is retrieved using Basic authentication on the `/session` endpoint. The response will include a `JSESSIONID` in the header. This session ID is also included in the response object
-
-
-
-* The session token is retrieved using Basic authentication on the `/session` endpoint. The response will include a `JSESSIONID` in the header. This session ID is also included in the response object
+* The session token is retrieved using Basic authentication on the `/session` endpoint. The response will include a `JSESSIONID` in the header.
 
 
 * The `sessionId` token should be passed with all subsequent calls as a cookie named `JSESSIONID`.
