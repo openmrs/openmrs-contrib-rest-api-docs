@@ -25,7 +25,7 @@ This documentation serves as a reference to the bespoke [REST API](https://en.wi
 
 # Getting Started
 
-* If you are new to OpenMRS checkout the [Getting Started as a Developer Guide](https://wiki.openmrs.org/display/docs/Getting+Started+as+a+Developer)
+* If you are new to OpenMRS check out the [Get Started as a Developer Guide](https://wiki.openmrs.org/display/docs/Get+Started+as+a+Developer)
 from OpenMRS.
 
 * For getting a detailed technical API documentation for the REST Module, checkout this wiki [here](https://wiki.openmrs.org/display/docs/REST+Web+Services+API+For+Clients)
