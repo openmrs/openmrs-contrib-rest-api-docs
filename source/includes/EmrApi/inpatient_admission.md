@@ -82,10 +82,9 @@ This endpoint returns paged data.  The maximum number of results for any paged r
 * `currentInpatientLocation`: optional list of location uuids.  If specified, limits the admissions to those where the patient is currently at one of the given locations
 * `includeDischarged`: optional, defaults to false.  If true, includes patients who have active visits but whose most recent ADT encounter is a discharge
 * `totalCount`: optional, defaults to false.  This is a standard REST parameter which, if passed with `true`, will included a `totalCount` property in the response.
+* `v`: optional, defaults to `default`.  This allows specifying the desired representation of ref | default | full | custom
 
 ### Available representations
-
-This endpoint supports all standard responses:  ref, default, full, and custom.  If no specific representation is requested, the default will be returned.
 
 #### Full representation:
 

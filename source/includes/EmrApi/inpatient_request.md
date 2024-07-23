@@ -76,10 +76,9 @@ This endpoint returns paged data.  The maximum number of results for any paged r
 * `dispositionLocation`: optional list of location uuids.  If specified, limits the requests to those requesting one of the specified locations
 * `dispositionType`: optional list of `ADMIT`, `TRANSFER` OR `DISCHAGE` allows indicating with specific types of requests should be returned
 * `totalCount`: optional, defaults to false.  This is a standard REST parameter which, if passed with `true`, will included a `totalCount` property in the response.
+* `v`: optional, defaults to `default`.  This allows specifying the desired representation of ref | default | full | custom
 
 ### Available representations
-
-This endpoint supports all standard responses:  ref, default, full, and custom.  If no specific representation is requested, the default will be returned.
 
 #### Full representation:
 

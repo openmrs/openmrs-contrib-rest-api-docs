@@ -132,7 +132,10 @@ fetch("/openmrs/ws/rest/v1/emrapi/configuration", requestOptions)
 }
 ```
 
-* The endpoint supports all standard representations (ref, default, full, and custom).
-* If no representation is specified, the `ref` is returned.
-* For any given representation, all properties are returned with the given representation.
-* A custom representation can be used to retrieve only specific properties of interest, and specific data within those representations.
+### Supported Parameters:
+
+* `v`: optional, defaults to `ref`.  This allows specifying the desired representation of ref | default | full | custom
+
+The endpoint supports all standard representations (ref, default, full, and custom).  If no representation is specified, the `ref` is returned.  
+For any given representation, all properties are returned with the given representation.  
+A custom representation can be used to retrieve only specific properties of interest, and specific data within those representations.
