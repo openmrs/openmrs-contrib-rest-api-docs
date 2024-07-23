@@ -9,15 +9,6 @@ Provides a means to retrieve inpatient admissions associated with active visits 
 
 ## Get Inpatient Admission
 
-This endpoint returns paged data.  The maximum number of results for any paged response is controlled by the webservices.rest module configuration.
-
-### Supported Parameters:
-
-* `visitLocation`: optional location uuid.  If specified, limits the admissions to those associated with a visit at the given location or parent visit location
-* `currentInpatientLocation`: optional list of location uuids.  If specified, limits the admissions to those where the patient is currently at one of the given locations
-* `includeDischarged`: optional, defaults to false.  If true, includes patients who have active visits but whose most recent ADT encounter is a discharge
-* `totalCount`: optional, defaults to false.  This is a standard REST parameter which, if passed with `true`, will included a `totalCount` property in the response.
-
 > Get Inpatient Admission
 
 ```shell
@@ -82,6 +73,15 @@ fetch("/openmrs/ws/rest/v1/emrapi/inpatient/admission?visitLocation=b6fcd85f-599
   "totalCount": integer
 }
 ```
+
+This endpoint returns paged data.  The maximum number of results for any paged response is controlled by the webservices.rest module configuration.
+
+### Supported Parameters:
+
+* `visitLocation`: optional location uuid.  If specified, limits the admissions to those associated with a visit at the given location or parent visit location
+* `currentInpatientLocation`: optional list of location uuids.  If specified, limits the admissions to those where the patient is currently at one of the given locations
+* `includeDischarged`: optional, defaults to false.  If true, includes patients who have active visits but whose most recent ADT encounter is a discharge
+* `totalCount`: optional, defaults to false.  This is a standard REST parameter which, if passed with `true`, will included a `totalCount` property in the response.
 
 ### Available representations
 

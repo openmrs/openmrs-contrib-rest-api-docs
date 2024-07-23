@@ -9,15 +9,6 @@ Provides a means to retrieve inpatient requests (eg. requests for admission, dis
 
 ## Get Inpatient Request
 
-This endpoint returns paged data.  The maximum number of results for any paged response is controlled by the webservices.rest module configuration.
-
-### Supported Parameters:
-
-* `visitLocation`: optional location uuid.  If specified, limits the requests to those associated with a visit at the given location or parent visit location
-* `dispositionLocation`: optional list of location uuids.  If specified, limits the requests to those requesting one of the specified locations
-* `dispositionType`: optional list of `ADMIT`, `TRANSFER` OR `DISCHAGE` allows indicating with specific types of requests should be returned
-* `totalCount`: optional, defaults to false.  This is a standard REST parameter which, if passed with `true`, will included a `totalCount` property in the response.
-
 > Get Inpatient Request
 
 ```shell
@@ -76,6 +67,15 @@ fetch("/openmrs/ws/rest/v1/emrapi/inpatient/inpatient/request?dispositionType=AD
   "totalCount": integer
 }
 ```
+
+This endpoint returns paged data.  The maximum number of results for any paged response is controlled by the webservices.rest module configuration.
+
+### Supported Parameters:
+
+* `visitLocation`: optional location uuid.  If specified, limits the requests to those associated with a visit at the given location or parent visit location
+* `dispositionLocation`: optional list of location uuids.  If specified, limits the requests to those requesting one of the specified locations
+* `dispositionType`: optional list of `ADMIT`, `TRANSFER` OR `DISCHAGE` allows indicating with specific types of requests should be returned
+* `totalCount`: optional, defaults to false.  This is a standard REST parameter which, if passed with `true`, will included a `totalCount` property in the response.
 
 ### Available representations
 

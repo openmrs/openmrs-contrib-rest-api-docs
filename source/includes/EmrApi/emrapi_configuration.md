@@ -1,6 +1,7 @@
 # EMRAPI Configuration
 
-## Overview
+## EMR API Configuration Overview
+
 The EMR API module provides several high-level APIs and configuration settings.  The configuration endpoint provided by the `emrapi` module enables RESTful access to these configuration values.
 
 ## Available operations for EMRAPI Configuration
@@ -8,11 +9,6 @@ The EMR API module provides several high-level APIs and configuration settings. 
 1. [Get EMRAPI Configuration](#get-emrapi-configuration)
 
 ## Get EMRAPI Configuration
-
-* The endpoint supports all standard representations (ref, default, full, and custom).
-* If no representation is specified, the `ref` is returned.
-* For any given representation, all properties are returned with the given representation.
-* A custom representation can be used to retrieve only specific properties of interest, and specific data within those representations.
 
 > Get EMRAPI configuration
 
@@ -31,7 +27,6 @@ Request request = new Request.Builder()
   .addHeader("Cookie", "JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010")
   .build();
 Response response = client.newCall(request).execute();
-
 ```
 
 ```javascript
@@ -50,13 +45,11 @@ fetch("/openmrs/ws/rest/v1/emrapi/configuration", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
-
 ```
 
 > Success Response
 
 ```response
-
 {
   "metadataSourceName": string,
   "orderingProviderEncounterRole": encounterRole,
@@ -138,3 +131,8 @@ fetch("/openmrs/ws/rest/v1/emrapi/configuration", requestOptions)
   "transferForm": form
 }
 ```
+
+* The endpoint supports all standard representations (ref, default, full, and custom).
+* If no representation is specified, the `ref` is returned.
+* For any given representation, all properties are returned with the given representation.
+* A custom representation can be used to retrieve only specific properties of interest, and specific data within those representations.
