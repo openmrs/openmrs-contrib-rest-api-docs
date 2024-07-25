@@ -71,6 +71,9 @@ includes:
   - ImplementationId/implementation_id
   - AdministrationLinks/administration_links
   - DatabaseChanges/database_changes
+  - EmrApi/emrapi_configuration
+  - EmrApi/inpatient_admission
+  - EmrApi/inpatient_request
   - contrib
   
 
