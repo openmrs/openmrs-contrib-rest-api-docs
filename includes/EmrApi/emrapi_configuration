@@ -1,0 +1,128 @@
+<h1 id='emrapi-configuration'>EMRAPI Configuration</h1><h2 id='emr-api-configuration-overview'>EMR API Configuration Overview</h2>
+<p>The EMR API module provides several high-level APIs and configuration settings.  The configuration endpoint provided by the <code>emrapi</code> module enables RESTful access to these configuration values.</p>
+<h2 id='available-operations-for-emrapi-configuration'>Available operations for EMRAPI Configuration</h2>
+<ol>
+<li><a href="#get-emrapi-configuration">Get EMRAPI Configuration</a></li>
+</ol>
+<h2 id='get-emrapi-configuration'>Get EMRAPI Configuration</h2>
+<blockquote>
+<p>Get EMRAPI configuration</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /openmrs/ws/rest/v1/emrapi/configuration
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/emrapi/configuration"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/emrapi/configuration</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "metadataSourceName": string,
+  "orderingProviderEncounterRole": encounterRole,
+  "supportsTransferLocationTag": locationTag,
+  "unknownLocation": location,
+  "denyAdmissionConcept": concept,
+  "admissionForm": form,
+  "exitFromInpatientEncounterType": encounterType,
+  "extraPatientIdentifierTypes": patientIdentifierType[],
+  "consultFreeTextCommentsConcept": concept,
+  "sameAsConceptMapType": conceptMapType,
+  "testPatientPersonAttributeType": personAttributeType,
+  "admissionDecisionConcept": concept,
+  "supportsAdmissionLocationTag": locationTag,
+  "checkInEncounterType": encounterType,
+  "transferWithinHospitalEncounterType": encounterType,
+  "suppressedDiagnosisConcepts": concept[],
+  "primaryIdentifierType": patientIdentifierType,
+  "nonDiagnosisConceptSets": concept[],
+  "fullPrivilegeLevel": role,
+  "unknownProvider": provider,
+  "diagnosisSets": concept[],
+  "personImageDirectory": string,
+  "visitNoteEncounterType": encounterType,
+  "consultEncounterType": encounterType,
+  "diagnosisMetadata": {
+    "diagnosisCertaintyConcept": concept,
+    "diagnosisOrderConcept": concept,
+    "codedDiagnosisConcept": concept,
+    "nonCodedDiagnosisConcept": concept,
+    "diagnosisSetConcept": concept
+  },
+  "narrowerThanConceptMapType": conceptMapType,
+  "clinicianEncounterRole": encounterRole,
+  "conceptSourcesForDiagnosisSearch": conceptSource[],
+  "patientDiedConcept": concept,
+  "emrApiConceptSource": conceptSource,
+  "lastViewedPatientSizeLimit": integer,
+  "identifierTypesToSearch": patientIdentifierType[],
+  "telephoneAttributeType": personAttributeType,
+  "checkInClerkEncounterRole": encounterRole,
+  "dischargeForm": form,
+  "unknownCauseOfDeathConcept": concept,
+  "visitAssignmentHandlerAdjustEncounterTimeOfDayIfNecessary": boolean,
+  "atFacilityVisitType": visitType,
+  "visitExpireHours": integer,
+  "admissionEncounterType": encounterType,
+  "dispositions": [
+    {
+      "uuid": string,
+      "name": string,
+      "conceptCode": string,
+      "type: string,
+      "careSettingTypes": string[],
+      "encounterTypes": string[],
+      "excludedEncounterTypes": string[],
+      "keepsVisitOpen": boolean,
+      "actions": string[],
+      "additionalObs": [
+        {
+          "label": string,
+          "conceptCode: string,
+          "params: map&lt;string, string&gt;
+        }
+      ],
+    }
+  ],
+  "dispositionDescriptor": {
+    "admissionLocationConcept": concept,
+    "dateOfDeathConcept": concept,
+    "dispositionConcept": concept,
+    "internalTransferLocationConcept": concept,
+    "dispositionSetConcept": concept
+  },
+  "highPrivilegeLevel": role,
+  "supportsLoginLocationTag": locationTag,
+  "unknownPatientPersonAttributeType": personAttributeType,
+  "supportsVisitsLocationTag": locationTag,
+  "transferForm": form
+}
+</code></pre></div><h3 id='supported-parameters'>Supported Parameters:</h3>
+<ul>
+<li><code>v</code>: optional, defaults to <code>ref</code>.  This allows specifying the desired representation of ref | default | full | custom</li>
+</ul>
+
+<p>The endpoint supports all standard representations (ref, default, full, and custom).  If no representation is specified, the <code>ref</code> is returned.<br>
+For any given representation, all properties are returned with the given representation.<br>
+A custom representation can be used to retrieve only specific properties of interest, and specific data within those representations.</p>

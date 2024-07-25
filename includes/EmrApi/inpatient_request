@@ -1,0 +1,81 @@
+<h1 id='inpatient-request'>Inpatient Request</h1><h2 id='overview'>Overview</h2>
+<p>Provides a means to retrieve inpatient requests (eg. requests for admission, discharge, or transfer) associated with active visits that meet the given request criteria.</p>
+<h2 id='available-operations-for-inpatient-request'>Available operations for Inpatient Request</h2>
+<ol>
+<li><a href="#get-inpatient-request">Get Inpatient Request</a></li>
+</ol>
+<h2 id='get-inpatient-request'>Get Inpatient Request</h2>
+<blockquote>
+<p>Get Inpatient Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>GET /openmrs/ws/rest/v1/emrapi/inpatient/inpatient/request?dispositionType<span class="o">=</span>ADMIT&amp;visitLocation<span class="o">=</span>b6fcd85f-5995-43c9-875f-3bb2299087ff&amp;dispositionLocation<span class="o">=</span>b6fcd85f-5995-43c9-875f-3bb2299087ff&amp;totalCount<span class="o">=</span><span class="nb">true</span>&amp;v<span class="o">=</span>full
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"/openmrs/ws/rest/v1/emrapi/inpatient/inpatient/request?dispositionType=ADMIT&amp;visitLocation=b6fcd85f-5995-43c9-875f-3bb2299087ff&amp;dispositionLocation=b6fcd85f-5995-43c9-875f-3bb2299087ff&amp;totalCount=true&amp;v=full"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Basic YWRtaW46QWRtaW4xMjM="</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Cookie"</span><span class="o">,</span> <span class="s">"JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+<span class="kd">var</span> <span class="nx">requestHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic YWRtaW46QWRtaW4xMjM=</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">requestHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JSESSIONID=33B84B3BEA8E81E9D22D5A722815E010</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">requestHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/openmrs/ws/rest/v1/emrapi/inpatient/inpatient/request?dispositionType=ADMIT&amp;visitLocation=b6fcd85f-5995-43c9-875f-3bb2299087ff&amp;dispositionLocation=b6fcd85f-5995-43c9-875f-3bb2299087ff&amp;totalCount=true&amp;v=full</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+</code></pre></div>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+{
+  "results": [
+    {
+        "visit": visit,
+        "patient": patient,
+        "dispositionType": ADMIT | TRANSFER | DISCHARGE,
+        "dispositionEncounter": encounter,
+        "dispositionObsGroup": obs,
+        "disposition": concept,
+        "dispositionLocation": location
+    }
+  ],
+  "totalCount": integer
+}
+</code></pre></div>
+<p>This endpoint returns paged data.  The maximum number of results for any paged response is controlled by the webservices.rest module configuration.</p>
+<h3 id='supported-parameters'>Supported Parameters:</h3>
+<ul>
+<li><code>visitLocation</code>: optional location uuid.  If specified, limits the requests to those associated with a visit at the given location or parent visit location</li>
+<li><code>dispositionLocation</code>: optional list of location uuids.  If specified, limits the requests to those requesting one of the specified locations</li>
+<li><code>dispositionType</code>: optional list of <code>ADMIT</code>, <code>TRANSFER</code> OR <code>DISCHAGE</code> allows indicating with specific types of requests should be returned</li>
+<li><code>totalCount</code>: optional, defaults to false.  This is a standard REST parameter which, if passed with <code>true</code>, will included a <code>totalCount</code> property in the response.</li>
+<li><code>v</code>: optional, defaults to <code>default</code>.  This allows specifying the desired representation of ref | default | full | custom</li>
+</ul>
+<h3 id='available-representations'>Available representations</h3><h4 id='full-representation'>Full representation:</h4>
+<ul>
+<li>visit: <code>full</code></li>
+<li>all other properties: <code>default</code></li>
+</ul>
+<h4 id='default-representation'>Default Representation:</h4>
+<ul>
+<li>visit: <code>default</code></li>
+<li>all other properties: <code>ref</code></li>
+</ul>
+<h4 id='ref-representation'>Ref Representation</h4>
+<p>All properties returned as <code>ref</code> representations</p>
+<h4 id='custom-representation'>Custom Representation</h4>
+<p>Any custom representation is supported.</p>
