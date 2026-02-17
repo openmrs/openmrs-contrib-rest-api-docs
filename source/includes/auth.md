@@ -1,7 +1,7 @@
 # Authentication
 
-* Almost every API endpoint(other than the `/session` endpoint) in  OpenMRS API requires authentication 
-  in order to interact.
+* Almost every API endpoint (other than the `/session` endpoint) in the OpenMRS API requires authentication
+  to interact with it.
 
 * Currently, only BASIC authentication is supported. Along with the HTTP request, a request header of 
   `Authorization: Basic <base64 of username:password>` needs to be sent.
@@ -195,8 +195,10 @@ fetch("/openmrs/ws/rest/v1/password/45ce6c2e-dd5a-11e6-9d9c-0242ac150002", reque
 
 * An administrator (with the `EDIT_USER_PASSWORDS` privilege) can change the password for other users by 
   posting a new password to `/password/:target_user_uuid`.
-* The examples returns a `500 Internal server Error` status if we try to change the password associated with the admin user.so we should use a suitable user's UUID.
-* The new password must contain atleast one integer.
+* The example returns a `500 Internal Server Error` status if we try to change the password associated with the admin user. Therefore, a suitable user's
+  UUID should be used.
+
+* The new password must contain at least one integer.
 
 > Password change By Users
 
@@ -247,9 +249,9 @@ fetch("/openmrs/ws/rest/v1/password \n", requestOptions)
 
 
 * After authenticating user can change their own password, by posting to `/password`.
-* The new password must contain atleast one integer.
+* The new password must contain at least one integer.
 
-## Getting all location without authentication
+## Getting all locations without authentication
 
 > Getting all location without authentication
 
