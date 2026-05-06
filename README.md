@@ -14,7 +14,7 @@ Contributions are welcome!
 
 ## Get Started 
 
-Fork this repository in Github and submit the changes via pull requests. If 
+Fork this repository in GitHub and submit the changes via pull requests. If 
 you browse to the markdown files in this repository and edit them, GitHub will 
 guide you through forking and making a pull request with your suggested changes.
 
